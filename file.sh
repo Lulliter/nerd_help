@@ -11,13 +11,14 @@ echo "A line I wrote on my local computer" >> README.md
 ## ---5) check what changed
 git status
 ## ---6) Add to staging  + Commit (all) change(s)
-git add README.md
-git add Configuration-R-git.Rproj
-git add         file.sh
-git add        helper.R
-git add        helper.Rout
+			# git add README.md
+			# git add Configuration-R-git.Rproj
+			# git add         file.sh
+			# git add        helper.R
+			# git add        helper.Rout
+git add -u
 
-git commit -m "added instrucitons in file.sh"
+git commit -m "added things in README"
 ## ---7) and push to your remote repo on GitHub.
 git push origin main
 
@@ -43,11 +44,11 @@ R CMD BATCH helper.R
 # Use the pre-filled form and click “Generate token”.
 Rscript -e 'usethis::create_github_token()' #helper function that takes you to the web form
 			# NAME:  R:GITHUB_PAT Config — gist, repo, user, workflow
-			# TOKEN:  ghp_.....Z485
+			# TOKEN:  ghp_...YzVa
 
 ## ---2) Store your PAT in R environ
 Rscript -e 'usethis::edit_r_environ()' #which will open it
-# write GITHUB_TOKEN="ghp_...Z485" (in .Renviron)
+# write GITHUB_TOKEN="ghp_...YzVa" (in .Renviron)
 
 		## (NOPE!)---2) Store your PAT with
 		# (NOPE!) Rscript -e 'gitcreds::gitcreds_set()' # only works in interactive sessions
