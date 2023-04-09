@@ -1,5 +1,6 @@
 # Configuration in R
 
+print("Hello")
 
 # Required pckgs ----------------------------------------------------------
 if (!require("pacman")) {

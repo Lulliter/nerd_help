@@ -2,12 +2,28 @@
 
 
 ## ---1) in Github  (https://github.com/Lulliter/Configuration-R-git.git)
+# Create a new REPO
+
 ## ---2) in terminal /Users/luisamimmi/GoogleDrive/Github/
 # git clone https://github.com/Lulliter/Configuration-R-git.git
+
 ## ---3) in terminal
 git remote show origin # (get some information on its connection to GitHub(now master -> main!!!)
+		# * remote origin
+		#   Fetch URL: https://github.com/Lulliter/Regis_R.git
+		#   Push  URL: https://github.com/Lulliter/Regis_R.git
+		#   HEAD branch: master
+		#   Remote branch:
+		#     master tracked
+		#   Local branch configured for 'git pull':
+		#     master merges with remote master
+		#   Local ref configured for 'git push':
+		#     master pushes to master (up to date)
+
+
 ## ---4) make some loca changes
 echo "A line I wrote on my local computer" >> README.md
+
 ## ---5) check what changed
 git status
 ## ---6) Add to staging  + Commit (all) change(s)
@@ -18,9 +34,9 @@ git status
 			# git add        helper.Rout
 git add -u
 
-git commit -m "added things in README"
+git commit -m "changed token"
 ## ---7) and push to your remote repo on GitHub.
-git push origin main
+git push origin master
 
 # ----
 
@@ -54,7 +70,7 @@ Rscript -e 'usethis::edit_r_environ()' #which will open it
 		# (NOPE!) Rscript -e 'gitcreds::gitcreds_set()' # only works in interactive sessions
 
 ## ---3) Confirm your PAT is saved
-Rscript -e 'gh::gh_whoami()'
+Rscript -e 'gh::gh_whoami()' # YEP !
 
 
 # ----
