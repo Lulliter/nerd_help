@@ -39,6 +39,8 @@ git commit -m "changed token"
 git push origin master
 
 # ----
+# GITHUB AUTHENTICATION
+
 
 # 1/2 CACHE CREDENTIALS *SSH*
 # From https://docs.github.com/en/authentication/connecting-to-github-with-ssh
@@ -83,6 +85,10 @@ ssh-add  ~/.ssh/id_ed25519 # IF no pass phrase
 # a) Copy the SSH public key to your clipboard.
 pbcopy < ~/.ssh/id_ed25519.pub
 # b) In the upper-right corner of any page, click your profile photo, then click Settings.
+
+
+
+
 # ---------
 
 
