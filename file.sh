@@ -5,7 +5,7 @@
 # Create a new REPO
 
 ## ---2) in terminal /Users/luisamimmi/GoogleDrive/Github/
-# git clone https://github.com/Lulliter/Configuration-R-git.git
+git clone https://github.com/Lulliter/Configuration-R-git.git
 
 ## ---3) in terminal
 git remote show origin # (get some information on its connection to GitHub(now master -> main!!!)
@@ -40,7 +40,53 @@ git push origin master
 
 # ----
 
-# CACHE CREDENTIALS [using R commands from shell]
+# 1/2 CACHE CREDENTIALS *SSH*
+# From https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+# When you connect via SSH, you authenticate using a private key file on your local machine
+# Check if you have any SSH
+ls -al ~/.ssh
+			# total 40
+			# drwx------    7 luisamimmi  staff   224 Sep  8  2017 .
+			# drwxr-xr-x@ 105 luisamimmi  staff  3360 Jul 22 14:40 ..
+			# -rw-------@   1 luisamimmi  staff  1766 Jun  6  2015 github_rsa
+			# -rw-r--r--    1 luisamimmi  staff   401 Jun  6  2015 github_rsa.pub
+			# -rw-r--r--@   1 luisamimmi  staff  2783 Sep  8  2017 known_hosts
+			# -rw-------    1 luisamimmi  staff  3243 Feb 21  2018 id_rsa
+			# -rw-r--r--@   1 luisamimmi  staff   746 Feb 21  2018 id_rsa.pub  # could be
+
+# GENERATE NEW SSH key
+ssh-keygen -t ed25519 -C "lmm76@georgetown.edu" # No location  # No passkey
+# saved in /Users/luisamimmi/.ssh/id_ed25519
+
+			# -rw-------@   1 luisamimmi  staff   411 Jul 22 14:45 id_ed25519
+			# -rw-r--r--@   1 luisamimmi  staff   102 Jul 22 14:45 id_ed25519.pub
+
+# ADD your SSH key to the ssh-agent
+#Start the ssh-agent in the background.
+eval "$(ssh-agent -s)" # Agent pid 77375
+# exec ssh-agent zsh
+open ~/.ssh/config
+#If the file doesn't exist, create the file.
+touch ~/.ssh/config
+open ~/.ssh/config # then modify the file to contain the following lines.
+			#Host github.com
+			#  AddKeysToAgent yes
+			#  UseKeychain yes
+			#  IdentityFile ~/.ssh/id_ed25519
+
+# ADD your SSH private key to the ssh-agent and store your passphrase in the keychain. If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_ed25519 in the command with the name of your private key file.
+# ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh-add  ~/.ssh/id_ed25519 # IF no pass phrase
+			# Identity added: /Users/luisamimmi/.ssh/id_ed25519 (lmm76@georgetown.edu)
+
+# ADD the SSH public key to your account on GitHub.
+# a) Copy the SSH public key to your clipboard.
+pbcopy < ~/.ssh/id_ed25519.pub
+# b) In the upper-right corner of any page, click your profile photo, then click Settings.
+# ---------
+
+
+# 2/2 CACHE CREDENTIALS  *HTTPS* [using R commands from shell]
 # from (https://cfss.uchicago.edu/setup/git-configure/#cache-credentials-for-ssh)
 # In order to push changes to GitHub, you need to authenticate yourself. That is,
 # you need to prove you are the owner of your GitHub account. When you log in to
@@ -48,6 +94,7 @@ git push origin master
 # your identity. But when you want to push and pull from your computer, you cannot
 # use this method. Instead, you will prove your identity using one of two methods.
 
+# install needed libraries in R
 R CMD BATCH helper.R
 
 
@@ -56,7 +103,7 @@ R CMD BATCH helper.R
 # https://github.com/<OWNER>/<REPO>.git. You will need a personal access token (PAT)
 # and use that as your credential for HTTPS operations.
 
-## ---1) Run this code to that takes you to the web form to create a PAT.
+## ---1) Run this code that takes you to the web form to create a PAT.
 # Use the pre-filled form and click “Generate token”.
 Rscript -e 'usethis::create_github_token()' #helper function that takes you to the web form
 			# NAME:  R:GITHUB_PAT Config — gist, repo, user, workflow
