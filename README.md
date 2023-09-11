@@ -1,8 +1,6 @@
 # Configuration-R-git
 Things I will never remember about this  
  
-
-
 # Reference 
 
 + [Youtube video](https://www.youtube.com/watch?v=c14aqVC-Szo) ! 
@@ -12,9 +10,11 @@ Things I will never remember about this
 
 # Example of gitignore
 
-
 # Authentication for Github
 
 1) Using the SSH protocol
 
 2) Cloning GitHub repositories using HTTPS
+
+
+# [ secret] 
