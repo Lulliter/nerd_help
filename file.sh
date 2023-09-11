@@ -45,7 +45,9 @@ git push origin master
 # 1/2 CACHE CREDENTIALS *SSH*
 # From https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 # When you connect via SSH, you authenticate using a private key file on your local machine
-# Check if you have any SSH
+
+
+# a) Check if you have any SSH
 ls -al ~/.ssh
 			# total 40
 			# drwx------    7 luisamimmi  staff   224 Sep  8  2017 .
@@ -56,14 +58,14 @@ ls -al ~/.ssh
 			# -rw-------    1 luisamimmi  staff  3243 Feb 21  2018 id_rsa
 			# -rw-r--r--@   1 luisamimmi  staff   746 Feb 21  2018 id_rsa.pub  # could be
 
-# GENERATE NEW SSH key
+# b) GENERATE NEW SSH key
 ssh-keygen -t ed25519 -C "lmm76@georgetown.edu" # No location  # No passkey
 # saved in /Users/luisamimmi/.ssh/id_ed25519
 
 			# -rw-------@   1 luisamimmi  staff   411 Jul 22 14:45 id_ed25519
 			# -rw-r--r--@   1 luisamimmi  staff   102 Jul 22 14:45 id_ed25519.pub
 
-# ADD your SSH key to the ssh-agent
+# c) ADD your SSH key to the ssh-agent
 #Start the ssh-agent in the background.
 eval "$(ssh-agent -s)" # Agent pid 77375
 # exec ssh-agent zsh
@@ -76,17 +78,21 @@ open ~/.ssh/config # then modify the file to contain the following lines.
 			#  UseKeychain yes
 			#  IdentityFile ~/.ssh/id_ed25519
 
-# ADD your SSH private key to the ssh-agent and store your passphrase in the keychain. If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_ed25519 in the command with the name of your private key file.
-# ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+# d) ADD your SSH private key to the ssh-agent and store your passphrase in the keychain.
+#If you created your key with a different name, or if you are adding an existing key that has a different name,
+#replace id_ed25519 in the command with the name of your private key file.
+
+# e) ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 ssh-add  ~/.ssh/id_ed25519 # IF no pass phrase
 			# Identity added: /Users/luisamimmi/.ssh/id_ed25519 (lmm76@georgetown.edu)
 
-# ADD the SSH public key to your account on GitHub.
-# a) Copy the SSH public key to your clipboard.
+# f) ADD the SSH public key to your account on GitHub.
+# f.1) Copy the SSH public key to your clipboard.
 pbcopy < ~/.ssh/id_ed25519.pub
-# b) In the upper-right corner of any page, click your profile photo, then click Settings.
+# f.2) In the upper-right corner of any page, click your profile photo, then click Settings.
 
-
+# g) PER CONFLITTI
+#vedere https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/
 
 
 # ---------

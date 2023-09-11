@@ -1,6 +1,5 @@
-# Configuration in R
+# Configuration in R x HTTPS ACCREDITATION
 
-print("Hello")
 
 # Required pckgs ----------------------------------------------------------
 if (!require("pacman")) {
