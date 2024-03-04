@@ -1,0 +1,51 @@
+---
+title: "Lab 3: Modeling correlation and regression"
+editor: source
+## ------  general Output Options
+execute:     
+  eval: true
+  echo: false     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: true # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Website construction in progress...
+:::
+
+
+# Day 3 
+
+
+## Topics
+
+> Learn how to .... .
+
+ {{< pagebreak >}}
+
+## Lab code
+<!-- NON FUNZIONA!!!! -->
+<!-- [Download "\*.R" file](practice/Rcode/labs_day3.R) -->
+

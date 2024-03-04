@@ -1,0 +1,116 @@
+---
+title: "Lab 1: Intro to R and data analysis"
+editor: source
+## ------  general Output Options
+execute:     
+  eval: true
+  echo: false     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: true # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Website construction in progress...
+:::
+
+# Day 1
+
+## Topics
+
+> Learn how to .... .
+
+{{< pagebreak >}}
+
+## Lab code
+
+Here you will find the solved problems  addressed in Lab 1
+
+-   as `.qmd` file (commented solutions)
+
+```{r}
+library(downloadthis)
+```
+
+
+ 
+-   as `.R` file
+
+```{r}
+#| output: true
+
+download_file(
+  path =  here::here("tools", "Rcode", "lab01_code.R" ),
+  output_name = "lab01_code", # no extension.... 
+  output_extension = ".R",  
+  button_label = "Download solution as .R file",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa-brands fa-r-project",
+  self_contained = FALSE
+)
+```
+
+{{< pagebreak >}}
+
+## Lab datasets
+
+<!-- using {downloadthis} + https://fontawesome.com/search?q=directory&o=r -->
+<!-- Button type + default, warning, primary, success, info, warning, danger -->
+Below are the datasets used in the Practice session: 
+
+
++ `.csv` file
+
+```{r}
+#| output: true
+
+library(downloadthis)
+
+mtcars %>%
+  download_this(path =  here::here("tools", "data", "autism_data"), 
+    output_name =  "autism_data", # no extension.... 
+    output_extension = ".csv",
+    button_label = "Download input data  .csv",
+    button_type = "danger",
+    has_icon = TRUE,
+    icon = "fa-solid fa-file-csv" # "fa-solid fa-file-excel"
+  )
+```
+
++ local `subfolder`
+
+```{r}
+#| output: true
+
+download_dir(
+  path = here::here("tools", "data", "01_datasets"),
+  output_name = "labs input data",
+  button_label = "Download input data directory",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa-solid fa-folder-open",
+  self_contained = FALSE
+)
+```

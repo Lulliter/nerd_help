@@ -18,3 +18,9 @@ Things I will never remember about this
 
 
 # [ secret] 
+
+
+
+# Acknowledgements 
+
++ [git favicon](https://icons8.com/icon/20906/git)

@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "tools/04_boh.html",
+    "href": "tools/04_boh.html",
+    "title": "Lab 4: Intro to machine learning",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/04_boh.html#topics",
+    "href": "tools/04_boh.html#topics",
+    "title": "Lab 4: Intro to machine learning",
+    "section": "Topics",
+    "text": "Topics\n\nLearn how to …. ."
+  },
+  {
+    "objectID": "tools/04_boh.html#lab-code",
+    "href": "tools/04_boh.html#lab-code",
+    "title": "Lab 4: Intro to machine learning",
+    "section": "Lab code",
+    "text": "Lab code"
+  },
+  {
+    "objectID": "tools/02_quarto.html",
+    "href": "tools/02_quarto.html",
+    "title": "Lab 2: Statistical inference & hypothesis testing",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/02_quarto.html#topics",
+    "href": "tools/02_quarto.html#topics",
+    "title": "Lab 2: Statistical inference & hypothesis testing",
+    "section": "Topics",
+    "text": "Topics\n\nLearn how to …. ."
+  },
+  {
+    "objectID": "tools/02_quarto.html#lab-code",
+    "href": "tools/02_quarto.html#lab-code",
+    "title": "Lab 2: Statistical inference & hypothesis testing",
+    "section": "Lab code",
+    "text": "Lab code"
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite constrution in progress…"
+  },
+  {
+    "objectID": "me.html#education",
+    "href": "me.html#education",
+    "title": "About the Instructor",
+    "section": "Education",
+    "text": "Education\nUniversità degli Studi di Pavia | Pavia, Italy Master of Biostatistics and Epidemiology | 2018-2019\nUniversità degli Studi di Milano | Milano, Italy Ph.D. in Chemical Sciences | 2001 - 2003\nInstitut National de la Recherche Agronomique | Versailles-Grignon, France Visiting scholar | 2003 - 2003\nUniversità degli Studi di Pavia | Pavia, Italy BSc Degree in Chemistry | 1994 - 2000\nUniversiteit Leiden | Leiden, The Netherlands Erasmus exchange student (6 months) | 1999 - 1999"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Nerd__help",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "tools/01_git.html",
+    "href": "tools/01_git.html",
+    "title": "Lab 1: Intro to R and data analysis",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/01_git.html#topics",
+    "href": "tools/01_git.html#topics",
+    "title": "Lab 1: Intro to R and data analysis",
+    "section": "Topics",
+    "text": "Topics\n\nLearn how to …. ."
+  },
+  {
+    "objectID": "tools/01_git.html#lab-code",
+    "href": "tools/01_git.html#lab-code",
+    "title": "Lab 1: Intro to R and data analysis",
+    "section": "Lab code",
+    "text": "Lab code\nHere you will find the solved problems addressed in Lab 1\n\nas .qmd file (commented solutions)\n\n\nas .R file\n\n\n\n Download solution as .R file"
+  },
+  {
+    "objectID": "tools/01_git.html#lab-datasets",
+    "href": "tools/01_git.html#lab-datasets",
+    "title": "Lab 1: Intro to R and data analysis",
+    "section": "Lab datasets",
+    "text": "Lab datasets\n\n\nBelow are the datasets used in the Practice session:\n\n\n.csv file\n\n\n\n Download input data  .csv\n\n\n\nlocal subfolder\n\n\n\n\n Download input data directory"
+  },
+  {
+    "objectID": "tools/03_AWS.html",
+    "href": "tools/03_AWS.html",
+    "title": "Lab 3: Modeling correlation and regression",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/03_AWS.html#topics",
+    "href": "tools/03_AWS.html#topics",
+    "title": "Lab 3: Modeling correlation and regression",
+    "section": "Topics",
+    "text": "Topics\n\nLearn how to …. ."
+  },
+  {
+    "objectID": "tools/03_AWS.html#lab-code",
+    "href": "tools/03_AWS.html#lab-code",
+    "title": "Lab 3: Modeling correlation and regression",
+    "section": "Lab code",
+    "text": "Lab code"
+  }
+]

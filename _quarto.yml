@@ -1,0 +1,73 @@
+project:
+  type: website
+  output-dir: docs # to publish website on GithubPages
+# --- By default, all valid Quarto input files (.qmd, .ipynb, .md, .Rmd)
+#  will be rendered (NO .file, _dir/)
+  render:
+    - "*.qmd"
+    - "!secret/"
+
+execute:
+  freeze: auto  # Re-render only when source changes
+
+website:
+  title: "Nerd help"
+  description: "Instructions for R + git + AWS etc..."
+  site-url: "https://lulliter.github.io/nerd-help"
+  favicon: images/icons8-git-96.png
+  search: false # no magnifier on navbar
+  page-navigation: true
+
+  page-footer:
+    left: |
+      {{< fa regular copyright >}} Luisa M. Mimmi 2024
+# {{< fa brands creative-commons >}} Luisa M. Mimmi 2024
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      [Source code at {{< fa brands github >}}](https://github.com/Lulliter/nerd-help)
+    background: "#e3eff7"
+
+  navbar:
+#    logo: images/MITGEST_logo.jpeg
+    pinned: true # non si muove quando scorro la pagina
+    background: "#72aed8" # "#0084e6" "#EE6A24"
+    right:
+      - text: "Home"
+        icon: house-fill # https://icons.getbootstrap.com/?q=home
+        href: index.qmd
+      - text: "Tools"
+        icon: terminal-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
+        menu:
+          - text: "1) git & github"
+            href: tools/01_git.qmd
+          - text: "2) Quarto website"
+            href: tools/02_quarto.qmd
+          - text: "3) AWS deployment"
+            href: tools/03_AWS.qmd
+          - text: "4) boh!"
+            href: tools/04_boh.qmd
+      - text: "About"
+        icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
+        href: me.qmd
+
+
+format:
+  html:
+    toc: true
+    toc-location: "left"
+    code-link: true
+    anchor-sections: true
+    fig-cap-location: margin
+    reference-location: margin
+    footnotes-hover: true
+    fontsize: 1em
+    theme: theme/Lulas_theme.scss
+    # css: theme/styles.css
+    ##----- code highlighting style
+    highlight-style: monokai # atom-one # github # dracula
+    mainfont: "Lato"
+    monofont: "Fira Mono"
+
+
+
+
