@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lulliter.github.io/nerd-help/tools/04_boh.html</loc>
-    <lastmod>2024-03-04T16:16:47.562Z</lastmod>
+    <loc>{{< var website.site-url >}}/tools/04_boh.html</loc>
+    <lastmod>2024-03-06T23:11:49.671Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/tools/02_quarto.html</loc>
-    <lastmod>2024-03-04T16:16:47.562Z</lastmod>
+    <loc>{{< var website.site-url >}}/tools/02_quarto.html</loc>
+    <lastmod>2024-03-06T23:12:44.764Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/me.html</loc>
-    <lastmod>2024-03-04T16:16:47.561Z</lastmod>
+    <loc>{{< var website.site-url >}}/me.html</loc>
+    <lastmod>2024-03-06T23:11:53.818Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/index.html</loc>
-    <lastmod>2024-03-04T16:16:47.559Z</lastmod>
+    <loc>{{< var website.site-url >}}/index.html</loc>
+    <lastmod>2024-03-06T23:02:27.305Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/tools/01_git.html</loc>
-    <lastmod>2024-03-04T16:16:47.562Z</lastmod>
+    <loc>{{< var website.site-url >}}/tools/01_git.html</loc>
+    <lastmod>2024-03-06T23:11:10.853Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/tools/03_AWS.html</loc>
-    <lastmod>2024-03-04T16:16:47.562Z</lastmod>
+    <loc>{{< var website.site-url >}}/tools/03_AWS.html</loc>
+    <lastmod>2024-03-06T22:35:59.040Z</lastmod>
   </url>
 </urlset>

@@ -1,7 +1,8 @@
 ---
-title: "Nerd__help"
+title: "Nerd help"
 ---
 
-This is a Quarto website.
+This is a Quarto website where I have Instructions for nerdy things.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I deploy it on GH pages here: [{{< var website.site-url >}}]({{< var website.site-url >}}) 
+ 

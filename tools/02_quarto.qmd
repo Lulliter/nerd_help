@@ -1,5 +1,5 @@
 ---
-title: "Lab 2: Statistical inference & hypothesis testing"
+title: "2) Quarto projects and websites"
 editor: source
 ## ------  general Output Options
 execute:     
