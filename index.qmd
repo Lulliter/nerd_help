@@ -1,6 +1,3 @@
----
-title: "Nerd help"
----
 
 This is a Quarto website where I have Instructions for nerdy things.
 
