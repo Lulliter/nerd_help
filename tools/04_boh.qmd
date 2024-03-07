@@ -1,5 +1,5 @@
 ---
-title: "4) ... "
+title: "4) Bonus Stuff"
 date: "`r Sys.time()`"
 date-format: "ddd, D of MMMM, YYYY"
 date-modified: last-modified
@@ -42,16 +42,27 @@ Website construction in progress...
 :::
 
 
-# Day 4 
+# 4) Bonus Stuff
 
 
 ## Topics
 
-> Learn how to .... .
 
- {{< pagebreak >}}
++ new mac setup
 
-## Lab code
-<!-- NON FUNZIONA!!!! -->
-<!-- [Download "\*.R" file](Rcode/labs_day4.R) -->
- 
++ shell commands
+  + looking for files CLI `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh`
++ understanding collaboration on git /GH
+
++ Example of things 
+  + `_variables.yml` for quarto projects variables
+  + Example of gitignore
+
++ Authentication for Github
+    + Using the SSH protocol (credentials)
+    + Cloning GitHub repositories using SSH
+    + Cloning GitHub repositories using HTTPS
+
++ make 
++ VS Code 
++ ...     

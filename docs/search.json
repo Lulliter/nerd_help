@@ -2,23 +2,16 @@
   {
     "objectID": "tools/04_boh.html",
     "href": "tools/04_boh.html",
-    "title": "4) …",
+    "title": "4) Bonus Stuff",
     "section": "",
     "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
   },
   {
     "objectID": "tools/04_boh.html#topics",
     "href": "tools/04_boh.html#topics",
-    "title": "4) …",
+    "title": "4) Bonus Stuff",
     "section": "Topics",
-    "text": "Topics\n\nLearn how to …. ."
-  },
-  {
-    "objectID": "tools/04_boh.html#lab-code",
-    "href": "tools/04_boh.html#lab-code",
-    "title": "4) …",
-    "section": "Lab code",
-    "text": "Lab code"
+    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
   },
   {
     "objectID": "tools/02_quarto.html",
