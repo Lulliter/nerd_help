@@ -1,80 +1,24 @@
 [
   {
-    "objectID": "tools/04_boh.html",
-    "href": "tools/04_boh.html",
-    "title": "4) Bonus Stuff",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "tools/04_boh.html#topics",
-    "href": "tools/04_boh.html#topics",
-    "title": "4) Bonus Stuff",
-    "section": "Topics",
-    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
-  },
-  {
-    "objectID": "tools/02_quarto.html",
-    "href": "tools/02_quarto.html",
-    "title": "2) Quarto projects and websites",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "tools/02_quarto.html#topics",
-    "href": "tools/02_quarto.html#topics",
-    "title": "2) Quarto projects and websites",
-    "section": "Topics",
-    "text": "Topics\n\nLearn how to …. ."
-  },
-  {
-    "objectID": "tools/02_quarto.html#lab-code",
-    "href": "tools/02_quarto.html#lab-code",
-    "title": "2) Quarto projects and websites",
-    "section": "Lab code",
-    "text": "Lab code"
-  },
-  {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "Luisa Maria Mimmi",
-    "section": "",
-    "text": "Hi there!\nI am a Policy & Data Analyst,  coffee addict and  enthusiast.\nI made this website for personal use, to collect a bunch of nerdy instructions I keep forgetting!\nFeel free to reach out via the links below.\n \n  \n   \n  \n    \n     LinkedIn\n  \n  \n    \n     Email\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n      Orcid"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Nerd help",
-    "section": "",
-    "text": "This is a Quarto website where I have Instructions for nerdy things.\nI deploy it on GH pages here: https://lulliter.github.io/nerd-help"
-  },
-  {
-    "objectID": "tools/01_git.html",
-    "href": "tools/01_git.html",
-    "title": "1) Git introduction",
+    "objectID": "tools/05_colors.html",
+    "href": "tools/05_colors.html",
+    "title": "5) Colors",
     "section": "",
     "text": "Caution\n\n\n\n\n\nWeb page construction in progress…"
   },
   {
-    "objectID": "tools/01_git.html#topics",
-    "href": "tools/01_git.html#topics",
-    "title": "1) Git introduction",
-    "section": "Topics",
-    "text": "Topics\n\nLearn how to …. ."
+    "objectID": "tools/05_colors.html#colors",
+    "href": "tools/05_colors.html#colors",
+    "title": "5) Colors",
+    "section": "Colors",
+    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")"
   },
   {
-    "objectID": "tools/01_git.html#lab-code",
-    "href": "tools/01_git.html#lab-code",
-    "title": "1) Git introduction",
-    "section": "Lab code",
-    "text": "Lab code\nHere you will find the solved problems addressed in Lab 1\n\nas .qmd file (commented solutions)\n\n\nas .R file\n\n\n\n Download solution as .R file"
-  },
-  {
-    "objectID": "tools/01_git.html#lab-datasets",
-    "href": "tools/01_git.html#lab-datasets",
-    "title": "1) Git introduction",
-    "section": "Lab datasets",
-    "text": "Lab datasets\n\n\nBelow are the datasets used in the Practice session:\n\n\n.csv file\n\n\n\n Download input data  .csv\n\n\n\nlocal subfolder\n\n\n\n\n Download input data directory"
+    "objectID": "tools/05_colors.html#color-palettes",
+    "href": "tools/05_colors.html#color-palettes",
+    "title": "5) Colors",
+    "section": "Color palettes",
+    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system"
   },
   {
     "objectID": "tools/03_AWS.html",
@@ -133,6 +77,13 @@
     "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)"
   },
   {
+    "objectID": "tools/01_git.html",
+    "href": "tools/01_git.html",
+    "title": "1) Git introduction",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…"
+  },
+  {
     "objectID": "tools/01_git.html#difference-bw-git-fetch-git-pull",
     "href": "tools/01_git.html#difference-bw-git-fetch-git-pull",
     "title": "1) Git introduction",
@@ -145,5 +96,68 @@
     "title": "1) Git introduction",
     "section": "Difference b/w git merge & git rebase\n",
     "text": "Difference b/w git merge & git rebase\n\nhttps://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/"
+  },
+  {
+    "objectID": "tools/01_git.html#create-checkout-a-branch",
+    "href": "tools/01_git.html#create-checkout-a-branch",
+    "title": "1) Git introduction",
+    "section": "Create & checkout a branch",
+    "text": "Create & checkout a branch\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see"
+  },
+  {
+    "objectID": "tools/01_git.html#make-changes-in-branch",
+    "href": "tools/01_git.html#make-changes-in-branch",
+    "title": "1) Git introduction",
+    "section": "Make changes in branch",
+    "text": "Make changes in branch\nI add a page to the site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Nerd help",
+    "section": "",
+    "text": "This is a Quarto website where I have Instructions for nerdy things.\nI deploy it on GH pages here: https://lulliter.github.io/nerd-help"
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "Luisa Maria Mimmi",
+    "section": "",
+    "text": "Hi there!\nI am a Policy & Data Analyst,  coffee addict and  enthusiast.\nI made this website for personal use, to collect a bunch of nerdy instructions I keep forgetting!\nFeel free to reach out via the links below.\n \n  \n   \n  \n    \n     LinkedIn\n  \n  \n    \n     Email\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n      Orcid"
+  },
+  {
+    "objectID": "tools/02_quarto.html",
+    "href": "tools/02_quarto.html",
+    "title": "2) Quarto projects and websites",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/02_quarto.html#topics",
+    "href": "tools/02_quarto.html#topics",
+    "title": "2) Quarto projects and websites",
+    "section": "Topics",
+    "text": "Topics\n\nLearn how to …. ."
+  },
+  {
+    "objectID": "tools/02_quarto.html#lab-code",
+    "href": "tools/02_quarto.html#lab-code",
+    "title": "2) Quarto projects and websites",
+    "section": "Lab code",
+    "text": "Lab code"
+  },
+  {
+    "objectID": "tools/04_boh.html",
+    "href": "tools/04_boh.html",
+    "title": "4) Bonus Stuff",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "tools/04_boh.html#topics",
+    "href": "tools/04_boh.html#topics",
+    "title": "4) Bonus Stuff",
+    "section": "Topics",
+    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
   }
 ]

@@ -48,8 +48,8 @@ website:
             href: tools/02_quarto.qmd
           - text: "3) AWS deployment"
             href: tools/03_AWS.qmd
-          - text: "4) boh!"
-            href: tools/04_boh.qmd
+          - text: "5) Color"
+            href: tools/05_colors.qmd        
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd

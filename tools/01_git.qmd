@@ -21,7 +21,7 @@ tbl-cap-location: top
 format:
   html:
     # theme: flatly #spacelab
-    code-fold: true # redundant bc echo false 
+    code-fold: false # redundant bc echo false 
     toc-depth: 3
     toc_float: true
     toc-location: left
@@ -42,11 +42,11 @@ Web page construction in progress...
 
 # Frist: some useful terminal commands
 
-+ shift+Q --> to exit from git dialogue 
-+ highlight [cmd + D] --> to seleect all subsequent instances 
-+ highlight [alt + drag] --> to edit at begin of each lines 
-+ highlight [cmd + shift + L] --> to edit at the end of each lines 
-+ highlight [ctr + shift + W] --> wrapping  text with start and end tag 
++ `[shift+Q]` --> to exit from git dialogue 
++ `highlight + [cmd + D]` --> to seleect all subsequent instances 
++ `highlight + [alt + drag]` --> to edit at begin of each lines 
++ `highlight + [cmd + shift + L]` --> to edit at the end of each lines 
++ `highlight + [ctr + shift + W]` --> wrapping  text with start and end tag 
 
 # Git installation
 
@@ -107,6 +107,27 @@ https://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-s
 # References
 
 + [The Pragmatic Git](https://blog.git-init.com/git-gold/) blogsite
+-----
+# Branches
+
+## Create & checkout a branch
+
+```{bash}
+# 1/2 create b
+git branch page_col #create a new branch named "page_col"
+
+# 2/2 then switch to b
+git checkout page_col
+
+# or 1+2/2 CREATE + SWITCH BRANCHES
+git checkout -b page_col  
+```
+
+Now I see   
+![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b}
+
+##  Make changes in branch
+I add a page to the site 
 
 -----
 
@@ -123,7 +144,7 @@ git clone https://github.com/Lulliter/nerd_help.git
 cd nerd_help
 ```
 
-### **Rules** 
+**Rules** 
 
 + THE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE
   + you create new branches for new features and merge them into Master when they’re completed. 
@@ -131,9 +152,37 @@ cd nerd_help
   + It’s also important when collaborating that your team picks features that don’t have overlapping code. 
 
 3. Here I create a new branch **colors_page** and I go there 
-  ```{bash}
-#  I create a new branch to add a color.qmd page 
+
+```{bash}
+#  I create a new branch to add a color.qmd page and switch there 
 git checkout -b colors_page 
+
+# verify this with the command:
+git branch
 ```
 
-In the branch, the collabrorator makes some changes 
+
+  + "checkout” is used to switch between branches. Adding the “-b” and a name at the end creates a new branch and then moves into that new branch for us.
+
+In the branch, the collabrorator
+
++ makes some changes ...
++ add + commit + push 
+
+3.b Wait 
+
+Even if I am in the collaborator GH, lookg like the remote is considered the owner GH 
+
+```{bash}
+git remote -v         
+# origin  https://github.com/Lulliter/nerd_help.git (fetch)
+# origin  https://github.com/Lulliter/nerd_help.git (push)
+```
+so I must change te origin in the collaborator GH
+
+
+```{bash}
+git remote set-url origin  https://github.com/lula-test/nerd_help.git
+```
+# REFERENCE 
+https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67
