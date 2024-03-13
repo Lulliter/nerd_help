@@ -28,8 +28,13 @@ about:
 
 :::{#hero-heading}
 
-Who am I? 
-<br> A Policy & Data Analyst, {{< fa mug-hot >}}  coffee addict and {{< fa brands r-project >}}  enthusiast 
+Hi there!
+
+I am a Policy & Data Analyst, {{< fa mug-hot >}}  coffee addict and {{< fa brands r-project >}}  enthusiast. 
+
+I made this website for personal use, to collect a bunch of nerdy instructions I keep forgetting!
+
+Feel free to reach out via the links below.
 
  
 :::

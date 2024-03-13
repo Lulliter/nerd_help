@@ -39,7 +39,7 @@
     "href": "me.html",
     "title": "Luisa Maria Mimmi",
     "section": "",
-    "text": "Who am I?  A Policy & Data Analyst,  coffee addict and  enthusiast\n \n  \n   \n  \n    \n     LinkedIn\n  \n  \n    \n     Email\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n      Orcid"
+    "text": "Hi there!\nI am a Policy & Data Analyst,  coffee addict and  enthusiast.\nI made this website for personal use, to collect a bunch of nerdy instructions I keep forgetting!\nFeel free to reach out via the links below.\n \n  \n   \n  \n    \n     LinkedIn\n  \n  \n    \n     Email\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n      Orcid"
   },
   {
     "objectID": "index.html",
@@ -53,7 +53,7 @@
     "href": "tools/01_git.html",
     "title": "1) Git introduction",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…"
   },
   {
     "objectID": "tools/01_git.html#topics",
@@ -131,5 +131,19 @@
     "title": "3) Publish website form GH Pages to AWS domain",
     "section": "[on GH Pages]: fix GHPages error",
     "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)"
+  },
+  {
+    "objectID": "tools/01_git.html#difference-bw-git-fetch-git-pull",
+    "href": "tools/01_git.html#difference-bw-git-fetch-git-pull",
+    "title": "1) Git introduction",
+    "section": "Difference b/w git fetch & git pull\n",
+    "text": "Difference b/w git fetch & git pull"
+  },
+  {
+    "objectID": "tools/01_git.html#difference-bw-git-merge-git-rebase",
+    "href": "tools/01_git.html#difference-bw-git-merge-git-rebase",
+    "title": "1) Git introduction",
+    "section": "Difference b/w git merge & git rebase\n",
+    "text": "Difference b/w git merge & git rebase\n\nhttps://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/"
   }
 ]
