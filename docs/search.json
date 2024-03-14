@@ -165,7 +165,7 @@
     "href": "index.html",
     "title": "Nerd help",
     "section": "",
-    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n( Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd-help"
+    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n( Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
   },
   {
     "objectID": "me.html",
