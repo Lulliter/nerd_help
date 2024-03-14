@@ -28,7 +28,7 @@ website:
       [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
     right: |
       Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
-      [Source code at {{< fa brands github >}}](https://github.com/Lulliter/nerd-help)
+      [Source code at {{< fa brands github >}}](https://github.com/Lulliter/nerd_help)
     background: "#e7d8da" #"#e3eff7"
 
   navbar:
@@ -46,8 +46,8 @@ website:
             href: tools/01_git.qmd
           - text: "2) Quarto website"
             href: tools/02_quarto.qmd
-          - text: "3) AWS deployment"
-            href: tools/03_AWS.qmd
+          - text: "3) Custom domains"
+            href: tools/03_custom_domain.qmd
           - text: "5) Color"
             href: tools/05_colors.qmd        
       - text: "About"
@@ -62,6 +62,13 @@ website:
         - tools/01_git.qmd
         - tools/01a_git_intro.qmd
         - tools/01b_git_branches.qmd
+    - title: "Custom domain"
+      style: "docked"
+      background: light
+      contents:
+        - tools/03_custom_domain.qmd
+        - tools/03a_AWS.qmd
+        - tools/03b_Google_domain.qmd
 format:
   html:
     toc: true

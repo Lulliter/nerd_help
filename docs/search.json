@@ -21,60 +21,54 @@
     "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system"
   },
   {
-    "objectID": "tools/03_AWS.html",
-    "href": "tools/03_AWS.html",
-    "title": "3) Publish website form GH Pages to AWS domain",
+    "objectID": "tools/03b_Google_domain.html",
+    "href": "tools/03b_Google_domain.html",
+    "title": "Custom domain on Google domain",
     "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:"
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
+    "crumbs": [
+      "Custom domain on Google domain"
+    ]
   },
   {
-    "objectID": "tools/03_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "tools/03_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "3) Publish website form GH Pages to AWS domain",
+    "objectID": "tools/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "tools/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on Google domain",
     "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings …."
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Custom domain on Google domain"
+    ]
   },
   {
-    "objectID": "tools/03_AWS.html#on-aws-buy-a-domain",
-    "href": "tools/03_AWS.html#on-aws-buy-a-domain",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on AWS] Buy a domain",
-    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com"
+    "objectID": "tools/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "href": "tools/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] Buy a domain",
+    "text": "[on Google Domain] Buy a domain",
+    "crumbs": [
+      "Custom domain on Google domain"
+    ]
   },
   {
-    "objectID": "tools/03_AWS.html#on-aws-set-up-a-hosted-zone",
-    "href": "tools/03_AWS.html#on-aws-set-up-a-hosted-zone",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on AWS] set up a “HOSTED ZONE”",
-    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone."
+    "objectID": "tools/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "href": "tools/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] set up a “HOSTED ZONE”",
+    "text": "[on Google Domain] set up a “HOSTED ZONE”",
+    "crumbs": [
+      "Custom domain on Google domain"
+    ]
   },
   {
-    "objectID": "tools/03_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "href": "tools/03_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on AWS]: Redirect the domain to my website on Github pages",
-    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” ."
-  },
-  {
-    "objectID": "tools/03_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "href": "tools/03_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
-    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS"
-  },
-  {
-    "objectID": "tools/03_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "href": "tools/03_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on local]: Adjust the .yml file of your website",
-    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com"
-  },
-  {
-    "objectID": "tools/03_AWS.html#on-gh-pages-fix-ghpages-error",
-    "href": "tools/03_AWS.html#on-gh-pages-fix-ghpages-error",
-    "title": "3) Publish website form GH Pages to AWS domain",
-    "section": "[on GH Pages]: fix GHPages error",
-    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)"
+    "objectID": "tools/03_custom_domain.html",
+    "href": "tools/03_custom_domain.html",
+    "title": "From GH Pages to custom domain",
+    "section": "",
+    "text": "(Source: www.freepik.com/)",
+    "crumbs": [
+      "From GH Pages to custom domain"
+    ]
   },
   {
     "objectID": "tools/01b_git_branches.html",
@@ -171,7 +165,7 @@
     "href": "index.html",
     "title": "Nerd help",
     "section": "",
-    "text": "Welcome!\nThis is a Quarto website where I collects instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd-help"
+    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n( Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd-help"
   },
   {
     "objectID": "me.html",
@@ -220,6 +214,86 @@
     "title": "2) Quarto projects and websites",
     "section": "Lab code",
     "text": "Lab code"
+  },
+  {
+    "objectID": "tools/03a_AWS.html",
+    "href": "tools/03a_AWS.html",
+    "title": "Custom domain on AWS",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "tools/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on AWS",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-aws-buy-a-domain",
+    "href": "tools/03a_AWS.html#on-aws-buy-a-domain",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] Buy a domain",
+    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "href": "tools/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] set up a “HOSTED ZONE”",
+    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone.",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "href": "tools/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Redirect the domain to my website on Github pages",
+    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” .",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "href": "tools/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
+    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "href": "tools/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "title": "Custom domain on AWS",
+    "section": "[on local]: Adjust the .yml file of your website",
+    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "tools/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "href": "tools/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "title": "Custom domain on AWS",
+    "section": "[on GH Pages]: fix GHPages error",
+    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)",
+    "crumbs": [
+      "Custom domain on AWS"
+    ]
   },
   {
     "objectID": "tools/04_boh.html",
