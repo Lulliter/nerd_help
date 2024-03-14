@@ -98,20 +98,6 @@
     "text": "Difference b/w git merge & git rebase\n\nhttps://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/"
   },
   {
-    "objectID": "tools/01_git.html#create-checkout-a-branch",
-    "href": "tools/01_git.html#create-checkout-a-branch",
-    "title": "1) Git introduction",
-    "section": "Create & checkout a branch",
-    "text": "Create & checkout a branch\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see"
-  },
-  {
-    "objectID": "tools/01_git.html#make-changes-in-branch",
-    "href": "tools/01_git.html#make-changes-in-branch",
-    "title": "1) Git introduction",
-    "section": "Make changes in branch",
-    "text": "Make changes in branch\nI add a page to the site"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Nerd help",
@@ -159,5 +145,89 @@
     "title": "4) Bonus Stuff",
     "section": "Topics",
     "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
+  },
+  {
+    "objectID": "tools/01_git.html#create-checkout-a-branch",
+    "href": "tools/01_git.html#create-checkout-a-branch",
+    "title": "1) Git introduction",
+    "section": "Create & checkout a branch",
+    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see"
+  },
+  {
+    "objectID": "tools/01_git.html#make-changes-in-branch",
+    "href": "tools/01_git.html#make-changes-in-branch",
+    "title": "1) Git introduction",
+    "section": "Make changes in branch",
+    "text": "Make changes in branch\nI add a page to the site"
+  },
+  {
+    "objectID": "tools/01_git.html#see-differences-bw-commits",
+    "href": "tools/01_git.html#see-differences-bw-commits",
+    "title": "1) Git introduction",
+    "section": "See differences b/w commits",
+    "text": "See differences b/w commits\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD"
+  },
+  {
+    "objectID": "tools/01_git.html#see-differences-bw-branches",
+    "href": "tools/01_git.html#see-differences-bw-branches",
+    "title": "1) Git introduction",
+    "section": "See differences b/w branches",
+    "text": "See differences b/w branches\n\ngit diff master..page_col '***.qmd'Q\n\n\n\n\n\n## Difference b/w git fetch & git pull\n\n\n\n## Difference b/w git merge & git rebase https://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/"
+  },
+  {
+    "objectID": "tools/01_git.html#merge",
+    "href": "tools/01_git.html#merge",
+    "title": "1) Git introduction",
+    "section": "Merge",
+    "text": "Merge\n…."
+  },
+  {
+    "objectID": "tools/01_git.html#section",
+    "href": "tools/01_git.html#section",
+    "title": "1) Git introduction",
+    "section": "##",
+    "text": "##"
+  },
+  {
+    "objectID": "tools/01_git.html#switch-to-other-branch",
+    "href": "tools/01_git.html#switch-to-other-branch",
+    "title": "1) Git introduction",
+    "section": "Switch to other branch",
+    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)"
+  },
+  {
+    "objectID": "tools/01_git.html#rename-your-current-branch",
+    "href": "tools/01_git.html#rename-your-current-branch",
+    "title": "1) Git introduction",
+    "section": "Rename your current branch",
+    "text": "Rename your current branch\nIt’s the -m parameter !\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!"
+  },
+  {
+    "objectID": "tools/01_git.html#rename-a-local-branch",
+    "href": "tools/01_git.html#rename-a-local-branch",
+    "title": "1) Git introduction",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remte branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!"
+  },
+  {
+    "objectID": "tools/01_git.html#push-upstream-a-local-branch",
+    "href": "tools/01_git.html#push-upstream-a-local-branch",
+    "title": "1) Git introduction",
+    "section": "Push upstream a local branch",
+    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin"
+  },
+  {
+    "objectID": "tools/01_git.html#rename-a-remote-branch",
+    "href": "tools/01_git.html#rename-a-remote-branch",
+    "title": "1) Git introduction",
+    "section": "Rename a (remote) branch",
+    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository"
+  },
+  {
+    "objectID": "tools/01_git.html#merge-a-git-branch-into-master",
+    "href": "tools/01_git.html#merge-a-git-branch-into-master",
+    "title": "1) Git introduction",
+    "section": "Merge a git branch into master",
+    "text": "Merge a git branch into master\n\nList All Git Branches\nSwitch to Master\nMerge Branch into Master\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSince merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:\n\n\n\n\n# List\ngit branch\n# Switch\ngit checkout master\n# The merge creates a merge commit, bringing together multiple lines of development while preserving the history of the source branch.\ngit merge -m \"Your merge commit message\" branch_name"
   }
 ]
