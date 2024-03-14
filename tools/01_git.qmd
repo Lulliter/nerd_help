@@ -1,307 +1,39 @@
 ---
-title: "1) Git introduction"
-date: "`r Sys.time()`"
-date-format: "ddd, D of MMMM, YYYY"
-date-modified: last-modified
-lang: en
-editor: source
-engine: knitr
-## ------  general Output Options
-execute:     
-  eval: false    # actually run? 
-  echo: true     #  include source code in output
-  warning: false  #  include warning code in output
-  error: false    #  include error code in output
-  output: false   # include output code in output (CHG in BLOCKS)
-  # include: false   # R still runs but code and results DON"T appear in output  
-  cache: false # normalmnte false
-toc: true
-fig-cap-location: top
-tbl-cap-location: top
-format:
-  html:
-    # theme: flatly #spacelab
-    code-fold: false # redundant bc echo false 
-    toc-depth: 3
-    toc_float: true
-    toc-location: left
-    toc-title: Outline
-    embed-resources: true # external dependencies embedded (Not in ..._files/)
-  # pdf:
-  #   toc-depth: 2
-  #   toc-title: Indice
-  #   highlight-style: github
-  #   #lang: it
-  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
-format-links: false
+title: "Git"
+# date: "`r Sys.time()`"
+# date-format: "ddd, D of MMMM, YYYY"
+# date-modified: last-modified
+# lang: en
+# editor: source
+# engine: knitr
+# ## ------  general Output Options
+# execute:     
+#   eval: false    # actually run? 
+#   echo: true     #  include source code in output
+#   warning: false  #  include warning code in output
+#   error: false    #  include error code in output
+#   output: false   # include output code in output (CHG in BLOCKS)
+#   # include: false   # R still runs but code and results DON"T appear in output  
+#   cache: false # normalmnte false
+# toc: true
+# fig-cap-location: top
+# tbl-cap-location: top
+# format:
+#   html:
+#     # theme: flatly #spacelab
+#     code-fold: false # redundant bc echo false 
+#     toc-depth: 3
+#     toc_float: true
+#     toc-location: left
+#     toc-title: Outline
+#     embed-resources: true # external dependencies embedded (Not in ..._files/)
+#   # pdf:
+#   #   toc-depth: 2
+#   #   toc-title: Indice
+#   #   highlight-style: github
+#   #   #lang: it
+#   #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+# format-links: false
 ---
 
-::: {.callout-caution collapse="false"}
-Web page construction in progress...
-:::
-
-# Frist: some useful terminal commands
-
-+ `[shift+Q]` --> to exit from git dialogue 
-+ `highlight + [cmd + D]` --> to seleect all subsequent instances 
-+ `highlight + [alt + drag]` --> to edit at begin of each lines 
-+ `highlight + [cmd + shift + L]` --> to edit at the end of each lines 
-+ `highlight + [ctr + shift + W]` --> wrapping  text with start and end tag 
-
-# Git installation
-
-...
-
-# Git architecture
-
-+ **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. Usually there is one default remote repository and origin represents this default repository.
-  + If you don’t like "origin", you can rename it
-```{bash}
-#  rename origin it by using 
-git remote rename origin new_name
-```
-
-+ **`branch`**	branch is a like a fork in the history of a repository. One branch represents an independent line of development, like a fork teeth.
-```{bash}
-#  to check which branches I have  
-git branch -a
-    # * master
-    #   page_col
-    #   remotes/origin/master
-```
-+ **`master`**	master is a branch, the default branch, the main branch, and it’s always there.
-
-+ **`HEAD`**	= the currently active branch (the checked out one). Each repository only has one current branch, hence one HEAD as well.
-  + **`Detached HEAD`** happens when a checkout command is applied to a specific historical commit, tag or remote branch.
-
-```{bash}
-#  to check where the HEAD of a repository is pointing to
-cat .git/HEAD
-    # ref: refs/heads/master
-```
-
-+ **`index`**	index is the proposed next commit, also called staging area. 
-
-# Git commands
-
-See @fig-git_wfl 
-
-+ `git status`	    = View the state of working directory and staging area
-+ `git add`       = Stage changes for next commit 
-+ `git commit`    = Commit the staged snapshot to the local repository    
-+ `git push`      = Upload local repository content to a remote repository
-  + 4 TEAM: it makes your local changes publicly available in a remote repository.  
-+ `git clone`     = Copies an entire remote repository down to your local machine, setting up a cloned version and checks out the default branch (generally master)
-  + this action is done only once.
-+ `git fetch`     = Download content from remote repository, but doesn’t force the merge 
-  + 4 TEAM: if a developer has pushed changes to a remote branch, those changes will be pulled down to your repository whenever fetch is performed.
-     + Note: fetch won't automatically merge any changes, only update references!
-+ `git merge`     = Join two branches together
-+ `git pull`      = Combo of git fetch and git merge  
-
-<!-- NO link in image -->
-<!-- ![title](location){#fig-reference} -->
-![Git Workflow](./img_tools/GitWorkflow-4.png){#fig-git_wfl}
-
-Source: [cloudstudio.com.au](https://cloudstudio.com.au/2021/06/26/git-command/)
-
-<!-- YES link in image -->
-<!-- ::: {#fig-git_wfl}
-[![Git Workflow](./img_tools/GitWorkflow-4.png)](https://cloudstudio.com.au/2021/06/26/git-command/)
-::: -->
- 
-# Branches
-
-## Create & checkout a branch
-
-> "checkout" means to change the branch you are currently working on (or switch to)
-
-```{bash}
-# 1/2 create b
-git branch page_col #create a new branch named "page_col"
-
-# 2/2 then switch to b
-git checkout page_col
-
-# or 1+2/2 CREATE + SWITCH BRANCHES
-git checkout -b page_col  
-```
-
-Now I see   
-![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b}
-
-## Switch to other branch 
-You can also use `git switch other_branch` which is more specific 
-
-```{bash}
-git switch page_col
-cat .git/HEAD # (confirms me I moved)
-```
-
-## Rename a (local) branch
-It's the `-m` parameter !
-
-+ you cannot rename a remte branch --> you delete it and re-upload it 
-```{bash}
-# In currently checkedout 
-git branch -m better_name
-
-# in different branch (non HEAD)
-git switch master
-git branch test_branch # fake one 
-git branch -a  # it's there
-git branch -m test_branch test_branch2
-git branch -a  # yep!
-
-```
-
-## Push upstream a local branch 
-1.  Create local branch 
-2.  Switch to local branch 
-3.  `git push –-set-upstream` command (the 1st time you push)
-4.  Thereafter `git push` (all subsequent git push commands automatically move local branch changes up to the remote branch.)
-
-```{bash}
-# 1 Create local branch 
-# 2 switch to local branch 
-git switch page_col
-# 3.a git push –set-upstream command (1st time)
-git push  --set-upstream origin  page_col
-  # check 
-  git branch -a # YAY!
-# 3.b git push origin (nest times )
-git push origin
-```
-
-
-## Rename a (remote) branch
-You need to 
-1. Publish an existing local branch on remote
-`git push -u origin local_branch`
-2. So you delete old one and push up a new one from local repository  
-
-## Merge a git branch into master 
-
-1. List All Git Branches
-2. Switch to Master
-3. Merge Branch into Master
-4. Push Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)
-
-
-
-::: {.callout-tip collapse="true"}
-Since merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:
-:::
-
-```{bash}
-# 1. List
-git branch
-# 2. Switch
-git checkout master
-# 3. The merge creates a merge commit, bringing together
-    # lines of development while preserving the history of the source branch.
-git merge -m "Prova di merge" page_col
-# 4. Push the local changes to the remote repository
-git push origin
-```
-
-
-
-
-
-
-
-## See differences b/w commits 
-
-```{bash}
-# diff between 2 latest commits (1 on branch) only in files I care 
-git diff dc87ae c86edffc16 "*.qmd"
-
-#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))
-git diff dc87ae..  
-git diff dc87ae^..HEAD  '***.qmd' #ORQ
-git diff dc87ae..HEAD   #OR
-
-# b/w old commit on branch and HEAD 
-git diff 693e61^..HEAD
-
-```
-
-## See differences b/w branches 
-
-```{bash}
-git diff master..page_col '***.qmd'Q
-```
-
------
-## Difference b/w `git fetch` & `git pull`
-
-
-## Difference b/w `git merge` & `git rebase`
-https://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/
-
------
-
-# Collaboration
-
-1. I create a test GH account **lula-test**  (associated to l__a__a@icloud.com)
-
-2. I clone in  `/Users/testuser/GH_test/nerd_help` this repository "nerd-help" I own as **Lulliter** and (from there (I indicated that **lula-test** is a collaborator)
-
-
-```{bash}
-# positioned in parent folder /Users/testuser/GH_test/
-git clone https://github.com/Lulliter/nerd_help.git
-cd nerd_help
-```
-
-**Rules** 
-
-+ THE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE
-  + you create new branches for new features and merge them into Master when they’re completed. 
-
-  + It’s also important when collaborating that your team picks features that don’t have overlapping code. 
-
-3. Here I create a new branch **colors_page** and I go there 
-
-```{bash}
-#  I create a new branch to add a color.qmd page and switch there 
-git checkout -b colors_page 
-
-# verify this with the command:
-git branch
-```
-
-
-  + "checkout” is used to switch between branches. Adding the “-b” and a name at the end creates a new branch and then moves into that new branch for us.
-
-In the branch, the collabrorator
-
-+ makes some changes ...
-+ add + commit + push 
-
-3.b Wait 
-
-Even if I am in the collaborator GH, lookg like the remote is considered the owner GH 
-
-```{bash}
-git remote -v         
-# origin  https://github.com/Lulliter/nerd_help.git (fetch)
-# origin  https://github.com/Lulliter/nerd_help.git (push)
-```
-so I must change te origin in the collaborator GH
-
-
-```{bash}
-git remote set-url origin  https://github.com/lula-test/nerd_help.git
-```
-
-
-
-# Reference 
-+ [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)
-+ [The Pragmatic Git](https://blog.git-init.com/git-gold/) blogsite
-+ [Tutorials](https://phoenixnap.com/kb/tag/git)
-
-
------
+![](../images/cat3_horiz.jpg)(Source: [www.freepik.com/](https://www.freepik.com/free-photo))

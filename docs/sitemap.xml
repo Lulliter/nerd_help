@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>{{< var website.site-url >}}/tools/01_git.html</loc>
-    <lastmod>2024-03-14T09:50:12.334Z</lastmod>
+    <loc>{{< var website.site-url >}}/me.html</loc>
+    <lastmod>2024-03-14T11:02:16.303Z</lastmod>
   </url>
 </urlset>

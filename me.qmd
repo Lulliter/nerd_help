@@ -1,40 +1,43 @@
 ---
-title: "Luisa Maria Mimmi"
+title: "Luisa M. Mimmi"
 about:
   id: hero-heading #about-block 
   template: jolla
-  image: images/dog-watch-mondo.png
+  #image: images/dog-watch-mondo.png
   links:
     # - icon: file-pdf
     #   text: CV (tbd)
     #   href: https://www.linkedin.com/in/luisa-m-mimmi/  
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/luisa-m-mimmi/
-    - icon: envelope
-      text: Email
-      href: mailto:lmm76@georgetown.edu
-    # - icon: github
-    #   text: Github (EXE Lula)
-    #   href: https://github.com/Lulliter
+    - icon: github
+      text: Github
+      href: https://github.com/Lulliter
+
+    # - icon: envelope
+    #   text: Email
+    #   href: mailto:lmm76@georgetown.edu
     # - text: "{{< fa brands google-scholar >}} Google Scholar"
     - text: "![](images/icons8-google-scholar-16.jpg) Google Scholar"
       href: https://scholar.google.com/citations?user=OBYla5gAAAAJ&hl=en&oi=ao
     - text: "{{< fa brands researchgate >}} Research Gate"
       href: https://www.researchgate.net/profile/Luisa-Mimmi
-    - text: "{{< fa brands orcid >}} Orcid"
-      href: https://orcid.org/0000-0002-2244-8282
+    # - text: "{{< fa brands orcid >}} Orcid"
+    #   href: https://orcid.org/0000-0002-2244-8282
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/luisa-m-mimmi/    
 ---
 
 :::{#hero-heading}
 
 Hi there!
 
-I am a Policy & Data Analyst, {{< fa mug-hot >}}  coffee addict and {{< fa brands r-project >}}  enthusiast. 
+I am Luisa, a Policy & Data Analyst, {{< fa mug-hot >}}  coffee addict, and {{< fa brands r-project >}}  enthusiast. 
 
-I made this website for personal use, to collect a bunch of nerdy instructions I keep forgetting!
+Since I am a self-taught programmer, I made this website to collect a bunch of *nerdy* instructions I keep forgetting. 
 
-Feel free to reach out via the links below.
+While this stuff is collected for personal use, I am glad if it can help anyone else ☺️
+
+You can learn about me and my work via the links below.
 
  
 :::

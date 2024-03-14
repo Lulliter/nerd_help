@@ -1,0 +1,138 @@
+---
+title: "1.a) Git introduction"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Web page construction in progress...
+:::
+
+# Frist: some useful terminal commands
+
++ `[shift+Q]` --> to exit from git dialogue 
++ `highlight + [cmd + D]` --> to seleect all subsequent instances 
++ `highlight + [alt + drag]` --> to edit at begin of each lines 
++ `highlight + [cmd + shift + L]` --> to edit at the end of each lines 
++ `highlight + [ctr + shift + W]` --> wrapping  text with start and end tag 
+
+# Git installation
+
+...
+
+# Git architecture
+
++ **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. Usually there is one default remote repository and origin represents this default repository.
+  + If you don’t like "origin", you can rename it
+```{bash}
+#  rename origin it by using 
+git remote rename origin new_name
+```
+
++ **`branch`**	branch is a like a fork in the history of a repository. One branch represents an independent line of development, like a fork teeth.
+```{bash}
+#  to check which branches I have  
+git branch -a
+    # * master
+    #   page_col
+    #   remotes/origin/master
+```
++ **`master`**	master is a branch, the default branch, the main branch, and it’s always there.
+
++ **`HEAD`**	= the currently active branch (the checked out one). Each repository only has one current branch, hence one HEAD as well.
+  + **`Detached HEAD`** happens when a checkout command is applied to a specific historical commit, tag or remote branch.
+
+```{bash}
+#  to check where the HEAD of a repository is pointing to
+cat .git/HEAD
+    # ref: refs/heads/master
+```
+
++ **`index`**	index is the proposed next commit, also called staging area. 
+
+# Git commands
+
+See @fig-git_wfl 
+
++ `git status`	    = View the state of working directory and staging area
++ `git add`       = Stage changes for next commit 
++ `git commit`    = Commit the staged snapshot to the local repository    
++ `git push`      = Upload local repository content to a remote repository
+  + 4 TEAM: it makes your local changes publicly available in a remote repository.  
++ `git clone`     = Copies an entire remote repository down to your local machine, setting up a cloned version and checks out the default branch (generally master)
+  + this action is done only once.
++ `git fetch`     = Download content from remote repository, but doesn’t force the merge 
+  + 4 TEAM: if a developer has pushed changes to a remote branch, those changes will be pulled down to your repository whenever fetch is performed.
+     + Note: fetch won't automatically merge any changes, only update references!
++ `git merge`     = Join two branches together
++ `git pull`      = Combo of git fetch and git merge  
+
+<!-- NO link in image -->
+<!-- ![title](location){#fig-reference} -->
+![Git Workflow](./img_tools/GitWorkflow-4.png){#fig-git_wfl}
+
+Source: [cloudstudio.com.au](https://cloudstudio.com.au/2021/06/26/git-command/)
+
+<!-- YES link in image -->
+<!-- ::: {#fig-git_wfl}
+[![Git Workflow](./img_tools/GitWorkflow-4.png)](https://cloudstudio.com.au/2021/06/26/git-command/)
+::: -->
+ 
+
+
+## See differences b/w commits 
+
+```{bash}
+# diff between 2 latest commits (1 on branch) only in files I care 
+git diff dc87ae c86edffc16 "*.qmd"
+
+#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))
+git diff dc87ae..  
+git diff dc87ae^..HEAD  '***.qmd' #ORQ
+git diff dc87ae..HEAD   #OR
+
+# b/w old commit on branch and HEAD 
+git diff 693e61^..HEAD
+
+```
+
+
+# Reference 
++ [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)
++ [The Pragmatic Git](https://blog.git-init.com/git-gold/) blogsite
++ [Tutorials](https://phoenixnap.com/kb/tag/git)
+
+
+-----

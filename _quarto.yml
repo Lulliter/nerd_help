@@ -54,7 +54,14 @@ website:
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd
 
-
+  sidebar:
+    - title: "Git"
+      style: "docked"
+      background: light
+      contents:
+        - tools/01_git.qmd
+        - tools/01a_git_intro.qmd
+        - tools/01b_git_branches.qmd
 format:
   html:
     toc: true

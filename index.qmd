@@ -1,5 +1,12 @@
+### Welcome! 
 
-This is a Quarto website where I have Instructions for nerdy things.
+This is a Quarto website where I collects instructions for "nerdy" things.
+
+
+
+![](./images/cat2_horiz.jpg)(Source: [www.freepik.com/](https://www.freepik.com/free-photo))
+
+ 
 
 I deploy it on GH pages here: [{{< var website.site-url >}}]({{< var website.site-url >}}) 
  
