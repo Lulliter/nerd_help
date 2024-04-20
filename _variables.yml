@@ -9,4 +9,4 @@ website:
 
 #To include the value of a variable, use:
 #	+ the `{{< var >}}` shortcode in normal *.qmd {{< var website.site-url >}}
-#		+ the `"{{< var >}}"` shortcode in YAML entry "{{< var website.site-url >}"}
+#	+ the `"{{< var >}}"` shortcode in YAML entry "{{< var website.site-url >}"}

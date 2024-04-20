@@ -25,4 +25,4 @@ title: "From GH Pages to custom domain"
 #     toc-title: ""
 ---
 
-![](../images/cat1_vert.jpg){width=40%}<br><br>(Source: [www.freepik.com/](https://www.freepik.com/free-photo))
+![](../images/cat1_vert.jpg){width=40%}<br>(Source: [www.freepik.com/](https://www.freepik.com/free-photo))

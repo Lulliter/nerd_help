@@ -35,15 +35,14 @@ format-links: false
 Website construction in progress...
 :::
 
-# Day 2
+# What is Quarto and is it on my machine?
+It is not an R packg, it's its own program to install... but RStudio (after some verison) install it as a bundled piece... 
 
-## Topics
+```{r}
+# reports on the full path names of an executable 
+base::Sys.which("quarto")
 
-> Learn how to .... .
+# quarto version
+quarto::quarto_version()
 
-{{< pagebreak >}}
-
-## Lab code
-<!-- NON FUNZIONA!!!! -->
-<!-- [Download "\*.R" file](Rcode/labs_day2.R) -->
- 
+```

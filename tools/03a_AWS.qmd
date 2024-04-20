@@ -59,10 +59,12 @@ git clone https://github.com/Lulliter/example.git
 	+ add content
 	+ git add/commit/push (or see my `./_render-deploy.sh`)
 
-5.  Configure the Repo to publish on `https://lulliter.github.io/example/` by going to **Settings** --\> **Pages** --\> (make sure to have a `./docs` folder and indicate to GH that you will deploy from it)
+5.  Configure the Repo to publish on `https://lulliter.github.io/example/` by going to **Settings** --\> **Pages** --\> 
+   + make sure to have a `./docs` folder and indicate to GH that you will deploy from it
+   + and to create a `.nojekyll` file for GitHub pages to work with a quarto website!
 
 6. on local: CNAME
-	Looking forward, we will need to have a file named `CNAME` that contains a single 		row: your custom domain (in this case: `thepadrinoz.com`)
+	Looking forward, we will need to have a file named `CNAME` that contains a single row: your custom domain (in this case: `thepadrinoz.com`)
  
 ::: {.callout-warning collapse="true"}
 ❗ Before adding/committing to repo `CNAME`, at every push, the custom domain gets decoupled from GH Pages settings ....

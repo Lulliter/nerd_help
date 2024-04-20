@@ -209,14 +209,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Thu, 14 of March, 2024</p>
+      <p class="date">Sat, 20 of April, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thu, 14 of March, 2024</p>
+      <p class="date-modified">Sat, 20 of April, 2024</p>
     </div>
   </div>
     
@@ -246,15 +246,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Lulliter/example.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
-<li>
-<p>on Local/GitHub: deploy website via Github Pages</p>
+<li>on Local/GitHub: deploy website via Github Pages
 <ul>
 <li>add content</li>
 <li>git add/commit/push (or see my <code>./_render-deploy.sh</code>)</li>
 </ul>
 </li>
-<li><p>Configure the Repo to publish on <code>https://lulliter.github.io/example/</code> by going to <strong>Settings</strong> –&gt; <strong>Pages</strong> –&gt; (make sure to have a <code>./docs</code> folder and indicate to GH that you will deploy from it)</p></li>
-<li><p>on local: CNAME Looking forward, we will need to have a file named <code>CNAME</code> that contains a single row: your custom domain (in this case: <code>thepadrinoz.com</code>)</p></li>
+<li>Configure the Repo to publish on <code>https://lulliter.github.io/example/</code> by going to <strong>Settings</strong> –&gt; <strong>Pages</strong> –&gt;</li>
+</ol>
+<ul>
+<li>make sure to have a <code>./docs</code> folder and indicate to GH that you will deploy from it</li>
+<li>and to create a <code>.nojekyll</code> file for GitHub pages to work with a quarto website!</li>
+</ul>
+<ol start="6" type="1">
+<li>on local: CNAME Looking forward, we will need to have a file named <code>CNAME</code> that contains a single row: your custom domain (in this case: <code>thepadrinoz.com</code>)</li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
