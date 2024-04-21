@@ -161,13 +161,6 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Nerd help",
-    "section": "",
-    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
-  },
-  {
     "objectID": "me.html",
     "href": "me.html",
     "title": "Luisa M. Mimmi",
@@ -175,11 +168,174 @@
     "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n    \n     LinkedIn"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Nerd help",
+    "section": "",
+    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
+  },
+  {
+    "objectID": "r/01_tidyeval.html",
+    "href": "r/01_tidyeval.html",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "href": "r/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "NON STANDARD EVALUATION in TIDYVERSE",
+    "text": "NON STANDARD EVALUATION in TIDYVERSE\n\n\nDEFUSING function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions."
+  },
+  {
+    "objectID": "r/01_tidyeval.html#two-comlpementary-forms-of-nse-used-in-the-tidyverse",
+    "href": "r/01_tidyeval.html#two-comlpementary-forms-of-nse-used-in-the-tidyverse",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "TWO (comlpementary) FORMS of NSE used in the Tidyverse",
+    "text": "TWO (comlpementary) FORMS of NSE used in the Tidyverse\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\ne.g. dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise(). Normal interactive programming (tidyverse) use data-masking (makes it easy to program) which it makes it harder to create functions.\n\n# EXE `group_by()`\nmy_summarise &lt;- function(data, group_var) {\n  data %&gt;%\n    group_by({{ group_var }}) %&gt;%\n    summarise(mean = mean(height))\n}\n\n# call(s) \nstarwars %&gt;% my_summarise (., homeworld) \nstarwars %&gt;% my_summarise (., sex) \n\nSOOOOO Passing data-masked arguments to functions requires injection (= quasiquotation)\nThis includes injection operators: + {{ embracing operator (rlang) + !! operator (base) + .data pronouns. + .env pronouns."
+  },
+  {
+    "objectID": "r/01_tidyeval.html#quotedefuse-with-enquo-inside-f-unquoteinject-with",
+    "href": "r/01_tidyeval.html#quotedefuse-with-enquo-inside-f-unquoteinject-with",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1/4 Quote/defuse with enquo (INSIDE f) Unquote/inject with !!\n",
+    "text": "1/4 Quote/defuse with enquo (INSIDE f) Unquote/inject with !!\n\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \ngrouped_mean_1a &lt;- function(df, group_var, summarize_var) {\n    # Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    # Inject the expression contained in `*_var` \n  # inside a `summarise()` argument\n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1a(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n# -------- OR \ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1b(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#quote-unquote-many-vars-with-...",
+    "href": "r/01_tidyeval.html#quote-unquote-many-vars-with-...",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "2/4 … + quote & unquote (many) vars with ...\n",
+    "text": "2/4 … + quote & unquote (many) vars with ...\n\nIn this case, summarize_var goes in front and ... last\n\ngrouped_mean_2 &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n    df = starwars, # (...)\n    sex, homeworld, # (...)\n    summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#name-of-the-var-left-of",
+    "href": "r/01_tidyeval.html#name-of-the-var-left-of",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "3/4 … + name of the var left of :=\n",
+    "text": "3/4 … + name of the var left of :=\n\nOKKIO!!! + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????\n\ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or even better \n    summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld,\n    summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#b-or-name-of-the-var-left-of",
+    "href": "r/01_tidyeval.html#b-or-name-of-the-var-left-of",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "3/4.b OR … + name of the var left of :=\n",
+    "text": "3/4.b OR … + name of the var left of :=\n\n\ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n#   summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    # summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # or even better-er  \n        summarize(\n            \"Mean_{{summarize_var}}\" := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_3b(\n    df = starwars, \n    sex, homeworld,\n    summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#data",
+    "href": "r/01_tidyeval.html#data",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "4/4 … + .data\n",
+    "text": "4/4 … + .data\n\nIt’s good practice to prefix named arguments with a . (.data)to reduce the risk of conflicts between your arguments and the arguments passed to ...\n\ngrouped_mean_4 &lt;- function(data,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n\n    data %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or even better \n    summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_4(\n    data = starwars, \n    summarize_var =  height ,\n    sex, homeworld\n)"
+  },
+  {
     "objectID": "tools/01a_git_intro.html",
     "href": "tools/01a_git_intro.html",
     "title": "1.a) Git introduction",
     "section": "",
     "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#check-which-ssh-i-already-have",
+    "href": "tools/01a_git_intro.html#check-which-ssh-i-already-have",
+    "title": "1.a) Git introduction",
+    "section": "Check which ssh I already have",
+    "text": "Check which ssh I already have\n\nI have a github SSH\n\n\n# where to see my SSH \nlibrary(credentials)",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
+    "href": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
+    "title": "1.a) Git introduction",
+    "section": "1) On Github I create a NEW repo",
+    "text": "1) On Github I create a NEW repo\n[…]",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "href": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "title": "1.a) Git introduction",
+    "section": "2.a) In Terminal clone remote repo locally",
+    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "href": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "title": "1.a) Git introduction",
+    "section": "2.b) With {usethis} clone remote repo locally",
+    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "href": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "title": "1.a) Git introduction",
+    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
+    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
+    "href": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
+    "title": "1.a) Git introduction",
+    "section": "4) I make changes in the local repo",
+    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\nquarto create project website mysite",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#check-what-happened",
+    "href": "tools/01a_git_intro.html#check-what-happened",
+    "title": "1.a) Git introduction",
+    "section": "5) Check what happened…",
+    "text": "5) Check what happened…\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
+    "href": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
+    "title": "1.a) Git introduction",
+    "section": "6) Add local changes to staging area",
+    "text": "6) Add local changes to staging area\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#commit-desired-changes",
+    "href": "tools/01a_git_intro.html#commit-desired-changes",
+    "title": "1.a) Git introduction",
+    "section": "7) Commit desired changes",
+    "text": "7) Commit desired changes\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#push-source-and-build-repos.",
+    "href": "tools/01a_git_intro.html#push-source-and-build-repos.",
+    "title": "1.a) Git introduction",
+    "section": "8) Push source and build repos.",
+    "text": "8) Push source and build repos.\n\ngit push origin master",
     "crumbs": [
       "1.a) Git introduction"
     ]
@@ -195,25 +351,21 @@
     ]
   },
   {
+    "objectID": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "href": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "title": "1.a) Git introduction",
+    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
+    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
     "objectID": "tools/02_quarto.html",
     "href": "tools/02_quarto.html",
     "title": "2) Quarto projects and websites",
     "section": "",
     "text": "Caution\n\n\n\n\n\nWebsite construction in progress…\n\n\n\nWhat is Quarto and is it on my machine?\nIt is not an R packg, it’s its own program to install… but RStudio (after some verison) install it as a bundled piece…"
-  },
-  {
-    "objectID": "tools/02_quarto.html#topics",
-    "href": "tools/02_quarto.html#topics",
-    "title": "2) Quarto projects and websites",
-    "section": "Topics",
-    "text": "Topics\n\nLearn how to …. ."
-  },
-  {
-    "objectID": "tools/02_quarto.html#lab-code",
-    "href": "tools/02_quarto.html#lab-code",
-    "title": "2) Quarto projects and websites",
-    "section": "Lab code",
-    "text": "Lab code"
   },
   {
     "objectID": "tools/03a_AWS.html",
@@ -308,125 +460,5 @@
     "title": "4) Bonus Stuff",
     "section": "Topics",
     "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
-    "href": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
-    "title": "1.a) Git introduction",
-    "section": "1) On Github I create a NEW repo",
-    "text": "1) On Github I create a NEW repo\n[…]",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#i-terminal-position-myself-in-the-folder-above-the-desired-git-repo",
-    "href": "tools/01a_git_intro.html#i-terminal-position-myself-in-the-folder-above-the-desired-git-repo",
-    "title": "1.a) Git introduction",
-    "section": "2) I Terminal position myself in the Folder ABOVE the desired git repo",
-    "text": "2) I Terminal position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#i-clone-it-locally",
-    "href": "tools/01a_git_intro.html#i-clone-it-locally",
-    "title": "1.a) Git introduction",
-    "section": "3) I clone it locally",
-    "text": "3) I clone it locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "href": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "title": "1.a) Git introduction",
-    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
-    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#check-what-happened",
-    "href": "tools/01a_git_intro.html#check-what-happened",
-    "title": "1.a) Git introduction",
-    "section": "5) Check what happened…",
-    "text": "5) Check what happened…\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
-    "href": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
-    "title": "1.a) Git introduction",
-    "section": "6) Add local changes to staging area",
-    "text": "6) Add local changes to staging area\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#commit-desired-changes",
-    "href": "tools/01a_git_intro.html#commit-desired-changes",
-    "title": "1.a) Git introduction",
-    "section": "7) Commit desired changes",
-    "text": "7) Commit desired changes\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#push-source-and-build-repos.",
-    "href": "tools/01a_git_intro.html#push-source-and-build-repos.",
-    "title": "1.a) Git introduction",
-    "section": "8) Push source and build repos.",
-    "text": "8) Push source and build repos.\n\ngit push origin master",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "href": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "title": "1.a) Git introduction",
-    "section": "2.a) In Terminal clone remote repo locally",
-    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "href": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "title": "1.a) Git introduction",
-    "section": "2.b) With {usethis} clone remote repo locally",
-    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
-    "href": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
-    "title": "1.a) Git introduction",
-    "section": "4) I make changes in the local repo",
-    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\nquarto create project website mysite",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "href": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "title": "1.a) Git introduction",
-    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
-    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nEx when I change Github Pages because of AWS domain\n\nmake a BACKUP of local!\nBrutal: just local changes or reset your local master to the state on remote\n\n\ngit reset --hard origin/master",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
   }
 ]

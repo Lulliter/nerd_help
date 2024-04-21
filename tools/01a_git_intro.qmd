@@ -90,6 +90,60 @@ library(usethis)
 #usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
 ```
 
+
+### Managing/Verifying git credential stored 
+
+> Where do I see it on Github?
+`? fa(name = "github")` --> **settings** --> **Developer settings** --> Personal Access Tokens   
+
+> WARNING: `credentials::git_credential_ask("https://github.com")` actually exposes the PAT password
+
+
+```{r}
+#| eval: false
+
+credentials::credential_helper_get()
+      # [1] "osxkeychain"
+
+# to see all of them 
+credentials::git_credential_ask("https://github.com")
+      # $protocol
+      # [1] "https"
+      # $host
+      # [1] "github.com"
+      # $username
+      # [1] "PersonalAccessToken"
+      # $password
+      # [1] "ghp_...52eR" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      # attr(,"class")
+      # [1] "git_credential"
+
+# --- other useful things to check 
+#usethis::gh_token_help()
+usethis::git_sitrep()
+gh::gh_whoami()
+# {
+#   "name": "Luisa Mimmi",
+#   "login": "Lulliter",
+#   "html_url": "https://github.com/Lulliter",
+#   "scopes": "gist, repo, user, workflow",
+#   "token": "ghp_...52eR"
+# } 
+```
+
+### What are SSH keys?
+Secure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.
+
+## Check which ssh I already have 
+
+> I have a github SSH  
+
+```{r}
+#| eval: false
+# where to see my SSH 
+library(credentials)  
+```
+
 # Git commands
 
 See @fig-git_wfl 
@@ -285,19 +339,35 @@ E.g. I had this occurring because I wanted to push a heavy PDF download button a
 
 1. make a BACKUP of local!
 
-2. Go back to remote 
+2. Go back before the commit 
 
-+ (a) Brutal: eset your local `master` to the state on remote `origin` 
++ (a) Brutal: reset your local `master` to the state on your remote `origin` (a.k.a. last pushed updates) 
 
 ```{bash}
 git reset --hard origin/master
 ```
 
-+ (b) Softer option: Brutal: just local changes or reset your local master to the state on remote 
-
++ (b) Conservative option: reset to before last commit saving local changes  
+  + `--soft` = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to `commit` them)
+  + `--mixed` = you will still keep the changes in your working tree but not on the index (you have to `add` and `commit` again)
+  + `--hard` = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit
+  
 ```{bash}
 git reset --soft HEAD~1   
 ```
+
+
++ (c) Another useful option: similar to `soft`
+  + `--keep` It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.
+  
+```{bash}
+# Assuming HEAD points at 7e05a95 
+  # 7e05a95  (HEAD -> main) Update a
+  # e62add5  Update b
+  # ca9ae0a  Update a
+git reset --mixed HEAD^  
+```
+
 # Reference 
 + [Happy Git and GitHub for the useR](https://happygitwithr.com/ssh)
 + [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)

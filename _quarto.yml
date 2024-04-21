@@ -50,6 +50,13 @@ website:
             href: tools/03_custom_domain.qmd
           - text: "5) Color"
             href: tools/05_colors.qmd        
+      - text: "{{< fa brands r-project >}} programming"
+#        icon: "R programming" #  archive-fill # https://icons.getbootstrap.com/?q=home
+        menu:
+          - text: "1) tidyeval"
+            href: r/01_tidyeval.qmd
+          # - text: "2) ??? "
+          #   href: tools/02_???.qmd
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd

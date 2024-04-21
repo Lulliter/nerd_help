@@ -1,0 +1,456 @@
+---
+title: "1.a) Tidyeval and functional programming"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Web page construction in progress...
+:::
+
+
+
+```{r}
+library(tidyverse)
+library(rlang)
+```
+
+# Learning resources
+
++ [Bruno Rodriguez YT vid](https://www.youtube.com/watch?v=pcvWKVlRmwE)
++ [rlang DATAMASKING](https://rlang.r-lib.org/reference/topic-data-		mask.html)
++ [Tidy eval in R: A simple example](https://www.youtube.com/watch?v=YlZuT6PWOEY&t=1s)
++ [Lionel Henry | Interactivity and Programming in the Tidyverse | RStudio (2020)](https://www.youtube.com/watch?v=SW_TUkPXSmA)
+
+
+# Explanation
+Premise: `tidyverse` functions use tidy evaluation = *they don't evaluate the value of a variable right away*! = Non-Standard evaluation ....(my custom R function DOES = Standard evaluation)  
+
+--> I need a sort of METAVARIABLE (a "quosure"), i.e. something that doesn't get evaluated until I tell so.
+
+## NON STANDARD EVALUATION in TIDYVERSE
+
++ **DEFUSING** function arguments: I can create a "quosure" with `rlang::enquo()` /  `rlang::enquos()` so an expression can be examined, modified, and injected into other expressions.
+
+
+## TWO (comlpementary) FORMS of NSE used in the Tidyverse 
+
+### 1) **TIDY SELECTION** is used in SELECTION VERBS 
+			
+e.g. in `dplyr::select()` `across()`, `relocate()`, `rename()` and `pull()` use  **tidy selection** where expressions are either interpreted in the context of the data frame (e.g. `c(cyl, am)` or evaluated in the user environment (e.g. `all_of()`, `starts_with()`)
+			
+```{r}
+#| eval: false
+
+# EXE `across()`
+summarise_mean <- function(data, vars) {
+	# all variables selected by user...	
+	data %>% summarise(n = n(), across({{ vars }}, mean))
+}
+# call 
+starwars %>% 
+	group_by(homeworld) %>% 
+	# with where
+	summarise_mean(where(is.numeric))
+```
+			
+### 2) **DATA MASKING** used in ACTION VERBS 
+
+e.g. `dplyr::mutate()`, `ggplot2::aes()`, `arrange()`, `count()`, `filter()`, `group_by()`,   and `summarise()`. Normal interactive programming (`tidyverse`) use  **data-masking** (makes it easy to program) which it makes it harder to create functions.  
+
+```{r}
+#| eval: false
+
+# EXE `group_by()`
+my_summarise <- function(data, group_var) {
+  data %>%
+    group_by({{ group_var }}) %>%
+    summarise(mean = mean(height))
+}
+
+# call(s) 
+starwars %>% my_summarise (., homeworld) 
+starwars %>% my_summarise (., sex) 
+```
+
+SOOOOO Passing data-masked arguments to functions requires **injection** (= **quasiquotation**) 
+
+This includes injection operators:
+		+ `{{` embracing operator (`rlang`)
+		+ `!!` operator (`base`) 
+		+ `.data` pronouns. 
+		+ `.env` pronouns.
+
+# Example with options 
+
+## 1/4 Quote/defuse with `enquo` (INSIDE f) Unquote/inject with `!!`
+```{r}
+# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test 
+grouped_mean_1a <- function(df, group_var, summarize_var) {
+	# Defuse the user expression in `*_var`
+	group_var = enquo(group_var)
+	summarize_var = enquo(summarize_var)
+
+  df %>% 
+  	# Inject the expression contained in `*_var` 
+  # inside a `summarise()` argument
+    group_by(!!group_var) %>% 
+    summarize(mean = mean(!!summarize_var, na.rm = TRUE))
+}
+
+# call
+grouped_mean_1a(
+  df = starwars, 
+  group_var = sex, 
+  summarize_var =  height 
+)
+
+# -------- OR 
+grouped_mean_1b <- function(df, group_var, summarize_var) {
+	df %>% 
+# Defuse and inject in a single step with the embracing operator
+    group_by({{group_var}} ) %>% 
+    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))
+}
+
+# call
+grouped_mean_1b(
+  df = starwars, 
+  group_var = sex, 
+  summarize_var =  height 
+)
+```
+
+
+## 2/4 ... + quote & unquote (many) vars with `...` 
+
+In this case, `summarize_var` goes in front and `...` last 
+```{r}
+grouped_mean_2 <- function(df,  summarize_var, ...) {
+  
+#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+	summarize_var = enquo(summarize_var)
+	
+	df %>% 
+		group_by(...) %>% 
+		summarize(mean = mean(!!summarize_var, na.rm = TRUE))
+}
+
+# call
+grouped_mean_2(
+	df = starwars, # (...)
+	sex, homeworld, # (...)
+	summarize_var =  height 
+)
+```
+
+## 3/4 ... + name of the var left of  `:=` 
+
+OKKIO!!! 
+			+ `!!summarize_var_name :=  ... ` OK 
+			+ `!!str_c("Mean_", summarize_var_name) :=  ... ` OK: xchè??????
+			+ `str_c("Mean_", !!summarize_var_name) :=  ... ` WRONG: xchè??????
+
+```{r}
+grouped_mean_3 <- function(df,  summarize_var, ...) {
+  
+#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+	summarize_var = enquo(summarize_var)
+	summarize_var_name <- as_label(enquo(summarize_var))
+	
+	
+	df %>% 
+		group_by(...) %>% 
+	#	summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
+	# or even better 
+	summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
+	
+}
+
+# call
+grouped_mean_3(
+	df = starwars, 
+	sex, homeworld,
+	summarize_var =  height 
+)
+```
+
+## 3/4.b OR ... + name of the var left of  `:=` 
+```{r}
+grouped_mean_3b <- function(df,  summarize_var, ...) {
+  
+#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+	summarize_var = enquo(summarize_var)
+#	summarize_var_name <- as_label(enquo(summarize_var))
+	
+	df %>% 
+		group_by(...) %>% 
+	# summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
+	# summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
+	# or even better-er  
+		summarize(
+			"Mean_{{summarize_var}}" := mean(!!summarize_var, na.rm = TRUE))
+	
+}
+
+# call
+grouped_mean_3b(
+	df = starwars, 
+	sex, homeworld,
+	summarize_var =  height 
+)
+```
+
+
+## 4/4 ... +  `.data`
+It’s good practice to prefix *named arguments* with a . (`.data`)to reduce the risk of conflicts between your arguments and the arguments passed to `...`
+```{r}
+grouped_mean_4 <- function(data,  summarize_var, ...) {
+  
+#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+	summarize_var = enquo(summarize_var)
+	summarize_var_name <- as_label(enquo(summarize_var))
+
+	data %>% 
+		group_by(...) %>% 
+	#	summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
+	# or even better 
+	summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
+	
+}
+
+# call
+grouped_mean_4(
+	data = starwars, 
+	summarize_var =  height ,
+	sex, homeworld
+)
+```
+
+
+# Examples
+
+```{r}
+ 
+starwars <- starwars
+
+# I FORWARD a (masked)  argument with DOUBLE EMBRACE 
+my_summarise <- function(data, var) {
+  data %>% dplyr::summarise(Mean =mean( {{ var }}, na.rm = TRUE ))
+}
+
+call <- my_summarise (starwars, height)
+
+# The .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{
+my_summarise2 <- function(data, var) {
+  data %>% dplyr::summarise(mean = mean(.data[[var]], na.rm = TRUE ))
+}
+
+call2 <- my_summarise2 (starwars, "height")
+
+
+
+```
+
+```{r}
+
+# # ------- 1/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
+# # https://www.youtube.com/watch?v=pcvWKVlRmwE
+# 
+# f_prop_grouping <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2  ) {
+#   
+#   end_df <- start_df %>% 
+#     # grouping var(s)
+#     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato
+#     ) %>% 
+#     summarise(n_group = n(),# n_stato
+#               TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
+#               TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2
+#     ) %>% 
+#     mutate(N_group = sum(n_group), # N_stato
+#            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato
+#            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group)
+#            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"),
+#            
+#     ) }
+
+# run
+# end_df <- f_prop_grouping(AL_anagr_stato_t, end_df, misura, stato, inizio_past, inizio_rit )
+
+# ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
+f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2 ) {  
+  # This to use the "walrus operator" := on the LEFT (naming the derived vars )
+  dummy1name <- as_label(enquo(dummy1))
+  dummy2name <- as_label(enquo(dummy2))
+ 
+  
+  end_df <- start_df %>% 
+    # grouping var(s)
+    group_by( {{group_var1}}, {{group_var2}} # misura e stato
+    ) %>% 
+    summarise(n_group = n(),# n_stato
+              !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
+              !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group)
+              
+              !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2
+              !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%")   # % dummy over n(group) 
+               ) %>% 
+    # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
+    mutate (N_group = sum(n_group),
+            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
+    ) %>% 
+    relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))  
+}
+
+# # ------- 3/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
+# # using [“enquo” + “!!”  ]      |  "syms" function and the “!!!”  (for multiple vars) 
+# f_prop_grouping3 <- function(start_df, end_df, group_vars, dummy1, dummy2  ) {
+#   # define the list of group_by vars "syms" 
+#   group_vars <- syms(group_vars)
+#   # This to use the "walrus operator" := on the LEFT (naming the created var  
+#   dummy1name <- as_label(enquo(dummy1))
+#   dummy2name <- as_label(enquo(dummy2))
+#   
+#   end_df <- start_df %>% 
+#     # call grouping var(s) “!!!” 
+#     group_by( !!!group_vars ) %>%    
+#     summarise(n_group = n(),# n_stato
+#               # TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
+#               # TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2
+#               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
+#               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group)
+#               
+#               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2
+#               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%") # % dummy over n(group) 
+#               ) %>% 
+#     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
+#     mutate (N_group = sum(n_group),
+#             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
+#     ) %>% 
+#     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))  
+#     
+#   
+# }
+
+
+# ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche MEDIA
+f_mean_grouping2 <- function(start_df, end_df, group_var1, group_var2, numer1, numer2) {  
+  # This to use the "walrus operator" := on the LEFT (naming the derived vars )
+  numer1name <- as_label(enquo(numer1))
+  numer2name <- as_label(enquo(numer2))
+  
+  # operations
+  end_df <- start_df %>% 
+    # grouping var(s)
+    group_by( {{group_var1}}, {{group_var2}} # misura e stato
+    ) %>% 
+    summarise(n_group = n(),# n_stato
+              !!str_c("Media_", numer1name) := mean({{numer1}}, na.rm = TRUE),
+              !!str_c("Media_", numer2name) := mean({{numer2}}, na.rm = TRUE)
+              ) %>% 
+    # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
+    mutate (N_group = sum(n_group),
+            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
+    ) %>% 
+    relocate (c("N_group","Perc_group" ), .before = !!str_c("Media_", numer1name) )
+}
+
+# OKKIO!!!!!! 
+#end_df <- f_prop_grouping2(AL_anagr_stato_t, end_df, c("misura", "stato"), inizio_past, inizio_rit )
+
+
+# f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, ... ) {
+#   
+#   end_df <- start_df %>% 
+#     # grouping var(s)
+#     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato
+#     ) %>% 
+#     summarise(n_group = n(),# n_stato
+#               TOT_dummy1 = sum(..., na.rm = TRUE ), # SUM_dummy1
+#               TOT_dummy2 = sum(..., na.rm = TRUE ) # SUM_dummy2
+#     ) %>% 
+#     mutate(N_group = sum(n_group), # N_stato
+#            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato
+#            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group)
+#            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"),
+#            
+#     ) }
+
+
+
+# ------- FUNZIONE: generalizzo il nome della fase (prefix) 
+f_rimuovo_pref <- function(data, prefix = "word_"){
+  rename_with(.data = data, 
+              .cols = dplyr::starts_with(prefix), # (default e' everything() e le pescava comunque)
+              # rinomino le date eliminando il prefisso
+              .fn = function(x)sub(prefix,"",x))
+  
+}
+
+# EXE uso
+#BC_PROGETTAZIONE_temp <- f_rimuovo_pref(BC_PROGETTAZIONE , prefix = "PROG_ESEC_") 
+
+
+# -------- FUNZIONE: introduco qualche calcolo sulle date delle fasi procedurali
+f_calcoli_date <- function(data, inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) {
+  dplyr::mutate(data,
+                durata_prev =  {{fine_fase_prev}} - {{inizio_fase_prev}} ,
+                #durata_eff =   {{fine_eff}} - {{inizio_eff}} ,
+                inizio_V_today = case_when(
+                  {{inizio_fase_prev}} <= today() ~ "pre_oggi",
+                  {{inizio_fase_prev}} > today() ~  "post_oggi",
+                  TRUE ~ "Ignoto"),
+                inizio_discrep = {{inizio_fase_eff}} - {{inizio_fase_prev}} ,
+                inizio_ritardo = case_when(
+                  inizio_V_today == "Ignoto" ~ "[Fase non prevista]",
+                  inizio_V_today == "post_oggi" ~ "Inizio previsto futuro",
+                  inizio_V_today == "pre_oggi" & !is.na({{inizio_fase_eff}}) ~ if_else(
+                    inizio_discrep > 0 , glue("rit = {inizio_discrep} gg"), glue("ant = {inizio_discrep} gg")
+                  ),
+                  inizio_V_today == "pre_oggi" & is.na({{inizio_fase_eff}}) ~  "No inizio effettivo")
+  )
+}
+
+# EXE uso
+# BC_PROGETTAZIONE_calc <-  f_calcoli_date (
+#   data = BC_PROGETTAZIONE_temp , 
+#   inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff)
+
+```
+
+
+# MORE
+
+https://jonthegeek.com/2018/06/04/writing-custom-tidyverse-functions/
