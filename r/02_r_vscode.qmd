@@ -1,0 +1,180 @@
+---
+title: "02) Using R from VS Code"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Web page construction in progress...
+:::
+
+(as of 25/5/2022)
+# Reference
+
++ [Tipo su YT che installa python3](https://www.freecodecamp.org/news/python-version-on-mac-update/)
++ [Tipo su YT che installa R/radian on VS Code](https://www.youtube.com/watch?v=EDJqHZx0JnQ&t=563s)
++ [Blog Sharon Machlis How to run R in Visual Studio Code](https://www.infoworld.com/article/3625488/how-to-run-r-in-visual-studio-code.html)
+
+# Install VS Code
+
+...
+
+# Install R ext on VS Code
+
+... 
+
+# Install `radian` ext on 
+One of the first suggestions is to use the `radian` terminal. That’s not a VS Code extension but an application written in Python—which means your system needs Python installed in order for radian to run. I already have Python and the conda package manager installed on my Mac, so I used the following installation command for radian:
+
+See the [How to set up VS Code for R](https://www.infoworld.com/video/110179/how-to-set-up-vscode-for-r) video tutorial for easy instructions on how to install Python for use with R and RStudio.
+
+## NEW Python version
++ Version: Python 3.9.13 for macOS 10.9 or later 
++ Interpreter path: /usr/local/bin/python3
+
+## Gotcha!!!
+```{bash}
+python3 --version
+# Python 3.9.13
+```
+
+## other recommended extensions 
+There are a few other recommended installations for the extension:
+
++ languageserver  (R packages, so can be installed from R)
++ httpgd (R packages, so can be installed from R)
++ VSCode-R-Debugger
++ Quarto 
+
+---
+
+
+# Python 
+## 3 ways to work with python
+### --- 1) Launch Idle shell + execute
+(it comes installed with the new python3)
+
+### --- 2) Execute program in shell 
+```{bash}
+python3 Python3_9_test.py  
+# it prompts for name etc... 
+```
+### --- 3) Execute program in VS code 
+Just look for the arrow from the top of the `.py` file
+
+---
+
+
+## install radian [again!!!]
+```{bash}
+pip3 install -U radian
+# then as it suggests
+/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 -m pip install --upgrade pip
+```
+
+Check 
+```{bash}
+radian --version
+```
+
+radian version: 0.6.3
+r executable: /Library/Frameworks/R.framework/Resources/bin/R
+r version: 4.1.0
+python executable: /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9
+python version: 3.9.13
+
+# Tweak Visual Studio Code settings for R
+
+The easiest way to change a VS Code setting is to open up settings in the user interface. Another other option is editing the settings JSON file. 
+
+## Path to open `settings.json` 
+
++ [from Finder] Go to /Users/luisamimmi/Library/Application Support/Code/User/settings.json
++ [from VS code] Open by `ctr+shift+P` and then "Preferences: Open Settings (json)" 
+
+### Open in finder
+
+From shell
+
+```{bash}
+open -a Finder /Library/Frameworks/R.framework/Resources
+
+```
+
+## modify R Extension settings
+
+I need to specify the path to `R` **R > Rpath: mac**
+```{bash}
+# here are the commands to figure it out 
+R 
+R.home("bin")
+# [1] "/Library/Frameworks/R.framework/Resources/bin"
+```
+
+To color the console I need to have `radian`  path in R settings --> 
+R> Rterm:MAC  
+**R > Rterm: Mac**
+`"r.rterm.mac": "/Library/Frameworks/Python.framework/Versions/3.9/bin/radian"`
+ 
+## Sending R code to terminal
+
++ `Ctrl + Shift + P` and choose "R: Create R terminal" command
++ oppure lancio R interactive dalla tendina in Terminal
+
+## Path to keybindings.json
+
+~/Library/Application Support/Code/User/keybindings.json
+
+## Info on Keybinding
+
+<https://code.visualstudio.com/docs/getstarted/keybindings>
+
+## F&$%ing `lintr` in VSCode
+
+<https://github.com/r-lib/lintr#continuous-integration>
+
+You can tone it down by creating your own `~/.lintr/ file like so
+
+```{}
+linters: with_defaults(
+  line_length_linter = NULL,
+  open_curly_linter = NULL, 
+  commented_code_linter = NULL,
+  trailing_whitespace_linter = NULL)
+```
+
+
+
+

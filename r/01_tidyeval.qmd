@@ -49,27 +49,33 @@ library(rlang)
 
 # Learning resources
 
++ [ALbert Rapp YT vid](https://www.youtube.com/watch?v=L_sX-sL9aWM&t=1810s)
 + [Bruno Rodriguez YT vid](https://www.youtube.com/watch?v=pcvWKVlRmwE)
 + [rlang DATAMASKING](https://rlang.r-lib.org/reference/topic-data-		mask.html)
 + [Tidy eval in R: A simple example](https://www.youtube.com/watch?v=YlZuT6PWOEY&t=1s)
-+ [Lionel Henry | Interactivity and Programming in the Tidyverse | RStudio (2020)](https://www.youtube.com/watch?v=SW_TUkPXSmA)
++ [Lionel Henry | Interactivity and Programming in the Tidyverse](https://www.youtube.com/watch?v=SW_TUkPXSmA) | RStudioConf (2020)
 
 
 # Explanation
-Premise: `tidyverse` functions use tidy evaluation = *they don't evaluate the value of a variable right away*! = Non-Standard evaluation ....(my custom R function DOES = Standard evaluation)  
+Premise: `tidyverse` functions use **tidy evaluation** (= *they don't evaluate the value of a variable right away*! = **Non-Standard evaluation**). 
 
---> I need a sort of METAVARIABLE (a "quosure"), i.e. something that doesn't get evaluated until I tell so.
+  + (+) This means you can do some intermediate transformation to the variable in abstract (e.g. to a generic "column" thing)
+  + (-) it’s hard to refer to variables indirectly, and hence harder to program with
+
+In contrast, normal/base/custom R functions DO evaluate objects (i.e. `a+b`) **as soon as possible**   =  **Standard evaluation**  
+
+So, to take full advantage of **Non-Standard evaluation** (more interactivity, but also writing custom functions), I will need a sort of **METAVARIABLE** (a "quosure"), i.e. something that doesn't get evaluated until I tell so.
 
 ## NON STANDARD EVALUATION in TIDYVERSE
 
-+ **DEFUSING** function arguments: I can create a "quosure" with `rlang::enquo()` /  `rlang::enquos()` so an expression can be examined, modified, and injected into other expressions.
++ **DEFUSING** (**DELAYING**) function arguments: I can create a "quosure" with `rlang::enquo()` /  `rlang::enquos()` so an expression can be examined, modified, and injected into other expressions.
 
 
-## TWO (comlpementary) FORMS of NSE used in the Tidyverse 
+## TWO (complementary) FORMS of NSE used in the Tidyverse 
 
 ### 1) **TIDY SELECTION** is used in SELECTION VERBS 
 			
-e.g. in `dplyr::select()` `across()`, `relocate()`, `rename()` and `pull()` use  **tidy selection** where expressions are either interpreted in the context of the data frame (e.g. `c(cyl, am)` or evaluated in the user environment (e.g. `all_of()`, `starts_with()`)
+e.g. in `dplyr::select()` `across()`, `relocate()`, `rename()` and `pull()` use  ***tidy selection*** where expressions are either interpreted in the context of the data frame (e.g. `c(cyl, am)` or evaluated in the user environment (e.g. `all_of()`, `starts_with()`)
 			
 ```{r}
 #| eval: false
@@ -88,57 +94,66 @@ starwars %>%
 			
 ### 2) **DATA MASKING** used in ACTION VERBS 
 
-e.g. `dplyr::mutate()`, `ggplot2::aes()`, `arrange()`, `count()`, `filter()`, `group_by()`,   and `summarise()`. Normal interactive programming (`tidyverse`) use  **data-masking** (makes it easy to program) which it makes it harder to create functions.  
+ACTION VERBS  = `dplyr::mutate()`, `ggplot2::aes()`, `arrange()`, `count()`, `filter()`, `group_by()`,   and `summarise()`.
+
+ Normal interactive programming (`tidyverse`) use  ***data-masking***, which allow you to use variables in the “current” data frame without any extra syntax. This:
+ 
+ + (+) makes it nicer to interactively work (no extra typing of `data$column`, just `column`), but 
+ + (-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an  env-variable).  
 
 ```{r}
 #| eval: false
 
-# EXE `group_by()`
-my_summarise <- function(data, group_var) {
-  data %>%
-    group_by({{ group_var }}) %>%
-    summarise(mean = mean(height))
-}
+## ---  tidyverse non std eval 
+starwars %>% 
+ filter (homeworld == "Tatooine")  
 
-# call(s) 
-starwars %>% my_summarise (., homeworld) 
-starwars %>% my_summarise (., sex) 
+
 ```
 
-SOOOOO Passing data-masked arguments to functions requires **injection** (= **quasiquotation**) 
+SOOOOO We need some way to add `$` back into the picture. Passing data-masked arguments to functions requires **INJECTION** (= **quasiquotation**), i.e. **TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH** `{{`
 
-This includes injection operators:
+Inside data-masking function (actions), we can use injection operators:
+
 		+ `{{` embracing operator (`rlang`)
 		+ `!!` operator (`base`) 
 		+ `.data` pronouns. 
 		+ `.env` pronouns.
 
-# Example with options 
+## Defuse with "embracing" `{{variable }}` (inside custom f)  
 
-## 1/4 Quote/defuse with `enquo` (INSIDE f) Unquote/inject with `!!`
-```{r}
-# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test 
-grouped_mean_1a <- function(df, group_var, summarize_var) {
-	# Defuse the user expression in `*_var`
-	group_var = enquo(group_var)
-	summarize_var = enquo(summarize_var)
+```{r actv_embrace}
 
-  df %>% 
-  	# Inject the expression contained in `*_var` 
-  # inside a `summarise()` argument
-    group_by(!!group_var) %>% 
-    summarize(mean = mean(!!summarize_var, na.rm = TRUE))
+## --- own function with tidyverse non std eval ACTION VERB `group_by()`
+my_summarise <- function(data, group_var) {
+  data %>%
+# tell to inject whatever argument supplied to the function (homeworld) 
+		# **in place** of "group_var" 
+    group_by({{ group_var }}) %>%
+    summarise(mean = mean(height))
 }
 
-# call
-grouped_mean_1a(
-  df = starwars, 
-  group_var = sex, 
-  summarize_var =  height 
-)
+# call(s) 
+my_summarise (starwars, homeworld) 
+my_summarise (starwars, sex) 
+```
 
+ 
+:::{.callout-warning}
+Without `{{group_var}}` I would get the error  
+	*"! Must group by variables found in `.data`.
+	✖ Column `group_var` is not found."*
+:::
+
+
+# Different options 
+
+
+## 1   Defuse (nothing!) + Inject `{{`  (inside custom f) 
+
+```{r}
 # -------- OR 
-grouped_mean_1b <- function(df, group_var, summarize_var) {
+grouped_mean_1 <- function(df, group_var, summarize_var) {
 	df %>% 
 # Defuse and inject in a single step with the embracing operator
     group_by({{group_var}} ) %>% 
@@ -146,7 +161,30 @@ grouped_mean_1b <- function(df, group_var, summarize_var) {
 }
 
 # call
-grouped_mean_1b(
+grouped_mean_1(
+  df = starwars, 
+  group_var = sex, 
+  summarize_var =  height 
+)
+```
+
+## 2  Defuse `enquo`  + Inject `!!`  (inside custom f) 
+```{r}
+# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test 
+
+grouped_mean_2 <- function(df, group_var, summarize_var) {
+	## -- Defuse the user expression in `*_var`
+	group_var = enquo(group_var)
+	summarize_var = enquo(summarize_var)
+
+  df %>% 
+  	## -- Inject the expression contained in `*_var` 
+    group_by(!!group_var) %>% 
+    summarize(mean = mean(!!summarize_var, na.rm = TRUE))
+}
+
+# call
+grouped_mean_2(
   df = starwars, 
   group_var = sex, 
   summarize_var =  height 
@@ -154,13 +192,18 @@ grouped_mean_1b(
 ```
 
 
-## 2/4 ... + quote & unquote (many) vars with `...` 
+
+## 3  Defuse `...`  +  Inject `...` 
 
 In this case, `summarize_var` goes in front and `...` last 
+
++ `...` can stand for multiple variables 
 ```{r}
-grouped_mean_2 <- function(df,  summarize_var, ...) {
+# ---- func 
+grouped_mean_3 <- function(df,  summarize_var, ...) {
   
-#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+	## -- Defuse the summarize_var = enquo(summarize_var) 
+	## ... group_var >>>> NO NEED FOR ENQUO with ... !
 	summarize_var = enquo(summarize_var)
 	
 	df %>% 
@@ -168,75 +211,108 @@ grouped_mean_2 <- function(df,  summarize_var, ...) {
 		summarize(mean = mean(!!summarize_var, na.rm = TRUE))
 }
 
-# call
-grouped_mean_2(
-	df = starwars, # (...)
+# ---- call
+grouped_mean_3(
+	df = starwars, 
 	sex, homeworld, # (...)
 	summarize_var =  height 
 )
 ```
 
-## 3/4 ... + name of the var left of  `:=` 
 
-OKKIO!!! 
-			+ `!!summarize_var_name :=  ... ` OK 
-			+ `!!str_c("Mean_", summarize_var_name) :=  ... ` OK: xchè??????
-			+ `str_c("Mean_", !!summarize_var_name) :=  ... ` WRONG: xchè??????
+:::{.callout-tip}
+`{{...}}` Basically we are saying "everything I throw at the function will be carried along until I want to evaluate it"   
+:::
 
+
+# Different options (with left side eq)
+
+## 1b (nothing!) + `{{` & left side `:=`  !!!!
+
++ Super compact left side syntax with `"sometext_{{group_var}}" :=`
 ```{r}
-grouped_mean_3 <- function(df,  summarize_var, ...) {
-  
-#	group_var = enquo(group_var) NO NEED FOR ENQUO!
+# --- func
+grouped_mean_1b <- function(df, group_var, summarize_var) {
+	df %>% 
+		# Defuse and inject in a single step with the embracing operator
+		group_by({{group_var}} ) %>% 
+		summarize( "BY_{{group_var}}" := mean({{summarize_var}} , na.rm = TRUE))
+}
+
+# --- call
+grouped_mean_1b (
+	df = starwars, 
+	group_var = sex, 
+	summarize_var =  height 
+)
+```
+
+
+## 2b `enquo` +  `!!` & left side `:=` 
+
+2 things needed here :
+
+	+  `as_label(enquo(____var))`
+	+  left side syntax with `!!str_c("Mean_", ____var) :=`
+ 
+```{r}
+# --- func
+grouped_mean_2b <- function(df, group_var, summarize_var) {
+	## -- Defuse the user expression in `*_var`
+	group_var = enquo(group_var)
+	summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!
+	
+	df %>% 
+		## -- Inject the expression contained in `*_var` 
+		group_by(!!group_var) %>% 
+		summarize(!!str_c("Mean_", summarize_var) := mean(!!summarize_var, na.rm = TRUE))
+}
+
+# --- call
+grouped_mean_2b(df = starwars, 
+					 group_var = sex, 
+					 summarize_var =  height 
+)
+```
+
+## 3b `...` + `...` & left side `:=` 
+```{r }
+## --  define function 
+grouped_mean_3b <- function(df,  summarize_var, ...) {
+#	group_var = ...  NO NEED FOR ENQUO!
 	summarize_var = enquo(summarize_var)
 	summarize_var_name <- as_label(enquo(summarize_var))
-	
 	
 	df %>% 
 		group_by(...) %>% 
 	#	summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
-	# or even better 
-	summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
-	
+	# or  
+	summarize(!!str_c("My_mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
+	# ERRORE ?!?!?!?
+	# summarize(str_c("Mean_", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
 }
 
-# call
-grouped_mean_3(
-	df = starwars, 
-	sex, homeworld,
-	summarize_var =  height 
+## --  call function
+grouped_mean_3b(df = starwars, 
+					 sex, homeworld, #	group_var
+					 summarize_var =  height 
 )
 ```
 
-## 3/4.b OR ... + name of the var left of  `:=` 
-```{r}
-grouped_mean_3b <- function(df,  summarize_var, ...) {
-  
-#	group_var = enquo(group_var) NO NEED FOR ENQUO!
-	summarize_var = enquo(summarize_var)
-#	summarize_var_name <- as_label(enquo(summarize_var))
-	
-	df %>% 
-		group_by(...) %>% 
-	# summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
-	# summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
-	# or even better-er  
-		summarize(
-			"Mean_{{summarize_var}}" := mean(!!summarize_var, na.rm = TRUE))
-	
-}
+:::{.callout-warning}
+OKKIO!!! 
+Strange enough... seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought 
+	+ `!!summarize_var_name :=  ... ` OK 
+	+ `!!str_c("Mean_", summarize_var_name) :=  ... ` OK: xchè??????
+	+ `str_c("Mean_", !!summarize_var_name) :=  ... ` WRONG: xchè??????
 
-# call
-grouped_mean_3b(
-	df = starwars, 
-	sex, homeworld,
-	summarize_var =  height 
-)
-```
+:::
 
 
-## 4/4 ... +  `.data`
+# Using  `.data`
 It’s good practice to prefix *named arguments* with a . (`.data`)to reduce the risk of conflicts between your arguments and the arguments passed to `...`
 ```{r}
+## --  define function 
 grouped_mean_4 <- function(data,  summarize_var, ...) {
   
 #	group_var = enquo(group_var) NO NEED FOR ENQUO!
@@ -251,7 +327,7 @@ grouped_mean_4 <- function(data,  summarize_var, ...) {
 	
 }
 
-# call
+## --  call function
 grouped_mean_4(
 	data = starwars, 
 	summarize_var =  height ,
@@ -271,6 +347,7 @@ my_summarise <- function(data, var) {
   data %>% dplyr::summarise(Mean =mean( {{ var }}, na.rm = TRUE ))
 }
 
+## --  call function
 call <- my_summarise (starwars, height)
 
 # The .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{

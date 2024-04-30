@@ -3,8 +3,8 @@ title: "2) Quarto projects and websites"
 editor: source
 ## ------  general Output Options
 execute:     
-  eval: true
-  echo: false     #  include source code in output
+  eval: false
+  echo: true     #  include source code in output
   warning: false  #  include warning code in output
   error: false    #  include error code in output
   output: false   # include output code in output (CHG in BLOCKS)
@@ -16,7 +16,7 @@ tbl-cap-location: top
 format:
   html:
     # theme: flatly #spacelab
-    code-fold: true # redundant bc echo false 
+    code-fold: false # redundant bc echo false 
     toc-depth: 3
     toc_float: true
     toc-location: left
@@ -46,3 +46,51 @@ base::Sys.which("quarto")
 quarto::quarto_version()
 
 ```
+
+## Markdown `divs`
+
+Rather than write out the `HTML`, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where `#` denotes the ID, and `.` denotes a class. 
+
+Example:
+
++ this (markdown) is = 
+
+```markdown
+::: {#hello .greeting .message style="color: red;"}
+Hello **world**!
+:::
+```
+::: {#hello .greeting .message style="color: red;"}
+Hello **world**!
+:::
+
++ to this (HTLM)
+
+```HTML
+<div id="hello" class="greeting">
+  Hello world!
+</div>
+```
+
++ and this (markdown) is = 
+
+```markdown
+::: {style="color: red; border: solid black;"}
+Goodbye, world.
+:::
+```
+::: {style="color: red; border: solid black;"}
+Goodbye, world.
+:::
+
++ and to this (HTLM)
+
+```HTML
+<div style="color: red; border: solid black;">
+  Goodbye, world.
+</div>
+```
+# Quarto themes 
+
++ **Mara Averick's **Blog post on theme / scss** [Down the front-end rabbit hole](https://quartoand.me/front-end)
+

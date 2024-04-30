@@ -186,7 +186,7 @@
     "href": "r/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
     "title": "1.a) Tidyeval and functional programming",
     "section": "NON STANDARD EVALUATION in TIDYVERSE",
-    "text": "NON STANDARD EVALUATION in TIDYVERSE\n\n\nDEFUSING function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions."
+    "text": "NON STANDARD EVALUATION in TIDYVERSE\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions."
   },
   {
     "objectID": "r/01_tidyeval.html#two-comlpementary-forms-of-nse-used-in-the-tidyverse",
@@ -206,29 +206,29 @@
     "objectID": "r/01_tidyeval.html#quote-unquote-many-vars-with-...",
     "href": "r/01_tidyeval.html#quote-unquote-many-vars-with-...",
     "title": "1.a) Tidyeval and functional programming",
-    "section": "2/4 … + quote & unquote (many) vars with ...\n",
-    "text": "2/4 … + quote & unquote (many) vars with ...\n\nIn this case, summarize_var goes in front and ... last\n\ngrouped_mean_2 &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n    df = starwars, # (...)\n    sex, homeworld, # (...)\n    summarize_var =  height \n)"
+    "section": "2 Quote + Unquote (many) vars with ...\n",
+    "text": "2 Quote + Unquote (many) vars with ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_2 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_2(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”"
   },
   {
     "objectID": "r/01_tidyeval.html#name-of-the-var-left-of",
     "href": "r/01_tidyeval.html#name-of-the-var-left-of",
     "title": "1.a) Tidyeval and functional programming",
-    "section": "3/4 … + name of the var left of :=\n",
-    "text": "3/4 … + name of the var left of :=\n\nOKKIO!!! + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????\n\ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or even better \n    summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld,\n    summarize_var =  height \n)"
+    "section": "3 … + name of the var left of :=\n",
+    "text": "3 … + name of the var left of :=\n\n\n## --  define function \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, #   group_var\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????"
   },
   {
     "objectID": "r/01_tidyeval.html#b-or-name-of-the-var-left-of",
     "href": "r/01_tidyeval.html#b-or-name-of-the-var-left-of",
     "title": "1.a) Tidyeval and functional programming",
     "section": "3/4.b OR … + name of the var left of :=\n",
-    "text": "3/4.b OR … + name of the var left of :=\n\n\ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n#   summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    # summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # or even better-er  \n        summarize(\n            \"Mean_{{summarize_var}}\" := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_3b(\n    df = starwars, \n    sex, homeworld,\n    summarize_var =  height \n)"
+    "text": "3/4.b OR … + name of the var left of :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n#   summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    # summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # or even better-er  \n        summarize(\n            \"Mean_{{summarize_var}}\" := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n## --  call function\ngrouped_mean_3b(\n    df = starwars, \n    sex, homeworld,\n    summarize_var =  height \n)"
   },
   {
     "objectID": "r/01_tidyeval.html#data",
     "href": "r/01_tidyeval.html#data",
     "title": "1.a) Tidyeval and functional programming",
     "section": "4/4 … + .data\n",
-    "text": "4/4 … + .data\n\nIt’s good practice to prefix named arguments with a . (.data)to reduce the risk of conflicts between your arguments and the arguments passed to ...\n\ngrouped_mean_4 &lt;- function(data,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n\n    data %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or even better \n    summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n# call\ngrouped_mean_4(\n    data = starwars, \n    summarize_var =  height ,\n    sex, homeworld\n)"
+    "text": "4/4 … + .data\n\nIt’s good practice to prefix named arguments with a . (.data)to reduce the risk of conflicts between your arguments and the arguments passed to ...\n\n## --  define function \ngrouped_mean_4 &lt;- function(data,  summarize_var, ...) {\n  \n#   group_var = enquo(group_var) NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n\n    data %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or even better \n    summarize(!!str_c(\"Mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    \n}\n\n## --  call function\ngrouped_mean_4(\n    data = starwars, \n    summarize_var =  height ,\n    sex, homeworld\n)"
   },
   {
     "objectID": "tools/01a_git_intro.html",
@@ -365,7 +365,7 @@
     "href": "tools/02_quarto.html",
     "title": "2) Quarto projects and websites",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…\n\n\n\nWhat is Quarto and is it on my machine?\nIt is not an R packg, it’s its own program to install… but RStudio (after some verison) install it as a bundled piece…"
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
   },
   {
     "objectID": "tools/03a_AWS.html",
@@ -460,5 +460,194 @@
     "title": "4) Bonus Stuff",
     "section": "Topics",
     "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#two-complementary-forms-of-nse-used-in-the-tidyverse",
+    "href": "r/01_tidyeval.html#two-complementary-forms-of-nse-used-in-the-tidyverse",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "TWO (complementary) FORMS of NSE used in the Tidyverse",
+    "text": "TWO (complementary) FORMS of NSE used in the Tidyverse\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing of data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{{` embracing operator (`rlang`)\n    + `!!` operator (`base`) \n    + `.data` pronouns. \n    + `.env` pronouns."
+  },
+  {
+    "objectID": "tools/02_quarto.html#markdown-divs",
+    "href": "tools/02_quarto.html#markdown-divs",
+    "title": "2) Quarto projects and websites",
+    "section": "Markdown divs\n",
+    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-with-embracing-variable-inside-custom-f",
+    "href": "r/01_tidyeval.html#defuse-with-embracing-variable-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "Defuse with “embracing” {variable } (inside custom f)",
+    "text": "Defuse with “embracing” {variable } (inside custom f)\n\n## --- own function with tidyverse non std eval ACTION VERB `group_by()`\nmy_summarise &lt;- function(data, group_var) {\n  data %&gt;%\n# tell to inject whatever argument supplied to the function (homeworld) \n        # **in place** of \"group_var\" \n    group_by({{ group_var }}) %&gt;%\n    summarise(mean = mean(height))\n}\n\n# call(s) \nmy_summarise (starwars, homeworld) \nmy_summarise (starwars, sex) \n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#a-quotedefuse-with-nothing-unquoteinject-with-inside-custom-f",
+    "href": "r/01_tidyeval.html#a-quotedefuse-with-nothing-unquoteinject-with-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1a Quote/defuse with (nothing!) + Unquote/inject with {{ (inside custom f)",
+    "text": "1a Quote/defuse with (nothing!) + Unquote/inject with {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1a &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1a(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#b-quotedefuse-with-enquo-unquoteinject-with-inside-custom-f",
+    "href": "r/01_tidyeval.html#b-quotedefuse-with-enquo-unquoteinject-with-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1b Quote/defuse with enquo + Unquote/inject with !! (inside custom f)",
+    "text": "1b Quote/defuse with enquo + Unquote/inject with !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1b(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#a-defuse-nothing-inject-with-inside-custom-f",
+    "href": "r/01_tidyeval.html#a-defuse-nothing-inject-with-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1a Defuse (nothing!) + Inject with {{ (inside custom f)",
+    "text": "1a Defuse (nothing!) + Inject with {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1a &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1a(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-nothing-inject-with-inside-custom-f",
+    "href": "r/01_tidyeval.html#defuse-nothing-inject-with-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1 Defuse (nothing!) + Inject with {{ (inside custom f)",
+    "text": "1 Defuse (nothing!) + Inject with {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-with-enquo-inject-with-inside-custom-f",
+    "href": "r/01_tidyeval.html#defuse-with-enquo-inject-with-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "2 Defuse with enquo + Inject with !! (inside custom f)",
+    "text": "2 Defuse with enquo + Inject with !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-...-inject-...",
+    "href": "r/01_tidyeval.html#defuse-...-inject-...",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "3 Defuse ... + Inject ...\n",
+    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#b-nothing-left-side",
+    "href": "r/01_tidyeval.html#b-nothing-left-side",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1b (nothing!) + {{ & left side := !!!!",
+    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#b-enquo-left-side",
+    "href": "r/01_tidyeval.html#b-enquo-left-side",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "2b enquo + !! & left side :=\n",
+    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#b-...-...-left-side",
+    "href": "r/01_tidyeval.html#b-...-...-left-side",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "3b ... + ... & left side :=\n",
+    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "href": "r/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
+    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "href": "r/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "title": "1.a) Tidyeval and functional programming",
+    "section": "2 Defuse enquo + Inject !! (inside custom f)",
+    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
+  },
+  {
+    "objectID": "r/02_r_vscode.html",
+    "href": "r/02_r_vscode.html",
+    "title": "02) Using R from VS Code",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#new-python-version",
+    "href": "r/02_r_vscode.html#new-python-version",
+    "title": "02) Using R from VS Code",
+    "section": "NEW Python version",
+    "text": "NEW Python version\n\nVersion: Python 3.9.13 for macOS 10.9 or later\nInterpreter path: /usr/local/bin/python3"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#gotcha",
+    "href": "r/02_r_vscode.html#gotcha",
+    "title": "02) Using R from VS Code",
+    "section": "Gotcha!!!",
+    "text": "Gotcha!!!\n\npython3 --version\n# Python 3.9.13"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#ways-to-work-with-python",
+    "href": "r/02_r_vscode.html#ways-to-work-with-python",
+    "title": "02) Using R from VS Code",
+    "section": "3 ways to work with python",
+    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#install-radian-again",
+    "href": "r/02_r_vscode.html#install-radian-again",
+    "title": "02) Using R from VS Code",
+    "section": "install radian [again!!!]",
+    "text": "install radian [again!!!]\n\npip3 install -U radian\n# then as it suggests\n/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 -m pip install --upgrade pip\n\nCheck\n\nradian --version\n\nradian version: 0.6.3 r executable: /Library/Frameworks/R.framework/Resources/bin/R r version: 4.1.0 python executable: /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 python version: 3.9.13"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#settings.json-path",
+    "href": "r/02_r_vscode.html#settings.json-path",
+    "title": "02) Using R from VS Code",
+    "section": "Settings.json path",
+    "text": "Settings.json path\n/Users/luisamimmi/Library/Application Support/Code/User/settings.json\nOpen by ctr+shift+P and then “Preferences: Open Settings (json)”\nOpen in finder\nFrom shell\n\nopen -a Finder /Library/Frameworks/R.framework/Resources"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#modify-r-extension-settings",
+    "href": "r/02_r_vscode.html#modify-r-extension-settings",
+    "title": "02) Using R from VS Code",
+    "section": "modify R Extension settings",
+    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac \"r.rterm.mac\": \"/Library/Frameworks/Python.framework/Versions/3.9/bin/radian\""
+  },
+  {
+    "objectID": "r/02_r_vscode.html#sending-r-code-to-terminal",
+    "href": "r/02_r_vscode.html#sending-r-code-to-terminal",
+    "title": "02) Using R from VS Code",
+    "section": "Sending R code to terminal",
+    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#path-to-keybindings.json",
+    "href": "r/02_r_vscode.html#path-to-keybindings.json",
+    "title": "02) Using R from VS Code",
+    "section": "Path to keybindings.json",
+    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#info-on-keybinding",
+    "href": "r/02_r_vscode.html#info-on-keybinding",
+    "title": "02) Using R from VS Code",
+    "section": "Info on Keybinding",
+    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#fing-lintr-in-vscode",
+    "href": "r/02_r_vscode.html#fing-lintr-in-vscode",
+    "title": "02) Using R from VS Code",
+    "section": "F&$%ing lintr in VSCode",
+    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#other-recommended-extensions",
+    "href": "r/02_r_vscode.html#other-recommended-extensions",
+    "title": "02) Using R from VS Code",
+    "section": "other recommended extensions",
+    "text": "other recommended extensions\nThere are a few other recommended installations for the extension:\n\nlanguageserver (R packages, so can be installed from R)\nhttpgd (R packages, so can be installed from R)\nVSCode-R-Debugger\nQuarto"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#path-to-open-settings.json",
+    "href": "r/02_r_vscode.html#path-to-open-settings.json",
+    "title": "02) Using R from VS Code",
+    "section": "Path to open settings.json\n",
+    "text": "Path to open settings.json\n\n\n[from Finder] Go to /Users/luisamimmi/Library/Application Support/Code/User/settings.json\n[from VS code] Open by ctr+shift+P and then “Preferences: Open Settings (json)”\n\nOpen in finder\nFrom shell\n\nopen -a Finder /Library/Frameworks/R.framework/Resources"
   }
 ]
