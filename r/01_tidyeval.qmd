@@ -55,8 +55,10 @@ library(rlang)
 + [Tidy eval in R: A simple example](https://www.youtube.com/watch?v=YlZuT6PWOEY&t=1s)
 + [Lionel Henry | Interactivity and Programming in the Tidyverse](https://www.youtube.com/watch?v=SW_TUkPXSmA) | RStudioConf (2020)
 
++ [purrr](https://jennybc.github.io/purrr-tutorial/ls03_map-function-syntax.html#map()_function_specification)
 
-# Explanation
+
+# Premise
 Premise: `tidyverse` functions use **tidy evaluation** (= *they don't evaluate the value of a variable right away*! = **Non-Standard evaluation**). 
 
   + (+) This means you can do some intermediate transformation to the variable in abstract (e.g. to a generic "column" thing)
@@ -120,31 +122,6 @@ Inside data-masking function (actions), we can use injection operators:
 		+ `.data` pronouns. 
 		+ `.env` pronouns.
 
-## Defuse with "embracing" `{{variable }}` (inside custom f)  
-
-```{r actv_embrace}
-
-## --- own function with tidyverse non std eval ACTION VERB `group_by()`
-my_summarise <- function(data, group_var) {
-  data %>%
-# tell to inject whatever argument supplied to the function (homeworld) 
-		# **in place** of "group_var" 
-    group_by({{ group_var }}) %>%
-    summarise(mean = mean(height))
-}
-
-# call(s) 
-my_summarise (starwars, homeworld) 
-my_summarise (starwars, sex) 
-```
-
- 
-:::{.callout-warning}
-Without `{{group_var}}` I would get the error  
-	*"! Must group by variables found in `.data`.
-	✖ Column `group_var` is not found."*
-:::
-
 
 # Different options 
 
@@ -167,6 +144,12 @@ grouped_mean_1(
   summarize_var =  height 
 )
 ```
+ 
+:::{.callout-warning}
+Without `{{group_var}}` I would get the error  
+	*"! Must group by variables found in `.data`.
+	✖ Column `group_var` is not found."*
+:::
 
 ## 2  Defuse `enquo`  + Inject `!!`  (inside custom f) 
 ```{r}
@@ -225,7 +208,9 @@ grouped_mean_3(
 :::
 
 
-# Different options (with left side eq)
+# Different options with NAMING
+For technical reasons, the R language doesn't support complex expressions on the left of `=`, but we can use `:=` as a workaround... it allows to use glue and curly-curly syntax on the left of `=`
+
 
 ## 1b (nothing!) + `{{` & left side `:=`  !!!!
 
@@ -308,59 +293,130 @@ Strange enough... seems like the unquoting must be of the WHOLE left-side of the
 
 :::
 
+# Adding the `.data` syntax
 
-# Using  `.data`
-It’s good practice to prefix *named arguments* with a . (`.data`)to reduce the risk of conflicts between your arguments and the arguments passed to `...`
+It’s good practice to prefix *named arguments* with a . (`.data`) to reduce the risk of conflicts between your arguments and the arguments passed to `...`
+
+
+## 4  Inject `{{` + specify `.data`
+
+Adding a new *generic* function argument `data` (up until now I was hardcoding it when executing the function)
+
+#### Simple `data`  
 ```{r}
-## --  define function 
-grouped_mean_4 <- function(data,  summarize_var, ...) {
-  
-#	group_var = enquo(group_var) NO NEED FOR ENQUO!
-	summarize_var = enquo(summarize_var)
-	summarize_var_name <- as_label(enquo(summarize_var))
-
-	data %>% 
-		group_by(...) %>% 
-	#	summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))
-	# or even better 
-	summarize(!!str_c("Mean_", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))
-	
-}
-
-## --  call function
-grouped_mean_4(
-	data = starwars, 
-	summarize_var =  height ,
-	sex, homeworld
-)
-```
-
-
-# Examples
-
-```{r}
- 
 starwars <- starwars
 
-# I FORWARD a (masked)  argument with DOUBLE EMBRACE 
-my_summarise <- function(data, var) {
-  data %>% dplyr::summarise(Mean =mean( {{ var }}, na.rm = TRUE ))
+## -- write function
+my_sum <- function(data, num_var) {
+	data %>%
+		dplyr::group_by(data$homeworld) %>%
+		# num_var or sum will not work!
+		dplyr::summarise(
+			"weighted_count_{{num_var}}" := sum( {{ num_var }}, na.rm = TRUE ))
+	}
+
+## --  call function
+my_sum (starwars, mass) 
+```
+
+#### With `.data` pronoun
+The `.data` pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like `{{`
+```{r}
+## -- write function
+my_sum2 <- function(data, num_var) {
+	# no`.` here!!!
+	data %>%
+		dplyr::group_by(.data$homeworld) %>%
+		# num_var or sum will not work!
+		dplyr::summarise(
+			"weighted_count_{{num_var}}" := sum( {{ num_var }}, na.rm = TRUE ))
 }
 
 ## --  call function
-call <- my_summarise (starwars, height)
-
-# The .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{
-my_summarise2 <- function(data, var) {
-  data %>% dplyr::summarise(mean = mean(.data[[var]], na.rm = TRUE ))
-}
-
-call2 <- my_summarise2 (starwars, "height")
-
-
-
+my_sum2 (starwars, mass) 
 ```
 
+#### With `.data[[var]]` pronoun
+
++ If you have a variable name in a string, use the `.data` pronoun to subset that variable with `[[`.
+```{r}
+
+## -- write function
+my_sum3 <- function(data, num_var, group_var) {
+	# no`.` here!!!
+	data %>%
+		dplyr::group_by(.data[[group_var]]) %>%
+		# num_var or sum will not work!
+		dplyr::summarise(
+			"weighted_count_{{num_var}}" := sum( {{ num_var }}, na.rm = TRUE ))
+}
+
+group_var <- "homeworld"
+## --  call function
+my_sum3 (starwars, mass, group_var) 
+```
+
+# _______
+
+# Iteration `purrr` on top of NSE
+
+Now I want to iteratively execute my custom function `my_mean` over a vector of grouping variables `group_var_vec`  .
+
+```{r}
+## -- write function
+my_mean <- function(data, num_var, group_var) {
+	# no`.` here!!!
+	data %>%
+		dplyr::group_by(.data[[group_var]]) %>%
+		# num_var or sum will not work!
+		dplyr::summarise(
+			"mean_of_{{num_var}}" := mean( {{ num_var }}, na.rm = TRUE ))
+}
+```
+
+####  Option 1) Existing function  `.f`
+
++ my big "gotcha" here is I do not need to specify `.x` in the arguments after `.f` as I kept doing... 🤯
+```{r}
+group_var_vec <- c("homeworld", "species", "sex") 
+
+# map returns a list 
+list  <-  map(.x = group_var_vec, #	 x 
+				  .f = my_mean,   # function  NO ()
+				  data = starwars, 
+				  num_var = height)# ADDITIONAL arguments 
+				  #, group_var = .x)  
+
+
+list[[1]] 
+pluck(list, 1)
+```
+
+####  Option 2) anonymous function as formula  `~ fun()`
++ 🤔🤷🏻‍♀️not quite sure why it should be "anonymous" given that I gave it a name... but it works   
+```{r}
+list_tilde <- map(.x = group_var_vec, 
+						~my_mean(
+							data = starwars, num_var = height, group_var = .x) # ALL arguments 
+)
+
+list_tilde[[1]] 
+pluck(list_tilde, 1)
+```
+
+## BTW map can output a row-binded df here
+```{r}
+# map returns dataframes binded by row 
+dfr <- map_dfr(.x = group_var_vec, # x 
+				~my_mean(data = starwars, # function 
+							num_var = height, group_var = .x) # arguments 
+				)
+
+dfr
+```
+
+# _______
+# some more real life cases...
 ```{r}
 
 # # ------- 1/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 

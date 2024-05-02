@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>{{< var website.site-url >}}/tools/05_colors.html</loc>
+    <lastmod>2024-03-13T15:06:34.515Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03b_Google_domain.html</loc>
+    <lastmod>2024-03-14T13:50:59.850Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03_custom_domain.html</loc>
+    <lastmod>2024-03-14T14:14:54.347Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01b_git_branches.html</loc>
+    <lastmod>2024-04-20T15:29:30.832Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01_git.html</loc>
+    <lastmod>2024-03-14T14:15:00.625Z</lastmod>
+  </url>
+  <url>
     <loc>{{< var website.site-url >}}/r/02_r_vscode.html</loc>
     <lastmod>2024-04-30T13:45:42.059Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/me.html</loc>
+    <lastmod>2024-03-14T11:02:16.303Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/index.html</loc>
+    <lastmod>2024-03-14T14:14:17.494Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/01_tidyeval.html</loc>
+    <lastmod>2024-05-02T11:18:31.102Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/03_r_gpt.html</loc>
+    <lastmod>2024-05-02T10:09:40.948Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01a_git_intro.html</loc>
+    <lastmod>2024-04-26T17:50:47.518Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/02_quarto.html</loc>
+    <lastmod>2024-04-27T09:47:31.732Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03a_AWS.html</loc>
+    <lastmod>2024-04-20T16:25:34.873Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/04_boh.html</loc>
+    <lastmod>2024-03-13T15:06:34.515Z</lastmod>
   </url>
 </urlset>
