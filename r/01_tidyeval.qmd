@@ -57,6 +57,10 @@ library(rlang)
 
 + [purrr](https://jennybc.github.io/purrr-tutorial/ls03_map-function-syntax.html#map()_function_specification)
 
+# MORE
+
+https://jonthegeek.com/2018/06/04/writing-custom-tidyverse-functions/
+
 
 # Premise
 Premise: `tidyverse` functions use **tidy evaluation** (= *they don't evaluate the value of a variable right away*! = **Non-Standard evaluation**). 
@@ -376,7 +380,7 @@ my_mean <- function(data, num_var, group_var) {
 
 ####  Option 1) Existing function  `.f`
 
-+ my big "gotcha" here is I do not need to specify `.x` in the arguments after `.f` as I kept doing... 🤯
++ my big "gotcha" here is I must not specify `.x` in the arguments after `.f` as I kept doing... 🤯
 ```{r}
 group_var_vec <- c("homeworld", "species", "sex") 
 
@@ -388,20 +392,63 @@ list  <-  map(.x = group_var_vec, #	 x
 				  #, group_var = .x)  
 
 
-list[[1]] 
-pluck(list, 1)
+list[[3]]
 ```
 
+#### [digression] `pluck`
+
+
+```{r}
+# build list 
+movies <- c("A New Hope",
+            "The Empire Strikes Back",
+            "Return of the Jedi",
+            "Phantom Menace",
+            "Attack of the Clones",
+            "Revenge of the Sith",
+            "The Force Awakens",
+            "The Last Jedi",
+            "Rise of Skywalker")
+
+years <- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)
+
+film_l <- list(movies, years,
+                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))
+
+ 
+```
+
+
+Here is an esasier way to extract elements from lists
+```{r}
+
+# 1st df and 1st column of it 
+film_l[[1]][1]
+
+pluck(film_l,1,1)
+```
+
+... which can go insude a pipe
+```{r}
+#pipe in our list 
+film_l %>% 
+	#and grab the first list element, the movie title;
+	pluck(1) %>% 
+	# take each movie title and extract the last word from it using the word function.
+	map_chr(~ word(., -1))
+```
+
+
 ####  Option 2) anonymous function as formula  `~ fun()`
-+ 🤔🤷🏻‍♀️not quite sure why it should be "anonymous" given that I gave it a name... but it works   
++ 🤔🤷🏻‍♀️not quite sure why it should be "anonymous" given that I gave it a name... but it works nonetheless
 ```{r}
 list_tilde <- map(.x = group_var_vec, 
 						~my_mean(
 							data = starwars, num_var = height, group_var = .x) # ALL arguments 
 )
 
-list_tilde[[1]] 
-pluck(list_tilde, 1)
+list_tilde[[3]] 
+pluck(list_tilde, 3)
 ```
 
 ## BTW map can output a row-binded df here
@@ -416,174 +463,172 @@ dfr
 ```
 
 # _______
-# some more real life cases...
-```{r}
-
-# # ------- 1/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
-# # https://www.youtube.com/watch?v=pcvWKVlRmwE
-# 
-# f_prop_grouping <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2  ) {
-#   
-#   end_df <- start_df %>% 
-#     # grouping var(s)
-#     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato
-#     ) %>% 
-#     summarise(n_group = n(),# n_stato
-#               TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
-#               TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2
-#     ) %>% 
-#     mutate(N_group = sum(n_group), # N_stato
-#            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato
-#            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group)
-#            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"),
-#            
-#     ) }
-
-# run
-# end_df <- f_prop_grouping(AL_anagr_stato_t, end_df, misura, stato, inizio_past, inizio_rit )
-
-# ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
-f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2 ) {  
-  # This to use the "walrus operator" := on the LEFT (naming the derived vars )
-  dummy1name <- as_label(enquo(dummy1))
-  dummy2name <- as_label(enquo(dummy2))
- 
-  
-  end_df <- start_df %>% 
-    # grouping var(s)
-    group_by( {{group_var1}}, {{group_var2}} # misura e stato
-    ) %>% 
-    summarise(n_group = n(),# n_stato
-              !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
-              !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group)
-              
-              !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2
-              !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%")   # % dummy over n(group) 
-               ) %>% 
-    # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
-    mutate (N_group = sum(n_group),
-            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
-    ) %>% 
-    relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))  
-}
-
-# # ------- 3/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione 
-# # using [“enquo” + “!!”  ]      |  "syms" function and the “!!!”  (for multiple vars) 
-# f_prop_grouping3 <- function(start_df, end_df, group_vars, dummy1, dummy2  ) {
-#   # define the list of group_by vars "syms" 
-#   group_vars <- syms(group_vars)
-#   # This to use the "walrus operator" := on the LEFT (naming the created var  
-#   dummy1name <- as_label(enquo(dummy1))
-#   dummy2name <- as_label(enquo(dummy2))
-#   
-#   end_df <- start_df %>% 
-#     # call grouping var(s) “!!!” 
-#     group_by( !!!group_vars ) %>%    
-#     summarise(n_group = n(),# n_stato
-#               # TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
-#               # TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2
-#               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1
-#               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group)
-#               
-#               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2
-#               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%") # % dummy over n(group) 
-#               ) %>% 
-#     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
-#     mutate (N_group = sum(n_group),
-#             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
-#     ) %>% 
-#     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))  
-#     
-#   
-# }
 
 
-# ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche MEDIA
-f_mean_grouping2 <- function(start_df, end_df, group_var1, group_var2, numer1, numer2) {  
-  # This to use the "walrus operator" := on the LEFT (naming the derived vars )
-  numer1name <- as_label(enquo(numer1))
-  numer2name <- as_label(enquo(numer2))
-  
-  # operations
-  end_df <- start_df %>% 
-    # grouping var(s)
-    group_by( {{group_var1}}, {{group_var2}} # misura e stato
-    ) %>% 
-    summarise(n_group = n(),# n_stato
-              !!str_c("Media_", numer1name) := mean({{numer1}}, na.rm = TRUE),
-              !!str_c("Media_", numer2name) := mean({{numer2}}, na.rm = TRUE)
-              ) %>% 
-    # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE
-    mutate (N_group = sum(n_group),
-            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato
-    ) %>% 
-    relocate (c("N_group","Perc_group" ), .before = !!str_c("Media_", numer1name) )
-}
+<!-- # some more real life cases... -->
+<!-- ```{r} -->
 
-# OKKIO!!!!!! 
-#end_df <- f_prop_grouping2(AL_anagr_stato_t, end_df, c("misura", "stato"), inizio_past, inizio_rit )
+<!-- # # ------- 1/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- # # https://www.youtube.com/watch?v=pcvWKVlRmwE -->
+<!-- #  -->
+<!-- # f_prop_grouping <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2  ) { -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # grouping var(s) -->
+<!-- #     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato -->
+<!-- #     ) %>%  -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #     ) %>%  -->
+<!-- #     mutate(N_group = sum(n_group), # N_stato -->
+<!-- #            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato -->
+<!-- #            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"), -->
+<!-- #             -->
+<!-- #     ) } -->
 
+<!-- # run -->
+<!-- # end_df <- f_prop_grouping(AL_anagr_stato_t, end_df, misura, stato, inizio_past, inizio_rit ) -->
 
-# f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, ... ) {
-#   
-#   end_df <- start_df %>% 
-#     # grouping var(s)
-#     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato
-#     ) %>% 
-#     summarise(n_group = n(),# n_stato
-#               TOT_dummy1 = sum(..., na.rm = TRUE ), # SUM_dummy1
-#               TOT_dummy2 = sum(..., na.rm = TRUE ) # SUM_dummy2
-#     ) %>% 
-#     mutate(N_group = sum(n_group), # N_stato
-#            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato
-#            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group)
-#            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"),
-#            
-#     ) }
+<!-- # ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2 ) {   -->
+<!--   # This to use the "walrus operator" := on the LEFT (naming the derived vars ) -->
+<!--   dummy1name <- as_label(enquo(dummy1)) -->
+<!--   dummy2name <- as_label(enquo(dummy2)) -->
 
 
+<!--   end_df <- start_df %>%  -->
+<!--     # grouping var(s) -->
+<!--     group_by( {{group_var1}}, {{group_var2}} # misura e stato -->
+<!--     ) %>%  -->
+<!--     summarise(n_group = n(),# n_stato -->
+<!--               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!--               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group) -->
 
-# ------- FUNZIONE: generalizzo il nome della fase (prefix) 
-f_rimuovo_pref <- function(data, prefix = "word_"){
-  rename_with(.data = data, 
-              .cols = dplyr::starts_with(prefix), # (default e' everything() e le pescava comunque)
-              # rinomino le date eliminando il prefisso
-              .fn = function(x)sub(prefix,"",x))
-  
-}
+<!--               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2 -->
+<!--               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%")   # % dummy over n(group)  -->
+<!--                ) %>%  -->
+<!--     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!--     mutate (N_group = sum(n_group), -->
+<!--             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!--     ) %>%  -->
+<!--     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))   -->
+<!-- } -->
 
-# EXE uso
-#BC_PROGETTAZIONE_temp <- f_rimuovo_pref(BC_PROGETTAZIONE , prefix = "PROG_ESEC_") 
+<!-- # # ------- 3/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- # # using [“enquo” + “!!”  ]      |  "syms" function and the “!!!”  (for multiple vars)  -->
+<!-- # f_prop_grouping3 <- function(start_df, end_df, group_vars, dummy1, dummy2  ) { -->
+<!-- #   # define the list of group_by vars "syms"  -->
+<!-- #   group_vars <- syms(group_vars) -->
+<!-- #   # This to use the "walrus operator" := on the LEFT (naming the created var   -->
+<!-- #   dummy1name <- as_label(enquo(dummy1)) -->
+<!-- #   dummy2name <- as_label(enquo(dummy2)) -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # call grouping var(s) “!!!”  -->
+<!-- #     group_by( !!!group_vars ) %>%     -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               # TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               # TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #                -->
+<!-- #               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2 -->
+<!-- #               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%") # % dummy over n(group)  -->
+<!-- #               ) %>%  -->
+<!-- #     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!-- #     mutate (N_group = sum(n_group), -->
+<!-- #             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!-- #     ) %>%  -->
+<!-- #     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))   -->
+<!-- #      -->
+<!-- #    -->
+<!-- # } -->
 
 
-# -------- FUNZIONE: introduco qualche calcolo sulle date delle fasi procedurali
-f_calcoli_date <- function(data, inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) {
-  dplyr::mutate(data,
-                durata_prev =  {{fine_fase_prev}} - {{inizio_fase_prev}} ,
-                #durata_eff =   {{fine_eff}} - {{inizio_eff}} ,
-                inizio_V_today = case_when(
-                  {{inizio_fase_prev}} <= today() ~ "pre_oggi",
-                  {{inizio_fase_prev}} > today() ~  "post_oggi",
-                  TRUE ~ "Ignoto"),
-                inizio_discrep = {{inizio_fase_eff}} - {{inizio_fase_prev}} ,
-                inizio_ritardo = case_when(
-                  inizio_V_today == "Ignoto" ~ "[Fase non prevista]",
-                  inizio_V_today == "post_oggi" ~ "Inizio previsto futuro",
-                  inizio_V_today == "pre_oggi" & !is.na({{inizio_fase_eff}}) ~ if_else(
-                    inizio_discrep > 0 , glue("rit = {inizio_discrep} gg"), glue("ant = {inizio_discrep} gg")
-                  ),
-                  inizio_V_today == "pre_oggi" & is.na({{inizio_fase_eff}}) ~  "No inizio effettivo")
-  )
-}
+<!-- # ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche MEDIA -->
+<!-- f_mean_grouping2 <- function(start_df, end_df, group_var1, group_var2, numer1, numer2) {   -->
+<!--   # This to use the "walrus operator" := on the LEFT (naming the derived vars ) -->
+<!--   numer1name <- as_label(enquo(numer1)) -->
+<!--   numer2name <- as_label(enquo(numer2)) -->
 
-# EXE uso
-# BC_PROGETTAZIONE_calc <-  f_calcoli_date (
-#   data = BC_PROGETTAZIONE_temp , 
-#   inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff)
+<!--   # operations -->
+<!--   end_df <- start_df %>%  -->
+<!--     # grouping var(s) -->
+<!--     group_by( {{group_var1}}, {{group_var2}} # misura e stato -->
+<!--     ) %>%  -->
+<!--     summarise(n_group = n(),# n_stato -->
+<!--               !!str_c("Media_", numer1name) := mean({{numer1}}, na.rm = TRUE), -->
+<!--               !!str_c("Media_", numer2name) := mean({{numer2}}, na.rm = TRUE) -->
+<!--               ) %>%  -->
+<!--     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!--     mutate (N_group = sum(n_group), -->
+<!--             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!--     ) %>%  -->
+<!--     relocate (c("N_group","Perc_group" ), .before = !!str_c("Media_", numer1name) ) -->
+<!-- } -->
 
-```
+<!-- # OKKIO!!!!!!  -->
+<!-- #end_df <- f_prop_grouping2(AL_anagr_stato_t, end_df, c("misura", "stato"), inizio_past, inizio_rit ) -->
 
 
-# MORE
+<!-- # f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, ... ) { -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # grouping var(s) -->
+<!-- #     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato -->
+<!-- #     ) %>%  -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               TOT_dummy1 = sum(..., na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               TOT_dummy2 = sum(..., na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #     ) %>%  -->
+<!-- #     mutate(N_group = sum(n_group), # N_stato -->
+<!-- #            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato -->
+<!-- #            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"), -->
+<!-- #             -->
+<!-- #     ) } -->
 
-https://jonthegeek.com/2018/06/04/writing-custom-tidyverse-functions/
+
+
+<!-- # ------- FUNZIONE: generalizzo il nome della fase (prefix)  -->
+<!-- f_rimuovo_pref <- function(data, prefix = "word_"){ -->
+<!--   rename_with(.data = data,  -->
+<!--               .cols = dplyr::starts_with(prefix), # (default e' everything() e le pescava comunque) -->
+<!--               # rinomino le date eliminando il prefisso -->
+<!--               .fn = function(x)sub(prefix,"",x)) -->
+
+<!-- } -->
+
+<!-- # EXE uso -->
+<!-- #BC_PROGETTAZIONE_temp <- f_rimuovo_pref(BC_PROGETTAZIONE , prefix = "PROG_ESEC_")  -->
+
+
+<!-- # -------- FUNZIONE: introduco qualche calcolo sulle date delle fasi procedurali -->
+<!-- f_calcoli_date <- function(data, inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) { -->
+<!--   dplyr::mutate(data, -->
+<!--                 durata_prev =  {{fine_fase_prev}} - {{inizio_fase_prev}} , -->
+<!--                 #durata_eff =   {{fine_eff}} - {{inizio_eff}} , -->
+<!--                 inizio_V_today = case_when( -->
+<!--                   {{inizio_fase_prev}} <= today() ~ "pre_oggi", -->
+<!--                   {{inizio_fase_prev}} > today() ~  "post_oggi", -->
+<!--                   TRUE ~ "Ignoto"), -->
+<!--                 inizio_discrep = {{inizio_fase_eff}} - {{inizio_fase_prev}} , -->
+<!--                 inizio_ritardo = case_when( -->
+<!--                   inizio_V_today == "Ignoto" ~ "[Fase non prevista]", -->
+<!--                   inizio_V_today == "post_oggi" ~ "Inizio previsto futuro", -->
+<!--                   inizio_V_today == "pre_oggi" & !is.na({{inizio_fase_eff}}) ~ if_else( -->
+<!--                     inizio_discrep > 0 , glue("rit = {inizio_discrep} gg"), glue("ant = {inizio_discrep} gg") -->
+<!--                   ), -->
+<!--                   inizio_V_today == "pre_oggi" & is.na({{inizio_fase_eff}}) ~  "No inizio effettivo") -->
+<!--   ) -->
+<!-- } -->
+
+<!-- # EXE uso -->
+<!-- # BC_PROGETTAZIONE_calc <-  f_calcoli_date ( -->
+<!-- #   data = BC_PROGETTAZIONE_temp ,  -->
+<!-- #   inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) -->
+
+<!-- ``` -->
+
