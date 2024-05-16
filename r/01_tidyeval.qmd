@@ -374,8 +374,6 @@ group_var <- "homeworld"
 my_sum3 (starwars, mass, group_var) 
 ```
 
-# _______ STOP 
-
 # Iteration `purrr` on top of (dplyr) NSE
 
 Now I want to iteratively execute my custom function `my_mean` over a vector of grouping variables `group_var_vec`.
@@ -439,11 +437,12 @@ groupmeans_dfr
 
 # _______
 
+
 # Iteration `purrr` with (purrr) NSE
 
 Here I am trying a different recipe: i.e. putting NSE inside the `purrr` function, instead of inside the `dplyr` function. For examples 
 
-### ---- 1 masked var in `purrr::map`
+### ---- 1 masked group_var in `purrr::map`
 ```{r}
 library(dplyr)
 library(purrr)
@@ -451,45 +450,76 @@ library(purrr)
 group_var <- c("gender", "species")
  
 NSE_map_g <- map(.x = group_var, 
-							 .f = ~{
-							 	starwars %>% 
-							 		group_by( {{.x}}) %>% 
-							 		summarise(mean_height  = mean(height  , na.rm = TRUE ))
-							 })
+					  .f = ~{
+					  	starwars %>% 
+					  		group_by( {{.x}}) %>% 
+					  		summarise(mean_height  = mean(height  , na.rm = TRUE ))
+					  })
 
 pluck(NSE_map_g,1)
 ```
 
+### ---- 2a masked num_var in `purrr::map`
+
++ using `syms` 
+	+ 🤯 Note: I need `.x = syms(numvar)` instead of `.x = numvar` because map woudl understand the vector as characters and not as symbols 
 
 ```{r}
 num_var <- c("height", "birth_year")
  
-NSE_map_n <- map(.x = num_var, 
+NSE_map_n <- map(#.x = num_var,      # WRONG, map gets a vector of characters
+					  # .x = {{num_var}}, # also WRONG ???
+					  # .x =  syms(num_var), # RIGHT, map gets a list of symbols  
 					  .f = ~{
 					  	starwars %>% 
 					  		group_by(species) %>% 
-					  		summarise("mean_{{.x}}"  := mean({{.x}}, na.rm = TRUE ))
+					  		summarise("mean_{{.x}}" := mean({{.x}}, na.rm = TRUE ))
 					  })
 
 pluck(NSE_map_n,1)
 ```
 
-### ---- 2 masked vars in `purrr::map`
+### ---- 2b masked num_var in `purrr::map`
+
++ using A) Defuse `enquo` + B) Inject `!!`
+
 ```{r}
-group_var <- c("gender", "species")
+num_var <- c("height", "birth_year")
+ 
+NSE_map_n <-  map(
+	# .x = num_var,      # WRONG, (vector of characters)
+	.x = !! sym(num_var), # RIGHT, (list of symbols)  
+	.f = ~{
+		starwars %>% 
+			group_by(species) %>% 
+			summarise("mean_{{.x}}" := mean({{.x}}, na.rm = TRUE ))
+	})
+
+
+pluck(NSE_map_n,1)
+```
+
+
+# _______ WRONG (start)_____ 
+
+
+### ---- 3 masked group_var + num_var vars in `purrr::map`
+DOESNT REALLY WORK !!!!
+```{r}
+group_var <- c("sex", "species")
 num_var <- c("height", "birth_year")
 
-NSE_map_gn <- map2(.x = group_var, 
-						  .y = num_var ,
-						  .f = ~{
-						  	starwars %>% 
-						  		group_by({{.x}}) %>% 
-						  		summarise("mean_{{.y}}"  := mean({{.y}}, na.rm = TRUE ))
-						  })
+NSE_map_gn <- map2(.x = syms (group_var), 
+						 .y = syms(num_var),
+						 .f = ~{
+						 	starwars %>% 
+						 		group_by({{.x}}) %>% 
+						 		summarise("mean_{{.y}}_by{{.x}}"   := mean({{.y}}, na.rm = TRUE ))
+						 })
 
-pluck(NSE_map_df2,1)
+pluck(NSE_map_gn,1)
 ```
-DOESNT WORK !!!!
+# _______ WRONG (end)_____ 
 
 
 ## Tidyeval in purrr + custom function
