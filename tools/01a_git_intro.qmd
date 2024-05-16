@@ -282,6 +282,12 @@ git push origin master
 ```
 
 
+# Git repo setup (1st Local >> 2nd Github)
+
+This has perfect instructions to start a quarto website and then deploy on GitHub
+
++ Sam Csik blog post [https://ucsb-meds.github.io/creating-quarto-websites/](https://ucsb-meds.github.io/creating-quarto-websites/)
+
 
 # Git architecture
 

@@ -47,6 +47,19 @@ library(tidyverse)
 library(rlang)
 ```
 
+# TL;DR
+
+Inside data-masking function (actions), we can use injection operators:
+
+		+ `{{` embracing operator (`rlang`) OR
+			+ [`enquo` followed by] `!!` operator (`base`) 
+			+ `...` + `...`
+		+ varname_name `:=` function(`{{var}}`)
+		+ `.data` pronouns. 
+		+ `.env` pronouns.
+
+
+
 # Learning resources
 
 + [ALbert Rapp YT vid](https://www.youtube.com/watch?v=L_sX-sL9aWM&t=1810s)
@@ -72,12 +85,12 @@ In contrast, normal/base/custom R functions DO evaluate objects (i.e. `a+b`) **a
 
 So, to take full advantage of **Non-Standard evaluation** (more interactivity, but also writing custom functions), I will need a sort of **METAVARIABLE** (a "quosure"), i.e. something that doesn't get evaluated until I tell so.
 
-## NON STANDARD EVALUATION in TIDYVERSE
+## Non-Standard evaluation in `tidyverse`
 
 + **DEFUSING** (**DELAYING**) function arguments: I can create a "quosure" with `rlang::enquo()` /  `rlang::enquos()` so an expression can be examined, modified, and injected into other expressions.
 
 
-## TWO (complementary) FORMS of NSE used in the Tidyverse 
+## Two (complementary) forms of NSE used in `tidyverse`
 
 ### 1) **TIDY SELECTION** is used in SELECTION VERBS 
 			
@@ -104,7 +117,7 @@ ACTION VERBS  = `dplyr::mutate()`, `ggplot2::aes()`, `arrange()`, `count()`, `fi
 
  Normal interactive programming (`tidyverse`) use  ***data-masking***, which allow you to use variables in the “current” data frame without any extra syntax. This:
  
- + (+) makes it nicer to interactively work (no extra typing of `data$column`, just `column`), but 
+ + (+) makes it nicer to interactively work (no extra typing for `data$column`, just `column`), but 
  + (-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an  env-variable).  
 
 ```{r}
@@ -114,15 +127,16 @@ ACTION VERBS  = `dplyr::mutate()`, `ggplot2::aes()`, `arrange()`, `count()`, `fi
 starwars %>% 
  filter (homeworld == "Tatooine")  
 
-
 ```
 
 SOOOOO We need some way to add `$` back into the picture. Passing data-masked arguments to functions requires **INJECTION** (= **quasiquotation**), i.e. **TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH** `{{`
 
 Inside data-masking function (actions), we can use injection operators:
 
-		+ `{{` embracing operator (`rlang`)
-		+ `!!` operator (`base`) 
+		+ `{{` embracing operator (`rlang`) OR
+			+ [`enquo` followed by] `!!` operator (`base`) 
+			+ `...` + `...`
+		+ varname_name `:=` function(`{{var}}`)
 		+ `.data` pronouns. 
 		+ `.env` pronouns.
 
@@ -302,7 +316,7 @@ Strange enough... seems like the unquoting must be of the WHOLE left-side of the
 It’s good practice to prefix *named arguments* with a . (`.data`) to reduce the risk of conflicts between your arguments and the arguments passed to `...`
 
 
-## 4  Inject `{{` + specify `.data`
+## 1.c  Inject `{{` + specify `.data`
 
 Adding a new *generic* function argument `data` (up until now I was hardcoding it when executing the function)
 
@@ -360,11 +374,11 @@ group_var <- "homeworld"
 my_sum3 (starwars, mass, group_var) 
 ```
 
-# _______
+# _______ STOP 
 
-# Iteration `purrr` on top of NSE
+# Iteration `purrr` on top of (dplyr) NSE
 
-Now I want to iteratively execute my custom function `my_mean` over a vector of grouping variables `group_var_vec`  .
+Now I want to iteratively execute my custom function `my_mean` over a vector of grouping variables `group_var_vec`.
 
 ```{r}
 ## -- write function
@@ -378,25 +392,158 @@ my_mean <- function(data, num_var, group_var) {
 }
 ```
 
-####  Option 1) Existing function  `.f`
+Here the question is how to specify the function 
+
+##  Option 1) `purrr` + existing function  `.f`...
 
 + my big "gotcha" here is I must not specify `.x` in the arguments after `.f` as I kept doing... 🤯
 ```{r}
+## -- using function `my_mean` with:
 group_var_vec <- c("homeworld", "species", "sex") 
 
 # map returns a list 
-list  <-  map(.x = group_var_vec, #	 x 
-				  .f = my_mean,   # function  NO ()
-				  data = starwars, 
-				  num_var = height)# ADDITIONAL arguments 
-				  #, group_var = .x)  
+groupmeans_l  <-  map(.x = group_var_vec, #	 x 
+							 .f = my_mean,   # function  NO ()
+							 data = starwars, # ADDITIONAL arguments 
+							 num_var = height)
+#, group_var = .x)  
 
 
-list[[3]]
+groupmeans_l[[3]]
 ```
 
-#### [digression] `pluck`
 
+##  Option 2) `purrr` + anonymous function as formula  `~ fun()`
++ 🤔🤷🏻‍♀️not quite sure why it should be "anonymous" given that I gave it a name... but it works nonetheless
+```{r}
+## -- using function `my_mean` with:
+groupmeans_l_tilde <- map(.x = group_var_vec, 
+								  ~my_mean(        # function  YESS!! ()
+								  	data = starwars, num_var = height, group_var = .x) # ALL arguments 
+)
+
+groupmeans_l_tilde[[3]] 
+pluck(groupmeans_l_tilde, 3)
+```
+
+#### BTW map can output a row-binded df here
+```{r}
+# map returns dataframes binded by row 
+groupmeans_dfr <- map_dfr(.x = group_var_vec, # x 
+								  ~my_mean(        # function  YESS!! ()
+								  	data = starwars, num_var = height, group_var = .x) # ALL arguments 
+)
+
+groupmeans_dfr
+```
+
+# _______
+
+# Iteration `purrr` with (purrr) NSE
+
+Here I am trying a different recipe: i.e. putting NSE inside the `purrr` function, instead of inside the `dplyr` function. For examples 
+
+### ---- 1 masked var in `purrr::map`
+```{r}
+library(dplyr)
+library(purrr)
+
+group_var <- c("gender", "species")
+ 
+NSE_map_g <- map(.x = group_var, 
+							 .f = ~{
+							 	starwars %>% 
+							 		group_by( {{.x}}) %>% 
+							 		summarise(mean_height  = mean(height  , na.rm = TRUE ))
+							 })
+
+pluck(NSE_map_g,1)
+```
+
+
+```{r}
+num_var <- c("height", "birth_year")
+ 
+NSE_map_n <- map(.x = num_var, 
+					  .f = ~{
+					  	starwars %>% 
+					  		group_by(species) %>% 
+					  		summarise("mean_{{.x}}"  := mean({{.x}}, na.rm = TRUE ))
+					  })
+
+pluck(NSE_map_n,1)
+```
+
+### ---- 2 masked vars in `purrr::map`
+```{r}
+group_var <- c("gender", "species")
+num_var <- c("height", "birth_year")
+
+NSE_map_gn <- map2(.x = group_var, 
+						  .y = num_var ,
+						  .f = ~{
+						  	starwars %>% 
+						  		group_by({{.x}}) %>% 
+						  		summarise("mean_{{.y}}"  := mean({{.y}}, na.rm = TRUE ))
+						  })
+
+pluck(NSE_map_df2,1)
+```
+DOESNT WORK !!!!
+
+
+## Tidyeval in purrr + custom function
+
+### 1/2 single (group, num) function 
+```{r}
+my_mean_2  <- function(data, group_var, num_var) {
+	quo_group_var <- enquo(group_var)
+	quo_num_var <- enquo(num_var)
+	# no`.` here!!!
+	data %>%
+		dplyr::group_by(.data[[!! quo_group_var]]) %>%
+		dplyr::summarise(
+			"mean_of_{{quo_num_var}}" := mean( !!quo_num_var, na.rm = TRUE ))
+}
+
+# test YEAH
+test1 <- my_mean_2(data = starwars, group_var = sex, num_var =height) 
+```
+
+### 2/2 map function 
+```{r}
+group_var <- c("gender", "species")
+num_var <- c("height", "birth_year")
+
+tidy_map_df3 <- map2(.x = group_var, 
+							.y = num_var ,
+							~my_mean_2,
+							data = starwars
+) 
+tidy_map_df3
+
+```
+
+https://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr 
+
+
+```{r}
+vars <- train %>% select(ends_with("bin")) %>% colnames()
+
+vars %>%
+# create a symbol (defused expressions that represent objects in environments)
+  syms() %>%
+  map(function(var) get_charts(!!var))
+
+# test YEAH
+test2 <- my_mean(data = starwars, group_var = sex, num_var =height) 
+```
+
+
+# _______
+
+
+## [digression] `pluck`
 
 ```{r}
 # build list 
@@ -439,30 +586,6 @@ film_l %>%
 ```
 
 
-####  Option 2) anonymous function as formula  `~ fun()`
-+ 🤔🤷🏻‍♀️not quite sure why it should be "anonymous" given that I gave it a name... but it works nonetheless
-```{r}
-list_tilde <- map(.x = group_var_vec, 
-						~my_mean(
-							data = starwars, num_var = height, group_var = .x) # ALL arguments 
-)
-
-list_tilde[[3]] 
-pluck(list_tilde, 3)
-```
-
-## BTW map can output a row-binded df here
-```{r}
-# map returns dataframes binded by row 
-dfr <- map_dfr(.x = group_var_vec, # x 
-				~my_mean(data = starwars, # function 
-							num_var = height, group_var = .x) # arguments 
-				)
-
-dfr
-```
-
-# _______
 
 
 <!-- # some more real life cases... -->

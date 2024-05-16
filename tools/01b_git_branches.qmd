@@ -144,6 +144,20 @@ git push origin
 git diff master..page_col '***.qmd'Q
 ```
 
+
+# Git Rebase 
+
+1. take commits from a separat branch and replay (shift the change down to the tip of master) them at the end of another brabch
+2. integrate recent commits without merging
+
+* you never rebase a public branch, only a private one!
+ 
+
++ YT video on [diff merge - rebase](https://www.youtube.com/watch?v=zOnwgxiC0OA)
+
+
+
+
 # Collaboration
 
 1. I create a test GH account **lula-test**  (associated to l__a__a@icloud.com)
@@ -197,6 +211,9 @@ so I must change te origin in the collaborator GH
 ```{bash}
 git remote set-url origin  https://github.com/lula-test/nerd_help.git
 ```
+
+
+
 
 
 
