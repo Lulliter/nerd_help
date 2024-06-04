@@ -1,0 +1,165 @@
+---
+title: "Useful things R"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+
+```{r}
+library(dplyr)
+starwars <- starwars
+```
+
+
+# Filter rows in and out with `dplyr` 
+
+Multiple values (same column) in and out
+
++ `%in% c("x", "y")` for values
++ `!colname`  for negation 
+
+```{r}
+f_1 <- starwars %>% 
+	filter(homeworld %in% c("Naboo","Tatooine"))  
+
+f_2 <- starwars %>% 
+	# ! in front! 
+	filter(!homeworld %in% c("Naboo","Tatooine"))
+
+```
+
+Multiple columns (some values) in and out
+```{r}
+f_3 <- starwars %>% 
+	filter(species == "Ewok" & homeworld %in% c("Endor","Tatooine"))  
+
+f_4 <- starwars %>% 
+	# ! in front! 
+	filter(!species %in% c("Droid","Human") &  !homeworld %in% c("Naboo","Tatooine"))
+```
+
+# Keep/Drop rows that have ALL NA values in all columns
+```{r}
+# Filter rows that have only NA values in all columns  
+cols_allNA <- starwars %>%
+  filter(if_all(everything(), is.na))  # 0 
+
+# or drop them 
+# Drop rows that have NA values in all columns
+cols_noneNA <- starwars %>%
+  filter(!if_all(everything(), is.na))  # 87 
+```
+
+# Drop rows that have ANY NA values in all columns
+```{r}
+# Filter rows that have only NA values in all columns  
+cols_anyNA <- starwars %>%
+  filter(!if_any(everything(), is.na))  # 58 
+
+```
+
+# Keep/drop rows that have ALL NA values in some columns
+```{r}
+# Filter rows that have only NA values in all columns whose name ....
+spec_col_allNA <- starwars %>%
+ filter(if_all(starts_with("h"), is.na))  # 0 
+ # filter(!if_all(starts_with("h"), is.na))  # 0 
+```
+
+# DESELECT only numeric columns that only have 0 for any row 
+
+```{r}
+# first create one 
+starwars2 <- starwars %>% 
+	mutate(all0_col  = 0) %>% 
+	relocate (all0_col, .before = everything()) %>% 
+	## ----- drop SE hanno tutta la colonna == 0
+	select(!where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
+	## ----- or 
+	# select(-where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
+
+```
+
+```{r}
+d <- data.frame(a = c(1,5,56,4,9), 
+					 b = c(0,0,NA,0,NA), 
+					 c = c(98,67,NA,3,7), 
+					 d = c(0,0,0,0,0), 
+					 e = c(NA,NA,NA,NA,NA))
+
+# --- removes all NA 
+d2 <- d %>% 
+	select(!where(~all(is.na(.x))))
+
+# --- removes NA's and Zeros
+d3a <- d2 %>% 
+	# all() and any() check if all or any values in a vector evaluate to TRUE for some expression
+	select(where( ~ !all(is.na(.) | . == 0)))  
+
+# d3b <- d2 %>% 
+# 	# --- or  
+# 	select(where( ~ !all_of(is.na(.) | .x == 0))) 
+
+d3c <- d2 %>% 
+	# --- or  
+	select(!where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
+
+# # --- removes strictly ALL Zeros
+# d4 <- d2 %>% 
+# 	select(!where( ~ contains ("0") ))
+#  
+```
+
+
+# Left join dove elimino `x` e `y`
+
++ using `suffix` argument of `left_join`
+```{r}
+
+star <- starwars %>% 
+	select( 2:5)
+
+star2 <- starwars %>% 
+	select( 2, 5:7) 
+
+# join 
+star_join <- star %>% 
+	left_join(star2,
+				 by = c("name"), 
+				 # get rid of duplicated cols .... 
+				 suffix = c("", ".y")) %>% 
+	select(-ends_with(".y")) 
+```
+

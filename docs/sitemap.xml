@@ -26,15 +26,19 @@
   </url>
   <url>
     <loc>{{< var website.site-url >}}/r/01_tidyeval.html</loc>
-    <lastmod>2024-05-16T09:27:35.394Z</lastmod>
+    <lastmod>2024-05-16T14:38:06.655Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/me.html</loc>
+    <lastmod>2024-03-14T11:02:16.303Z</lastmod>
   </url>
   <url>
     <loc>{{< var website.site-url >}}/index.html</loc>
     <lastmod>2024-03-14T14:14:17.494Z</lastmod>
   </url>
   <url>
-    <loc>{{< var website.site-url >}}/me.html</loc>
-    <lastmod>2024-03-14T11:02:16.303Z</lastmod>
+    <loc>{{< var website.site-url >}}/r/00_useful.html</loc>
+    <lastmod>2024-06-04T20:02:25.990Z</lastmod>
   </url>
   <url>
     <loc>{{< var website.site-url >}}/r/02_r_vscode.html</loc>

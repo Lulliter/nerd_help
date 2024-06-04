@@ -53,6 +53,8 @@ website:
       - text: "{{< fa brands r-project >}} programming"
 #        icon: "R programming" #  archive-fill # https://icons.getbootstrap.com/?q=home
         menu:
+          - text: "0) useful stuff"
+            href: r/00_useful.qmd
           - text: "1) tidyeval"
             href: r/01_tidyeval.qmd
           - text: "2) R from VS Code"
