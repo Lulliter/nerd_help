@@ -36,21 +36,17 @@ format:
 format-links: false
 ---
 
-
-```{r}
-library(dplyr)
-starwars <- starwars
-```
-
-
 # Filter rows in and out with `dplyr` 
 
 Multiple values (same column) in and out
 
 + `%in% c("x", "y")` for values
 + `!colname`  for negation 
-
 ```{r}
+library(dplyr)
+
+starwars <- starwars
+
 f_1 <- starwars %>% 
 	filter(homeworld %in% c("Naboo","Tatooine"))  
 
@@ -96,70 +92,5 @@ cols_anyNA <- starwars %>%
 spec_col_allNA <- starwars %>%
  filter(if_all(starts_with("h"), is.na))  # 0 
  # filter(!if_all(starts_with("h"), is.na))  # 0 
-```
-
-# DESELECT only numeric columns that only have 0 for any row 
-
-```{r}
-# first create one 
-starwars2 <- starwars %>% 
-	mutate(all0_col  = 0) %>% 
-	relocate (all0_col, .before = everything()) %>% 
-	## ----- drop SE hanno tutta la colonna == 0
-	select(!where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
-	## ----- or 
-	# select(-where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
-
-```
-
-```{r}
-d <- data.frame(a = c(1,5,56,4,9), 
-					 b = c(0,0,NA,0,NA), 
-					 c = c(98,67,NA,3,7), 
-					 d = c(0,0,0,0,0), 
-					 e = c(NA,NA,NA,NA,NA))
-
-# --- removes all NA 
-d2 <- d %>% 
-	select(!where(~all(is.na(.x))))
-
-# --- removes NA's and Zeros
-d3a <- d2 %>% 
-	# all() and any() check if all or any values in a vector evaluate to TRUE for some expression
-	select(where( ~ !all(is.na(.) | . == 0)))  
-
-# d3b <- d2 %>% 
-# 	# --- or  
-# 	select(where( ~ !all_of(is.na(.) | .x == 0))) 
-
-d3c <- d2 %>% 
-	# --- or  
-	select(!where( ~ is.numeric(.x) && sum(.x, na.rm = TRUE) == 0))
-
-# # --- removes strictly ALL Zeros
-# d4 <- d2 %>% 
-# 	select(!where( ~ contains ("0") ))
-#  
-```
-
-
-# Left join dove elimino `x` e `y`
-
-+ using `suffix` argument of `left_join`
-```{r}
-
-star <- starwars %>% 
-	select( 2:5)
-
-star2 <- starwars %>% 
-	select( 2, 5:7) 
-
-# join 
-star_join <- star %>% 
-	left_join(star2,
-				 by = c("name"), 
-				 # get rid of duplicated cols .... 
-				 suffix = c("", ".y")) %>% 
-	select(-ends_with(".y")) 
 ```
 

@@ -59,7 +59,7 @@ website:
             href: r/01_tidyeval.qmd
           - text: "2) R from VS Code"
             href: r/02_r_vscode.qmd
-          - text: "2) R from VS Code"
+          - text: "3) ChatGPT from RStudio"
             href: r/03_r_gpt.qmd
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
