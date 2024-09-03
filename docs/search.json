@@ -340,7 +340,7 @@
     "href": "r/02_r_vscode.html#modify-r-extension-settings",
     "title": "02) Using R from VS Code",
     "section": "modify R Extension settings",
-    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac \"r.rterm.mac\": \"/Library/Frameworks/Python.framework/Versions/3.9/bin/radian\""
+    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\""
   },
   {
     "objectID": "r/02_r_vscode.html#sending-r-code-to-terminal",
@@ -621,5 +621,57 @@
     "title": "4) Bonus Stuff",
     "section": "Topics",
     "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#install-python",
+    "href": "r/02_r_vscode.html#install-python",
+    "title": "02) Using R from VS Code",
+    "section": "install Python",
+    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#ma-quale-versione-python-ho-installato",
+    "href": "r/02_r_vscode.html#ma-quale-versione-python-ho-installato",
+    "title": "02) Using R from VS Code",
+    "section": "Ma quale versione Python ho installato?",
+    "text": "Ma quale versione Python ho installato?\n\nVersion: Python 3.12.5 for macOS …."
+  },
+  {
+    "objectID": "r/02_r_vscode.html#now-ensure-python-and-pip-are-installed",
+    "href": "r/02_r_vscode.html#now-ensure-python-and-pip-are-installed",
+    "title": "02) Using R from VS Code",
+    "section": "… now Ensure Python and pip are installed:",
+    "text": "… now Ensure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#now-install-radian",
+    "href": "r/02_r_vscode.html#now-install-radian",
+    "title": "02) Using R from VS Code",
+    "section": "… now install radian\n",
+    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!"
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#ask-about-latest-commit",
+    "href": "tools/01a_git_intro.html#ask-about-latest-commit",
+    "title": "1.a) Git introduction",
+    "section": "Ask about latest commit",
+    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "href": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "title": "02) Using R from VS Code",
+    "section": "OK, but which Python version am I running?",
+    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#in-sum",
+    "href": "r/02_r_vscode.html#in-sum",
+    "title": "02) Using R from VS Code",
+    "section": "In sum:",
+    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian"
   }
 ]

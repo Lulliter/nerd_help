@@ -56,20 +56,132 @@ Web page construction in progress...
 ... 
 
 # Install `radian` ext on 
+
 One of the first suggestions is to use the `radian` terminal. That’s not a VS Code extension but an application written in Python—which means your system needs Python installed in order for radian to run. I already have Python and the conda package manager installed on my Mac, so I used the following installation command for radian:
 
 See the [How to set up VS Code for R](https://www.infoworld.com/video/110179/how-to-set-up-vscode-for-r) video tutorial for easy instructions on how to install Python for use with R and RStudio.
 
-## NEW Python version
-+ Version: Python 3.9.13 for macOS 10.9 or later 
-+ Interpreter path: /usr/local/bin/python3
 
-## Gotcha!!!
+## install Python
+
 ```{bash}
-python3 --version
-# Python 3.9.13
+#| eval: false
+#| echo: true
+brew install python
+
+# Python has been installed as
+#   /usr/local/bin/python3
+# 
+# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to
+# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into
+#   /usr/local/opt/python@3.12/libexec/bin
 ```
 
+
++ If you do not need a specific version of Python, and always want Homebrew's `python3` in your PATH:
+
+
+```{bash}
+#| eval: false
+#| echo: true
+
+brew install python3
+```
+## OK, but which Python version am I running? 
+ 
++ Version: Python 3.12.5 for macOS .... 
+
+### Ensure `Python` and `pip` are installed: 
+```{bash}
+#| eval: false
+#| echo: true
+python3 --version # Python 3.12.5
+pip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)
+# pip 21.2.4 from
+# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)
+```
+
+### Gotcha (part 1/2)!!!
+Problem: mismatch tra pip (3.9) e python 3.12) 
+
+The error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.
+
+Here are the steps to create a **virtual environment** and install radian within it:
+
+Create a virtual environment:
+
+```{bash}
+#| eval: false
+#| echo: true
+
+# Create a virtual environment
+python3.12 -m venv myenv
+# Activate the virtual environment
+source myenv/bin/activate
+# Upgrade pip within the virtual environment
+pip install --upgrade pip
+# Install radian within the virtual environment
+pip install radian
+```
+
+
+
+###  Where is this new Python 3.12?
+`/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12`
+
+> looks like Homebrew puts Python in `/usr/local/Cellar/`
+
+###  Where is this new pip/ (`pip3 install radian`)
+`/usr/local/lib/python3.12/site-packages/pip`
+
+## ... now install `radian`
+
+```{bash}
+#| eval: false
+#| echo: true
+
+#  Now, try installing radian again:
+pip3 install radian
+```
+
+
+### Where is this `radian` (Gotcha (part 2/2)!!!)
+OKKIO: Move it from virtual environemnt a real environment 
+```{bash}
+#| eval: false
+#| echo: true
+
+which radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!
+source myenv/bin/activate
+cp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/
+chmod +x /usr/local/bin/radian
+
+# check 
+which radian # /usr/local/bin/radian   NEW !!!!
+```
+
+
+## In sum:
+
++ **Python 3.12.5** is in: `/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12`
++ **Pip ??** is in: `/usr/local/lib/python3.12/site-packages/pip`
++ **radian** is in: `/usr/local/bin/radian`
+
+# ____ qui ______ 
+
+
+# After radian installed 
+
+Add to PATH: If radian is installed but not in your PATH, you can add it manually. For example, if radian is installed in /usr/local/bin, you can add this to your PATH in your .zshrc file:
+
+
+```{bash}
+#| eval: false
+#| echo: true
+
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
 ## other recommended extensions 
 There are a few other recommended installations for the extension:
 
@@ -82,12 +194,16 @@ There are a few other recommended installations for the extension:
 
 
 # Python 
+
 ## 3 ways to work with python
 ### --- 1) Launch Idle shell + execute
 (it comes installed with the new python3)
 
 ### --- 2) Execute program in shell 
 ```{bash}
+#| eval: false
+#| echo: true
+
 python3 Python3_9_test.py  
 # it prompts for name etc... 
 ```
@@ -97,23 +213,6 @@ Just look for the arrow from the top of the `.py` file
 ---
 
 
-## install radian [again!!!]
-```{bash}
-pip3 install -U radian
-# then as it suggests
-/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 -m pip install --upgrade pip
-```
-
-Check 
-```{bash}
-radian --version
-```
-
-radian version: 0.6.3
-r executable: /Library/Frameworks/R.framework/Resources/bin/R
-r version: 4.1.0
-python executable: /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9
-python version: 3.9.13
 
 # Tweak Visual Studio Code settings for R
 
@@ -146,7 +245,8 @@ R.home("bin")
 To color the console I need to have `radian`  path in R settings --> 
 R> Rterm:MAC  
 **R > Rterm: Mac**
-`"r.rterm.mac": "/Library/Frameworks/Python.framework/Versions/3.9/bin/radian"`
+
+`"r.rterm.mac": "/usr/local/bin/radian"`
  
 ## Sending R code to terminal
 

@@ -319,7 +319,27 @@ cat .git/HEAD
 
 + **`index`**	index is the proposed next commit, also called staging area. 
 
+## Ask about latest commit 
 
+WHere: 
+
+- `--format=%cd`  %cd stands for "commit date."
+- `--pretty=%B` Customizes the output to show the full commit message body
+- `--format=%cd` and the commit message subject `%s` of the most recent commit.
+- `--pretty` is a shorthand for common formatting options 
+
+```{bash}
+# 1) To find out the date and time of your last Git commit 
+git log -1 --format=%cd # %cd stands for "commit date."
+# 2) To find out the message of your last Git commit 
+git log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body
+
+#1+2) You can get both the commit date and message in one line using the following command:
+git log -1 --format="%cd %s"
+# or 
+git log -1 --pretty="%cd %s"
+```
+ 
 ## See differences b/w commits 
 
 ```{bash}
