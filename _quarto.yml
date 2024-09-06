@@ -39,8 +39,8 @@ website:
       - text: "Home"
         icon: house-fill # https://icons.getbootstrap.com/?q=home
         href: index.qmd
-      - text: "Tools"
-        icon: terminal-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
+      - text: "General tools"
+        icon: tools #  archive-fill # https://icons.getbootstrap.com/?q=home
         menu:
           - text: "1) git & github"
             href: tools/01_git.qmd
@@ -61,6 +61,11 @@ website:
             href: r/02_r_vscode.qmd
           - text: "3) ChatGPT from RStudio"
             href: r/03_r_gpt.qmd
+      - text: "Shell"
+        icon: terminal-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
+        menu:
+          - text: "1) Shell script to handle foto"
+            href: shell/foto.sh
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd

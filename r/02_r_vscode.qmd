@@ -182,7 +182,11 @@ Add to PATH: If radian is installed but not in your PATH, you can add it manuall
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
-## other recommended extensions 
+
+
+
+
+# Other recommended extensions 
 There are a few other recommended installations for the extension:
 
 + languageserver  (R packages, so can be installed from R)
@@ -216,12 +220,13 @@ Just look for the arrow from the top of the `.py` file
 
 # Tweak Visual Studio Code settings for R
 
-The easiest way to change a VS Code setting is to open up settings in the user interface. Another other option is editing the settings JSON file. 
-
-## Path to open `settings.json` 
+The easiest way to change a VS Code setting is to open up settings in the user interface: 
 
 + [from Finder] Go to /Users/luisamimmi/Library/Application Support/Code/User/settings.json
-+ [from VS code] Open by `ctr+shift+P` and then "Preferences: Open Settings (json)" 
++ [from VS code] Open by `ctr+shift+P` and then type `Preferences: Open User Settings (JSON)`)
+
+Then edit that setting file.
+Here is a lits of possible settings for R users  [GH link](https://github.com/REditorSupport/vscode-R/wiki/Extension-settings)
 
 ### Open in finder
 
