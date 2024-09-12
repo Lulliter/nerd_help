@@ -1,0 +1,63 @@
+---
+title: "Using chatGPT from RStudio!"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+
+# Instructions
+
+Follow the instructions in this [blog post](https://blogs.rstudio.com/ai/posts/2024-04-04-chat-with-llms-using-chattr/) to try out the package `chattr`.
+
+The steps are:
+
+1. install (I use the GH development version)
+
+```{r}
+#remotes::install_github("mlverse/chattr")
+```
+
+2. select LLM model to use in your session
+```{r}
+library(chattr)
+chattr_use("gpt4")
+```
+
+3. Use
+```{r}
+chattr::chattr_app()
+```
+
+After you select the model you wish to interact with, the app will open in Viewer. 

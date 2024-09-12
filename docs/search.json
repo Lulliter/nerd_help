@@ -1,255 +1,201 @@
 [
   {
-    "objectID": "tools/05_colors.html",
-    "href": "tools/05_colors.html",
-    "title": "5) Colors",
+    "objectID": "shell/shell_var.html",
+    "href": "shell/shell_var.html",
+    "title": "Shell script to learn variables",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…"
+    "text": "What are shell variables and how do u use them?",
+    "crumbs": [
+      "Shell",
+      "Shell script to learn variables"
+    ]
   },
   {
-    "objectID": "tools/05_colors.html#colors",
-    "href": "tools/05_colors.html#colors",
-    "title": "5) Colors",
-    "section": "Colors",
-    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")"
-  },
-  {
-    "objectID": "tools/05_colors.html#color-palettes",
-    "href": "tools/05_colors.html#color-palettes",
-    "title": "5) Colors",
-    "section": "Color palettes",
-    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system"
-  },
-  {
-    "objectID": "tools/03b_Google_domain.html",
-    "href": "tools/03b_Google_domain.html",
-    "title": "Custom domain on Google domain",
+    "objectID": "shell.html",
+    "href": "shell.html",
+    "title": "Shell & CLI scripts",
     "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
+    "text": "}(Source: www.freepik.com/)",
     "crumbs": [
-      "Custom domain on Google domain"
+      "Shell",
+      "Shell & CLI scripts"
     ]
   },
   {
-    "objectID": "tools/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "tools/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "Custom domain on Google domain",
-    "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "objectID": "rstats/03_r_gpt.html",
+    "href": "rstats/03_r_gpt.html",
+    "title": "Using chatGPT from RStudio!",
+    "section": "",
+    "text": "Instructions\nFollow the instructions in this blog post to try out the package chattr.\nThe steps are:\n\ninstall (I use the GH development version)\n\n\n#remotes::install_github(\"mlverse/chattr\")\n\n\nselect LLM model to use in your session\n\n\nlibrary(chattr)\nchattr_use(\"gpt4\")\n\n\nUse\n\n\nchattr::chattr_app()\n\nAfter you select the model you wish to interact with, the app will open in Viewer.",
     "crumbs": [
-      "Custom domain on Google domain"
+      "{{< fa brands r-project >}} programming",
+      "Using chatGPT from RStudio!"
     ]
   },
   {
-    "objectID": "tools/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "href": "tools/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] Buy a domain",
-    "text": "[on Google Domain] Buy a domain",
+    "objectID": "rstats/01_tidyeval.html",
+    "href": "rstats/01_tidyeval.html",
+    "title": "Tidyeval and functional programming",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)",
     "crumbs": [
-      "Custom domain on Google domain"
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
     ]
   },
   {
-    "objectID": "tools/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "href": "tools/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] set up a “HOSTED ZONE”",
-    "text": "[on Google Domain] set up a “HOSTED ZONE”",
+    "objectID": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "href": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "title": "Tidyeval and functional programming",
+    "section": "Non-Standard evaluation in tidyverse\n",
+    "text": "Non-Standard evaluation in tidyverse\n\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions.",
     "crumbs": [
-      "Custom domain on Google domain"
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
     ]
   },
   {
-    "objectID": "tools/03_custom_domain.html",
-    "href": "tools/03_custom_domain.html",
-    "title": "From GH Pages to custom domain",
+    "objectID": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
+    "href": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
+    "title": "Tidyeval and functional programming",
+    "section": "Two (complementary) forms of NSE used in tidyverse\n",
+    "text": "Two (complementary) forms of NSE used in tidyverse\n\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing for data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{` embracing operator (`rlang`) OR\n        + [`enquo` followed by] `!!` operator (`base`) \n        + `...` + `...`\n    + varname_name `:=` function(`{{var}`)\n    + `.data` pronouns. \n    + `.env` pronouns.",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "href": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "title": "Tidyeval and functional programming",
+    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
+    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "href": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "title": "Tidyeval and functional programming",
+    "section": "2 Defuse enquo + Inject !! (inside custom f)",
+    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-...-inject-...",
+    "href": "rstats/01_tidyeval.html#defuse-...-inject-...",
+    "title": "Tidyeval and functional programming",
+    "section": "3 Defuse ... + Inject ...\n",
+    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-nothing-left-side",
+    "href": "rstats/01_tidyeval.html#b-nothing-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "1b (nothing!) + {{ & left side := !!!!",
+    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-enquo-left-side",
+    "href": "rstats/01_tidyeval.html#b-enquo-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "2b enquo + !! & left side :=\n",
+    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-...-...-left-side",
+    "href": "rstats/01_tidyeval.html#b-...-...-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "3b ... + ... & left side :=\n",
+    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#c-inject-specify-.data",
+    "href": "rstats/01_tidyeval.html#c-inject-specify-.data",
+    "title": "Tidyeval and functional programming",
+    "section": "1.c Inject {{ + specify .data\n",
+    "text": "1.c Inject {{ + specify .data\n\nAdding a new generic function argument data (up until now I was hardcoding it when executing the function)\nSimple data\n\n\nstarwars &lt;- starwars\n\n## -- write function\nmy_sum &lt;- function(data, num_var) {\n    data %&gt;%\n        dplyr::group_by(data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n    }\n\n## --  call function\nmy_sum (starwars, mass) \n\nWith .data pronoun\nThe .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{\n\n## -- write function\nmy_sum2 &lt;- function(data, num_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\n## --  call function\nmy_sum2 (starwars, mass) \n\nWith .data[[var]] pronoun\n\nIf you have a variable name in a string, use the .data pronoun to subset that variable with [[.\n\n\n## -- write function\nmy_sum3 &lt;- function(data, num_var, group_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[group_var]]) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\ngroup_var &lt;- \"homeworld\"\n## --  call function\nmy_sum3 (starwars, mass, group_var)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
+    "href": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
+    "title": "Tidyeval and functional programming",
+    "section": "Option 1) purrr + existing function .f…",
+    "text": "Option 1) purrr + existing function .f…\n\nmy big “gotcha” here is I must not specify .x in the arguments after .f as I kept doing… 🤯\n\n\n## -- using function `my_mean` with:\ngroup_var_vec &lt;- c(\"homeworld\", \"species\", \"sex\") \n\n# map returns a list \ngroupmeans_l  &lt;-  map(.x = group_var_vec, #  x \n                             .f = my_mean,   # function  NO ()\n                             data = starwars, # ADDITIONAL arguments \n                             num_var = height)\n#, group_var = .x)  \n\n\ngroupmeans_l[[3]]",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
+    "href": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
+    "title": "Tidyeval and functional programming",
+    "section": "Option 2) purrr + anonymous function as formula ~ fun()\n",
+    "text": "Option 2) purrr + anonymous function as formula ~ fun()\n\n\n🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless\n\n\n## -- using function `my_mean` with:\ngroupmeans_l_tilde &lt;- map(.x = group_var_vec, \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_l_tilde[[3]] \npluck(groupmeans_l_tilde, 3)\n\nBTW map can output a row-binded df here\n\n# map returns dataframes binded by row \ngroupmeans_dfr &lt;- map_dfr(.x = group_var_vec, # x \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_dfr",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
+    "href": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
+    "title": "Tidyeval and functional programming",
+    "section": "Tidyeval in purrr + custom function",
+    "text": "Tidyeval in purrr + custom function\n1/2 single (group, num) function\n\nmy_mean_2  &lt;- function(data, group_var, num_var) {\n    quo_group_var &lt;- enquo(group_var)\n    quo_num_var &lt;- enquo(num_var)\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[!! quo_group_var]]) %&gt;%\n        dplyr::summarise(\n            \"mean_of_{{quo_num_var}}\" := mean( !!quo_num_var, na.rm = TRUE ))\n}\n\n# test YEAH\ntest1 &lt;- my_mean_2(data = starwars, group_var = sex, num_var =height) \n\n2/2 map function\n\ngroup_var &lt;- c(\"gender\", \"species\")\nnum_var &lt;- c(\"height\", \"birth_year\")\n\ntidy_map_df3 &lt;- map2(.x = group_var, \n                            .y = num_var ,\n                            ~my_mean_2,\n                            data = starwars\n) \ntidy_map_df3\n\nhttps://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr\n\nvars &lt;- train %&gt;% select(ends_with(\"bin\")) %&gt;% colnames()\n\nvars %&gt;%\n# create a symbol (defused expressions that represent objects in environments)\n  syms() %&gt;%\n  map(function(var) get_charts(!!var))\n\n# test YEAH\ntest2 &lt;- my_mean(data = starwars, group_var = sex, num_var =height)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#digression-pluck",
+    "href": "rstats/01_tidyeval.html#digression-pluck",
+    "title": "Tidyeval and functional programming",
+    "section": "[digression] pluck\n",
+    "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats.html",
+    "href": "rstats.html",
+    "title": "I ❤️ #rstats",
     "section": "",
     "text": "(Source: www.freepik.com/)",
     "crumbs": [
-      "From GH Pages to custom domain"
+      "{{< fa brands r-project >}} programming",
+      "I ❤️ #rstats"
     ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html",
-    "href": "tools/01b_git_branches.html",
-    "title": "1.b) Git Branches",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#create-checkout-a-branch",
-    "href": "tools/01b_git_branches.html#create-checkout-a-branch",
-    "title": "1.b) Git Branches",
-    "section": "Create & checkout a branch",
-    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#switch-to-other-branch",
-    "href": "tools/01b_git_branches.html#switch-to-other-branch",
-    "title": "1.b) Git Branches",
-    "section": "Switch to other branch",
-    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#rename-a-local-branch",
-    "href": "tools/01b_git_branches.html#rename-a-local-branch",
-    "title": "1.b) Git Branches",
-    "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remte branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#push-upstream-a-local-branch",
-    "href": "tools/01b_git_branches.html#push-upstream-a-local-branch",
-    "title": "1.b) Git Branches",
-    "section": "Push upstream a local branch",
-    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#rename-a-remote-branch",
-    "href": "tools/01b_git_branches.html#rename-a-remote-branch",
-    "title": "1.b) Git Branches",
-    "section": "Rename a (remote) branch",
-    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#merge-a-git-branch-into-master",
-    "href": "tools/01b_git_branches.html#merge-a-git-branch-into-master",
-    "title": "1.b) Git Branches",
-    "section": "Merge a git branch into master",
-    "text": "Merge a git branch into master\n\nList All Git Branches\nSwitch to Master\nMerge Branch into Master\nPush Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSince merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:\n\n\n\n\n# 1. List\ngit branch\n# 2. Switch\ngit checkout master\n# 3. The merge creates a merge commit, bringing together\n    # lines of development while preserving the history of the source branch.\ngit merge -m \"Prova di merge\" page_col\n# 4. Push the local changes to the remote repository\ngit push origin",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01b_git_branches.html#see-differences-bw-branches",
-    "href": "tools/01b_git_branches.html#see-differences-bw-branches",
-    "title": "1.b) Git Branches",
-    "section": "See differences b/w branches",
-    "text": "See differences b/w branches\n\ngit diff master..page_col '***.qmd'Q",
-    "crumbs": [
-      "1.b) Git Branches"
-    ]
-  },
-  {
-    "objectID": "tools/01_git.html",
-    "href": "tools/01_git.html",
-    "title": "Git",
-    "section": "",
-    "text": "(Source: www.freepik.com/)",
-    "crumbs": [
-      "Git"
-    ]
-  },
-  {
-    "objectID": "r/04_text_analytics.html",
-    "href": "r/04_text_analytics.html",
-    "title": "Text Analytics in R",
-    "section": "",
-    "text": "To install quanteda\n\nquanteda is an R package for managing and analyzing text, https://github.com/quanteda/quanteda\n\nFirst, you will need to install XCode command line tools.\n\n\nxcode-select --install\n\n\nThen install the TBB libraries and the pkg-config utility: (after installing Homebrew):\n\n\nbrew install tbb pkg-config\n\n\ngfortran https://github.com/fxcoudert/gfortran-for-macOS/releases\nNow you can install quanteda\n\n\ninstall.packages(\"quanteda\")"
-  },
-  {
-    "objectID": "r/02_r_vscode.html",
-    "href": "r/02_r_vscode.html",
-    "title": "02) Using R from VS Code",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#install-python",
-    "href": "r/02_r_vscode.html#install-python",
-    "title": "02) Using R from VS Code",
-    "section": "install Python",
-    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "href": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "title": "02) Using R from VS Code",
-    "section": "OK, but which Python version am I running?",
-    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#now-install-radian",
-    "href": "r/02_r_vscode.html#now-install-radian",
-    "title": "02) Using R from VS Code",
-    "section": "… now install radian\n",
-    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#in-sum",
-    "href": "r/02_r_vscode.html#in-sum",
-    "title": "02) Using R from VS Code",
-    "section": "In sum:",
-    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#ways-to-work-with-python",
-    "href": "r/02_r_vscode.html#ways-to-work-with-python",
-    "title": "02) Using R from VS Code",
-    "section": "3 ways to work with python",
-    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#modify-r-extension-settings",
-    "href": "r/02_r_vscode.html#modify-r-extension-settings",
-    "title": "02) Using R from VS Code",
-    "section": "modify R Extension settings",
-    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\""
-  },
-  {
-    "objectID": "r/02_r_vscode.html#sending-r-code-to-terminal",
-    "href": "r/02_r_vscode.html#sending-r-code-to-terminal",
-    "title": "02) Using R from VS Code",
-    "section": "Sending R code to terminal",
-    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#path-to-keybindings.json",
-    "href": "r/02_r_vscode.html#path-to-keybindings.json",
-    "title": "02) Using R from VS Code",
-    "section": "Path to keybindings.json",
-    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#info-on-keybinding",
-    "href": "r/02_r_vscode.html#info-on-keybinding",
-    "title": "02) Using R from VS Code",
-    "section": "Info on Keybinding",
-    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#fing-lintr-in-vscode",
-    "href": "r/02_r_vscode.html#fing-lintr-in-vscode",
-    "title": "02) Using R from VS Code",
-    "section": "F&$%ing lintr in VSCode",
-    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)"
-  },
-  {
-    "objectID": "r/00_useful.html",
-    "href": "r/00_useful.html",
-    "title": "Useful things R",
-    "section": "",
-    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0"
   },
   {
     "objectID": "index.html",
@@ -259,377 +205,640 @@
     "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
   },
   {
+    "objectID": "git/git_branches.html",
+    "href": "git/git_branches.html",
+    "title": "Git branches",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#create-checkout-a-branch",
+    "href": "git/git_branches.html#create-checkout-a-branch",
+    "title": "Git branches",
+    "section": "Create & checkout a branch",
+    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#switch-to-other-branch",
+    "href": "git/git_branches.html#switch-to-other-branch",
+    "title": "Git branches",
+    "section": "Switch to other branch",
+    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-local-branch",
+    "href": "git/git_branches.html#rename-a-local-branch",
+    "title": "Git branches",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remte branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#push-upstream-a-local-branch",
+    "href": "git/git_branches.html#push-upstream-a-local-branch",
+    "title": "Git branches",
+    "section": "Push upstream a local branch",
+    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-remote-branch",
+    "href": "git/git_branches.html#rename-a-remote-branch",
+    "title": "Git branches",
+    "section": "Rename a (remote) branch",
+    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#merge-a-git-branch-into-master",
+    "href": "git/git_branches.html#merge-a-git-branch-into-master",
+    "title": "Git branches",
+    "section": "Merge a git branch into master",
+    "text": "Merge a git branch into master\n\nList All Git Branches\nSwitch to Master\nMerge Branch into Master\nPush Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSince merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:\n\n\n\n\n# 1. List\ngit branch\n# 2. Switch\ngit checkout master\n# 3. The merge creates a merge commit, bringing together\n    # lines of development while preserving the history of the source branch.\ngit merge -m \"Prova di merge\" page_col\n# 4. Push the local changes to the remote repository\ngit push origin",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#see-differences-bw-branches",
+    "href": "git/git_branches.html#see-differences-bw-branches",
+    "title": "Git branches",
+    "section": "See differences b/w branches",
+    "text": "See differences b/w branches\n\ngit diff master..page_col '***.qmd'Q",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html",
+    "href": "dev/05_colors.html",
+    "title": "Colors",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#colors",
+    "href": "dev/05_colors.html#colors",
+    "title": "Colors",
+    "section": "Colors",
+    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#color-palettes",
+    "href": "dev/05_colors.html#color-palettes",
+    "title": "Colors",
+    "section": "Color palettes",
+    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html",
+    "href": "dev/03b_Google_domain.html",
+    "title": "Custom domain on Google domain",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on Google domain",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "href": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] Buy a domain",
+    "text": "[on Google Domain] Buy a domain",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "href": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] set up a “HOSTED ZONE”",
+    "text": "[on Google Domain] set up a “HOSTED ZONE”",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html",
+    "href": "dev/02_quarto.html",
+    "title": "Quarto projects and websites",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#markdown-divs",
+    "href": "dev/02_quarto.html#markdown-divs",
+    "title": "Quarto projects and websites",
+    "section": "Markdown divs\n",
+    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#quarto-and-bibliography",
+    "href": "dev/02_quarto.html#quarto-and-bibliography",
+    "title": "Quarto projects and websites",
+    "section": "Quarto and bibliography",
+    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev.html",
+    "href": "dev.html",
+    "title": "Misc. Development tools",
+    "section": "",
+    "text": "(Source: www.freepik.com/)",
+    "crumbs": [
+      "Dev tools",
+      "Misc. Development tools"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html",
+    "href": "dev/03a_AWS.html",
+    "title": "Custom domain on AWS",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on AWS",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt;\n\n\nmake sure to have a ./docs folder and indicate to GH that you will deploy from it\nand to create a .nojekyll file for GitHub pages to work with a quarto website!\n\n\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-buy-a-domain",
+    "href": "dev/03a_AWS.html#on-aws-buy-a-domain",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] Buy a domain",
+    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "href": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] set up a “HOSTED ZONE”",
+    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone.",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "href": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Redirect the domain to my website on Github pages",
+    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” .",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "href": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
+    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "href": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "title": "Custom domain on AWS",
+    "section": "[on local]: Adjust the .yml file of your website",
+    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "href": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "title": "Custom domain on AWS",
+    "section": "[on GH Pages]: fix GHPages error",
+    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/04_boh.html",
+    "href": "dev/04_boh.html",
+    "title": "4) Bonus Stuff",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "dev/04_boh.html#topics",
+    "href": "dev/04_boh.html#topics",
+    "title": "4) Bonus Stuff",
+    "section": "Topics",
+    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
+  },
+  {
+    "objectID": "git.html",
+    "href": "git.html",
+    "title": "Git",
+    "section": "",
+    "text": "(Source: www.freepik.com/)",
+    "crumbs": [
+      "git",
+      "Git"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html",
+    "href": "git/git_intro.html",
+    "title": "Git introduction",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#check-which-ssh-i-already-have",
+    "href": "git/git_intro.html#check-which-ssh-i-already-have",
+    "title": "Git introduction",
+    "section": "Check which ssh I already have",
+    "text": "Check which ssh I already have\n\nI have a github SSH\n\n\n# where to see my SSH \nlibrary(credentials)",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#on-github-i-create-a-new-repo",
+    "href": "git/git_intro.html#on-github-i-create-a-new-repo",
+    "title": "Git introduction",
+    "section": "1) On Github I create a NEW repo",
+    "text": "1) On Github I create a NEW repo\n[…]",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "href": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "title": "Git introduction",
+    "section": "2.a) In Terminal clone remote repo locally",
+    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "href": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "title": "Git introduction",
+    "section": "2.b) With {usethis} clone remote repo locally",
+    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "href": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "title": "Git introduction",
+    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
+    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#i-make-changes-in-the-local-repo",
+    "href": "git/git_intro.html#i-make-changes-in-the-local-repo",
+    "title": "Git introduction",
+    "section": "4) I make changes in the local repo",
+    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\nquarto create project website mysite",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#check-what-happened",
+    "href": "git/git_intro.html#check-what-happened",
+    "title": "Git introduction",
+    "section": "5) Check what happened…",
+    "text": "5) Check what happened…\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#add-local-changes-to-staging-area",
+    "href": "git/git_intro.html#add-local-changes-to-staging-area",
+    "title": "Git introduction",
+    "section": "6) Add local changes to staging area",
+    "text": "6) Add local changes to staging area\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#commit-desired-changes",
+    "href": "git/git_intro.html#commit-desired-changes",
+    "title": "Git introduction",
+    "section": "7) Commit desired changes",
+    "text": "7) Commit desired changes\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#push-source-and-build-repos.",
+    "href": "git/git_intro.html#push-source-and-build-repos.",
+    "title": "Git introduction",
+    "section": "8) Push source and build repos.",
+    "text": "8) Push source and build repos.\n\ngit push origin master",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#ask-about-latest-commit",
+    "href": "git/git_intro.html#ask-about-latest-commit",
+    "title": "Git introduction",
+    "section": "Ask about latest commit",
+    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#see-differences-bw-commits",
+    "href": "git/git_intro.html#see-differences-bw-commits",
+    "title": "Git introduction",
+    "section": "See differences b/w commits",
+    "text": "See differences b/w commits\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "title": "Git introduction",
+    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
+    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
     "objectID": "me.html",
     "href": "me.html",
     "title": "Luisa M. Mimmi",
     "section": "",
-    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n    \n     LinkedIn"
+    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
   },
   {
-    "objectID": "r/01_tidyeval.html",
-    "href": "r/01_tidyeval.html",
-    "title": "1.a) Tidyeval and functional programming",
+    "objectID": "rstats/00_useful.html",
+    "href": "rstats/00_useful.html",
+    "title": "Useful things R",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)"
+    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Useful things R"
+    ]
   },
   {
-    "objectID": "r/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "href": "r/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "Non-Standard evaluation in tidyverse\n",
-    "text": "Non-Standard evaluation in tidyverse\n\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions."
-  },
-  {
-    "objectID": "r/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "href": "r/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "Two (complementary) forms of NSE used in tidyverse\n",
-    "text": "Two (complementary) forms of NSE used in tidyverse\n\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing for data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{` embracing operator (`rlang`) OR\n        + [`enquo` followed by] `!!` operator (`base`) \n        + `...` + `...`\n    + varname_name `:=` function(`{{var}`)\n    + `.data` pronouns. \n    + `.env` pronouns."
-  },
-  {
-    "objectID": "r/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "href": "r/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
-    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "href": "r/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "2 Defuse enquo + Inject !! (inside custom f)",
-    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#defuse-...-inject-...",
-    "href": "r/01_tidyeval.html#defuse-...-inject-...",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "3 Defuse ... + Inject ...\n",
-    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#b-nothing-left-side",
-    "href": "r/01_tidyeval.html#b-nothing-left-side",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "1b (nothing!) + {{ & left side := !!!!",
-    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#b-enquo-left-side",
-    "href": "r/01_tidyeval.html#b-enquo-left-side",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "2b enquo + !! & left side :=\n",
-    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#b-...-...-left-side",
-    "href": "r/01_tidyeval.html#b-...-...-left-side",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "3b ... + ... & left side :=\n",
-    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#c-inject-specify-.data",
-    "href": "r/01_tidyeval.html#c-inject-specify-.data",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "1.c Inject {{ + specify .data\n",
-    "text": "1.c Inject {{ + specify .data\n\nAdding a new generic function argument data (up until now I was hardcoding it when executing the function)\nSimple data\n\n\nstarwars &lt;- starwars\n\n## -- write function\nmy_sum &lt;- function(data, num_var) {\n    data %&gt;%\n        dplyr::group_by(data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n    }\n\n## --  call function\nmy_sum (starwars, mass) \n\nWith .data pronoun\nThe .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{\n\n## -- write function\nmy_sum2 &lt;- function(data, num_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\n## --  call function\nmy_sum2 (starwars, mass) \n\nWith .data[[var]] pronoun\n\nIf you have a variable name in a string, use the .data pronoun to subset that variable with [[.\n\n\n## -- write function\nmy_sum3 &lt;- function(data, num_var, group_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[group_var]]) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\ngroup_var &lt;- \"homeworld\"\n## --  call function\nmy_sum3 (starwars, mass, group_var)"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "href": "r/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "Option 1) purrr + existing function .f…",
-    "text": "Option 1) purrr + existing function .f…\n\nmy big “gotcha” here is I must not specify .x in the arguments after .f as I kept doing… 🤯\n\n\n## -- using function `my_mean` with:\ngroup_var_vec &lt;- c(\"homeworld\", \"species\", \"sex\") \n\n# map returns a list \ngroupmeans_l  &lt;-  map(.x = group_var_vec, #  x \n                             .f = my_mean,   # function  NO ()\n                             data = starwars, # ADDITIONAL arguments \n                             num_var = height)\n#, group_var = .x)  \n\n\ngroupmeans_l[[3]]"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "href": "r/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "Option 2) purrr + anonymous function as formula ~ fun()\n",
-    "text": "Option 2) purrr + anonymous function as formula ~ fun()\n\n\n🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless\n\n\n## -- using function `my_mean` with:\ngroupmeans_l_tilde &lt;- map(.x = group_var_vec, \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_l_tilde[[3]] \npluck(groupmeans_l_tilde, 3)\n\nBTW map can output a row-binded df here\n\n# map returns dataframes binded by row \ngroupmeans_dfr &lt;- map_dfr(.x = group_var_vec, # x \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_dfr"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "href": "r/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "Tidyeval in purrr + custom function",
-    "text": "Tidyeval in purrr + custom function\n1/2 single (group, num) function\n\nmy_mean_2  &lt;- function(data, group_var, num_var) {\n    quo_group_var &lt;- enquo(group_var)\n    quo_num_var &lt;- enquo(num_var)\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[!! quo_group_var]]) %&gt;%\n        dplyr::summarise(\n            \"mean_of_{{quo_num_var}}\" := mean( !!quo_num_var, na.rm = TRUE ))\n}\n\n# test YEAH\ntest1 &lt;- my_mean_2(data = starwars, group_var = sex, num_var =height) \n\n2/2 map function\n\ngroup_var &lt;- c(\"gender\", \"species\")\nnum_var &lt;- c(\"height\", \"birth_year\")\n\ntidy_map_df3 &lt;- map2(.x = group_var, \n                            .y = num_var ,\n                            ~my_mean_2,\n                            data = starwars\n) \ntidy_map_df3\n\nhttps://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr\n\nvars &lt;- train %&gt;% select(ends_with(\"bin\")) %&gt;% colnames()\n\nvars %&gt;%\n# create a symbol (defused expressions that represent objects in environments)\n  syms() %&gt;%\n  map(function(var) get_charts(!!var))\n\n# test YEAH\ntest2 &lt;- my_mean(data = starwars, group_var = sex, num_var =height)"
-  },
-  {
-    "objectID": "r/01_tidyeval.html#digression-pluck",
-    "href": "r/01_tidyeval.html#digression-pluck",
-    "title": "1.a) Tidyeval and functional programming",
-    "section": "[digression] pluck\n",
-    "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))"
-  },
-  {
-    "objectID": "r/03_r_gpt.html",
-    "href": "r/03_r_gpt.html",
-    "title": "Using chatGPT from RStudio!",
+    "objectID": "rstats/02_r_vscode.html",
+    "href": "rstats/02_r_vscode.html",
+    "title": "Using R from VS Code",
     "section": "",
-    "text": "Instructions\nFollow the instructions in this blog post to try out the package chattr.\nThe steps are:\n\ninstall (I use the GH development version)\n\n\n#remotes::install_github(\"mlverse/chattr\")\n\n\nselect LLM model to use in your session\n\n\nlibrary(chattr)\nchattr_use(\"gpt4\")\n\n\nUse\n\n\nchattr::chattr_app()\n\nAfter you select the model you wish to interact with, the app will open in Viewer."
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#install-python",
+    "href": "rstats/02_r_vscode.html#install-python",
+    "title": "Using R from VS Code",
+    "section": "install Python",
+    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "href": "rstats/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "title": "Using R from VS Code",
+    "section": "OK, but which Python version am I running?",
+    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#now-install-radian",
+    "href": "rstats/02_r_vscode.html#now-install-radian",
+    "title": "Using R from VS Code",
+    "section": "… now install radian\n",
+    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#in-sum",
+    "href": "rstats/02_r_vscode.html#in-sum",
+    "title": "Using R from VS Code",
+    "section": "In sum:",
+    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#ways-to-work-with-python",
+    "href": "rstats/02_r_vscode.html#ways-to-work-with-python",
+    "title": "Using R from VS Code",
+    "section": "3 ways to work with python",
+    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#modify-r-extension-settings",
+    "href": "rstats/02_r_vscode.html#modify-r-extension-settings",
+    "title": "Using R from VS Code",
+    "section": "modify R Extension settings",
+    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\"",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#sending-r-code-to-terminal",
+    "href": "rstats/02_r_vscode.html#sending-r-code-to-terminal",
+    "title": "Using R from VS Code",
+    "section": "Sending R code to terminal",
+    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#path-to-keybindings.json",
+    "href": "rstats/02_r_vscode.html#path-to-keybindings.json",
+    "title": "Using R from VS Code",
+    "section": "Path to keybindings.json",
+    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#info-on-keybinding",
+    "href": "rstats/02_r_vscode.html#info-on-keybinding",
+    "title": "Using R from VS Code",
+    "section": "Info on Keybinding",
+    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/02_r_vscode.html#fing-lintr-in-vscode",
+    "href": "rstats/02_r_vscode.html#fing-lintr-in-vscode",
+    "title": "Using R from VS Code",
+    "section": "F&$%ing lintr in VSCode",
+    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Using R from VS Code"
+    ]
+  },
+  {
+    "objectID": "rstats/04_text_analytics.html",
+    "href": "rstats/04_text_analytics.html",
+    "title": "Text Analytics in R",
+    "section": "",
+    "text": "To install quanteda\n\nquanteda is an R package for managing and analyzing text, https://github.com/quanteda/quanteda\n\nFirst, you will need to install XCode command line tools.\n\n\nxcode-select --install\n\n\nThen install the TBB libraries and the pkg-config utility: (after installing Homebrew):\n\n\nbrew install tbb pkg-config\n\n\ngfortran https://github.com/fxcoudert/gfortran-for-macOS/releases\nNow you can install quanteda\n\n\ninstall.packages(\"quanteda\")",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Text Analytics in R"
+    ]
   },
   {
     "objectID": "shell/foto.html",
     "href": "shell/foto.html",
     "title": "Shell script to change pics",
     "section": "",
-    "text": "Needed to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/_nerd_help/images\"\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/_nerd_help/images/output\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd huge_res\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_image_size() {\n    # Creare una directory di output nella directory di lavoro corrente\n    mkdir -p \"./output\"\n\n    max_size=5000000\n\n    # Loop su ogni immagine .jpg nella directory corrente\n    for file in ./*.jpg; do\n        # Estrae il nome base del file\n        base_name=$(basename \"$file\")\n\n        # Copia l'immagine nella directory di output\n        cp \"$file\" \"./output/$base_name\"\n\n        # Inizializza la qualità a 85\n        quality=85\n\n        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                # Riduci la qualità\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                # Se la qualità è già bassa, riduci la risoluzione del 90%\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        # Mostra la dimensione finale dell'immagine\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_image_size"
-  },
-  {
-    "objectID": "tools/01a_git_intro.html",
-    "href": "tools/01a_git_intro.html",
-    "title": "1.a) Git introduction",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "text": "Needed to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/_nerd_help/images\"\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/_nerd_help/images/output\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd huge_res\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_image_size() {\n    # Creare una directory di output nella directory di lavoro corrente\n    mkdir -p \"./output\"\n\n    max_size=5000000\n\n    # Loop su ogni immagine .jpg nella directory corrente\n    for file in ./*.jpg; do\n        # Estrae il nome base del file\n        base_name=$(basename \"$file\")\n\n        # Copia l'immagine nella directory di output\n        cp \"$file\" \"./output/$base_name\"\n\n        # Inizializza la qualità a 85\n        quality=85\n\n        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                # Riduci la qualità\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                # Se la qualità è già bassa, riduci la risoluzione del 90%\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        # Mostra la dimensione finale dell'immagine\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_image_size",
     "crumbs": [
-      "1.a) Git introduction"
+      "Shell",
+      "Shell script to change pics"
     ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#check-which-ssh-i-already-have",
-    "href": "tools/01a_git_intro.html#check-which-ssh-i-already-have",
-    "title": "1.a) Git introduction",
-    "section": "Check which ssh I already have",
-    "text": "Check which ssh I already have\n\nI have a github SSH\n\n\n# where to see my SSH \nlibrary(credentials)",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
-    "href": "tools/01a_git_intro.html#on-github-i-create-a-new-repo",
-    "title": "1.a) Git introduction",
-    "section": "1) On Github I create a NEW repo",
-    "text": "1) On Github I create a NEW repo\n[…]",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "href": "tools/01a_git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "title": "1.a) Git introduction",
-    "section": "2.a) In Terminal clone remote repo locally",
-    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "href": "tools/01a_git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "title": "1.a) Git introduction",
-    "section": "2.b) With {usethis} clone remote repo locally",
-    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "href": "tools/01a_git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "title": "1.a) Git introduction",
-    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
-    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
-    "href": "tools/01a_git_intro.html#i-make-changes-in-the-local-repo",
-    "title": "1.a) Git introduction",
-    "section": "4) I make changes in the local repo",
-    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\nquarto create project website mysite",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#check-what-happened",
-    "href": "tools/01a_git_intro.html#check-what-happened",
-    "title": "1.a) Git introduction",
-    "section": "5) Check what happened…",
-    "text": "5) Check what happened…\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
-    "href": "tools/01a_git_intro.html#add-local-changes-to-staging-area",
-    "title": "1.a) Git introduction",
-    "section": "6) Add local changes to staging area",
-    "text": "6) Add local changes to staging area\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#commit-desired-changes",
-    "href": "tools/01a_git_intro.html#commit-desired-changes",
-    "title": "1.a) Git introduction",
-    "section": "7) Commit desired changes",
-    "text": "7) Commit desired changes\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#push-source-and-build-repos.",
-    "href": "tools/01a_git_intro.html#push-source-and-build-repos.",
-    "title": "1.a) Git introduction",
-    "section": "8) Push source and build repos.",
-    "text": "8) Push source and build repos.\n\ngit push origin master",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#ask-about-latest-commit",
-    "href": "tools/01a_git_intro.html#ask-about-latest-commit",
-    "title": "1.a) Git introduction",
-    "section": "Ask about latest commit",
-    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#see-differences-bw-commits",
-    "href": "tools/01a_git_intro.html#see-differences-bw-commits",
-    "title": "1.a) Git introduction",
-    "section": "See differences b/w commits",
-    "text": "See differences b/w commits\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "href": "tools/01a_git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "title": "1.a) Git introduction",
-    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
-    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "tools/02_quarto.html",
-    "href": "tools/02_quarto.html",
-    "title": "2) Quarto projects and websites",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "tools/02_quarto.html#markdown-divs",
-    "href": "tools/02_quarto.html#markdown-divs",
-    "title": "2) Quarto projects and websites",
-    "section": "Markdown divs\n",
-    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;"
-  },
-  {
-    "objectID": "tools/02_quarto.html#quarto-and-bibliography",
-    "href": "tools/02_quarto.html#quarto-and-bibliography",
-    "title": "2) Quarto projects and websites",
-    "section": "Quarto and bibliography",
-    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown"
-  },
-  {
-    "objectID": "tools/03a_AWS.html",
-    "href": "tools/03a_AWS.html",
-    "title": "Custom domain on AWS",
-    "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "tools/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "Custom domain on AWS",
-    "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt;\n\n\nmake sure to have a ./docs folder and indicate to GH that you will deploy from it\nand to create a .nojekyll file for GitHub pages to work with a quarto website!\n\n\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-aws-buy-a-domain",
-    "href": "tools/03a_AWS.html#on-aws-buy-a-domain",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS] Buy a domain",
-    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-aws-set-up-a-hosted-zone",
-    "href": "tools/03a_AWS.html#on-aws-set-up-a-hosted-zone",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS] set up a “HOSTED ZONE”",
-    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone.",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "href": "tools/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS]: Redirect the domain to my website on Github pages",
-    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” .",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "href": "tools/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
-    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "href": "tools/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "title": "Custom domain on AWS",
-    "section": "[on local]: Adjust the .yml file of your website",
-    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/03a_AWS.html#on-gh-pages-fix-ghpages-error",
-    "href": "tools/03a_AWS.html#on-gh-pages-fix-ghpages-error",
-    "title": "Custom domain on AWS",
-    "section": "[on GH Pages]: fix GHPages error",
-    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)",
-    "crumbs": [
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "tools/04_boh.html",
-    "href": "tools/04_boh.html",
-    "title": "4) Bonus Stuff",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "tools/04_boh.html#topics",
-    "href": "tools/04_boh.html#topics",
-    "title": "4) Bonus Stuff",
-    "section": "Topics",
-    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
   }
 ]

@@ -16,10 +16,10 @@ about:
     #   text: Email
     #   href: mailto:lmm76@georgetown.edu
     # - text: "{{< fa brands google-scholar >}} Google Scholar"
-    - text: "![](images/icons8-google-scholar-16.jpg) Google Scholar"
-      href: https://scholar.google.com/citations?user=OBYla5gAAAAJ&hl=en&oi=ao
-    - text: "{{< fa brands researchgate >}} Research Gate"
-      href: https://www.researchgate.net/profile/Luisa-Mimmi
+    # - text: "![](images/icons8-google-scholar-16.jpg) Google Scholar"
+    #   href: https://scholar.google.com/citations?user=OBYla5gAAAAJ&hl=en&oi=ao
+    # - text: "{{< fa brands researchgate >}} Research Gate"
+    #   href: https://www.researchgate.net/profile/Luisa-Mimmi
     # - text: "{{< fa brands orcid >}} Orcid"
     #   href: https://orcid.org/0000-0002-2244-8282
     - icon: linkedin

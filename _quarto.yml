@@ -32,59 +32,67 @@ website:
     background: "#e7d8da" #"#e3eff7"
 
   navbar:
-#    logo: images/MITGEST_logo.jpeg
+#   logo: images/MITGEST_logo.jpeg
     pinned: true # non si muove quando scorro la pagina
     background: "#b78a92" # "#72aed8" # "#0084e6" "#EE6A24"
     right:
       - text: "Home"
         icon: house-fill # https://icons.getbootstrap.com/?q=home
         href: index.qmd
-      - text: "General tools"
+      - text: "Dev tools"
         icon: tools #  archive-fill # https://icons.getbootstrap.com/?q=home
-        menu:
-          - text: "1) git & github"
-            href: tools/01_git.qmd
-          - text: "2) Quarto website"
-            href: tools/02_quarto.qmd
-          - text: "3) Custom domains"
-            href: tools/03_custom_domain.qmd
-          - text: "5) Color"
-            href: tools/05_colors.qmd
+        href: dev.qmd
+      - text: "git"
+        icon: git #  archive-fill # https://icons.getbootstrap.com/?q=home
+        href: git.qmd
       - text: "{{< fa brands r-project >}} programming"
 #        icon: "R programming" #  archive-fill # https://icons.getbootstrap.com/?q=home
-        menu:
-          - text: "0) useful stuff"
-            href: r/00_useful.qmd
-          - text: "1) tidyeval"
-            href: r/01_tidyeval.qmd
-          - text: "2) R from VS Code"
-            href: r/02_r_vscode.qmd
-          - text: "3) ChatGPT from RStudio"
-            href: r/03_r_gpt.qmd
+        href: rstats.qmd
       - text: "Shell"
         icon: terminal-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
-        menu:
-          - text: "1) Shell script to handle foto"
-            href: shell/foto.qmd
+        href: shell.qmd
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd
 
   sidebar:
-    - title: "Git"
+    - title: "Dev tools"
       style: "docked"
       background: light
       contents:
-        - tools/01_git.qmd
-        - tools/01a_git_intro.qmd
-        - tools/01b_git_branches.qmd
-    - title: "Custom domain"
+        - dev.qmd
+        - dev/02_quarto.qmd
+        - dev/03a_AWS.qmd
+        - dev/03b_Google_domain.qmd
+        - dev/05_colors.qmd
+
+    - title: "git"
       style: "docked"
       background: light
       contents:
-        - tools/03_custom_domain.qmd
-        - tools/03a_AWS.qmd
-        - tools/03b_Google_domain.qmd
+        - git.qmd
+        - git/git_intro.qmd
+        - git/git_branches.qmd
+
+    - title: "{{< fa brands r-project >}} programming"
+      style: "docked"
+      background: light
+      contents:
+        - rstats.qmd
+        - rstats/00_useful.qmd
+        - rstats/01_tidyeval.qmd
+        - rstats/02_r_vscode.qmd
+        - rstats/03_r_gpt.qmd
+        - rstats/04_text_analytics.qmd
+
+    - title: "Shell"
+      style: "docked"
+      background: light
+      contents:
+        - shell.qmd
+        - shell/foto.qmd
+        - shell/shell_var.qmd
+
 format:
   html:
     toc: true

@@ -1,0 +1,96 @@
+---
+title: "Useful things R"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+# Filter rows in and out with `dplyr` 
+
+Multiple values (same column) in and out
+
++ `%in% c("x", "y")` for values
++ `!colname`  for negation 
+```{r}
+library(dplyr)
+
+starwars <- starwars
+
+f_1 <- starwars %>% 
+	filter(homeworld %in% c("Naboo","Tatooine"))  
+
+f_2 <- starwars %>% 
+	# ! in front! 
+	filter(!homeworld %in% c("Naboo","Tatooine"))
+
+```
+
+Multiple columns (some values) in and out
+```{r}
+f_3 <- starwars %>% 
+	filter(species == "Ewok" & homeworld %in% c("Endor","Tatooine"))  
+
+f_4 <- starwars %>% 
+	# ! in front! 
+	filter(!species %in% c("Droid","Human") &  !homeworld %in% c("Naboo","Tatooine"))
+```
+
+# Keep/Drop rows that have ALL NA values in all columns
+```{r}
+# Filter rows that have only NA values in all columns  
+cols_allNA <- starwars %>%
+  filter(if_all(everything(), is.na))  # 0 
+
+# or drop them 
+# Drop rows that have NA values in all columns
+cols_noneNA <- starwars %>%
+  filter(!if_all(everything(), is.na))  # 87 
+```
+
+# Drop rows that have ANY NA values in all columns
+```{r}
+# Filter rows that have only NA values in all columns  
+cols_anyNA <- starwars %>%
+  filter(!if_any(everything(), is.na))  # 58 
+
+```
+
+# Keep/drop rows that have ALL NA values in some columns
+```{r}
+# Filter rows that have only NA values in all columns whose name ....
+spec_col_allNA <- starwars %>%
+ filter(if_all(starts_with("h"), is.na))  # 0 
+ # filter(!if_all(starts_with("h"), is.na))  # 0 
+```
+
