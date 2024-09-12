@@ -69,7 +69,3 @@ git clone https://github.com/Lulliter/example.git
 
  
 ## \[on Google Domain\] set up a "HOSTED ZONE"
-
- 
-
- 

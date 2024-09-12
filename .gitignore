@@ -37,5 +37,5 @@ ___render_deploy.sh
 
 ## -----------------------------------------------------------------------------
 # old / private
-secret/*
 git_init.sh
+images/huge_res/*

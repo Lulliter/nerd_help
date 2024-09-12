@@ -65,7 +65,7 @@ website:
         icon: terminal-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
         menu:
           - text: "1) Shell script to handle foto"
-            href: shell/foto.sh
+            href: shell/foto.qmd
       - text: "About"
         icon: person-circle #mortarboard-fill # https://icons.getbootstrap.com/?q=home
         href: me.qmd

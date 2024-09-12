@@ -161,11 +161,109 @@
     ]
   },
   {
-    "objectID": "r/03_r_gpt.html",
-    "href": "r/03_r_gpt.html",
-    "title": "Using chatGPT from RStudio!",
+    "objectID": "r/04_text_analytics.html",
+    "href": "r/04_text_analytics.html",
+    "title": "Text Analytics in R",
     "section": "",
-    "text": "Instructions\nFollow the instructions in this blog post to try out the package chattr.\nThe steps are:\n\ninstall (I use the GH development version)\n\n\n#remotes::install_github(\"mlverse/chattr\")\n\n\nselect LLM model to use in your session\n\n\nlibrary(chattr)\nchattr_use(\"gpt4\")\n\n\nUse\n\n\nchattr::chattr_app()\n\nAfter you select the model you wish to interact with, the app will open in Viewer."
+    "text": "To install quanteda\n\nquanteda is an R package for managing and analyzing text, https://github.com/quanteda/quanteda\n\nFirst, you will need to install XCode command line tools.\n\n\nxcode-select --install\n\n\nThen install the TBB libraries and the pkg-config utility: (after installing Homebrew):\n\n\nbrew install tbb pkg-config\n\n\ngfortran https://github.com/fxcoudert/gfortran-for-macOS/releases\nNow you can install quanteda\n\n\ninstall.packages(\"quanteda\")"
+  },
+  {
+    "objectID": "r/02_r_vscode.html",
+    "href": "r/02_r_vscode.html",
+    "title": "02) Using R from VS Code",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#install-python",
+    "href": "r/02_r_vscode.html#install-python",
+    "title": "02) Using R from VS Code",
+    "section": "install Python",
+    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "href": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
+    "title": "02) Using R from VS Code",
+    "section": "OK, but which Python version am I running?",
+    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#now-install-radian",
+    "href": "r/02_r_vscode.html#now-install-radian",
+    "title": "02) Using R from VS Code",
+    "section": "… now install radian\n",
+    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#in-sum",
+    "href": "r/02_r_vscode.html#in-sum",
+    "title": "02) Using R from VS Code",
+    "section": "In sum:",
+    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#ways-to-work-with-python",
+    "href": "r/02_r_vscode.html#ways-to-work-with-python",
+    "title": "02) Using R from VS Code",
+    "section": "3 ways to work with python",
+    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#modify-r-extension-settings",
+    "href": "r/02_r_vscode.html#modify-r-extension-settings",
+    "title": "02) Using R from VS Code",
+    "section": "modify R Extension settings",
+    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\""
+  },
+  {
+    "objectID": "r/02_r_vscode.html#sending-r-code-to-terminal",
+    "href": "r/02_r_vscode.html#sending-r-code-to-terminal",
+    "title": "02) Using R from VS Code",
+    "section": "Sending R code to terminal",
+    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#path-to-keybindings.json",
+    "href": "r/02_r_vscode.html#path-to-keybindings.json",
+    "title": "02) Using R from VS Code",
+    "section": "Path to keybindings.json",
+    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#info-on-keybinding",
+    "href": "r/02_r_vscode.html#info-on-keybinding",
+    "title": "02) Using R from VS Code",
+    "section": "Info on Keybinding",
+    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings"
+  },
+  {
+    "objectID": "r/02_r_vscode.html#fing-lintr-in-vscode",
+    "href": "r/02_r_vscode.html#fing-lintr-in-vscode",
+    "title": "02) Using R from VS Code",
+    "section": "F&$%ing lintr in VSCode",
+    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)"
+  },
+  {
+    "objectID": "r/00_useful.html",
+    "href": "r/00_useful.html",
+    "title": "Useful things R",
+    "section": "",
+    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Nerd help",
+    "section": "",
+    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "Luisa M. Mimmi",
+    "section": "",
+    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n    \n     LinkedIn"
   },
   {
     "objectID": "r/01_tidyeval.html",
@@ -266,116 +364,18 @@
     "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))"
   },
   {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "Luisa M. Mimmi",
+    "objectID": "r/03_r_gpt.html",
+    "href": "r/03_r_gpt.html",
+    "title": "Using chatGPT from RStudio!",
     "section": "",
-    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n      Google Scholar\n  \n  \n      Research Gate\n  \n  \n    \n     LinkedIn"
+    "text": "Instructions\nFollow the instructions in this blog post to try out the package chattr.\nThe steps are:\n\ninstall (I use the GH development version)\n\n\n#remotes::install_github(\"mlverse/chattr\")\n\n\nselect LLM model to use in your session\n\n\nlibrary(chattr)\nchattr_use(\"gpt4\")\n\n\nUse\n\n\nchattr::chattr_app()\n\nAfter you select the model you wish to interact with, the app will open in Viewer."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Nerd help",
+    "objectID": "shell/foto.html",
+    "href": "shell/foto.html",
+    "title": "Shell script to change pics",
     "section": "",
-    "text": "Welcome!\nThis is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)\nI deploy it on GH pages here: https://lulliter.github.io/nerd_help/"
-  },
-  {
-    "objectID": "r/00_useful.html",
-    "href": "r/00_useful.html",
-    "title": "Useful things R",
-    "section": "",
-    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0"
-  },
-  {
-    "objectID": "r/02_r_vscode.html",
-    "href": "r/02_r_vscode.html",
-    "title": "02) Using R from VS Code",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#new-python-version",
-    "href": "r/02_r_vscode.html#new-python-version",
-    "title": "02) Using R from VS Code",
-    "section": "NEW Python version",
-    "text": "NEW Python version\n\nVersion: Python 3.9.13 for macOS 10.9 or later\nInterpreter path: /usr/local/bin/python3"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#gotcha",
-    "href": "r/02_r_vscode.html#gotcha",
-    "title": "02) Using R from VS Code",
-    "section": "Gotcha!!!",
-    "text": "Gotcha!!!\n\npython3 --version\n# Python 3.9.13"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#other-recommended-extensions",
-    "href": "r/02_r_vscode.html#other-recommended-extensions",
-    "title": "02) Using R from VS Code",
-    "section": "other recommended extensions",
-    "text": "other recommended extensions\nThere are a few other recommended installations for the extension:\n\nlanguageserver (R packages, so can be installed from R)\nhttpgd (R packages, so can be installed from R)\nVSCode-R-Debugger\nQuarto"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#ways-to-work-with-python",
-    "href": "r/02_r_vscode.html#ways-to-work-with-python",
-    "title": "02) Using R from VS Code",
-    "section": "3 ways to work with python",
-    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#install-radian-again",
-    "href": "r/02_r_vscode.html#install-radian-again",
-    "title": "02) Using R from VS Code",
-    "section": "install radian [again!!!]",
-    "text": "install radian [again!!!]\n\npip3 install -U radian\n# then as it suggests\n/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 -m pip install --upgrade pip\n\nCheck\n\nradian --version\n\nradian version: 0.6.3 r executable: /Library/Frameworks/R.framework/Resources/bin/R r version: 4.1.0 python executable: /Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9 python version: 3.9.13"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#path-to-open-settings.json",
-    "href": "r/02_r_vscode.html#path-to-open-settings.json",
-    "title": "02) Using R from VS Code",
-    "section": "Path to open settings.json\n",
-    "text": "Path to open settings.json\n\n\n[from Finder] Go to /Users/luisamimmi/Library/Application Support/Code/User/settings.json\n[from VS code] Open by ctr+shift+P and then “Preferences: Open Settings (json)”\n\nOpen in finder\nFrom shell\n\nopen -a Finder /Library/Frameworks/R.framework/Resources"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#modify-r-extension-settings",
-    "href": "r/02_r_vscode.html#modify-r-extension-settings",
-    "title": "02) Using R from VS Code",
-    "section": "modify R Extension settings",
-    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\""
-  },
-  {
-    "objectID": "r/02_r_vscode.html#sending-r-code-to-terminal",
-    "href": "r/02_r_vscode.html#sending-r-code-to-terminal",
-    "title": "02) Using R from VS Code",
-    "section": "Sending R code to terminal",
-    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#path-to-keybindings.json",
-    "href": "r/02_r_vscode.html#path-to-keybindings.json",
-    "title": "02) Using R from VS Code",
-    "section": "Path to keybindings.json",
-    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#info-on-keybinding",
-    "href": "r/02_r_vscode.html#info-on-keybinding",
-    "title": "02) Using R from VS Code",
-    "section": "Info on Keybinding",
-    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#fing-lintr-in-vscode",
-    "href": "r/02_r_vscode.html#fing-lintr-in-vscode",
-    "title": "02) Using R from VS Code",
-    "section": "F&$%ing lintr in VSCode",
-    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)"
-  },
-  {
-    "objectID": "r/04_text_analytics.html",
-    "href": "r/04_text_analytics.html",
-    "title": "Text Analytics in R",
-    "section": "",
-    "text": "To install quanteda\n\nquanteda is an R package for managing and analyzing text, https://github.com/quanteda/quanteda\n\nFirst, you will need to install XCode command line tools.\n\n\nxcode-select --install\n\n\nThen install the TBB libraries and the pkg-config utility: (after installing Homebrew):\n\n\nbrew install tbb pkg-config\n\n\ngfortran https://github.com/fxcoudert/gfortran-for-macOS/releases\nNow you can install quanteda\n\n\ninstall.packages(\"quanteda\")"
+    "text": "Needed to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/_nerd_help/images\"\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/_nerd_help/images/output\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd huge_res\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_image_size() {\n    # Creare una directory di output nella directory di lavoro corrente\n    mkdir -p \"./output\"\n\n    max_size=5000000\n\n    # Loop su ogni immagine .jpg nella directory corrente\n    for file in ./*.jpg; do\n        # Estrae il nome base del file\n        base_name=$(basename \"$file\")\n\n        # Copia l'immagine nella directory di output\n        cp \"$file\" \"./output/$base_name\"\n\n        # Inizializza la qualità a 85\n        quality=85\n\n        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                # Riduci la qualità\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                # Se la qualità è già bassa, riduci la risoluzione del 90%\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        # Mostra la dimensione finale dell'immagine\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_image_size"
   },
   {
     "objectID": "tools/01a_git_intro.html",
@@ -483,6 +483,16 @@
     "title": "1.a) Git introduction",
     "section": "8) Push source and build repos.",
     "text": "8) Push source and build repos.\n\ngit push origin master",
+    "crumbs": [
+      "1.a) Git introduction"
+    ]
+  },
+  {
+    "objectID": "tools/01a_git_intro.html#ask-about-latest-commit",
+    "href": "tools/01a_git_intro.html#ask-about-latest-commit",
+    "title": "1.a) Git introduction",
+    "section": "Ask about latest commit",
+    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
     "crumbs": [
       "1.a) Git introduction"
     ]
@@ -621,57 +631,5 @@
     "title": "4) Bonus Stuff",
     "section": "Topics",
     "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#install-python",
-    "href": "r/02_r_vscode.html#install-python",
-    "title": "02) Using R from VS Code",
-    "section": "install Python",
-    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#ma-quale-versione-python-ho-installato",
-    "href": "r/02_r_vscode.html#ma-quale-versione-python-ho-installato",
-    "title": "02) Using R from VS Code",
-    "section": "Ma quale versione Python ho installato?",
-    "text": "Ma quale versione Python ho installato?\n\nVersion: Python 3.12.5 for macOS …."
-  },
-  {
-    "objectID": "r/02_r_vscode.html#now-ensure-python-and-pip-are-installed",
-    "href": "r/02_r_vscode.html#now-ensure-python-and-pip-are-installed",
-    "title": "02) Using R from VS Code",
-    "section": "… now Ensure Python and pip are installed:",
-    "text": "… now Ensure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#now-install-radian",
-    "href": "r/02_r_vscode.html#now-install-radian",
-    "title": "02) Using R from VS Code",
-    "section": "… now install radian\n",
-    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!"
-  },
-  {
-    "objectID": "tools/01a_git_intro.html#ask-about-latest-commit",
-    "href": "tools/01a_git_intro.html#ask-about-latest-commit",
-    "title": "1.a) Git introduction",
-    "section": "Ask about latest commit",
-    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
-    "crumbs": [
-      "1.a) Git introduction"
-    ]
-  },
-  {
-    "objectID": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "href": "r/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "title": "02) Using R from VS Code",
-    "section": "OK, but which Python version am I running?",
-    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip"
-  },
-  {
-    "objectID": "r/02_r_vscode.html#in-sum",
-    "href": "r/02_r_vscode.html#in-sum",
-    "title": "02) Using R from VS Code",
-    "section": "In sum:",
-    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian"
   }
 ]

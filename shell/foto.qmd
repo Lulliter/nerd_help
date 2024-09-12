@@ -1,0 +1,171 @@
+---
+title: "Shell script to change pics"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+# Needed to change size and format 
+
+
+```{bash}
+#!/bin/zsh
+
+# Funzione per convertire le immagini .HEIC in .jpg
+convert_heic_to_jpg() {
+    # Check if input directory exists
+    if [ ! -d "$input_dir" ]; then
+        echo "Input directory $input_dir does not exist."
+        return 1
+    fi
+
+    # Check if output directory exists, if not, create it
+    if [ ! -d "$output_dir" ]; then
+        mkdir -p "$output_dir"
+        if [ $? -ne 0 ]; then
+            echo "Failed to create output directory $output_dir."
+            return 1
+        fi
+    fi
+
+    # Check if there are any .HEIC files in the input directory
+    shopt -s nullglob
+    heic_files=("$input_dir"/*.HEIC)
+    shopt -u nullglob
+
+    if [ ${#heic_files[@]} -eq 0 ]; then
+        echo "No .HEIC files found in $input_dir."
+        return 1
+    fi
+
+    # Convert each .HEIC file to .jpg
+    for file in "${heic_files[@]}"; do
+        base_name=$(basename "$file" .HEIC)
+        convert "$file" -quality 85 "$output_dir/$base_name.jpg"
+        if [ $? -eq 0 ]; then
+            echo "Converted $file to $output_dir/$base_name.jpg"
+        else
+            echo "Failed to convert $file."
+        fi
+    done
+}
+
+
+# Funzione per ridurre la dimensione dei file a meno di 2 megabyte
+reduce_image_size() {
+    # Check if output directory exists
+    if [ ! -d "$output_dir" ]; then
+        echo "Output directory $output_dir does not exist."
+        return 1
+    fi
+
+    # Check if there are any .jpg files in the output directory
+    shopt -s nullglob
+    jpg_files=("$output_dir"/*.jpg)
+    shopt -u nullglob
+
+    if [ ${#jpg_files[@]} -eq 0 ]; then
+        echo "No .jpg files found in $output_dir."
+        return 1
+    fi
+
+    # Reduce each .jpg file to less than 2 megabytes
+    for file in "${jpg_files[@]}"; do
+        while [ $(stat -f%z "$file") -ge 1000000 ]; do
+            mogrify -resize 90% "$file"
+        done
+        echo "Reduced size of $file"
+    done
+}
+```
+
+
+```{bash}
+# ----4 esempio 
+# Directory contenente le immagini .HEIC
+input_dir="/Users/luisamimmi/Github/_nerd_help/images"
+# Directory dove salvare le immagini convertite
+output_dir="/Users/luisamimmi/Github/_nerd_help/images/output"
+
+# Call the 1 function
+convert_heic_to_jpg
+# Call the 2 function
+reduce_image_size
+```
+
+```{bash}
+#!/bin/zsh
+
+# move to desired dir 
+cd huge_res
+
+# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi
+reduce_image_size() {
+    # Creare una directory di output nella directory di lavoro corrente
+    mkdir -p "./output"
+
+    max_size=5000000
+
+    # Loop su ogni immagine .jpg nella directory corrente
+    for file in ./*.jpg; do
+        # Estrae il nome base del file
+        base_name=$(basename "$file")
+
+        # Copia l'immagine nella directory di output
+        cp "$file" "./output/$base_name"
+
+        # Inizializza la qualità a 85
+        quality=85
+
+        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo
+        while [[ $(stat -f%z "./output/$base_name") -ge $max_size ]]; do
+            if [[ $quality -gt 10 ]]; then
+                # Riduci la qualità
+                magick "./output/$base_name" -quality $quality "./output/$base_name"
+                quality=$((quality - 5))
+            else
+                # Se la qualità è già bassa, riduci la risoluzione del 90%
+                magick "./output/$base_name" -resize 90% "./output/$base_name"
+            fi
+        done
+
+        # Mostra la dimensione finale dell'immagine
+        echo "Reduced $base_name to $(stat -f%z "./output/$base_name") bytes"
+    done
+}
+
+
+# Esecuzione della funzione
+reduce_image_size
+```
+

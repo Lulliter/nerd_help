@@ -1,7 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>{{< var website.site-url >}}/tools/05_colors.html</loc>
+    <lastmod>2024-09-12T14:18:34.983Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03b_Google_domain.html</loc>
+    <lastmod>2024-09-12T14:18:23.272Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03_custom_domain.html</loc>
+    <lastmod>2024-03-14T14:14:54.347Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01b_git_branches.html</loc>
+    <lastmod>2024-05-04T10:58:01.764Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01_git.html</loc>
+    <lastmod>2024-09-06T21:14:40.012Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/04_text_analytics.html</loc>
+    <lastmod>2024-09-12T14:17:50.730Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/02_r_vscode.html</loc>
+    <lastmod>2024-09-06T21:31:43.535Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/00_useful.html</loc>
+    <lastmod>2024-06-14T10:00:17.379Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/index.html</loc>
+    <lastmod>2024-03-14T14:14:17.494Z</lastmod>
+  </url>
+  <url>
     <loc>{{< var website.site-url >}}/me.html</loc>
     <lastmod>2024-09-06T21:35:30.379Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/01_tidyeval.html</loc>
+    <lastmod>2024-09-05T10:17:06.973Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/r/03_r_gpt.html</loc>
+    <lastmod>2024-05-02T10:09:40.948Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/shell/foto.html</loc>
+    <lastmod>2024-09-12T14:48:53.492Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/01a_git_intro.html</loc>
+    <lastmod>2024-08-29T10:42:41.526Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/02_quarto.html</loc>
+    <lastmod>2024-09-12T14:18:10.220Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/03a_AWS.html</loc>
+    <lastmod>2024-04-20T16:25:34.873Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/tools/04_boh.html</loc>
+    <lastmod>2024-03-13T15:06:34.515Z</lastmod>
   </url>
 </urlset>
