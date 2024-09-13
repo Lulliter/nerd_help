@@ -8,10 +8,10 @@ editor: source
 engine: knitr
 ## ------  general Output Options
 execute:     
-  eval: false    # actually run? 
-  echo: true     #  include source code in output
-  warning: false  #  include warning code in output
-  error: false    #  include error code in output
+  eval: false     # actually run? 
+  echo: true      # include source code in output
+  warning: false  # include warning code in output
+  error: false    # include error code in output
   output: false   # include output code in output (CHG in BLOCKS)
   # include: false   # R still runs but code and results DON"T appear in output  
   cache: false # normalmnte false
@@ -59,27 +59,34 @@ Web page construction in progress...
 2. You should check out Homebrew, “the missing package manager for OS X”. Among many other things, it can install Git for you. Once you have Homebrew installed, do this in the shell:
 
 ```{bash}
+# - Terminal
+
 brew install git
 ```
 
 Check version
 
 ```{bash}
+# - Terminal
+
 which git
 git --version
 ```
 
 # Git configuration
 
-### In the shell (Appendix A):
+## Setting up your Git configs
 
+### --- In terminal 
 ```{bash}
+# - Terminal
+
 git config --global user.name "Jane Doe"
 git config --global user.email "jane@example.com"
 git config --global --list
 ```
 
-### In R 
+### --- In R 
 The usethis package offers an alternative approach. You can set your Git user name and email from within R:
 
 ```{r}
@@ -134,15 +141,38 @@ gh::gh_whoami()
 ### What are SSH keys?
 Secure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.
 
-## Check which ssh I already have 
+## Create an SSH
 
+You only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [adding a new SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) to learn how to do this.
+
+## Check which ssh I already have 
 > I have a github SSH  
+
+SSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:
+
+
+```{bash}
+# - Terminal
+ls -al ~/.ssh
+```
+
 
 ```{r}
 #| eval: false
-# where to see my SSH 
+
+# - IN R 
+
+# ------ where to see my SSH 
 library(credentials)  
+# Found git version 2.41.0
+# Supported HTTPS credential helpers: cache, store
+# Found OpenSSH_9.0p1, LibreSSL 3.3.6
+# Default SSH key: /Users/luisamimmi/.ssh/id_ed25519  #(location of my SSH key)
+
+# ------ KEY 
+# credentials::ssh_key_info()
 ```
+
 
 # Git commands
 
@@ -185,6 +215,8 @@ Source: [cloudstudio.com.au](https://cloudstudio.com.au/2021/06/26/git-command/)
 ### i) position myself in the Folder ABOVE the desired git repo
 
 ```{bash}
+# - Terminal
+
 #  My `ParentFolder` for github repos...
 cd cd ~/Github/  
 ```
@@ -198,6 +230,8 @@ You can only push to two types of URL addresses:
 
 Git associates a remote URL with a name, and your default remote is usually called `origin`
 ```{bash}
+# - Terminal
+
 # if https (Clone using the web URL.)
 git clone https://github.com/Lulliter/nerd_help.git
 # if SSH (Use a password-protected SSH key.)
@@ -230,6 +264,8 @@ Opens a new RStudio instance in the new Project
 ## 3) - OPTIONAL - I copy there some stuff I already had in a different folder
  
 ```{bash}
+# - Terminal
+
 # copy other LOCAL --> git LOCAL
 cp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help 
 ```
@@ -239,12 +275,16 @@ cp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help
 For example, I actually wanted a quarto website, so I open TERMINAL and do 
 
 ```{bash}
+# - Terminal
+
 quarto create project website mysite
 ```
 
 
 ## 5) Check what happened... 
 ```{bash}
+# - Terminal
+
 cd ~/Github/_nerd_help 
 git remote show origin 
 git status
@@ -254,6 +294,8 @@ git status
 ## 6) Add local changes to staging area 
  
 ```{bash}
+# - Terminal
+
 git add -A # everything
 git add -u # only already tracked stuff 
 ```
@@ -262,6 +304,8 @@ git add -u # only already tracked stuff
 ## 7) Commit desired changes 
 
 ```{bash}
+# - Terminal
+
 # Create Std commit "message"....
 msg="rebuilt on `date`"
 if [ $# -eq 1 ]
@@ -278,40 +322,79 @@ git commit -m "whatever message"
 ## 8)  Push source and build repos.
 
 ```{bash}
+# - Terminal
+
 git push origin master
 ```
 
 
 # Git repo setup (1st Local >> 2nd Github)
 
-This has perfect instructions to start a quarto website and then deploy on GitHub
+1. **Create a local git repository**
 
-+ Sam Csik blog post [https://ucsb-meds.github.io/creating-quarto-websites/](https://ucsb-meds.github.io/creating-quarto-websites/)
+```{bash}
+# - Terminal
+
+cd local_proj_dir
+git init
+git add *
+git commit -am ‘Initial commit’
+```
+
+2. **Create a new blank repository on GitHub**
+
++ > There is option ‘add a README file’ and ‘gitignore’ in the initial setup. Keep them unclicked.🚫 🚫 ️
++ Copy repository `hhtps` or `ssh` URL
+
+3. **Push local git repository to GitHub**
+as instructed by Github 
+
+```{bash}
+# - Terminal
+
+# Change the branch to 'main'
+# git branch -M main
+# Connect your local repository to GitHub repository
+git remote add origin hhtps://github.com/username/repo.git
+# Push the local repository to GitHub
+git push -u origin master
+```
 
 
 # Git architecture
 
-+ **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. Usually there is one default remote repository and origin represents this default repository.
++ **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. 
++ Usually there is one default remote repository and origin represents this default repository.
   + If you don’t like "origin", you can rename it
 ```{bash}
+# - Terminal
+
+#  see your “origin” remote listed:
+git remote -v
+
 #  rename origin it by using 
 git remote rename origin new_name
 ```
 
 + **`branch`**	branch is a like a fork in the history of a repository. One branch represents an independent line of development, like a fork teeth.
 ```{bash}
+# - Terminal
+
 #  to check which branches I have  
 git branch -a
     # * master
     #   page_col
     #   remotes/origin/master
 ```
-+ **`master`**	master is a branch, the default branch, the main branch, and it’s always there.
+
++ **`master`**	(or `main`) is a branch, the default branch, the main branch, and it’s always there.
 
 + **`HEAD`**	= the currently active branch (the checked out one). Each repository only has one current branch, hence one HEAD as well.
   + **`Detached HEAD`** happens when a checkout command is applied to a specific historical commit, tag or remote branch.
 
 ```{bash}
+# - Terminal
+
 #  to check where the HEAD of a repository is pointing to
 cat .git/HEAD
     # ref: refs/heads/master
@@ -329,6 +412,8 @@ WHere:
 - `--pretty` is a shorthand for common formatting options 
 
 ```{bash}
+# - Terminal
+
 # 1) To find out the date and time of your last Git commit 
 git log -1 --format=%cd # %cd stands for "commit date."
 # 2) To find out the message of your last Git commit 
@@ -343,6 +428,8 @@ git log -1 --pretty="%cd %s"
 ## See differences b/w commits 
 
 ```{bash}
+# - Terminal
+
 # diff between 2 latest commits (1 on branch) only in files I care 
 git diff dc87ae c86edffc16 "*.qmd"
 
@@ -359,6 +446,41 @@ git diff 693e61^..HEAD
 
 # Problems
 
+## When you accidentally let `git` track files 
+
+### CASE 1) File that is `Untracked` but it appears in `git status` 
+
+🤟🏻 do this 
++ add file to `.gitignore` file 
+
+
+💣💥 don't do this .....
+```{bash}
+# - Terminal
+
+# Preview the files but `-n` means it is a dry run
+git clean -n 
+# Remove the file (-f flag stands for "force")
+git clean -f 
+```
+
+### CASE 2) File that is `Tracked` by git
+This command removes files from the staging area (so they won't be in the next commit), but keeps them in the working directory!!! 
+Useful for configuration files, build artifacts, etc.  
+```{bash}
+# - Terminal
+
+# Remove the file from the staging area
+
+# add .env file to .gitignore
+echo "accident.txt" >> .gitignore
+# tell Git NOT to track this file (it gets removed from the index, but stays local system)
+git rm --cached accident.txt
+
+# or whole directory (-r recursive) 
+git rm --cached -r directory/
+```
+
 ## Your branch is ahead of 'origin/master' by "x" commits
 
 E.g. I had this occurring because I wanted to push a heavy PDF download button and `git push` couldn't go through.  
@@ -370,6 +492,8 @@ E.g. I had this occurring because I wanted to push a heavy PDF download button a
 + (a) Brutal: reset your local `master` to the state on your remote `origin` (a.k.a. last pushed updates) 
 
 ```{bash}
+# - Terminal
+
 git reset --hard origin/master
 ```
 
@@ -379,6 +503,8 @@ git reset --hard origin/master
   + `--hard` = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit
   
 ```{bash}
+# - Terminal
+
 git reset --soft HEAD~1   
 ```
 
@@ -387,6 +513,8 @@ git reset --soft HEAD~1
   + `--keep` It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.
   
 ```{bash}
+# - Terminal
+
 # Assuming HEAD points at 7e05a95 
   # 7e05a95  (HEAD -> main) Update a
   # e62add5  Update b

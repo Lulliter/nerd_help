@@ -542,7 +542,7 @@
     "href": "git/git_intro.html#check-which-ssh-i-already-have",
     "title": "Git introduction",
     "section": "Check which ssh I already have",
-    "text": "Check which ssh I already have\n\nI have a github SSH\n\n\n# where to see my SSH \nlibrary(credentials)",
+    "text": "Check which ssh I already have\n\nI have a github SSH\n\nSSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:\n\n# - Terminal\nls -al ~/.ssh\n\n\n# - IN R \n\n# ------ where to see my SSH \nlibrary(credentials)  \n# Found git version 2.41.0\n# Supported HTTPS credential helpers: cache, store\n# Found OpenSSH_9.0p1, LibreSSL 3.3.6\n# Default SSH key: /Users/luisamimmi/.ssh/id_ed25519  #(location of my SSH key)\n\n# ------ KEY \n# credentials::ssh_key_info()",
     "crumbs": [
       "git",
       "Git introduction"
@@ -564,7 +564,7 @@
     "href": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
     "title": "Git introduction",
     "section": "2.a) In Terminal clone remote repo locally",
-    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
+    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n# - Terminal\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# - Terminal\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
     "crumbs": [
       "git",
       "Git introduction"
@@ -586,7 +586,7 @@
     "href": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
     "title": "Git introduction",
     "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
-    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
+    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# - Terminal\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
     "crumbs": [
       "git",
       "Git introduction"
@@ -597,7 +597,7 @@
     "href": "git/git_intro.html#i-make-changes-in-the-local-repo",
     "title": "Git introduction",
     "section": "4) I make changes in the local repo",
-    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\nquarto create project website mysite",
+    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\n# - Terminal\n\nquarto create project website mysite",
     "crumbs": [
       "git",
       "Git introduction"
@@ -608,7 +608,7 @@
     "href": "git/git_intro.html#check-what-happened",
     "title": "Git introduction",
     "section": "5) Check what happened…",
-    "text": "5) Check what happened…\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
+    "text": "5) Check what happened…\n\n# - Terminal\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
     "crumbs": [
       "git",
       "Git introduction"
@@ -619,7 +619,7 @@
     "href": "git/git_intro.html#add-local-changes-to-staging-area",
     "title": "Git introduction",
     "section": "6) Add local changes to staging area",
-    "text": "6) Add local changes to staging area\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
+    "text": "6) Add local changes to staging area\n\n# - Terminal\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
     "crumbs": [
       "git",
       "Git introduction"
@@ -630,7 +630,7 @@
     "href": "git/git_intro.html#commit-desired-changes",
     "title": "Git introduction",
     "section": "7) Commit desired changes",
-    "text": "7) Commit desired changes\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
+    "text": "7) Commit desired changes\n\n# - Terminal\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
     "crumbs": [
       "git",
       "Git introduction"
@@ -641,7 +641,7 @@
     "href": "git/git_intro.html#push-source-and-build-repos.",
     "title": "Git introduction",
     "section": "8) Push source and build repos.",
-    "text": "8) Push source and build repos.\n\ngit push origin master",
+    "text": "8) Push source and build repos.\n\n# - Terminal\n\ngit push origin master",
     "crumbs": [
       "git",
       "Git introduction"
@@ -652,7 +652,7 @@
     "href": "git/git_intro.html#ask-about-latest-commit",
     "title": "Git introduction",
     "section": "Ask about latest commit",
-    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
+    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# - Terminal\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
     "crumbs": [
       "git",
       "Git introduction"
@@ -663,7 +663,7 @@
     "href": "git/git_intro.html#see-differences-bw-commits",
     "title": "Git introduction",
     "section": "See differences b/w commits",
-    "text": "See differences b/w commits\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
+    "text": "See differences b/w commits\n\n# - Terminal\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
     "crumbs": [
       "git",
       "Git introduction"
@@ -674,7 +674,7 @@
     "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
     "title": "Git introduction",
     "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
-    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
     "crumbs": [
       "git",
       "Git introduction"
@@ -839,6 +839,39 @@
     "crumbs": [
       "Shell",
       "Shell script to change pics"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "title": "Git introduction",
+    "section": "When you accidentally let git track files",
+    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#create-an-ssh",
+    "href": "git/git_intro.html#create-an-ssh",
+    "title": "Git introduction",
+    "section": "Create an SSH",
+    "text": "Create an SSH\nYou only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on generating a new SSH key and adding a new SSH key to your GitHub account to learn how to do this.",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#setting-up-your-git-configs",
+    "href": "git/git_intro.html#setting-up-your-git-configs",
+    "title": "Git introduction",
+    "section": "Setting up your Git configs",
+    "text": "Setting up your Git configs\n— In terminal\n\n# - Terminal\n\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@example.com\"\ngit config --global --list\n\n— In R\nThe usethis package offers an alternative approach. You can set your Git user name and email from within R:\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\n#usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nManaging/Verifying git credential stored\n\nWhere do I see it on Github? ? fa(name = \"github\") –&gt; settings –&gt; Developer settings –&gt; Personal Access Tokens\n\n\nWARNING: credentials::git_credential_ask(\"https://github.com\") actually exposes the PAT password\n\n\ncredentials::credential_helper_get()\n      # [1] \"osxkeychain\"\n\n# to see all of them \ncredentials::git_credential_ask(\"https://github.com\")\n      # $protocol\n      # [1] \"https\"\n      # $host\n      # [1] \"github.com\"\n      # $username\n      # [1] \"PersonalAccessToken\"\n      # $password\n      # [1] \"ghp_...52eR\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n      # attr(,\"class\")\n      # [1] \"git_credential\"\n\n# --- other useful things to check \n#usethis::gh_token_help()\nusethis::git_sitrep()\ngh::gh_whoami()\n# {\n#   \"name\": \"Luisa Mimmi\",\n#   \"login\": \"Lulliter\",\n#   \"html_url\": \"https://github.com/Lulliter\",\n#   \"scopes\": \"gist, repo, user, workflow\",\n#   \"token\": \"ghp_...52eR\"\n# } \n\nWhat are SSH keys?\nSecure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.",
+    "crumbs": [
+      "git",
+      "Git introduction"
     ]
   }
 ]

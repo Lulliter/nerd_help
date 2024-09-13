@@ -39,3 +39,6 @@ ___render_deploy.sh
 # old / private
 git_init.sh
 images/huge_res/*
+.Rdata
+.DS_Store
+.quarto
