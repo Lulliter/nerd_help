@@ -218,15 +218,18 @@ Once you’ve pushed your changes, you can use the GitHub WebUI to open the PR. 
 
 #fetch any changes from upstream and then apply them to your up branch
 git checkout up
-
+# This means you will update your up branch to match with the latest changes in the repository where you are submitting your PR.
 git pull --rebase
-
+# switch back to your working branch
 git checkout wkg_branch
-
+# update your working branch (that contains your PR changes) to contain the latest changes from upstream (via the up branch) while preserving the changes you made on your working branch
 git rebase up
 
-
-
+# Now that your working branch is current, you can make your changes.
+# To make changes to source code files you will edit the file(s), and run git add to stage # them for commit like you did before. 
+git commit --amend
+# Re-push your changes
+git push -f origin wkg_branch 
 ```
 
 # Collaboration

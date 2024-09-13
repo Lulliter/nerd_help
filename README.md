@@ -5,8 +5,8 @@ This is a set of instructions for "nerdy things" that I will never remember...
 # TO DO list ✍︎
 
 + ❒ 1) **git & Github** (`~/Documents/__nerd/00_shell_git _make/*`) 2 `*.qmd` file 
-+ ❒ 4) **Bonus stuff** ... 
-+ ❒
++ ❒ 2) **R** ... 
++ ❒ 3) **Shell** 
 + ❒
 + ❒
 + ❒
