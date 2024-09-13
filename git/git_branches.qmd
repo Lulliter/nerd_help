@@ -198,12 +198,36 @@ Whenever you want to create a new working branch, run the following commands:
 git checkout up
 
 git pull --rebase
+# Then, create and switch to your working branch.
+git checkout -b wkg_branch
 
 # make and commit changes 
+git add ...
+git commit -m "your message"
+
+#it’s time to push your changes to your remote fork. 
+git push origin wkg_branch
+
+# Opening the pull request
 
 ```
+Once you’ve pushed your changes, you can use the GitHub WebUI to open the PR. Simply navigate to the main project page and GitHub will automatically suggest opening a PR from the changes that most recently got pushed to your fork. 
+
+```{bash}
+# -- Terminal
+
+#fetch any changes from upstream and then apply them to your up branch
+git checkout up
+
+git pull --rebase
+
+git checkout wkg_branch
+
+git rebase up
 
 
+
+```
 
 # Collaboration
 
