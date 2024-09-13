@@ -156,6 +156,53 @@ git diff master..page_col '***.qmd'Q
 + YT video on [diff merge - rebase](https://www.youtube.com/watch?v=zOnwgxiC0OA)
 
 
+# “home base” branch to track changes on the main project
+[https://github.com/readme/guides/configure-git-environment](https://github.com/readme/guides/configure-git-environment)
+
+“Home base branch” is not a technical Git or GitHub term, but a phrase I use to describe a branch we’ll use to keep track of upstream repository changes, which will help us easily rebase our PRs in the future.... you’ll use it to rebase your development branches and create new working branches from it.
+
+> Basically in this example, my home base branch is named `up`. Your other development branches will be based on this up branch as well. In the following set of commands, Lulliter’s main branch is named master  
+
+> Run these commands to setup your up branch to track changes in the upstream project repo:
+
+```{bash}
+# -- Terminal
+git remote add upstream git@github.com:Lulliter/nerd_help.git 
+
+git fetch upstream
+# From github.com:Lulliter/nerd_help
+#  * [new branch]      master     -> upstream/master
+#  * [new branch]      new_sh     -> upstream/new_sh
+#  * [new branch]      page_col   -> upstream/page_col
+
+git checkout -b up upstream/master
+# M       .gitignore
+# M       docs/git/git_intro.html
+# M       docs/search.json
+# M       docs/sitemap.xml
+# M       git/git_intro.qmd
+# branch 'up' set up to track 'upstream/master'.
+# Switched to a new branch 'up'
+
+
+```
+
+### --- WORKFLOW 
+The following workflow will help you make changes, submit a new PR, and update the same PR if necessary.
+
+Whenever you want to create a new working branch, run the following commands:
+
+```{bash}
+# -- Terminal
+
+git checkout up
+
+git pull --rebase
+
+# make and commit changes 
+
+```
+
 
 
 # Collaboration
