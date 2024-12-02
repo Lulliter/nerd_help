@@ -1,7 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>{{< var website.site-url >}}/shell/shell_var.html</loc>
+    <lastmod>2024-09-12T17:46:12.105Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/shell.html</loc>
+    <lastmod>2024-09-12T19:26:21.001Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats/03_r_gpt.html</loc>
+    <lastmod>2024-05-02T10:09:40.948Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats/01_tidyeval.html</loc>
+    <lastmod>2024-09-12T19:18:24.311Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats.html</loc>
+    <lastmod>2024-09-12T19:19:44.839Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/index.html</loc>
+    <lastmod>2024-09-12T19:42:37.659Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/git/git_branches.html</loc>
+    <lastmod>2024-12-02T10:03:10.576Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev/05_colors.html</loc>
+    <lastmod>2024-09-12T19:08:51.744Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev/03b_Google_domain.html</loc>
+    <lastmod>2024-09-12T14:18:23.272Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev/02_quarto.html</loc>
+    <lastmod>2024-09-12T19:08:37.972Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev.html</loc>
+    <lastmod>2024-09-12T19:40:31.411Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev/03a_AWS.html</loc>
+    <lastmod>2024-04-20T16:25:34.873Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/dev/04_boh.html</loc>
+    <lastmod>2024-03-13T15:06:34.515Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/git.html</loc>
+    <lastmod>2024-09-12T19:05:38.586Z</lastmod>
+  </url>
+  <url>
     <loc>{{< var website.site-url >}}/git/git_intro.html</loc>
-    <lastmod>2024-09-13T20:05:53.282Z</lastmod>
+    <lastmod>2024-12-02T10:43:02.654Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/me.html</loc>
+    <lastmod>2024-09-12T19:29:09.377Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats/00_useful.html</loc>
+    <lastmod>2024-06-14T10:00:17.379Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats/02_r_vscode.html</loc>
+    <lastmod>2024-09-12T19:24:23.480Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/rstats/04_text_analytics.html</loc>
+    <lastmod>2024-09-12T14:17:50.730Z</lastmod>
+  </url>
+  <url>
+    <loc>{{< var website.site-url >}}/shell/foto.html</loc>
+    <lastmod>2024-12-02T09:56:50.226Z</lastmod>
   </url>
 </urlset>

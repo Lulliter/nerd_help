@@ -522,6 +522,89 @@ git reset --soft HEAD~1
 git reset --mixed HEAD^  
 ```
 
+# Dealing with existing branches
+
+```{bash}
+# - Terminal
+git remote show origin
+
+# * remote origin
+  # Fetch URL: git@github.com:Lulliter/nerd_help.git
+  # Push  URL: git@github.com:Lulliter/nerd_help.git
+  # HEAD branch: master
+  # Remote branches:
+    # master     tracked
+    # new_sh     tracked
+    # page_col   tracked
+    # wkg_branch tracked
+  # Local branches configured for 'git pull':
+    # master   merges with remote master
+    # page_col merges with remote page_col
+  # Local refs configured for 'git push':
+    # master     pushes to master     (up to date)
+    # new_sh     pushes to new_sh     (up to date)
+    # page_col   pushes to page_col   (up to date)
+    # wkg_branch pushes to wkg_branch (fast-forwardable)
+```
+
++ `Remote branches: tracked` Indicates that these branches are being tracked locally (there are corresponding local branches).
++ `Local branches configured for 'git pull':` Shows how local branches are configured for pulling changes from the remote
++ `Local refs configured for 'git push':` Shows  how local branches are configured for pushing changes to the remote
+  + `wkg_branch pushes to wkg_branch (fast-forwardable)` meaning there are changes in the remote branch that haven't been pulled locally
+
+```{bash}
+git branch   # to list local branches.
+git branch -r # to list remote branches.
+git branch -a # to list all branches (local + remote).
+```
+## Which branches have been merged? 
+
+```{bash}
+# To see which branches have been merged into your current branch
+git branch --merged
+# To check if a branch has been merged into the remote default branch (e.g., origin/master): 
+git branch -r --merged origin/master 
+
+# To check a specific branch was merged 
+git log master --oneline --decorate --graph --all | grep new_sh
+```
+
+## Visual confirmation of branches 
+This shows a visual representation of branch merges.
+```{bash}
+git log --graph --oneline --all
+# for a specific branches
+git merge-base --is-ancestor new_sh master 
+  # success == no output, exit code 0
+git merge-base --is-ancestor wkg_branch master   
+  # failure
+git merge-base --is-ancestor page_col master   
+  # success == no output, exit code 0
+```
+
+
+## Delete local and remote `new_sh` branch 
+
+```{bash}
+# check merged 
+git merge-base --is-ancestor new_sh master 
+# delete local 
+git branch -D new_sh
+# delete remote 
+git push origin --delete new_sh
+# re-check 
+git branch -a
+
+
+## WTF remotes/upstream/new_sh ?
+git remote -v
+# remote also from remote upstream 
+git push upstream --delete new_sh # --->>>> NOPE (but it was stale in local ref!
+git remote prune upstream           # --->>>> YEP !!
+
+# verify deletion 
+git branch -r
+```
 # Reference 
 + [Happy Git and GitHub for the useR](https://happygitwithr.com/ssh)
 + [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)

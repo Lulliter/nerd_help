@@ -220,7 +220,7 @@
     "href": "git/git_branches.html#create-checkout-a-branch",
     "title": "Git branches",
     "section": "Create & checkout a branch",
-    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col  \n\nNow I see",
+    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col",
     "crumbs": [
       "git",
       "Git branches"
@@ -242,7 +242,7 @@
     "href": "git/git_branches.html#rename-a-local-branch",
     "title": "Git branches",
     "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remte branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
     "crumbs": [
       "git",
       "Git branches"
@@ -538,6 +538,28 @@
     ]
   },
   {
+    "objectID": "git/git_intro.html#setting-up-your-git-configs",
+    "href": "git/git_intro.html#setting-up-your-git-configs",
+    "title": "Git introduction",
+    "section": "Setting up your Git configs",
+    "text": "Setting up your Git configs\n— In terminal\n\n# - Terminal\n\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@example.com\"\ngit config --global --list\n\n— In R\nThe usethis package offers an alternative approach. You can set your Git user name and email from within R:\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\n#usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nManaging/Verifying git credential stored\n\nWhere do I see it on Github? ? fa(name = \"github\") –&gt; settings –&gt; Developer settings –&gt; Personal Access Tokens\n\n\nWARNING: credentials::git_credential_ask(\"https://github.com\") actually exposes the PAT password\n\n\ncredentials::credential_helper_get()\n      # [1] \"osxkeychain\"\n\n# to see all of them \ncredentials::git_credential_ask(\"https://github.com\")\n      # $protocol\n      # [1] \"https\"\n      # $host\n      # [1] \"github.com\"\n      # $username\n      # [1] \"PersonalAccessToken\"\n      # $password\n      # [1] \"ghp_...52eR\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n      # attr(,\"class\")\n      # [1] \"git_credential\"\n\n# --- other useful things to check \n#usethis::gh_token_help()\nusethis::git_sitrep()\ngh::gh_whoami()\n# {\n#   \"name\": \"Luisa Mimmi\",\n#   \"login\": \"Lulliter\",\n#   \"html_url\": \"https://github.com/Lulliter\",\n#   \"scopes\": \"gist, repo, user, workflow\",\n#   \"token\": \"ghp_...52eR\"\n# } \n\nWhat are SSH keys?\nSecure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#create-an-ssh",
+    "href": "git/git_intro.html#create-an-ssh",
+    "title": "Git introduction",
+    "section": "Create an SSH",
+    "text": "Create an SSH\nYou only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on generating a new SSH key and adding a new SSH key to your GitHub account to learn how to do this.",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
     "objectID": "git/git_intro.html#check-which-ssh-i-already-have",
     "href": "git/git_intro.html#check-which-ssh-i-already-have",
     "title": "Git introduction",
@@ -670,11 +692,55 @@
     ]
   },
   {
+    "objectID": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "title": "Git introduction",
+    "section": "When you accidentally let git track files",
+    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
     "objectID": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
     "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
     "title": "Git introduction",
     "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
     "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#which-branches-have-been-merged",
+    "href": "git/git_intro.html#which-branches-have-been-merged",
+    "title": "Git introduction",
+    "section": "Which branches have been merged?",
+    "text": "Which branches have been merged?\n\n# To see which branches have been merged into your current branch\ngit branch --merged\n# To check if a branch has been merged into the remote default branch (e.g., origin/master): \ngit branch -r --merged origin/master \n\n# To check a specific branch was merged \ngit log master --oneline --decorate --graph --all | grep new_sh",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#visual-confirmation-of-branches",
+    "href": "git/git_intro.html#visual-confirmation-of-branches",
+    "title": "Git introduction",
+    "section": "Visual confirmation of branches",
+    "text": "Visual confirmation of branches\nThis shows a visual representation of branch merges.\n\ngit log --graph --oneline --all\n# for a specific branches\ngit merge-base --is-ancestor new_sh master \n  # success == no output, exit code 0\ngit merge-base --is-ancestor wkg_branch master   \n  # failure\ngit merge-base --is-ancestor page_col master   \n  # success == no output, exit code 0",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#delete-local-and-remote-new_sh-branch",
+    "href": "git/git_intro.html#delete-local-and-remote-new_sh-branch",
+    "title": "Git introduction",
+    "section": "Delete local and remote new_sh branch",
+    "text": "Delete local and remote new_sh branch\n\n# check merged \ngit merge-base --is-ancestor new_sh master \n# delete local \ngit branch -D new_sh\n# delete remote \ngit push origin --delete new_sh\n# re-check \ngit branch -a\n\n\n## WTF remotes/upstream/new_sh ?\ngit remote -v\n# remote also from remote upstream \ngit push upstream --delete new_sh # ---&gt;&gt;&gt;&gt; NOPE (but it was stale in local ref!\ngit remote prune upstream           # ---&gt;&gt;&gt;&gt; YEP !!\n\n# verify deletion \ngit branch -r",
     "crumbs": [
       "git",
       "Git introduction"
@@ -839,39 +905,6 @@
     "crumbs": [
       "Shell",
       "Shell script to change pics"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#when-you-accidentally-let-git-track-files",
-    "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
-    "title": "Git introduction",
-    "section": "When you accidentally let git track files",
-    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#create-an-ssh",
-    "href": "git/git_intro.html#create-an-ssh",
-    "title": "Git introduction",
-    "section": "Create an SSH",
-    "text": "Create an SSH\nYou only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on generating a new SSH key and adding a new SSH key to your GitHub account to learn how to do this.",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#setting-up-your-git-configs",
-    "href": "git/git_intro.html#setting-up-your-git-configs",
-    "title": "Git introduction",
-    "section": "Setting up your Git configs",
-    "text": "Setting up your Git configs\n— In terminal\n\n# - Terminal\n\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@example.com\"\ngit config --global --list\n\n— In R\nThe usethis package offers an alternative approach. You can set your Git user name and email from within R:\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\n#usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nManaging/Verifying git credential stored\n\nWhere do I see it on Github? ? fa(name = \"github\") –&gt; settings –&gt; Developer settings –&gt; Personal Access Tokens\n\n\nWARNING: credentials::git_credential_ask(\"https://github.com\") actually exposes the PAT password\n\n\ncredentials::credential_helper_get()\n      # [1] \"osxkeychain\"\n\n# to see all of them \ncredentials::git_credential_ask(\"https://github.com\")\n      # $protocol\n      # [1] \"https\"\n      # $host\n      # [1] \"github.com\"\n      # $username\n      # [1] \"PersonalAccessToken\"\n      # $password\n      # [1] \"ghp_...52eR\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n      # attr(,\"class\")\n      # [1] \"git_credential\"\n\n# --- other useful things to check \n#usethis::gh_token_help()\nusethis::git_sitrep()\ngh::gh_whoami()\n# {\n#   \"name\": \"Luisa Mimmi\",\n#   \"login\": \"Lulliter\",\n#   \"html_url\": \"https://github.com/Lulliter\",\n#   \"scopes\": \"gist, repo, user, workflow\",\n#   \"token\": \"ghp_...52eR\"\n# } \n\nWhat are SSH keys?\nSecure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.",
-    "crumbs": [
-      "git",
-      "Git introduction"
     ]
   }
 ]
