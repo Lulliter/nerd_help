@@ -59,8 +59,8 @@ git checkout page_col
 git checkout -b page_col  
 ```
 
-Now I see   
-![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b}
+<!-- Now I see   
+![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b} -->
 
 ## Switch to other branch 
 You can also use `git switch other_branch` which is more specific 

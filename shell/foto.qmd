@@ -41,7 +41,7 @@ format-links: false
 ```{bash}
 #!/bin/zsh
 
-# Funzione per convertire le immagini .HEIC in .jpg
+# Funzione per convertire le immagini .heic in .jpg
 convert_heic_to_jpg() {
     # Check if input directory exists
     if [ ! -d "$input_dir" ]; then
@@ -58,19 +58,19 @@ convert_heic_to_jpg() {
         fi
     fi
 
-    # Check if there are any .HEIC files in the input directory
+    # Check if there are any .heic files in the input directory
     shopt -s nullglob
-    heic_files=("$input_dir"/*.HEIC)
+    heic_files=("$input_dir"/*.heic)
     shopt -u nullglob
 
     if [ ${#heic_files[@]} -eq 0 ]; then
-        echo "No .HEIC files found in $input_dir."
+        echo "No .heic files found in $input_dir."
         return 1
     fi
 
-    # Convert each .HEIC file to .jpg
+    # Convert each .heic file to .jpg
     for file in "${heic_files[@]}"; do
-        base_name=$(basename "$file" .HEIC)
+        base_name=$(basename "$file" .heic)
         convert "$file" -quality 85 "$output_dir/$base_name.jpg"
         if [ $? -eq 0 ]; then
             echo "Converted $file to $output_dir/$base_name.jpg"
@@ -112,10 +112,10 @@ reduce_image_size() {
 
 ```{bash}
 # ----4 esempio 
-# Directory contenente le immagini .HEIC
-input_dir="/Users/luisamimmi/Github/_nerd_help/images"
+# Directory contenente le immagini .heic
+input_dir="/Users/luisamimmi/Downloads/foto_250"
 # Directory dove salvare le immagini convertite
-output_dir="/Users/luisamimmi/Github/_nerd_help/images/output"
+output_dir="/Users/luisamimmi/Downloads/foto_250/output"
 
 # Call the 1 function
 convert_heic_to_jpg
