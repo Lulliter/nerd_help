@@ -205,213 +205,40 @@
     "text": "This is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)"
   },
   {
-    "objectID": "git/git_branches.html",
-    "href": "git/git_branches.html",
-    "title": "Git branches",
+    "objectID": "git/git_collab.html",
+    "href": "git/git_collab.html",
+    "title": "Git collaboration",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n\n\n\nCollaboration\n\nI create a test GH account lula-test (associated to l__a__a@icloud.com)\nI clone in /Users/testuser/GH_test/nerd_help this repository “nerd-help” I own as Lulliter and (from there (I indicated that lula-test is a collaborator)\n\n\n# positioned in parent folder /Users/testuser/GH_test/\ngit clone https://github.com/Lulliter/nerd_help.git\ncd nerd_help\n\nRules\n\nTHE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE\n\nyou create new branches for new features and merge them into Master when they’re completed.\nIt’s also important when collaborating that your team picks features that don’t have overlapping code.\n\n\n\n\nHere I create a new branch colors_page and I go there\n\n\n#  I create a new branch to add a color.qmd page and switch there \ngit checkout -b colors_page \n\n# verify this with the command:\ngit branch\n\n\n“checkout” is used to switch between branches. Adding the “-b” and a name at the end creates a new branch and then moves into that new branch for us.\n\nIn the branch, the collabrorator\n\nmakes some changes …\nadd + commit + push\n\n3.b Wait\nEven if I am in the collaborator GH, lookg like the remote is considered the owner GH\n\ngit remote -v         \n# origin  https://github.com/Lulliter/nerd_help.git (fetch)\n# origin  https://github.com/Lulliter/nerd_help.git (push)\n\nso I must change te origin in the collaborator GH\n\ngit remote set-url origin  https://github.com/lula-test/nerd_help.git\n\nReference\n\nBlog on collab\n\nThe Pragmatic Git blogsite\nTutorials",
     "crumbs": [
       "git",
-      "Git branches"
+      "Git collaboration"
     ]
   },
   {
-    "objectID": "git/git_branches.html#create-checkout-a-branch",
-    "href": "git/git_branches.html#create-checkout-a-branch",
-    "title": "Git branches",
-    "section": "Create & checkout a branch",
-    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#switch-to-other-branch",
-    "href": "git/git_branches.html#switch-to-other-branch",
-    "title": "Git branches",
-    "section": "Switch to other branch",
-    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#rename-a-local-branch",
-    "href": "git/git_branches.html#rename-a-local-branch",
-    "title": "Git branches",
-    "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#push-upstream-a-local-branch",
-    "href": "git/git_branches.html#push-upstream-a-local-branch",
-    "title": "Git branches",
-    "section": "Push upstream a local branch",
-    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#rename-a-remote-branch",
-    "href": "git/git_branches.html#rename-a-remote-branch",
-    "title": "Git branches",
-    "section": "Rename a (remote) branch",
-    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#merge-a-git-branch-into-master",
-    "href": "git/git_branches.html#merge-a-git-branch-into-master",
-    "title": "Git branches",
-    "section": "Merge a git branch into master",
-    "text": "Merge a git branch into master\n\nList All Git Branches\nSwitch to Master\nMerge Branch into Master\nPush Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSince merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:\n\n\n\n\n# 1. List\ngit branch\n# 2. Switch\ngit checkout master\n# 3. The merge creates a merge commit, bringing together\n    # lines of development while preserving the history of the source branch.\ngit merge -m \"Prova di merge\" page_col\n# 4. Push the local changes to the remote repository\ngit push origin",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#see-differences-bw-branches",
-    "href": "git/git_branches.html#see-differences-bw-branches",
-    "title": "Git branches",
-    "section": "See differences b/w branches",
-    "text": "See differences b/w branches\n\ngit diff master..page_col '***.qmd'Q",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html",
-    "href": "dev/05_colors.html",
-    "title": "Colors",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html#colors",
-    "href": "dev/05_colors.html#colors",
-    "title": "Colors",
-    "section": "Colors",
-    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html#color-palettes",
-    "href": "dev/05_colors.html#color-palettes",
-    "title": "Colors",
-    "section": "Color palettes",
-    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html",
-    "href": "dev/03b_Google_domain.html",
-    "title": "Custom domain on Google domain",
-    "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "Custom domain on Google domain",
-    "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "href": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] Buy a domain",
-    "text": "[on Google Domain] Buy a domain",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "href": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] set up a “HOSTED ZONE”",
-    "text": "[on Google Domain] set up a “HOSTED ZONE”",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html",
-    "href": "dev/02_quarto.html",
-    "title": "Quarto projects and websites",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html#markdown-divs",
-    "href": "dev/02_quarto.html#markdown-divs",
-    "title": "Quarto projects and websites",
-    "section": "Markdown divs\n",
-    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html#quarto-and-bibliography",
-    "href": "dev/02_quarto.html#quarto-and-bibliography",
-    "title": "Quarto projects and websites",
-    "section": "Quarto and bibliography",
-    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev.html",
-    "href": "dev.html",
-    "title": "Misc. Development tools",
+    "objectID": "git.html",
+    "href": "git.html",
+    "title": "Git",
     "section": "",
     "text": "(Source: www.freepik.com/)",
     "crumbs": [
-      "Dev tools",
-      "Misc. Development tools"
+      "git",
+      "Git"
     ]
+  },
+  {
+    "objectID": "dev/04_boh.html",
+    "href": "dev/04_boh.html",
+    "title": "4) Bonus Stuff",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
+  },
+  {
+    "objectID": "dev/04_boh.html#topics",
+    "href": "dev/04_boh.html#topics",
+    "title": "4) Bonus Stuff",
+    "section": "Topics",
+    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
   },
   {
     "objectID": "dev/03a_AWS.html",
@@ -502,28 +329,212 @@
     ]
   },
   {
-    "objectID": "dev/04_boh.html",
-    "href": "dev/04_boh.html",
-    "title": "4) Bonus Stuff",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "dev/04_boh.html#topics",
-    "href": "dev/04_boh.html#topics",
-    "title": "4) Bonus Stuff",
-    "section": "Topics",
-    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
-  },
-  {
-    "objectID": "git.html",
-    "href": "git.html",
-    "title": "Git",
+    "objectID": "dev.html",
+    "href": "dev.html",
+    "title": "Misc. Development tools",
     "section": "",
     "text": "(Source: www.freepik.com/)",
     "crumbs": [
+      "Dev tools",
+      "Misc. Development tools"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html",
+    "href": "dev/02_quarto.html",
+    "title": "Quarto projects and websites",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#markdown-divs",
+    "href": "dev/02_quarto.html#markdown-divs",
+    "title": "Quarto projects and websites",
+    "section": "Markdown divs\n",
+    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#quarto-and-bibliography",
+    "href": "dev/02_quarto.html#quarto-and-bibliography",
+    "title": "Quarto projects and websites",
+    "section": "Quarto and bibliography",
+    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html",
+    "href": "dev/03b_Google_domain.html",
+    "title": "Custom domain on Google domain",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on Google domain",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "href": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] Buy a domain",
+    "text": "[on Google Domain] Buy a domain",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "href": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] set up a “HOSTED ZONE”",
+    "text": "[on Google Domain] set up a “HOSTED ZONE”",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html",
+    "href": "dev/05_colors.html",
+    "title": "Colors",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#colors",
+    "href": "dev/05_colors.html#colors",
+    "title": "Colors",
+    "section": "Colors",
+    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#color-palettes",
+    "href": "dev/05_colors.html#color-palettes",
+    "title": "Colors",
+    "section": "Color palettes",
+    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html",
+    "href": "git/git_branches.html",
+    "title": "Git branches",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
       "git",
-      "Git"
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#create-checkout-a-branch",
+    "href": "git/git_branches.html#create-checkout-a-branch",
+    "title": "Git branches",
+    "section": "Create & checkout a branch",
+    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#switch-to-other-branch",
+    "href": "git/git_branches.html#switch-to-other-branch",
+    "title": "Git branches",
+    "section": "Switch to other branch",
+    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-local-branch",
+    "href": "git/git_branches.html#rename-a-local-branch",
+    "title": "Git branches",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#push-upstream-a-local-branch",
+    "href": "git/git_branches.html#push-upstream-a-local-branch",
+    "title": "Git branches",
+    "section": "Push upstream a local branch",
+    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-remote-branch",
+    "href": "git/git_branches.html#rename-a-remote-branch",
+    "title": "Git branches",
+    "section": "Rename a (remote) branch",
+    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#merge-a-git-branch-into-master",
+    "href": "git/git_branches.html#merge-a-git-branch-into-master",
+    "title": "Git branches",
+    "section": "Merge a git branch into master",
+    "text": "Merge a git branch into master\n\nList All Git Branches\nSwitch to Master\nMerge Branch into Master\nPush Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSince merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:\n\n\n\n\n# 1. List\ngit branch\n# 2. Switch\ngit checkout master\n# 3. The merge creates a merge commit, bringing together\n    # lines of development while preserving the history of the source branch.\ngit merge -m \"Prova di merge\" page_col\n# 4. Push the local changes to the remote repository\ngit push origin",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#see-differences-bw-branches",
+    "href": "git/git_branches.html#see-differences-bw-branches",
+    "title": "Git branches",
+    "section": "See differences b/w branches",
+    "text": "See differences b/w branches\n\ngit diff master..page_col '***.qmd'Q",
+    "crumbs": [
+      "git",
+      "Git branches"
     ]
   },
   {
@@ -736,11 +747,11 @@
     ]
   },
   {
-    "objectID": "git/git_intro.html#delete-local-and-remote-new_sh-branch",
-    "href": "git/git_intro.html#delete-local-and-remote-new_sh-branch",
+    "objectID": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
+    "href": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
     "title": "Git introduction",
-    "section": "Delete local and remote new_sh branch",
-    "text": "Delete local and remote new_sh branch\n\n# check merged \ngit merge-base --is-ancestor new_sh master \n# delete local \ngit branch -D new_sh\n# delete remote \ngit push origin --delete new_sh\n# re-check \ngit branch -a\n\n\n## WTF remotes/upstream/new_sh ?\ngit remote -v\n# remote also from remote upstream \ngit push upstream --delete new_sh # ---&gt;&gt;&gt;&gt; NOPE (but it was stale in local ref!\ngit remote prune upstream           # ---&gt;&gt;&gt;&gt; YEP !!\n\n# verify deletion \ngit branch -r",
+    "section": "Delete local and remote branch (e.g. new_sh)",
+    "text": "Delete local and remote branch (e.g. new_sh)\n(now not visible anumore)\n\n# check merged \ngit merge-base --is-ancestor new_sh master \n# delete local \ngit branch -D new_sh\n# delete remote \ngit push origin --delete new_sh\n# re-check \ngit branch -a\n\n## WTF remotes/upstream/new_sh ?\ngit remote -v\n# remote also from remote upstream \ngit push upstream --delete new_sh # ---&gt;&gt;&gt;&gt; NOPE (but it was stale in local ref!\ngit remote prune upstream           # ---&gt;&gt;&gt;&gt; YEP !!\n\n# verify deletion \ngit branch -r",
     "crumbs": [
       "git",
       "Git introduction"

@@ -202,6 +202,39 @@ Source: [cloudstudio.com.au](https://cloudstudio.com.au/2021/06/26/git-command/)
 [![Git Workflow](./img_tools/GitWorkflow-4.png)](https://cloudstudio.com.au/2021/06/26/git-command/)
 ::: -->
 
+# Git repo setup (1st Local >> 2nd Github)
+
+1. **Create a local git repository**
+
+```{bash}
+# - Terminal
+
+cd local_proj_dir
+git init
+git add *
+git commit -am ‘Initial commit’
+```
+
+2. **Create a new blank repository on GitHub**
+
++ > There is option ‘add a README file’ and ‘gitignore’ in the initial setup. Keep them unclicked.🚫 🚫 ️
++ Copy repository `hhtps` or `ssh` URL
+
+3. **Push local git repository to GitHub**
+as instructed by Github 
+
+```{bash}
+# - Terminal
+
+# Change the branch to 'main'
+# git branch -M main
+# Connect your local repository to GitHub repository
+git remote add origin hhtps://github.com/username/repo.git
+# Push the local repository to GitHub
+git push -u origin master
+```
+
+
 # Git repo setup (1st Github >> 2nd Local)
 *Recommended!!!* (because this method sets up the local Git repository for immediate pulling and pushing. Under the hood, we are doing `git clone`.)   
 
@@ -328,52 +361,21 @@ git push origin master
 ```
 
 
-# Git repo setup (1st Local >> 2nd Github)
-
-1. **Create a local git repository**
-
-```{bash}
-# - Terminal
-
-cd local_proj_dir
-git init
-git add *
-git commit -am ‘Initial commit’
-```
-
-2. **Create a new blank repository on GitHub**
-
-+ > There is option ‘add a README file’ and ‘gitignore’ in the initial setup. Keep them unclicked.🚫 🚫 ️
-+ Copy repository `hhtps` or `ssh` URL
-
-3. **Push local git repository to GitHub**
-as instructed by Github 
-
-```{bash}
-# - Terminal
-
-# Change the branch to 'main'
-# git branch -M main
-# Connect your local repository to GitHub repository
-git remote add origin hhtps://github.com/username/repo.git
-# Push the local repository to GitHub
-git push -u origin master
-```
-
 
 # Git architecture
 
 + **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. 
-+ Usually there is one default remote repository and origin represents this default repository.
-  + If you don’t like "origin", you can rename it
++ Usually there is one *default remote repository* and `origin` represents this default repository.
+  + ...or you can rename it
 ```{bash}
 # - Terminal
 
-#  see your “origin” remote listed:
+#  see your remote branches listed:
 git remote -v
 
 #  rename origin it by using 
 git remote rename origin new_name
+  # looks like I have 2 remote branches: origin (default) and upstream
 ```
 
 + **`branch`**	branch is a like a fork in the history of a repository. One branch represents an independent line of development, like a fork teeth.
@@ -384,7 +386,16 @@ git remote rename origin new_name
 git branch -a
     # * master
     #   page_col
+    #   test_branch2
+    #   up
+    #   wkg_branch
+    #   remotes/origin/HEAD -> origin/master
     #   remotes/origin/master
+    #   remotes/origin/page_col
+    #   remotes/origin/wkg_branch
+    #   remotes/upstream/master
+    #   remotes/upstream/page_col
+    #   remotes/upstream/wkg_branch
 ```
 
 + **`master`**	(or `main`) is a branch, the default branch, the main branch, and it’s always there.
@@ -523,7 +534,12 @@ git reset --mixed HEAD^
 ```
 
 # Dealing with existing branches
+To show details about a particular remote (e.g. `origin`, which is the default name when you clone a project). This command is for: 
 
+  + Inspecting Remote Details
+  + Checking Remote Branches
+  + Verifying Tracking Branches
+  + Identifying Push and Fetch Status (ensure your local repository is up-to-date or ready for pushing changes)
 ```{bash}
 # - Terminal
 git remote show origin
@@ -534,7 +550,6 @@ git remote show origin
   # HEAD branch: master
   # Remote branches:
     # master     tracked
-    # new_sh     tracked
     # page_col   tracked
     # wkg_branch tracked
   # Local branches configured for 'git pull':
@@ -542,7 +557,6 @@ git remote show origin
     # page_col merges with remote page_col
   # Local refs configured for 'git push':
     # master     pushes to master     (up to date)
-    # new_sh     pushes to new_sh     (up to date)
     # page_col   pushes to page_col   (up to date)
     # wkg_branch pushes to wkg_branch (fast-forwardable)
 ```
@@ -557,6 +571,7 @@ git branch   # to list local branches.
 git branch -r # to list remote branches.
 git branch -a # to list all branches (local + remote).
 ```
+
 ## Which branches have been merged? 
 
 ```{bash}
@@ -583,8 +598,8 @@ git merge-base --is-ancestor page_col master
 ```
 
 
-## Delete local and remote `new_sh` branch 
-
+## Delete local and remote branch (e.g. `new_sh`)
+(now not visible anumore)
 ```{bash}
 # check merged 
 git merge-base --is-ancestor new_sh master 
@@ -595,7 +610,6 @@ git push origin --delete new_sh
 # re-check 
 git branch -a
 
-
 ## WTF remotes/upstream/new_sh ?
 git remote -v
 # remote also from remote upstream 
@@ -605,6 +619,8 @@ git remote prune upstream           # --->>>> YEP !!
 # verify deletion 
 git branch -r
 ```
+
+
 # Reference 
 + [Happy Git and GitHub for the useR](https://happygitwithr.com/ssh)
 + [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)
