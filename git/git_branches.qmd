@@ -63,7 +63,7 @@ git checkout -b page_col
 ![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b} -->
 
 ## Switch to other branch 
-You can also use `git switch other_branch` which is more specific 
+You can *also* use `git switch other_branch` which is more specific 
 
 ```{bash}
 git switch page_col
@@ -73,7 +73,7 @@ cat .git/HEAD # (confirms me I moved)
 ## Rename a (local) branch
 It's the `-m` parameter !
 
-+ you cannot rename a remte branch --> you delete it and re-upload it 
++ you cannot rename a remote branch --> you delete it and re-upload it 
 ```{bash}
 # In currently checkedout 
 git branch -m better_name
@@ -87,27 +87,90 @@ git branch -a  # yep!
 
 ```
 
-## Push upstream a local branch 
-1.  Create local branch 
-2.  Switch to local branch 
-3.  `git push –-set-upstream` command (the 1st time you push)
-4.  Thereafter `git push` (all subsequent git push commands automatically move local branch changes up to the remote branch.)
+
+# Merging a branch misaligned with master 
+
+E.g. I got to Github and examine branches and it tells me that `wkg_branch` is like this 
+
+> This branch (`wkg_branch`) is 2 commits ahead of, 2 commits behind `master`.
+
+## 1. Evaluate changes 
+Review these changes to ensure you understand what will be merged.
+```{bash}
+# check commits in wkg_branchh 
+git log master..wkg_branch
+  #  4 commits...  
+    # qlc su wkg_branch
+    # pasticci su wkg_branch
+    # boh
+    # testing the branch workflow 
+
+# check commits in master
+git log wkg_branch..master
+  # 2 commits 
+    # split git_branch + git_collab ⑂
+    # removed branch new_sh
+```
+
+## 2. Bring the changes from master into your branch 
 
 ```{bash}
-# 1 Create local branch 
-# 2 switch to local branch 
-git switch page_col
-# 3.a git push –set-upstream command (1st time)
-git push  --set-upstream origin  page_col
-  # check 
-  git branch -a # YAY!
-# 3.b git push origin (nest times )
-git push origin
+git checkout wkg_branch
 ```
 
 
+--- 
+
+# !!!!! ⛔️ in progress ⛔️!!!! 
+---
+
+## Push upstream a local branch 
+
+Check out explanation here [https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/](https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/)
+
+> It is important to Setup an **Upstream Branch** in Git to make the workflow smooth and manage branches efficiently. 
+
+> An upstream branch in Git refers to a branch that serves as a *reference point* for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.
+
+1.  Create local branch 
+2.  Switch to local branch `git checkout -b <new_branch>`
+3.  [When the current branch i.e (‘new_branch’) has no Upstream branch set] `git push –-set-upstream origin <new_branch>` command (the 1st time you push)
+4.  Thereafter `git push -u origin <new_branch>` (all subsequent git push commands automatically move local branch changes up to the remote branch.)
+
+```{bash}
+# 1 Create local branch 
+
+# 2 switch to local branch 
+git checkout -b <new_branch> # or
+git switch <new_branch> 
+
+# 3.a git push –set-upstream command (1st time)
+git push  --set-upstream origin <new_branch>
+  # check 
+  git branch -a # YAY!
+
+# 3.b git push origin (nest times )
+git push -u origin <new_branch>
+```
+
+## Check which Git branches are tracking which Upstream brances 
+
+```{bash}
+git branch -vv
+
+# * master       789640d [origin/master] split git_branch + git_collab ⑂
+#   page_col     c86edff [origin/page_col] added color.qmd to branch
+#   test_branch2 c86edff added color.qmd to branch
+#   up           bb0035b [upstream/master] git stuff
+#   wkg_branch   12e1e52 qlc su wkg_branch
+```
+
++ The main branch (master) has a tracking branch of [origin/master]
++ up has a tracking branch of [upstream/master]
+
 ## Rename a (remote) branch
 You need to 
+
 1. Publish an existing local branch on remote
 `git push -u origin local_branch`
 2. So you delete old one and push up a new one from local repository  
@@ -118,7 +181,6 @@ You need to
 2. Switch to Master
 3. Merge Branch into Master
 4. Push Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)
-
 
 
 ::: {.callout-tip collapse="true"}
@@ -232,69 +294,3 @@ git commit --amend
 git push -f origin wkg_branch 
 ```
 
-# Collaboration
-
-1. I create a test GH account **lula-test**  (associated to l__a__a@icloud.com)
-
-2. I clone in  `/Users/testuser/GH_test/nerd_help` this repository "nerd-help" I own as **Lulliter** and (from there (I indicated that **lula-test** is a collaborator)
-
-
-```{bash}
-# positioned in parent folder /Users/testuser/GH_test/
-git clone https://github.com/Lulliter/nerd_help.git
-cd nerd_help
-```
-
-**Rules** 
-
-+ THE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE
-  + you create new branches for new features and merge them into Master when they’re completed. 
-
-  + It’s also important when collaborating that your team picks features that don’t have overlapping code. 
-
-3. Here I create a new branch **colors_page** and I go there 
-
-```{bash}
-#  I create a new branch to add a color.qmd page and switch there 
-git checkout -b colors_page 
-
-# verify this with the command:
-git branch
-```
-
-
-  + "checkout” is used to switch between branches. Adding the “-b” and a name at the end creates a new branch and then moves into that new branch for us.
-
-In the branch, the collabrorator
-
-+ makes some changes ...
-+ add + commit + push 
-
-3.b Wait 
-
-Even if I am in the collaborator GH, lookg like the remote is considered the owner GH 
-
-```{bash}
-git remote -v         
-# origin  https://github.com/Lulliter/nerd_help.git (fetch)
-# origin  https://github.com/Lulliter/nerd_help.git (push)
-```
-so I must change te origin in the collaborator GH
-
-
-```{bash}
-git remote set-url origin  https://github.com/lula-test/nerd_help.git
-```
-
-
-
-
-
-
-# Reference 
-+ [Blog on collab](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67)
-+ [The Pragmatic Git](https://blog.git-init.com/git-gold/) blogsite
-+ [Tutorials](https://phoenixnap.com/kb/tag/git)
-
-
------
