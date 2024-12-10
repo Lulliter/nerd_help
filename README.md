@@ -4,9 +4,11 @@ This is a set of instructions for "nerdy things" that I will never remember...
 
 # TO DO list ✍︎
 
-+ ❒ 1) **git & Github** (`~/Documents/__nerd/00_shell_git _make/*`) 2 `*.qmd` file 
-+ ❒ 4) **Bonus stuff** ... 
-+ ❒
++ ❒ 1) **git**
+    + ❒ Rivedere `Git branches`
+    + ❒ Rivedere `Git collaboration`
++ ❒ 4) **Bshell** ... 
+    + ❒ Rivedere `Shell script to learn variables`
 + ❒
 + ❒
 + ❒
