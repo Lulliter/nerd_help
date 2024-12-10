@@ -498,7 +498,7 @@
     "href": "git/git_branches.html#push-upstream-a-local-branch",
     "title": "Git branches",
     "section": "Push upstream a local branch",
-    "text": "Push upstream a local branch\n\nCreate local branch\nSwitch to local branch\n\ngit push –-set-upstream command (the 1st time you push)\nThereafter git push (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n# 2 switch to local branch \ngit switch page_col\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin  page_col\n  # check \n  git branch -a # YAY!\n# 3.b git push origin (nest times )\ngit push origin",
+    "text": "Push upstream a local branch\nCheck out explanation here https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/\n\nIt is important to Setup an Upstream Branch in Git to make the workflow smooth and manage branches efficiently.\n\n\nAn upstream branch in Git refers to a branch that serves as a reference point for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.\n\n\nCreate local branch\nSwitch to local branch git checkout -b &lt;new_branch&gt;\n\n[When the current branch i.e (‘new_branch’) has no Upstream branch set] git push –-set-upstream origin &lt;new_branch&gt; command (the 1st time you push)\nThereafter git push -u origin &lt;new_branch&gt; (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n\n# 2 switch to local branch \ngit checkout -b &lt;new_branch&gt; # or\ngit switch &lt;new_branch&gt; \n\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin &lt;new_branch&gt;\n  # check \n  git branch -a # YAY!\n\n# 3.b git push origin (nest times )\ngit push -u origin &lt;new_branch&gt;",
     "crumbs": [
       "git",
       "Git branches"
@@ -509,7 +509,7 @@
     "href": "git/git_branches.html#rename-a-remote-branch",
     "title": "Git branches",
     "section": "Rename a (remote) branch",
-    "text": "Rename a (remote) branch\nYou need to 1. Publish an existing local branch on remote git push -u origin local_branch 2. So you delete old one and push up a new one from local repository",
+    "text": "Rename a (remote) branch\nYou need to\n\nPublish an existing local branch on remote git push -u origin local_branch\n\nSo you delete old one and push up a new one from local repository",
     "crumbs": [
       "git",
       "Git branches"
@@ -916,6 +916,17 @@
     "crumbs": [
       "Shell",
       "Shell script to change pics"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#check-which-git-branches-are-tracking-which-upstream-brances",
+    "href": "git/git_branches.html#check-which-git-branches-are-tracking-which-upstream-brances",
+    "title": "Git branches",
+    "section": "Check which Git branches are tracking which Upstream brances",
+    "text": "Check which Git branches are tracking which Upstream brances\n\ngit branch -vv\n\n# * master       789640d [origin/master] split git_branch + git_collab ⑂\n#   page_col     c86edff [origin/page_col] added color.qmd to branch\n#   test_branch2 c86edff added color.qmd to branch\n#   up           bb0035b [upstream/master] git stuff\n#   wkg_branch   12e1e52 qlc su wkg_branch\n\n\nThe main branch (master) has a tracking branch of [origin/master]\nup has a tracking branch of [upstream/master]",
+    "crumbs": [
+      "git",
+      "Git branches"
     ]
   }
 ]
