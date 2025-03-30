@@ -1,0 +1,131 @@
+---
+title: "Aruba <-> GH Pages"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+#editor: source
+## ------  general Output Options
+execute:     
+  eval: true
+  echo: false     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: true # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+::: {.callout-caution collapse="false"}
+Website construction in progress...
+:::
+
+## ✅ Step 1: Deploy your website via GitHub Pages
+
+Make sure your site is published via GitHub Pages.
+
+- **User site**: `https://yourusername.github.io/`
+- **Project site**: `https://yourusername.github.io/project-name/`
+
+Set your custom domain in the repo settings or by adding a `CNAME` file to the root of your repository with the content:
+
+```
+yourdomain.com
+```
+
+---
+
+## ✅ Step 2: Get your domain from Aruba
+
+If you haven't already, purchase or manage your domain on [https://admin.aruba.it](https://admin.aruba.it).
+
+---
+
+## ✅ Step 3: Update DNS Settings on Aruba
+
+1. Log in to Aruba's admin panel.
+2. Go to:
+
+```
+Domini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS
+```
+
+3. Add the following **A records** to point to GitHub Pages:
+
+| Type | Name | Value             |
+|------|------|-------------------|
+| A    | @    | 185.199.108.153   |
+| A    | @    | 185.199.109.153   |
+| A    | @    | 185.199.110.153   |
+| A    | @    | 185.199.111.153   |
+
+4. Add a **CNAME record** so `www.yourdomain.com` redirects correctly:
+
+| Type  | Name | Value                      |
+|-------|------|----------------------------|
+| CNAME | www  | yourusername.github.io.    |
+
+> ⚠️ Don’t forget the trailing `.` after your GitHub username.
+
+---
+
+## ✅ Step 4: Configure your GitHub Repository
+
+1. Go to your repository → Settings → Pages.
+2. In the **Custom domain** field, enter:
+
+```
+yourdomain.com
+```
+
+3. GitHub will create a `CNAME` file automatically.
+4. **Enable "Enforce HTTPS"** after DNS has propagated.
+
+---
+
+## ⏱️ Wait for DNS Propagation
+
+- This can take a few hours (up to 48h).
+- Use tools like [https://dnschecker.org](https://dnschecker.org) to check your domain.
+- From your terminal:  
+```bash
+ping yourdomain.com
+```
+
+---
+
+## 🧪 Test
+
+Once propagated:
+
+- Visit `https://yourdomain.com`
+- Also test `https://www.yourdomain.com` to ensure CNAME redirection works.
+
+---
+
+## 🔁 Optional: Redirect `www` to apex domain
+
+You can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like `www.yourdomain.com` that forwards to `yourdomain.com`.
+
+Let me know if you’d like a template for that too!

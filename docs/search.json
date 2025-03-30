@@ -227,18 +227,15 @@
     ]
   },
   {
-    "objectID": "dev/04_boh.html",
-    "href": "dev/04_boh.html",
-    "title": "4) Bonus Stuff",
+    "objectID": "dev/04_AWS_mail.html",
+    "href": "dev/04_AWS_mail.html",
+    "title": "Aruba <-> GH Pages",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…"
-  },
-  {
-    "objectID": "dev/04_boh.html#topics",
-    "href": "dev/04_boh.html#topics",
-    "title": "4) Bonus Stuff",
-    "section": "Topics",
-    "text": "Topics\n\nnew mac setup\n\nshell commands\n\nlooking for files CLI /Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh\n\n\n\nunderstanding collaboration on git /GH\n\nExample of things\n\n\n_variables.yml for quarto projects variables\nExample of gitignore\n\n\n\nAuthentication for Github\n\nUsing the SSH protocol (credentials)\nCloning GitHub repositories using SSH\nCloning GitHub repositories using HTTPS\n\n\nmake\nVS Code\n…"
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
   },
   {
     "objectID": "dev/03a_AWS.html",
@@ -509,7 +506,29 @@
     "href": "git/git_branches.html#bring-the-changes-from-master-into-your-branch",
     "title": "Git branches",
     "section": "2. Bring the changes from master into your branch",
-    "text": "2. Bring the changes from master into your branch\n\ngit checkout wkg_branch",
+    "text": "2. Bring the changes from master into your branch\n\ngit checkout wkg_branch\ngit merge master # error \n # here I have problems \n\n2.1. Resolve conflicts\ndifferent ways to resolve conflicts\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\ngit merge master\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\ngit merge master\n\n\nUse a merge tool\n\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#push-the-updated-branch",
+    "href": "git/git_branches.html#push-the-updated-branch",
+    "title": "Git branches",
+    "section": "3. Push the Updated Branch",
+    "text": "3. Push the Updated Branch\n\ngit push",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#optional-merge-the-branhc-into-master",
+    "href": "git/git_branches.html#optional-merge-the-branhc-into-master",
+    "title": "Git branches",
+    "section": "4. (optional) merge the branhc into master",
+    "text": "4. (optional) merge the branhc into master\n\ngit checkout master\ngit merge wkg_branch\ngit push",
     "crumbs": [
       "git",
       "Git branches"
@@ -945,10 +964,87 @@
     "href": "shell/foto.html",
     "title": "Shell script to change pics",
     "section": "",
-    "text": "Needed to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/_nerd_help/images\"\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/_nerd_help/images/output\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd huge_res\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_image_size() {\n    # Creare una directory di output nella directory di lavoro corrente\n    mkdir -p \"./output\"\n\n    max_size=5000000\n\n    # Loop su ogni immagine .jpg nella directory corrente\n    for file in ./*.jpg; do\n        # Estrae il nome base del file\n        base_name=$(basename \"$file\")\n\n        # Copia l'immagine nella directory di output\n        cp \"$file\" \"./output/$base_name\"\n\n        # Inizializza la qualità a 85\n        quality=85\n\n        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                # Riduci la qualità\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                # Se la qualità è già bassa, riduci la risoluzione del 90%\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        # Mostra la dimensione finale dell'immagine\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_image_size",
+    "text": "change format for individual .HEIC pic\n\n# Specify input directory, file name, and output directory\ninput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo\"\noutput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg\"\n# single foto\nfile_name=\"IMG_5398.heic\"\n\n# Construct full input and output file paths\ninput_file=\"${input_dir}/${file_name}\"\noutput_file=\"${output_dir}/${file_name%.heic}.jpg\"\n\n# Convert to .jpg\nsips -s format jpeg \"$input_file\" --out \"$output_file\"\n\nNeeded to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img\"\n\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img/smaller\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd $input_dir\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_any_image_size() {\n    mkdir -p \"./output\"\n    max_size=5000000\n\n    find . -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.png\" \\) | while read -r file; do\n        base_name=$(basename \"$file\")\n        cp \"$file\" \"./output/$base_name\"\n        quality=85\n\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_any_image_size",
     "crumbs": [
       "Shell",
       "Shell script to change pics"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "href": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 1: Deploy your website via GitHub Pages",
+    "text": "✅ Step 1: Deploy your website via GitHub Pages\nMake sure your site is published via GitHub Pages.\n\n\nUser site: https://yourusername.github.io/\n\n\nProject site: https://yourusername.github.io/project-name/\n\n\nSet your custom domain in the repo settings or by adding a CNAME file to the root of your repository with the content:\nyourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "href": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 2: Get your domain from Aruba",
+    "text": "✅ Step 2: Get your domain from Aruba\nIf you haven’t already, purchase or manage your domain on https://admin.aruba.it.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "href": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 3: Update DNS Settings on Aruba",
+    "text": "✅ Step 3: Update DNS Settings on Aruba\n\nLog in to Aruba’s admin panel.\nGo to:\n\nDomini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS\n\nAdd the following A records to point to GitHub Pages:\n\n\n\nType\nName\nValue\n\n\n\nA\n@\n185.199.108.153\n\n\nA\n@\n185.199.109.153\n\n\nA\n@\n185.199.110.153\n\n\nA\n@\n185.199.111.153\n\n\n\n\nAdd a CNAME record so www.yourdomain.com redirects correctly:\n\n\n\nType\nName\nValue\n\n\nCNAME\nwww\nyourusername.github.io.\n\n\n\n⚠️ Don’t forget the trailing . after your GitHub username.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "href": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 4: Configure your GitHub Repository",
+    "text": "✅ Step 4: Configure your GitHub Repository\n\nGo to your repository → Settings → Pages.\nIn the Custom domain field, enter:\n\nyourdomain.com\n\nGitHub will create a CNAME file automatically.\n\nEnable “Enforce HTTPS” after DNS has propagated.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "href": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "title": "Aruba <-> GH Pages",
+    "section": "⏱️ Wait for DNS Propagation",
+    "text": "⏱️ Wait for DNS Propagation\n\nThis can take a few hours (up to 48h).\nUse tools like https://dnschecker.org to check your domain.\nFrom your terminal:\n\n\nping yourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#test",
+    "href": "dev/04_AWS_mail.html#test",
+    "title": "Aruba <-> GH Pages",
+    "section": "🧪 Test",
+    "text": "🧪 Test\nOnce propagated:\n\nVisit https://yourdomain.com\n\nAlso test https://www.yourdomain.com to ensure CNAME redirection works.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "href": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "title": "Aruba <-> GH Pages",
+    "section": "🔁 Optional: Redirect www to apex domain",
+    "text": "🔁 Optional: Redirect www to apex domain\nYou can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like www.yourdomain.com that forwards to yourdomain.com.\nLet me know if you’d like a template for that too!",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
     ]
   }
 ]

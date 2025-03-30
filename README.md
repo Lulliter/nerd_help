@@ -6,11 +6,28 @@ This is a set of instructions for "nerdy things" that I will never remember...
 
 + ❒ 1) **git & Github** (`~/Documents/__nerd/00_shell_git _make/*`) 2 `*.qmd` file 
 + ❒ 4) **Bonus stuff** ... 
-+ ❒
-+ ❒
-+ ❒
-+ ❒
 
++ new mac setup
+
++ ❒ shell commands
+  + looking for files CLI `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh`
++ ❒ understanding collaboration on git /GH
+
++ ❒ Example of things 
+  + `_variables.yml` for quarto projects variables
+  + Example of gitignore
+
++ ❒ Authentication for Github
+    + Using the SSH protocol (credentials)
+    + Cloning GitHub repositories using SSH
+    + Cloning GitHub repositories using HTTPS
+
++ ❒ make 
++ ❒ VS Code 
++ ❒
++ ❒
++ ❒
++ ❒
 
 # Content
 

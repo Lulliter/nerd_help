@@ -116,8 +116,54 @@ git log wkg_branch..master
 
 ```{bash}
 git checkout wkg_branch
+git merge master # error 
+ # here I have problems 
 ```
 
+### 2.1. Resolve conflicts
+different ways to resolve conflicts 
+
+a. **Commit local changes** 
+```{bash}
+# (in wkg_branch)
+git add .
+git commit -m "Save local changes"
+git merge master
+```
+
+b. ~~**Stash the changes**~~  
+```{bash}
+# (in wkg_branch)
+git stash
+git merge master
+git stash pop
+```
+
+c. **Discard the local changes** 
+```{bash}
+# (in wkg_branch)
+git checkout -- .
+git checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml
+git merge master
+```
+
+d. **Use a merge tool** 
+
+You can use a merge tool to resolve the conflicts, such as `git mergetool` or `git difftool`. 
+
+## 3. Push the Updated Branch
+
+```{bash}
+git push
+```
+
+## 4. (optional) merge the branhc into master 
+
+```{bash}
+git checkout master
+git merge wkg_branch
+git push
+```
 
 --- 
 

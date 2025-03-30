@@ -35,6 +35,26 @@ format:
   #   embed-resources: true # external dependencies embedded (Not in ..._files/)
 format-links: false
 ---
+
+# change format for individual `.HEIC` pic 
+
+
+```{bash}
+# Specify input directory, file name, and output directory
+input_dir="/Users/luisamimmi/Documents/14_FOTO/2025_50esimo"
+output_dir="/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg"
+# single foto
+file_name="IMG_5398.heic"
+
+# Construct full input and output file paths
+input_file="${input_dir}/${file_name}"
+output_file="${output_dir}/${file_name%.heic}.jpg"
+
+# Convert to .jpg
+sips -s format jpeg "$input_file" --out "$output_file"
+
+```
+
 # Needed to change size and format 
 
 
@@ -113,9 +133,10 @@ reduce_image_size() {
 ```{bash}
 # ----4 esempio 
 # Directory contenente le immagini .HEIC
-input_dir="/Users/luisamimmi/Github/_nerd_help/images"
+input_dir="/Users/luisamimmi/Github/cv_typst/assets/img"
+
 # Directory dove salvare le immagini convertite
-output_dir="/Users/luisamimmi/Github/_nerd_help/images/output"
+output_dir="/Users/luisamimmi/Github/cv_typst/assets/img/smaller"
 
 # Call the 1 function
 convert_heic_to_jpg
@@ -127,45 +148,33 @@ reduce_image_size
 #!/bin/zsh
 
 # move to desired dir 
-cd huge_res
+cd $input_dir
 
 # Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi
-reduce_image_size() {
-    # Creare una directory di output nella directory di lavoro corrente
+reduce_any_image_size() {
     mkdir -p "./output"
-
     max_size=5000000
 
-    # Loop su ogni immagine .jpg nella directory corrente
-    for file in ./*.jpg; do
-        # Estrae il nome base del file
+    find . -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.png" \) | while read -r file; do
         base_name=$(basename "$file")
-
-        # Copia l'immagine nella directory di output
         cp "$file" "./output/$base_name"
-
-        # Inizializza la qualità a 85
         quality=85
 
-        # Riduzione della qualità e, se necessario, riduzione della risoluzione in un unico ciclo
         while [[ $(stat -f%z "./output/$base_name") -ge $max_size ]]; do
             if [[ $quality -gt 10 ]]; then
-                # Riduci la qualità
                 magick "./output/$base_name" -quality $quality "./output/$base_name"
                 quality=$((quality - 5))
             else
-                # Se la qualità è già bassa, riduci la risoluzione del 90%
                 magick "./output/$base_name" -resize 90% "./output/$base_name"
             fi
         done
 
-        # Mostra la dimensione finale dell'immagine
         echo "Reduced $base_name to $(stat -f%z "./output/$base_name") bytes"
     done
 }
 
 
 # Esecuzione della funzione
-reduce_image_size
+reduce_any_image_size
 ```
 
