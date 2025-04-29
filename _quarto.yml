@@ -64,6 +64,7 @@ website:
         - dev/02_quarto.qmd
         - dev/03a_AWS.qmd
         - dev/03b_Google_domain.qmd
+        - dev/04_AWS_mail.qmd
         - dev/05_colors.qmd
 
     - title: "git"
