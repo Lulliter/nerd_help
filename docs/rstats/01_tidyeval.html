@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Tidyeval and functional programming – Nerd help</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<link href="../rstats/00_useful.html" rel="prev">
+<link href="../images/icons8-git-96.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17c909d5fd25ae21b861c0c7a49b2096.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fab7bd7b12f84aff3e610d09ddea808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Nerd help</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../dev.html"> <i class="bi bi-tools" role="img">
+</i> 
+<span class="menu-text">Dev tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../git.html"> <i class="bi bi-git" role="img">
+</i> 
+<span class="menu-text">git</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../rstats.html" aria-current="page"> 
+<span class="menu-text"><i class="fa-brands fa-r-project" aria-label="r-project"></i> programming</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../shell.html"> <i class="bi bi-terminal-fill" role="img">
+</i> 
+<span class="menu-text">Shell</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../me.html"> <i class="bi bi-person-circle" role="img">
+</i> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rstats/01_tidyeval.html">Tidyeval and functional programming</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rstats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">I ❤️ #rstats</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rstats/00_useful.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful things R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rstats/01_tidyeval.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Tidyeval and functional programming</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+    <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Outline</h2>
+   
+  <ul>
+<li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a></li>
+  <li><a href="#learning-resources" id="toc-learning-resources" class="nav-link" data-scroll-target="#learning-resources">Learning resources</a></li>
+  <li><a href="#more" id="toc-more" class="nav-link" data-scroll-target="#more">MORE</a></li>
+  <li>
+<a href="#premise" id="toc-premise" class="nav-link" data-scroll-target="#premise">Premise</a>
+  <ul class="collapse">
+<li><a href="#non-standard-evaluation-in-tidyverse" id="toc-non-standard-evaluation-in-tidyverse" class="nav-link" data-scroll-target="#non-standard-evaluation-in-tidyverse">Non-Standard evaluation in <code>tidyverse</code></a></li>
+  <li>
+<a href="#two-complementary-forms-of-nse-used-in-tidyverse" id="toc-two-complementary-forms-of-nse-used-in-tidyverse" class="nav-link" data-scroll-target="#two-complementary-forms-of-nse-used-in-tidyverse">Two (complementary) forms of NSE used in <code>tidyverse</code></a>
+  <ul class="collapse">
+<li><a href="#tidy-selection-is-used-in-selection-verbs" id="toc-tidy-selection-is-used-in-selection-verbs" class="nav-link" data-scroll-target="#tidy-selection-is-used-in-selection-verbs">1) <strong>TIDY SELECTION</strong> is used in SELECTION VERBS</a></li>
+  <li><a href="#data-masking-used-in-action-verbs" id="toc-data-masking-used-in-action-verbs" class="nav-link" data-scroll-target="#data-masking-used-in-action-verbs">2) <strong>DATA MASKING</strong> used in ACTION VERBS</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#different-options" id="toc-different-options" class="nav-link" data-scroll-target="#different-options">Different options</a>
+  <ul class="collapse">
+<li><a href="#defuse-nothing-inject-inside-custom-f" id="toc-defuse-nothing-inject-inside-custom-f" class="nav-link" data-scroll-target="#defuse-nothing-inject-inside-custom-f">1 Defuse (nothing!) + Inject <code>{{</code> (inside custom f)</a></li>
+  <li><a href="#defuse-enquo-inject-inside-custom-f" id="toc-defuse-enquo-inject-inside-custom-f" class="nav-link" data-scroll-target="#defuse-enquo-inject-inside-custom-f">2 Defuse <code>enquo</code> + Inject <code>!!</code> (inside custom f)</a></li>
+  <li><a href="#defuse-...-inject-..." id="toc-defuse-...-inject-..." class="nav-link" data-scroll-target="#defuse-...-inject-...">3 Defuse <code>...</code> + Inject <code>...</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#different-options-with-naming" id="toc-different-options-with-naming" class="nav-link" data-scroll-target="#different-options-with-naming">Different options with NAMING</a>
+  <ul class="collapse">
+<li><a href="#b-nothing-left-side" id="toc-b-nothing-left-side" class="nav-link" data-scroll-target="#b-nothing-left-side">1b (nothing!) + <code>{{</code> &amp; left side <code>:=</code> !!!!</a></li>
+  <li><a href="#b-enquo-left-side" id="toc-b-enquo-left-side" class="nav-link" data-scroll-target="#b-enquo-left-side">2b <code>enquo</code> + <code>!!</code> &amp; left side <code>:=</code></a></li>
+  <li><a href="#b-...-...-left-side" id="toc-b-...-...-left-side" class="nav-link" data-scroll-target="#b-...-...-left-side">3b <code>...</code> + <code>...</code> &amp; left side <code>:=</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#adding-the-.data-syntax" id="toc-adding-the-.data-syntax" class="nav-link" data-scroll-target="#adding-the-.data-syntax">Adding the <code>.data</code> syntax</a>
+  <ul class="collapse">
+<li><a href="#c-inject-specify-.data" id="toc-c-inject-specify-.data" class="nav-link" data-scroll-target="#c-inject-specify-.data">1.c Inject <code>{{</code> + specify <code>.data</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#iteration-purrr-on-top-of-dplyr-nse" id="toc-iteration-purrr-on-top-of-dplyr-nse" class="nav-link" data-scroll-target="#iteration-purrr-on-top-of-dplyr-nse">Iteration <code>purrr</code> on top of (dplyr) NSE</a>
+  <ul class="collapse">
+<li><a href="#option-1-purrr-existing-function-.f" id="toc-option-1-purrr-existing-function-.f" class="nav-link" data-scroll-target="#option-1-purrr-existing-function-.f">Option 1) <code>purrr</code> + existing function <code>.f</code>…</a></li>
+  <li><a href="#option-2-purrr-anonymous-function-as-formula-fun" id="toc-option-2-purrr-anonymous-function-as-formula-fun" class="nav-link" data-scroll-target="#option-2-purrr-anonymous-function-as-formula-fun">Option 2) <code>purrr</code> + anonymous function as formula <code>~ fun()</code></a></li>
+  </ul>
+</li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">_______</a></li>
+  <li>
+<a href="#iteration-purrr-with-purrr-nse" id="toc-iteration-purrr-with-purrr-nse" class="nav-link" data-scroll-target="#iteration-purrr-with-purrr-nse">Iteration <code>purrr</code> with (purrr) NSE</a>
+  <ul class="collapse">
+<li><a href="#masked-group_var-in-purrrmap" id="toc-masked-group_var-in-purrrmap" class="nav-link" data-scroll-target="#masked-group_var-in-purrrmap">—- 1 masked group_var in <code>purrr::map</code></a></li>
+  <li><a href="#a-masked-num_var-in-purrrmap" id="toc-a-masked-num_var-in-purrrmap" class="nav-link" data-scroll-target="#a-masked-num_var-in-purrrmap">—- 2a masked num_var in <code>purrr::map</code></a></li>
+  <li><a href="#b-masked-num_var-in-purrrmap" id="toc-b-masked-num_var-in-purrrmap" class="nav-link" data-scroll-target="#b-masked-num_var-in-purrrmap">—- 2b masked num_var in <code>purrr::map</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#wrong-start_____" id="toc-wrong-start_____" class="nav-link" data-scroll-target="#wrong-start_____">_______ WRONG (start)_____</a>
+  <ul class="collapse">
+<li><a href="#masked-group_var-num_var-vars-in-purrrmap" id="toc-masked-group_var-num_var-vars-in-purrrmap" class="nav-link" data-scroll-target="#masked-group_var-num_var-vars-in-purrrmap">—- 3 masked group_var + num_var vars in <code>purrr::map</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#wrong-end_____" id="toc-wrong-end_____" class="nav-link" data-scroll-target="#wrong-end_____">_______ WRONG (end)_____</a>
+  <ul class="collapse">
+<li>
+<a href="#tidyeval-in-purrr-custom-function" id="toc-tidyeval-in-purrr-custom-function" class="nav-link" data-scroll-target="#tidyeval-in-purrr-custom-function">Tidyeval in purrr + custom function</a>
+  <ul class="collapse">
+<li><a href="#single-group-num-function" id="toc-single-group-num-function" class="nav-link" data-scroll-target="#single-group-num-function">1/2 single (group, num) function</a></li>
+  <li><a href="#map-function" id="toc-map-function" class="nav-link" data-scroll-target="#map-function">2/2 map function</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">_______</a>
+  <ul class="collapse">
+<li><a href="#digression-pluck" id="toc-digression-pluck" class="nav-link" data-scroll-target="#digression-pluck">[digression] <code>pluck</code></a></li>
+  </ul>
+</li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Tidyeval and functional programming</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tue, 29 of April, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Tue, 29 of April, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header><div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Web page construction in progress…</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org">rlang</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="tldr" class="level1"><h1>TL;DR</h1>
+<p>Inside data-masking function (actions), we can use injection operators:</p>
+<pre><code>    + `{` embracing operator (`rlang`) OR
+        + [`enquo` followed by] `!!` operator (`base`) 
+        + `...` + `...`
+    + varname_name `:=` function(`{{var}`)
+    + `.data` pronouns. 
+    + `.env` pronouns.</code></pre>
+</section><section id="learning-resources" class="level1"><h1>Learning resources</h1>
+<ul>
+<li><p><a href="https://www.youtube.com/watch?v=L_sX-sL9aWM&amp;t=1810s">ALbert Rapp YT vid</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=pcvWKVlRmwE">Bruno Rodriguez YT vid</a></p></li>
+<li><p><a href="https://rlang.r-lib.org/reference/topic-data-%20mask.html">rlang DATAMASKING</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=YlZuT6PWOEY&amp;t=1s">Tidy eval in R: A simple example</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=SW_TUkPXSmA">Lionel Henry | Interactivity and Programming in the Tidyverse</a> | RStudioConf (2020)</p></li>
+<li><p><a href="https://jennybc.github.io/purrr-tutorial/ls03_map-function-syntax.html#map()_function_specification">purrr</a></p></li>
+</ul></section><section id="more" class="level1"><h1>MORE</h1>
+<p>https://jonthegeek.com/2018/06/04/writing-custom-tidyverse-functions/</p>
+</section><section id="premise" class="level1"><h1>Premise</h1>
+<p>Premise: <code>tidyverse</code> functions use <strong>tidy evaluation</strong> (= <em>they don’t evaluate the value of a variable right away</em>! = <strong>Non-Standard evaluation</strong>).</p>
+<ul>
+<li>(+) This means you can do some intermediate transformation to the variable in abstract (e.g.&nbsp;to a generic “column” thing)</li>
+<li>(-) it’s hard to refer to variables indirectly, and hence harder to program with</li>
+</ul>
+<p>In contrast, normal/base/custom R functions DO evaluate objects (i.e.&nbsp;<code>a+b</code>) <strong>as soon as possible</strong> = <strong>Standard evaluation</strong></p>
+<p>So, to take full advantage of <strong>Non-Standard evaluation</strong> (more interactivity, but also writing custom functions), I will need a sort of <strong>METAVARIABLE</strong> (a “quosure”), i.e.&nbsp;something that doesn’t get evaluated until I tell so.</p>
+<section id="non-standard-evaluation-in-tidyverse" class="level2"><h2 class="anchored" data-anchor-id="non-standard-evaluation-in-tidyverse">Non-Standard evaluation in <code>tidyverse</code>
+</h2>
+<ul>
+<li>
+<strong>DEFUSING</strong> (<strong>DELAYING</strong>) function arguments: I can create a “quosure” with <code><a href="https://rlang.r-lib.org/reference/enquo.html">rlang::enquo()</a></code> / <code><a href="https://rlang.r-lib.org/reference/enquo.html">rlang::enquos()</a></code> so an expression can be examined, modified, and injected into other expressions.</li>
+</ul></section><section id="two-complementary-forms-of-nse-used-in-tidyverse" class="level2"><h2 class="anchored" data-anchor-id="two-complementary-forms-of-nse-used-in-tidyverse">Two (complementary) forms of NSE used in <code>tidyverse</code>
+</h2>
+<section id="tidy-selection-is-used-in-selection-verbs" class="level3"><h3 class="anchored" data-anchor-id="tidy-selection-is-used-in-selection-verbs">1) <strong>TIDY SELECTION</strong> is used in SELECTION VERBS</h3>
+<p>e.g.&nbsp;in <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code> use <strong><em>tidy selection</em></strong> where expressions are either interpreted in the context of the data frame (e.g.&nbsp;<code>c(cyl, am)</code> or evaluated in the user environment (e.g.&nbsp;<code><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>)</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># EXE `across()`</span></span>
+<span><span class="va">summarise_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># all variables selected by user... </span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">vars</span> <span class="op">}</span><span class="op">}</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># call </span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">homeworld</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co"># with where</span></span>
+<span>    <span class="fu">summarise_mean</span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="data-masking-used-in-action-verbs" class="level3"><h3 class="anchored" data-anchor-id="data-masking-used-in-action-verbs">2) <strong>DATA MASKING</strong> used in ACTION VERBS</h3>
+<p>ACTION VERBS = <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">ggplot2::aes()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>.</p>
+<p>Normal interactive programming (<code>tidyverse</code>) use <strong><em>data-masking</em></strong>, which allow you to use variables in the “current” data frame without any extra syntax. This:</p>
+<ul>
+<li>(+) makes it nicer to interactively work (no extra typing for <code>data$column</code>, just <code>column</code>), but</li>
+<li>(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## ---  tidyverse non std eval </span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span><span class="va">homeworld</span> <span class="op">==</span> <span class="st">"Tatooine"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>SOOOOO We need some way to add <code>$</code> back into the picture. Passing data-masked arguments to functions requires <strong>INJECTION</strong> (= <strong>quasiquotation</strong>), i.e.&nbsp;<strong>TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH</strong> <code>{{</code></p>
+<p>Inside data-masking function (actions), we can use injection operators:</p>
+<pre><code>    + `{` embracing operator (`rlang`) OR
+        + [`enquo` followed by] `!!` operator (`base`) 
+        + `...` + `...`
+    + varname_name `:=` function(`{{var}`)
+    + `.data` pronouns. 
+    + `.env` pronouns.</code></pre>
+</section></section></section><section id="different-options" class="level1"><h1>Different options</h1>
+<section id="defuse-nothing-inject-inside-custom-f" class="level2"><h2 class="anchored" data-anchor-id="defuse-nothing-inject-inside-custom-f">1 Defuse (nothing!) + Inject <code>{{</code> (inside custom f)</h2>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># -------- OR </span></span>
+<span><span class="va">grouped_mean_1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">group_var</span>, <span class="va">summarize_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># Defuse and inject in a single step with the embracing operator</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">group_var</span><span class="op">}</span><span class="op">}</span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">summarize_var</span><span class="op">}</span><span class="op">}</span> , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># call</span></span>
+<span><span class="fu">grouped_mean_1</span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>  group_var <span class="op">=</span> <span class="va">sex</span>, </span>
+<span>  summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Without <code>{group_var}</code> I would get the error<br><em>“! Must group by variables found in <code>.data</code>. ✖ Column <code>group_var</code> is not found.”</em></p>
+</div>
+</div>
+</section><section id="defuse-enquo-inject-inside-custom-f" class="level2"><h2 class="anchored" data-anchor-id="defuse-enquo-inject-inside-custom-f">2 Defuse <code>enquo</code> + Inject <code>!!</code> (inside custom f)</h2>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test </span></span>
+<span></span>
+<span><span class="va">grouped_mean_2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">group_var</span>, <span class="va">summarize_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co">## -- Defuse the user expression in `*_var`</span></span>
+<span>    <span class="va">group_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">group_var</span><span class="op">)</span></span>
+<span>    <span class="va">summarize_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">summarize_var</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co">## -- Inject the expression contained in `*_var` </span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">group_var</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">summarize_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># call</span></span>
+<span><span class="fu">grouped_mean_2</span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>  group_var <span class="op">=</span> <span class="va">sex</span>, </span>
+<span>  summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="defuse-...-inject-..." class="level2"><h2 class="anchored" data-anchor-id="defuse-...-inject-...">3 Defuse <code>...</code> + Inject <code>...</code>
+</h2>
+<p>In this case, <code>summarize_var</code> goes in front and <code>...</code> last</p>
+<ul>
+<li>
+<code>...</code> can stand for multiple variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ---- func </span></span>
+<span><span class="va">grouped_mean_3</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>,  <span class="va">summarize_var</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>    <span class="co">## -- Defuse the summarize_var = enquo(summarize_var) </span></span>
+<span>    <span class="co">## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !</span></span>
+<span>    <span class="va">summarize_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">summarize_var</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">summarize_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># ---- call</span></span>
+<span><span class="fu">grouped_mean_3</span><span class="op">(</span></span>
+<span>    df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>    <span class="va">sex</span>, <span class="va">homeworld</span>, <span class="co"># (...)</span></span>
+<span>    summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>{...}</code> Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”</p>
+</div>
+</div>
+</section></section><section id="different-options-with-naming" class="level1"><h1>Different options with NAMING</h1>
+<p>For technical reasons, the R language doesn’t support complex expressions on the left of <code>=</code>, but we can use <code>:=</code> as a workaround… it allows to use glue and curly-curly syntax on the left of <code>=</code></p>
+<section id="b-nothing-left-side" class="level2"><h2 class="anchored" data-anchor-id="b-nothing-left-side">1b (nothing!) + <code>{{</code> &amp; left side <code>:=</code> !!!!</h2>
+<ul>
+<li>Super compact left side syntax with <code>"sometext_{{group_var}}" :=</code>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># --- func</span></span>
+<span><span class="va">grouped_mean_1b</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">group_var</span>, <span class="va">summarize_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="co"># Defuse and inject in a single step with the embracing operator</span></span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">group_var</span><span class="op">}</span><span class="op">}</span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span> <span class="st">"BY_{{group_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">summarize_var</span><span class="op">}</span><span class="op">}</span> , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># --- call</span></span>
+<span><span class="fu">grouped_mean_1b</span> <span class="op">(</span></span>
+<span>    df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>    group_var <span class="op">=</span> <span class="va">sex</span>, </span>
+<span>    summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="b-enquo-left-side" class="level2"><h2 class="anchored" data-anchor-id="b-enquo-left-side">2b <code>enquo</code> + <code>!!</code> &amp; left side <code>:=</code>
+</h2>
+<p>2 things needed here :</p>
+<pre><code>+  `as_label(enquo(____var))`
++  left side syntax with `!!str_c("Mean_", ____var) :=`</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># --- func</span></span>
+<span><span class="va">grouped_mean_2b</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">group_var</span>, <span class="va">summarize_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co">## -- Defuse the user expression in `*_var`</span></span>
+<span>    <span class="va">group_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">group_var</span><span class="op">)</span></span>
+<span>    <span class="va">summarize_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/as_label.html">as_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">summarize_var</span><span class="op">)</span><span class="op">)</span> <span class="co"># as_label(enquo !!!!!</span></span>
+<span>    </span>
+<span>    <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="co">## -- Inject the expression contained in `*_var` </span></span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">group_var</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"Mean_"</span>, <span class="va">summarize_var</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">summarize_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># --- call</span></span>
+<span><span class="fu">grouped_mean_2b</span><span class="op">(</span>df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>                     group_var <span class="op">=</span> <span class="va">sex</span>, </span>
+<span>                     summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="b-...-...-left-side" class="level2"><h2 class="anchored" data-anchor-id="b-...-...-left-side">3b <code>...</code> + <code>...</code> &amp; left side <code>:=</code>
+</h2>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## --  define function </span></span>
+<span><span class="va">grouped_mean_3b</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>,  <span class="va">summarize_var</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="co">#   group_var = ...  NO NEED FOR ENQUO!</span></span>
+<span>    <span class="va">summarize_var</span> <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">summarize_var</span><span class="op">)</span></span>
+<span>    <span class="va">summarize_var_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/as_label.html">as_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">summarize_var</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co">#   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))</span></span>
+<span>    <span class="co"># or  </span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"My_mean_"</span>, <span class="va">summarize_var_name</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">summarize_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="co"># ERRORE ?!?!?!?</span></span>
+<span>    <span class="co"># summarize(str_c("Mean_", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## --  call function</span></span>
+<span><span class="fu">grouped_mean_3b</span><span class="op">(</span>df <span class="op">=</span> <span class="va">starwars</span>, </span>
+<span>                     <span class="va">sex</span>, <span class="va">homeworld</span>, <span class="co">#  group_var</span></span>
+<span>                     summarize_var <span class="op">=</span>  <span class="va">height</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>OKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + <code>!!summarize_var_name :=  ...</code> OK + <code>!!str_c("Mean_", summarize_var_name) :=  ...</code> OK: xchè?????? + <code>str_c("Mean_", !!summarize_var_name) :=  ...</code> WRONG: xchè??????</p>
+</div>
+</div>
+</section></section><section id="adding-the-.data-syntax" class="level1"><h1>Adding the <code>.data</code> syntax</h1>
+<p>It’s good practice to prefix <em>named arguments</em> with a . (<code>.data</code>) to reduce the risk of conflicts between your arguments and the arguments passed to <code>...</code></p>
+<section id="c-inject-specify-.data" class="level2"><h2 class="anchored" data-anchor-id="c-inject-specify-.data">1.c Inject <code>{{</code> + specify <code>.data</code>
+</h2>
+<p>Adding a new <em>generic</em> function argument <code>data</code> (up until now I was hardcoding it when executing the function)</p>
+<section id="simple-data" class="level4"><h4 class="anchored" data-anchor-id="simple-data">Simple <code>data</code>
+</h4>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">starwars</span> <span class="op">&lt;-</span> <span class="va">starwars</span></span>
+<span></span>
+<span><span class="co">## -- write function</span></span>
+<span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">num_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">homeworld</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="co"># num_var or sum will not work!</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>            <span class="st">"weighted_count_{{num_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span> <span class="op">{</span><span class="op">{</span> <span class="va">num_var</span> <span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span><span class="co">## --  call function</span></span>
+<span><span class="fu">my_sum</span> <span class="op">(</span><span class="va">starwars</span>, <span class="va">mass</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="with-.data-pronoun" class="level4"><h4 class="anchored" data-anchor-id="with-.data-pronoun">With <code>.data</code> pronoun</h4>
+<p>The <code>.data</code> pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like <code>{{</code></p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## -- write function</span></span>
+<span><span class="va">my_sum2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">num_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># no`.` here!!!</span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">homeworld</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="co"># num_var or sum will not work!</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>            <span class="st">"weighted_count_{{num_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span> <span class="op">{</span><span class="op">{</span> <span class="va">num_var</span> <span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## --  call function</span></span>
+<span><span class="fu">my_sum2</span> <span class="op">(</span><span class="va">starwars</span>, <span class="va">mass</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="with-.datavar-pronoun" class="level4"><h4 class="anchored" data-anchor-id="with-.datavar-pronoun">With <code>.data[[var]]</code> pronoun</h4>
+<ul>
+<li>If you have a variable name in a string, use the <code>.data</code> pronoun to subset that variable with <code>[[</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## -- write function</span></span>
+<span><span class="va">my_sum3</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">num_var</span>, <span class="va">group_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># no`.` here!!!</span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="co"># num_var or sum will not work!</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>            <span class="st">"weighted_count_{{num_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span> <span class="op">{</span><span class="op">{</span> <span class="va">num_var</span> <span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">group_var</span> <span class="op">&lt;-</span> <span class="st">"homeworld"</span></span>
+<span><span class="co">## --  call function</span></span>
+<span><span class="fu">my_sum3</span> <span class="op">(</span><span class="va">starwars</span>, <span class="va">mass</span>, <span class="va">group_var</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section></section><section id="iteration-purrr-on-top-of-dplyr-nse" class="level1"><h1>Iteration <code>purrr</code> on top of (dplyr) NSE</h1>
+<p>Now I want to iteratively execute my custom function <code>my_mean</code> over a vector of grouping variables <code>group_var_vec</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## -- write function</span></span>
+<span><span class="va">my_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">num_var</span>, <span class="va">group_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># no`.` here!!!</span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="co"># num_var or sum will not work!</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>            <span class="st">"mean_of_{{num_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span> <span class="op">{</span><span class="op">{</span> <span class="va">num_var</span> <span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here the question is how to specify the function</p>
+<section id="option-1-purrr-existing-function-.f" class="level2"><h2 class="anchored" data-anchor-id="option-1-purrr-existing-function-.f">Option 1) <code>purrr</code> + existing function <code>.f</code>…</h2>
+<ul>
+<li>my big “gotcha” here is I must not specify <code>.x</code> in the arguments after <code>.f</code> as I kept doing… 🤯</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## -- using function `my_mean` with:</span></span>
+<span><span class="va">group_var_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"homeworld"</span>, <span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># map returns a list </span></span>
+<span><span class="va">groupmeans_l</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">group_var_vec</span>, <span class="co">#  x </span></span>
+<span>                             .f <span class="op">=</span> <span class="va">my_mean</span>,   <span class="co"># function  NO ()</span></span>
+<span>                             data <span class="op">=</span> <span class="va">starwars</span>, <span class="co"># ADDITIONAL arguments </span></span>
+<span>                             num_var <span class="op">=</span> <span class="va">height</span><span class="op">)</span></span>
+<span><span class="co">#, group_var = .x)  </span></span>
+<span></span>
+<span></span>
+<span><span class="va">groupmeans_l</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="option-2-purrr-anonymous-function-as-formula-fun" class="level2"><h2 class="anchored" data-anchor-id="option-2-purrr-anonymous-function-as-formula-fun">Option 2) <code>purrr</code> + anonymous function as formula <code>~ fun()</code>
+</h2>
+<ul>
+<li>🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## -- using function `my_mean` with:</span></span>
+<span><span class="va">groupmeans_l_tilde</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">group_var_vec</span>, </span>
+<span>                                  <span class="op">~</span><span class="fu">my_mean</span><span class="op">(</span>        <span class="co"># function  YESS!! ()</span></span>
+<span>                                    data <span class="op">=</span> <span class="va">starwars</span>, num_var <span class="op">=</span> <span class="va">height</span>, group_var <span class="op">=</span> <span class="va">.x</span><span class="op">)</span> <span class="co"># ALL arguments </span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">groupmeans_l_tilde</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> </span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">groupmeans_l_tilde</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="btw-map-can-output-a-row-binded-df-here" class="level4"><h4 class="anchored" data-anchor-id="btw-map-can-output-a-row-binded-df-here">BTW map can output a row-binded df here</h4>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># map returns dataframes binded by row </span></span>
+<span><span class="va">groupmeans_dfr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">group_var_vec</span>, <span class="co"># x </span></span>
+<span>                                  <span class="op">~</span><span class="fu">my_mean</span><span class="op">(</span>        <span class="co"># function  YESS!! ()</span></span>
+<span>                                    data <span class="op">=</span> <span class="va">starwars</span>, num_var <span class="op">=</span> <span class="va">height</span>, group_var <span class="op">=</span> <span class="va">.x</span><span class="op">)</span> <span class="co"># ALL arguments </span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">groupmeans_dfr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section></section><section id="section" class="level1"><h1>_______</h1>
+</section><section id="iteration-purrr-with-purrr-nse" class="level1"><h1>Iteration <code>purrr</code> with (purrr) NSE</h1>
+<p>Here I am trying a different recipe: i.e.&nbsp;putting NSE inside the <code>purrr</code> function, instead of inside the <code>dplyr</code> function. For examples</p>
+<section id="masked-group_var-in-purrrmap" class="level3"><h3 class="anchored" data-anchor-id="masked-group_var-in-purrrmap">—- 1 masked group_var in <code>purrr::map</code>
+</h3>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"species"</span><span class="op">)</span></span>
+<span> </span>
+<span><span class="va">NSE_map_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">group_var</span>, </span>
+<span>                      .f <span class="op">=</span> <span class="op">~</span><span class="op">{</span></span>
+<span>                        <span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span> <span class="op">{</span><span class="op">{</span><span class="va">.x</span><span class="op">}</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_height  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span>  , na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span>                      <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">NSE_map_g</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="a-masked-num_var-in-purrrmap" class="level3"><h3 class="anchored" data-anchor-id="a-masked-num_var-in-purrrmap">—- 2a masked num_var in <code>purrr::map</code>
+</h3>
+<ul>
+<li>using <code>syms</code>
+<ul>
+<li>🤯 Note: I need <code>.x = syms(numvar)</code> instead of <code>.x = numvar</code> because map woudl understand the vector as characters and not as symbols</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"height"</span>, <span class="st">"birth_year"</span><span class="op">)</span></span>
+<span> </span>
+<span><span class="va">NSE_map_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="co">#.x = num_var,      # WRONG, map gets a vector of characters</span></span>
+<span>                      <span class="co"># .x = {{num_var}}, # also WRONG ???</span></span>
+<span>                      <span class="co"># .x =  syms(num_var), # RIGHT, map gets a list of symbols  </span></span>
+<span>                      .f <span class="op">=</span> <span class="op">~</span><span class="op">{</span></span>
+<span>                        <span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="st">"mean_{{.x}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">.x</span><span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span>                      <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">NSE_map_n</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="b-masked-num_var-in-purrrmap" class="level3"><h3 class="anchored" data-anchor-id="b-masked-num_var-in-purrrmap">—- 2b masked num_var in <code>purrr::map</code>
+</h3>
+<ul>
+<li>using A) Defuse <code>enquo</code> + B) Inject <code>!!</code>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"height"</span>, <span class="st">"birth_year"</span><span class="op">)</span></span>
+<span> </span>
+<span><span class="va">NSE_map_n</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span></span>
+<span>    <span class="co"># .x = num_var,      # WRONG, (vector of characters)</span></span>
+<span>    .x <span class="op">=</span> <span class="op">!</span><span class="op">!</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">num_var</span><span class="op">)</span>, <span class="co"># RIGHT, (list of symbols)  </span></span>
+<span>    .f <span class="op">=</span> <span class="op">~</span><span class="op">{</span></span>
+<span>        <span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="st">"mean_{{.x}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">.x</span><span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">NSE_map_n</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="wrong-start_____" class="level1"><h1>_______ WRONG (start)_____</h1>
+<section id="masked-group_var-num_var-vars-in-purrrmap" class="level3"><h3 class="anchored" data-anchor-id="masked-group_var-num_var-vars-in-purrrmap">—- 3 masked group_var + num_var vars in <code>purrr::map</code>
+</h3>
+<p>DOESNT REALLY WORK !!!!</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">group_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"species"</span><span class="op">)</span></span>
+<span><span class="va">num_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"height"</span>, <span class="st">"birth_year"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">NSE_map_gn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">syms</a></span> <span class="op">(</span><span class="va">group_var</span><span class="op">)</span>, </span>
+<span>                         .y <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">syms</a></span><span class="op">(</span><span class="va">num_var</span><span class="op">)</span>,</span>
+<span>                         .f <span class="op">=</span> <span class="op">~</span><span class="op">{</span></span>
+<span>                            <span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">.x</span><span class="op">}</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="st">"mean_{{.y}}_by{{.x}}"</span>   <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">.y</span><span class="op">}</span><span class="op">}</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span>                         <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">NSE_map_gn</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="wrong-end_____" class="level1"><h1>_______ WRONG (end)_____</h1>
+<section id="tidyeval-in-purrr-custom-function" class="level2"><h2 class="anchored" data-anchor-id="tidyeval-in-purrr-custom-function">Tidyeval in purrr + custom function</h2>
+<section id="single-group-num-function" class="level3"><h3 class="anchored" data-anchor-id="single-group-num-function">1/2 single (group, num) function</h3>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_mean_2</span>  <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">group_var</span>, <span class="va">num_var</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">quo_group_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">group_var</span><span class="op">)</span></span>
+<span>    <span class="va">quo_num_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html">enquo</a></span><span class="op">(</span><span class="va">num_var</span><span class="op">)</span></span>
+<span>    <span class="co"># no`.` here!!!</span></span>
+<span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="op">!</span><span class="op">!</span> <span class="va">quo_group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>            <span class="st">"mean_of_{{quo_num_var}}"</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span> <span class="op">!</span><span class="op">!</span><span class="va">quo_num_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># test YEAH</span></span>
+<span><span class="va">test1</span> <span class="op">&lt;-</span> <span class="fu">my_mean_2</span><span class="op">(</span>data <span class="op">=</span> <span class="va">starwars</span>, group_var <span class="op">=</span> <span class="va">sex</span>, num_var <span class="op">=</span><span class="va">height</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="map-function" class="level3"><h3 class="anchored" data-anchor-id="map-function">2/2 map function</h3>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">group_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"species"</span><span class="op">)</span></span>
+<span><span class="va">num_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"height"</span>, <span class="st">"birth_year"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tidy_map_df3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">group_var</span>, </span>
+<span>                            .y <span class="op">=</span> <span class="va">num_var</span> ,</span>
+<span>                            <span class="op">~</span><span class="va">my_mean_2</span>,</span>
+<span>                            data <span class="op">=</span> <span class="va">starwars</span></span>
+<span><span class="op">)</span> </span>
+<span><span class="va">tidy_map_df3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>https://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="va">train</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"bin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">vars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="co"># create a symbol (defused expressions that represent objects in environments)</span></span>
+<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">syms</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">var</span><span class="op">)</span> <span class="fu">get_charts</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">var</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># test YEAH</span></span>
+<span><span class="va">test2</span> <span class="op">&lt;-</span> <span class="fu">my_mean</span><span class="op">(</span>data <span class="op">=</span> <span class="va">starwars</span>, group_var <span class="op">=</span> <span class="va">sex</span>, num_var <span class="op">=</span><span class="va">height</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section></section><section id="section-1" class="level1"><h1>_______</h1>
+<section id="digression-pluck" class="level2"><h2 class="anchored" data-anchor-id="digression-pluck">[digression] <code>pluck</code>
+</h2>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build list </span></span>
+<span><span class="va">movies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A New Hope"</span>,</span>
+<span>            <span class="st">"The Empire Strikes Back"</span>,</span>
+<span>            <span class="st">"Return of the Jedi"</span>,</span>
+<span>            <span class="st">"Phantom Menace"</span>,</span>
+<span>            <span class="st">"Attack of the Clones"</span>,</span>
+<span>            <span class="st">"Revenge of the Sith"</span>,</span>
+<span>            <span class="st">"The Force Awakens"</span>,</span>
+<span>            <span class="st">"The Last Jedi"</span>,</span>
+<span>            <span class="st">"Rise of Skywalker"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1977</span>, <span class="fl">1980</span>, <span class="fl">1983</span>, <span class="fl">1999</span>, <span class="fl">2002</span>, <span class="fl">2005</span>, <span class="fl">2015</span>, <span class="fl">2017</span>, <span class="fl">2019</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">film_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">movies</span>, <span class="va">years</span>,</span>
+<span>                preference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is an esasier way to extract elements from lists</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 1st df and 1st column of it </span></span>
+<span><span class="va">film_l</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">film_l</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>… which can go insude a pipe</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#pipe in our list </span></span>
+<span><span class="va">film_l</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co">#and grab the first list element, the movie title;</span></span>
+<span>    <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co"># take each movie title and extract the last word from it using the word function.</span></span>
+<span>    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/word.html">word</a></span><span class="op">(</span><span class="va">.</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- # some more real life cases... -->
+<!-- ```{r} -->
+<!-- # # ------- 1/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- # # https://www.youtube.com/watch?v=pcvWKVlRmwE -->
+<!-- #  -->
+<!-- # f_prop_grouping <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2  ) { -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # grouping var(s) -->
+<!-- #     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato -->
+<!-- #     ) %>%  -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #     ) %>%  -->
+<!-- #     mutate(N_group = sum(n_group), # N_stato -->
+<!-- #            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato -->
+<!-- #            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"), -->
+<!-- #             -->
+<!-- #     ) } -->
+<!-- # run -->
+<!-- # end_df <- f_prop_grouping(AL_anagr_stato_t, end_df, misura, stato, inizio_past, inizio_rit ) -->
+<!-- # ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, dummy1, dummy2 ) {   -->
+<!--   # This to use the "walrus operator" := on the LEFT (naming the derived vars ) -->
+<!--   dummy1name <- as_label(enquo(dummy1)) -->
+<!--   dummy2name <- as_label(enquo(dummy2)) -->
+<!--   end_df <- start_df %>%  -->
+<!--     # grouping var(s) -->
+<!--     group_by( {{group_var1}}, {{group_var2}} # misura e stato -->
+<!--     ) %>%  -->
+<!--     summarise(n_group = n(),# n_stato -->
+<!--               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!--               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!--               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2 -->
+<!--               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%")   # % dummy over n(group)  -->
+<!--                ) %>%  -->
+<!--     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!--     mutate (N_group = sum(n_group), -->
+<!--             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!--     ) %>%  -->
+<!--     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))   -->
+<!-- } -->
+<!-- # # ------- 3/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche proporzione  -->
+<!-- # # using [“enquo” + “!!”  ]      |  "syms" function and the “!!!”  (for multiple vars)  -->
+<!-- # f_prop_grouping3 <- function(start_df, end_df, group_vars, dummy1, dummy2  ) { -->
+<!-- #   # define the list of group_by vars "syms"  -->
+<!-- #   group_vars <- syms(group_vars) -->
+<!-- #   # This to use the "walrus operator" := on the LEFT (naming the created var   -->
+<!-- #   dummy1name <- as_label(enquo(dummy1)) -->
+<!-- #   dummy2name <- as_label(enquo(dummy2)) -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # call grouping var(s) “!!!”  -->
+<!-- #     group_by( !!!group_vars ) %>%     -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               # TOT_dummy1 = sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               # TOT_dummy2 = sum({{dummy2}}, na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #               !!str_c("TOT_", dummy1name) := sum({{dummy1}}, na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               !!str_c("PERC_", dummy1name) := paste0(round(sum({{dummy1}}, na.rm = TRUE)/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #                -->
+<!-- #               !!str_c("TOT_", dummy2name) := sum({{dummy2}}, na.rm = TRUE ),  # SUM_dummy2 -->
+<!-- #               !!str_c("PERC_", dummy2name) := paste0(round(sum({{dummy2}}, na.rm = TRUE)/n_group,3)*100 ,"%") # % dummy over n(group)  -->
+<!-- #               ) %>%  -->
+<!-- #     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!-- #     mutate (N_group = sum(n_group), -->
+<!-- #             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!-- #     ) %>%  -->
+<!-- #     relocate (c("N_group","Perc_group" ), .before = !!str_c("TOT_", dummy1name))   -->
+<!-- #      -->
+<!-- #    -->
+<!-- # } -->
+<!-- # ------- 2/3 FUNZIONE: raggruppo (2 gruppi) e calcolo qualche MEDIA -->
+<!-- f_mean_grouping2 <- function(start_df, end_df, group_var1, group_var2, numer1, numer2) {   -->
+<!--   # This to use the "walrus operator" := on the LEFT (naming the derived vars ) -->
+<!--   numer1name <- as_label(enquo(numer1)) -->
+<!--   numer2name <- as_label(enquo(numer2)) -->
+<!--   # operations -->
+<!--   end_df <- start_df %>%  -->
+<!--     # grouping var(s) -->
+<!--     group_by( {{group_var1}}, {{group_var2}} # misura e stato -->
+<!--     ) %>%  -->
+<!--     summarise(n_group = n(),# n_stato -->
+<!--               !!str_c("Media_", numer1name) := mean({{numer1}}, na.rm = TRUE), -->
+<!--               !!str_c("Media_", numer2name) := mean({{numer2}}, na.rm = TRUE) -->
+<!--               ) %>%  -->
+<!--     # ? NOT SURE WHY HERE IT ONLY CONSIDERS 1ST GROUPING VARIABLE -->
+<!--     mutate (N_group = sum(n_group), -->
+<!--             Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%")  # %_stato -->
+<!--     ) %>%  -->
+<!--     relocate (c("N_group","Perc_group" ), .before = !!str_c("Media_", numer1name) ) -->
+<!-- } -->
+<!-- # OKKIO!!!!!!  -->
+<!-- #end_df <- f_prop_grouping2(AL_anagr_stato_t, end_df, c("misura", "stato"), inizio_past, inizio_rit ) -->
+<!-- # f_prop_grouping2 <- function(start_df, end_df, group_var1, group_var2, ... ) { -->
+<!-- #    -->
+<!-- #   end_df <- start_df %>%  -->
+<!-- #     # grouping var(s) -->
+<!-- #     group_by( {{group_var1}} ,  {{group_var2}} # misura e stato -->
+<!-- #     ) %>%  -->
+<!-- #     summarise(n_group = n(),# n_stato -->
+<!-- #               TOT_dummy1 = sum(..., na.rm = TRUE ), # SUM_dummy1 -->
+<!-- #               TOT_dummy2 = sum(..., na.rm = TRUE ) # SUM_dummy2 -->
+<!-- #     ) %>%  -->
+<!-- #     mutate(N_group = sum(n_group), # N_stato -->
+<!-- #            Perc_group =  paste0(round(n_group/N_group,3)*100 ,"%"), # %_stato -->
+<!-- #            Perc_group_dummy1 = paste0(round(TOT_dummy1/n_group,3)*100 ,"%"), # % dummy over n(group) -->
+<!-- #            Perc_group_dummy2 = paste0(round(TOT_dummy2/n_group,3)*100 ,"%"), -->
+<!-- #             -->
+<!-- #     ) } -->
+<!-- # ------- FUNZIONE: generalizzo il nome della fase (prefix)  -->
+<!-- f_rimuovo_pref <- function(data, prefix = "word_"){ -->
+<!--   rename_with(.data = data,  -->
+<!--               .cols = dplyr::starts_with(prefix), # (default e' everything() e le pescava comunque) -->
+<!--               # rinomino le date eliminando il prefisso -->
+<!--               .fn = function(x)sub(prefix,"",x)) -->
+<!-- } -->
+<!-- # EXE uso -->
+<!-- #BC_PROGETTAZIONE_temp <- f_rimuovo_pref(BC_PROGETTAZIONE , prefix = "PROG_ESEC_")  -->
+<!-- # -------- FUNZIONE: introduco qualche calcolo sulle date delle fasi procedurali -->
+<!-- f_calcoli_date <- function(data, inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) { -->
+<!--   dplyr::mutate(data, -->
+<!--                 durata_prev =  {{fine_fase_prev}} - {{inizio_fase_prev}} , -->
+<!--                 #durata_eff =   {{fine_eff}} - {{inizio_eff}} , -->
+<!--                 inizio_V_today = case_when( -->
+<!--                   {{inizio_fase_prev}} <= today() ~ "pre_oggi", -->
+<!--                   {{inizio_fase_prev}} > today() ~  "post_oggi", -->
+<!--                   TRUE ~ "Ignoto"), -->
+<!--                 inizio_discrep = {{inizio_fase_eff}} - {{inizio_fase_prev}} , -->
+<!--                 inizio_ritardo = case_when( -->
+<!--                   inizio_V_today == "Ignoto" ~ "[Fase non prevista]", -->
+<!--                   inizio_V_today == "post_oggi" ~ "Inizio previsto futuro", -->
+<!--                   inizio_V_today == "pre_oggi" & !is.na({{inizio_fase_eff}}) ~ if_else( -->
+<!--                     inizio_discrep > 0 , glue("rit = {inizio_discrep} gg"), glue("ant = {inizio_discrep} gg") -->
+<!--                   ), -->
+<!--                   inizio_V_today == "pre_oggi" & is.na({{inizio_fase_eff}}) ~  "No inizio effettivo") -->
+<!--   ) -->
+<!-- } -->
+<!-- # EXE uso -->
+<!-- # BC_PROGETTAZIONE_calc <-  f_calcoli_date ( -->
+<!-- #   data = BC_PROGETTAZIONE_temp ,  -->
+<!-- #   inizio_fase_prev, inizio_fase_eff, fine_fase_prev, fine_fase_eff) -->
+<!-- ``` -->
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lulliter\.github\.io\/nerd-help");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../rstats/00_useful.html" class="pagination-link" aria-label="Useful things R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Useful things R</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2024 Luisa M. Mimmi <br> License <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <i class="fa-brands fa-creative-commons-sa" aria-label="creative-commons-sa"></i> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br><a href="https://github.com/Lulliter/nerd_help">Source code at <i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>
