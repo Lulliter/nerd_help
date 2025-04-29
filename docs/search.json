@@ -238,6 +238,83 @@
     ]
   },
   {
+    "objectID": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "href": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 1: Deploy your website via GitHub Pages",
+    "text": "✅ Step 1: Deploy your website via GitHub Pages\nMake sure your site is published via GitHub Pages.\n\n\nUser site: https://yourusername.github.io/\n\n\nProject site: https://yourusername.github.io/project-name/\n\n\nSet your custom domain in the repo settings or by adding a CNAME file to the root of your repository with the content:\nyourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "href": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 2: Get your domain from Aruba",
+    "text": "✅ Step 2: Get your domain from Aruba\nIf you haven’t already, purchase or manage your domain on https://admin.aruba.it.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "href": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 3: Update DNS Settings on Aruba",
+    "text": "✅ Step 3: Update DNS Settings on Aruba\n\nLog in to Aruba’s admin panel.\nGo to:\n\nDomini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS\n\nAdd the following A records to point to GitHub Pages:\n\n\n\nType\nName\nValue\n\n\n\nA\n@\n185.199.108.153\n\n\nA\n@\n185.199.109.153\n\n\nA\n@\n185.199.110.153\n\n\nA\n@\n185.199.111.153\n\n\n\n\nAdd a CNAME record so www.yourdomain.com redirects correctly:\n\n\n\nType\nName\nValue\n\n\nCNAME\nwww\nyourusername.github.io.\n\n\n\n⚠️ Don’t forget the trailing . after your GitHub username.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "href": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 4: Configure your GitHub Repository",
+    "text": "✅ Step 4: Configure your GitHub Repository\n\nGo to your repository → Settings → Pages.\nIn the Custom domain field, enter:\n\nyourdomain.com\n\nGitHub will create a CNAME file automatically.\n\nEnable “Enforce HTTPS” after DNS has propagated.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "href": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "title": "Aruba <-> GH Pages",
+    "section": "⏱️ Wait for DNS Propagation",
+    "text": "⏱️ Wait for DNS Propagation\n\nThis can take a few hours (up to 48h).\nUse tools like https://dnschecker.org to check your domain.\nFrom your terminal:\n\n\nping yourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#test",
+    "href": "dev/04_AWS_mail.html#test",
+    "title": "Aruba <-> GH Pages",
+    "section": "🧪 Test",
+    "text": "🧪 Test\nOnce propagated:\n\nVisit https://yourdomain.com\n\nAlso test https://www.yourdomain.com to ensure CNAME redirection works.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "href": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "title": "Aruba <-> GH Pages",
+    "section": "🔁 Optional: Redirect www to apex domain",
+    "text": "🔁 Optional: Redirect www to apex domain\nYou can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like www.yourdomain.com that forwards to yourdomain.com.\nLet me know if you’d like a template for that too!",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
     "objectID": "dev/03a_AWS.html",
     "href": "dev/03a_AWS.html",
     "title": "Custom domain on AWS",
@@ -469,11 +546,22 @@
     ]
   },
   {
+    "objectID": "git/git_branches.html#see-which-branches-there-are",
+    "href": "git/git_branches.html#see-which-branches-there-are",
+    "title": "Git branches",
+    "section": "See which branches there are",
+    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote\n\n# delete local \ngit branch -d up\n# delete remote\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
     "objectID": "git/git_branches.html#switch-to-other-branch",
     "href": "git/git_branches.html#switch-to-other-branch",
     "title": "Git branches",
     "section": "Switch to other branch",
-    "text": "Switch to other branch\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
+    "text": "Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
     "crumbs": [
       "git",
       "Git branches"
@@ -484,7 +572,7 @@
     "href": "git/git_branches.html#rename-a-local-branch",
     "title": "Git branches",
     "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# in different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2\ngit branch -a  # yep!",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
     "crumbs": [
       "git",
       "Git branches"
@@ -968,83 +1056,6 @@
     "crumbs": [
       "Shell",
       "Shell script to change pics"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
-    "href": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 1: Deploy your website via GitHub Pages",
-    "text": "✅ Step 1: Deploy your website via GitHub Pages\nMake sure your site is published via GitHub Pages.\n\n\nUser site: https://yourusername.github.io/\n\n\nProject site: https://yourusername.github.io/project-name/\n\n\nSet your custom domain in the repo settings or by adding a CNAME file to the root of your repository with the content:\nyourdomain.com",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
-    "href": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 2: Get your domain from Aruba",
-    "text": "✅ Step 2: Get your domain from Aruba\nIf you haven’t already, purchase or manage your domain on https://admin.aruba.it.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
-    "href": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 3: Update DNS Settings on Aruba",
-    "text": "✅ Step 3: Update DNS Settings on Aruba\n\nLog in to Aruba’s admin panel.\nGo to:\n\nDomini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS\n\nAdd the following A records to point to GitHub Pages:\n\n\n\nType\nName\nValue\n\n\n\nA\n@\n185.199.108.153\n\n\nA\n@\n185.199.109.153\n\n\nA\n@\n185.199.110.153\n\n\nA\n@\n185.199.111.153\n\n\n\n\nAdd a CNAME record so www.yourdomain.com redirects correctly:\n\n\n\nType\nName\nValue\n\n\nCNAME\nwww\nyourusername.github.io.\n\n\n\n⚠️ Don’t forget the trailing . after your GitHub username.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
-    "href": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 4: Configure your GitHub Repository",
-    "text": "✅ Step 4: Configure your GitHub Repository\n\nGo to your repository → Settings → Pages.\nIn the Custom domain field, enter:\n\nyourdomain.com\n\nGitHub will create a CNAME file automatically.\n\nEnable “Enforce HTTPS” after DNS has propagated.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#wait-for-dns-propagation",
-    "href": "dev/04_AWS_mail.html#wait-for-dns-propagation",
-    "title": "Aruba <-> GH Pages",
-    "section": "⏱️ Wait for DNS Propagation",
-    "text": "⏱️ Wait for DNS Propagation\n\nThis can take a few hours (up to 48h).\nUse tools like https://dnschecker.org to check your domain.\nFrom your terminal:\n\n\nping yourdomain.com",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#test",
-    "href": "dev/04_AWS_mail.html#test",
-    "title": "Aruba <-> GH Pages",
-    "section": "🧪 Test",
-    "text": "🧪 Test\nOnce propagated:\n\nVisit https://yourdomain.com\n\nAlso test https://www.yourdomain.com to ensure CNAME redirection works.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
-    "href": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
-    "title": "Aruba <-> GH Pages",
-    "section": "🔁 Optional: Redirect www to apex domain",
-    "text": "🔁 Optional: Redirect www to apex domain\nYou can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like www.yourdomain.com that forwards to yourdomain.com.\nLet me know if you’d like a template for that too!",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
     ]
   }
 ]
