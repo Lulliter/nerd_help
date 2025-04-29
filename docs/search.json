@@ -546,28 +546,6 @@
     ]
   },
   {
-    "objectID": "git/git_branches.html#see-which-branches-there-are",
-    "href": "git/git_branches.html#see-which-branches-there-are",
-    "title": "Git branches",
-    "section": "See which branches there are",
-    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote\n\n# delete local \ngit branch -d up\n# delete remote\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#switch-to-other-branch",
-    "href": "git/git_branches.html#switch-to-other-branch",
-    "title": "Git branches",
-    "section": "Switch to other branch",
-    "text": "Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
     "objectID": "git/git_branches.html#rename-a-local-branch",
     "href": "git/git_branches.html#rename-a-local-branch",
     "title": "Git branches",
@@ -579,22 +557,44 @@
     ]
   },
   {
-    "objectID": "git/git_branches.html#evaluate-changes",
-    "href": "git/git_branches.html#evaluate-changes",
+    "objectID": "git/git_branches.html#see-which-branches-there-are",
+    "href": "git/git_branches.html#see-which-branches-there-are",
     "title": "Git branches",
-    "section": "1. Evaluate changes",
-    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log master..wkg_branch\n  #  4 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n    # boh\n    # testing the branch workflow \n\n# check commits in master\ngit log wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
+    "section": "See which branches there are",
+    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote.\n\n# delete local \ngit branch -d up\n\n# (delete remote)\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
     "crumbs": [
       "git",
       "Git branches"
     ]
   },
   {
-    "objectID": "git/git_branches.html#bring-the-changes-from-master-into-your-branch",
-    "href": "git/git_branches.html#bring-the-changes-from-master-into-your-branch",
+    "objectID": "git/git_branches.html#switch-to-other-branch",
+    "href": "git/git_branches.html#switch-to-other-branch",
     "title": "Git branches",
-    "section": "2. Bring the changes from master into your branch",
-    "text": "2. Bring the changes from master into your branch\n\ngit checkout wkg_branch\ngit merge master # error \n # here I have problems \n\n2.1. Resolve conflicts\ndifferent ways to resolve conflicts\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\ngit merge master\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\ngit merge master\n\n\nUse a merge tool\n\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.",
+    "section": "Switch to other branch",
+    "text": "Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)\n\nHowever I might have ALSO new/uncommitted stuff in the wkg_branch",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#evaluate-changes",
+    "href": "git/git_branches.html#evaluate-changes",
+    "title": "Git branches",
+    "section": "1. Evaluate changes",
+    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n \n\n# check commits in master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#commit-changes-left-on-wkg_branch",
+    "href": "git/git_branches.html#commit-changes-left-on-wkg_branch",
+    "title": "Git branches",
+    "section": "2. Commit changes left on wkg_branch\n",
+    "text": "2. Commit changes left on wkg_branch\n\n2.1. Resolve conflicts for duplicated EXISTING FILES\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\ngit merge master\n\n\n\nUse a merge tool like in VS CODE\n\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit\n\n2.2. Deal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Then commit to confirm the merge\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
     "crumbs": [
       "git",
       "Git branches"
@@ -605,18 +605,18 @@
     "href": "git/git_branches.html#push-the-updated-branch",
     "title": "Git branches",
     "section": "3. Push the Updated Branch",
-    "text": "3. Push the Updated Branch\n\ngit push",
+    "text": "3. Push the Updated Branch\n\n# check status\ngit log --graph --oneline --all",
     "crumbs": [
       "git",
       "Git branches"
     ]
   },
   {
-    "objectID": "git/git_branches.html#optional-merge-the-branhc-into-master",
-    "href": "git/git_branches.html#optional-merge-the-branhc-into-master",
+    "objectID": "git/git_branches.html#optional-merge-the-branch-into-master",
+    "href": "git/git_branches.html#optional-merge-the-branch-into-master",
     "title": "Git branches",
-    "section": "4. (optional) merge the branhc into master",
-    "text": "4. (optional) merge the branhc into master\n\ngit checkout master\ngit merge wkg_branch\ngit push",
+    "section": "4. (optional) merge the branch into master",
+    "text": "4. (optional) merge the branch into master\n\ngit checkout master\ngit merge wkg_branch\ngit push",
     "crumbs": [
       "git",
       "Git branches"

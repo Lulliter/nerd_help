@@ -193,7 +193,7 @@ See @fig-git_wfl
 
 <!-- NO link in image -->
 <!-- ![title](location){#fig-reference} -->
-![Git Workflow](./img_tools/GitWorkflow-4.png){#fig-git_wfl}
+![Git Workflow](../images/GitWorkflow-4.png){#fig-git_wfl}
 
 Source: [cloudstudio.com.au](https://cloudstudio.com.au/2021/06/26/git-command/)
 

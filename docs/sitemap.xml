@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/shell/shell_var.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/shell/shell_var.html</loc>
     <lastmod>2024-09-12T17:46:12.105Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/shell.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/shell.html</loc>
     <lastmod>2024-09-12T19:26:21.001Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats/03_r_gpt.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats/03_r_gpt.html</loc>
     <lastmod>2024-05-02T10:09:40.948Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats/01_tidyeval.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats/01_tidyeval.html</loc>
     <lastmod>2024-09-12T19:18:24.311Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats.html</loc>
     <lastmod>2024-09-12T19:19:44.839Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/index.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/index.html</loc>
     <lastmod>2024-09-12T19:42:37.659Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/git/git_collab.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/git/git_collab.html</loc>
     <lastmod>2024-12-10T10:31:23.839Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/git.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/git.html</loc>
     <lastmod>2024-09-12T19:05:38.586Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev/04_AWS_mail.html</loc>
-    <lastmod>2025-03-30T20:22:09.984Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/dev/04_AWS_mail.html</loc>
+    <lastmod>2025-04-29T15:44:36.716Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev/03a_AWS.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/dev/03a_AWS.html</loc>
     <lastmod>2024-04-20T16:25:34.873Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/dev.html</loc>
     <lastmod>2024-09-12T19:40:31.411Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev/02_quarto.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/dev/02_quarto.html</loc>
     <lastmod>2024-09-12T19:08:37.972Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev/03b_Google_domain.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/dev/03b_Google_domain.html</loc>
     <lastmod>2024-09-12T14:18:23.272Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/dev/05_colors.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/dev/05_colors.html</loc>
     <lastmod>2024-09-12T19:08:51.744Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/git/git_branches.html</loc>
-    <lastmod>2025-04-29T15:09:18.806Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/git/git_branches.html</loc>
+    <lastmod>2025-04-29T16:56:27.889Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/git/git_intro.html</loc>
-    <lastmod>2025-01-30T11:07:12.269Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/git/git_intro.html</loc>
+    <lastmod>2025-04-29T16:10:29.022Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/me.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/me.html</loc>
     <lastmod>2024-09-12T19:29:09.377Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats/00_useful.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats/00_useful.html</loc>
     <lastmod>2024-06-14T10:00:17.379Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats/02_r_vscode.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats/02_r_vscode.html</loc>
     <lastmod>2024-09-12T19:24:23.480Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/rstats/04_text_analytics.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats/04_text_analytics.html</loc>
     <lastmod>2024-09-12T14:17:50.730Z</lastmod>
   </url>
   <url>
-    <loc>{{&lt; var website.site-url &gt;}}/shell/foto.html</loc>
-    <lastmod>2025-03-28T21:04:41.783Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/shell/foto.html</loc>
+    <lastmod>2025-04-29T16:08:33.707Z</lastmod>
   </url>
 </urlset>
