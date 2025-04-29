@@ -304,11 +304,29 @@ A possible workflow could be to add features to `wkg_branch` and then merge them
 
 + How to avoid pointless conflicts of rendered files (e.g. `docs/*`) which complicate merges unnecessarily?
 
-1.  **Create a new branch** `wkg` from `master` (or `main`) for each new feature or bug fix.
+0. Do the above and merge master into `wkg_branch` first 
 
+1.  **Work on new branch** `wkg` from `master` (or `main`) for each new feature or bug fix.
+2.  **Commit changes** to `wkg_branch` as you go along.
 ```{bash}
-git new-branch wkg_branch 
+git checkout wkg_branch
+# # work on .qmd files
+# render locally if needed (but don't commit docs/)
+git add git/git_branches.qmd
+git commit -m "Work on git_branches.qmd"
 ```
+
+3. When done, **merge `wkg_branch` into `master`**.
+```{bash}
+git checkout master
+git merge wkg_branch
+
+quarto render
+git add docs/
+git commit -m "Update docs"
+git push origin master
+```
+
 
 --- 
 
