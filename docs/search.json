@@ -22,171 +22,6 @@
     ]
   },
   {
-    "objectID": "rstats/03_r_gpt.html",
-    "href": "rstats/03_r_gpt.html",
-    "title": "Using chatGPT from RStudio!",
-    "section": "",
-    "text": "Instructions\nFollow the instructions in this blog post to try out the package chattr.\nThe steps are:\n\ninstall (I use the GH development version)\n\n\n#remotes::install_github(\"mlverse/chattr\")\n\n\nselect LLM model to use in your session\n\n\nlibrary(chattr)\nchattr_use(\"gpt4\")\n\n\nUse\n\n\nchattr::chattr_app()\n\nAfter you select the model you wish to interact with, the app will open in Viewer.",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using chatGPT from RStudio!"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html",
-    "href": "rstats/01_tidyeval.html",
-    "title": "Tidyeval and functional programming",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "href": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "title": "Tidyeval and functional programming",
-    "section": "Non-Standard evaluation in tidyverse\n",
-    "text": "Non-Standard evaluation in tidyverse\n\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions.",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "href": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "title": "Tidyeval and functional programming",
-    "section": "Two (complementary) forms of NSE used in tidyverse\n",
-    "text": "Two (complementary) forms of NSE used in tidyverse\n\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing for data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{` embracing operator (`rlang`) OR\n        + [`enquo` followed by] `!!` operator (`base`) \n        + `...` + `...`\n    + varname_name `:=` function(`{{var}`)\n    + `.data` pronouns. \n    + `.env` pronouns.",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "href": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "title": "Tidyeval and functional programming",
-    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
-    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "href": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "title": "Tidyeval and functional programming",
-    "section": "2 Defuse enquo + Inject !! (inside custom f)",
-    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-...-inject-...",
-    "href": "rstats/01_tidyeval.html#defuse-...-inject-...",
-    "title": "Tidyeval and functional programming",
-    "section": "3 Defuse ... + Inject ...\n",
-    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-nothing-left-side",
-    "href": "rstats/01_tidyeval.html#b-nothing-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "1b (nothing!) + {{ & left side := !!!!",
-    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-enquo-left-side",
-    "href": "rstats/01_tidyeval.html#b-enquo-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "2b enquo + !! & left side :=\n",
-    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-...-...-left-side",
-    "href": "rstats/01_tidyeval.html#b-...-...-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "3b ... + ... & left side :=\n",
-    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#c-inject-specify-.data",
-    "href": "rstats/01_tidyeval.html#c-inject-specify-.data",
-    "title": "Tidyeval and functional programming",
-    "section": "1.c Inject {{ + specify .data\n",
-    "text": "1.c Inject {{ + specify .data\n\nAdding a new generic function argument data (up until now I was hardcoding it when executing the function)\nSimple data\n\n\nstarwars &lt;- starwars\n\n## -- write function\nmy_sum &lt;- function(data, num_var) {\n    data %&gt;%\n        dplyr::group_by(data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n    }\n\n## --  call function\nmy_sum (starwars, mass) \n\nWith .data pronoun\nThe .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{\n\n## -- write function\nmy_sum2 &lt;- function(data, num_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\n## --  call function\nmy_sum2 (starwars, mass) \n\nWith .data[[var]] pronoun\n\nIf you have a variable name in a string, use the .data pronoun to subset that variable with [[.\n\n\n## -- write function\nmy_sum3 &lt;- function(data, num_var, group_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[group_var]]) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\ngroup_var &lt;- \"homeworld\"\n## --  call function\nmy_sum3 (starwars, mass, group_var)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "href": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "title": "Tidyeval and functional programming",
-    "section": "Option 1) purrr + existing function .f…",
-    "text": "Option 1) purrr + existing function .f…\n\nmy big “gotcha” here is I must not specify .x in the arguments after .f as I kept doing… 🤯\n\n\n## -- using function `my_mean` with:\ngroup_var_vec &lt;- c(\"homeworld\", \"species\", \"sex\") \n\n# map returns a list \ngroupmeans_l  &lt;-  map(.x = group_var_vec, #  x \n                             .f = my_mean,   # function  NO ()\n                             data = starwars, # ADDITIONAL arguments \n                             num_var = height)\n#, group_var = .x)  \n\n\ngroupmeans_l[[3]]",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "href": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "title": "Tidyeval and functional programming",
-    "section": "Option 2) purrr + anonymous function as formula ~ fun()\n",
-    "text": "Option 2) purrr + anonymous function as formula ~ fun()\n\n\n🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless\n\n\n## -- using function `my_mean` with:\ngroupmeans_l_tilde &lt;- map(.x = group_var_vec, \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_l_tilde[[3]] \npluck(groupmeans_l_tilde, 3)\n\nBTW map can output a row-binded df here\n\n# map returns dataframes binded by row \ngroupmeans_dfr &lt;- map_dfr(.x = group_var_vec, # x \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_dfr",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "href": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "title": "Tidyeval and functional programming",
-    "section": "Tidyeval in purrr + custom function",
-    "text": "Tidyeval in purrr + custom function\n1/2 single (group, num) function\n\nmy_mean_2  &lt;- function(data, group_var, num_var) {\n    quo_group_var &lt;- enquo(group_var)\n    quo_num_var &lt;- enquo(num_var)\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[!! quo_group_var]]) %&gt;%\n        dplyr::summarise(\n            \"mean_of_{{quo_num_var}}\" := mean( !!quo_num_var, na.rm = TRUE ))\n}\n\n# test YEAH\ntest1 &lt;- my_mean_2(data = starwars, group_var = sex, num_var =height) \n\n2/2 map function\n\ngroup_var &lt;- c(\"gender\", \"species\")\nnum_var &lt;- c(\"height\", \"birth_year\")\n\ntidy_map_df3 &lt;- map2(.x = group_var, \n                            .y = num_var ,\n                            ~my_mean_2,\n                            data = starwars\n) \ntidy_map_df3\n\nhttps://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr\n\nvars &lt;- train %&gt;% select(ends_with(\"bin\")) %&gt;% colnames()\n\nvars %&gt;%\n# create a symbol (defused expressions that represent objects in environments)\n  syms() %&gt;%\n  map(function(var) get_charts(!!var))\n\n# test YEAH\ntest2 &lt;- my_mean(data = starwars, group_var = sex, num_var =height)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#digression-pluck",
-    "href": "rstats/01_tidyeval.html#digression-pluck",
-    "title": "Tidyeval and functional programming",
-    "section": "[digression] pluck\n",
-    "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
     "objectID": "rstats.html",
     "href": "rstats.html",
     "title": "I ❤️ #rstats",
@@ -557,11 +392,22 @@
     ]
   },
   {
+    "objectID": "git/git_branches.html#rename-a-local-branch-1",
+    "href": "git/git_branches.html#rename-a-local-branch-1",
+    "title": "Git branches",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
     "objectID": "git/git_branches.html#see-which-branches-there-are",
     "href": "git/git_branches.html#see-which-branches-there-are",
     "title": "Git branches",
     "section": "See which branches there are",
-    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote.\n\n# delete local \ngit branch -d up\n\n# (delete remote)\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
+    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote. This is only local, no remote.\n\n# delete local \ngit branch -d up\n\n# (delete remote)\n\n# (delete remote)\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
     "crumbs": [
       "git",
       "Git branches"
@@ -571,8 +417,8 @@
     "objectID": "git/git_branches.html#switch-to-other-branch",
     "href": "git/git_branches.html#switch-to-other-branch",
     "title": "Git branches",
-    "section": "Switch to other branch",
-    "text": "Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch page_col\ncat .git/HEAD # (confirms me I moved)\n\nHowever I might have ALSO new/uncommitted stuff in the wkg_branch",
+    "section": "0. Switch to other branch",
+    "text": "0. Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch wkg_branch\ncat .git/HEAD # (confirms me I moved)\n\nHowever I might have ALSO new/uncommitted stuff in the wkg_branch",
     "crumbs": [
       "git",
       "Git branches"
@@ -583,7 +429,7 @@
     "href": "git/git_branches.html#evaluate-changes",
     "title": "Git branches",
     "section": "1. Evaluate changes",
-    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n \n\n# check commits in master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
+    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n \n \n\n# check commits in master\ngit log -2 --graph wkg_branch..master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
     "crumbs": [
       "git",
       "Git branches"
@@ -594,7 +440,18 @@
     "href": "git/git_branches.html#commit-changes-left-on-wkg_branch",
     "title": "Git branches",
     "section": "2. Commit changes left on wkg_branch\n",
-    "text": "2. Commit changes left on wkg_branch\n\n2.1. Resolve conflicts for duplicated EXISTING FILES\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\ngit merge master\n\n\n\nUse a merge tool like in VS CODE\n\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit\n\n2.2. Deal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Then commit to confirm the merge\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
+    "text": "2. Commit changes left on wkg_branch\n\n2.1. Resolve conflicts for duplicated EXISTING FILES",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#commit-changes-left-on-wkg_branch-1",
+    "href": "git/git_branches.html#commit-changes-left-on-wkg_branch-1",
+    "title": "Git branches",
+    "section": "2. Commit changes left on wkg_branch\n",
+    "text": "2. Commit changes left on wkg_branch\n\n2.1. Resolve conflicts for duplicated EXISTING FILES\nDifferent ways to resolve conflicts:\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n\n\n\nUse a merge tool like in VS CODE\n\nUse a merge tool like in VS CODE\n\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit\n\n2.2. Deal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Then commit to confirm the merge\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch\n\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit\n\n2.2. Deal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Then commit to confirm the merge\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
     "crumbs": [
       "git",
       "Git branches"
@@ -605,18 +462,7 @@
     "href": "git/git_branches.html#push-the-updated-branch",
     "title": "Git branches",
     "section": "3. Push the Updated Branch",
-    "text": "3. Push the Updated Branch\n\n# check status\ngit log --graph --oneline --all",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#optional-merge-the-branch-into-master",
-    "href": "git/git_branches.html#optional-merge-the-branch-into-master",
-    "title": "Git branches",
-    "section": "4. (optional) merge the branch into master",
-    "text": "4. (optional) merge the branch into master\n\ngit checkout master\ngit merge wkg_branch\ngit push",
+    "text": "3. Push the Updated Branch\n\n# check status\ngit log --graph --oneline --all\n# check status\ngit log --graph --oneline --all",
     "crumbs": [
       "git",
       "Git branches"
@@ -916,143 +762,11 @@
     ]
   },
   {
-    "objectID": "rstats/02_r_vscode.html",
-    "href": "rstats/02_r_vscode.html",
-    "title": "Using R from VS Code",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n(as of 25/5/2022) # Reference",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#install-python",
-    "href": "rstats/02_r_vscode.html#install-python",
-    "title": "Using R from VS Code",
-    "section": "install Python",
-    "text": "install Python\n\nbrew install python\n\n# Python has been installed as\n#   /usr/local/bin/python3\n# \n# Unversioned symlinks `python`, `python-config`, `pip` etc. pointing to\n# `python3`, `python3-config`, `pip3` etc., respectively, have been installed into\n#   /usr/local/opt/python@3.12/libexec/bin\n\n\nIf you do not need a specific version of Python, and always want Homebrew’s python3 in your PATH:\n\n\nbrew install python3",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "href": "rstats/02_r_vscode.html#ok-but-which-python-version-am-i-running",
-    "title": "Using R from VS Code",
-    "section": "OK, but which Python version am I running?",
-    "text": "OK, but which Python version am I running?\n\nVersion: Python 3.12.5 for macOS ….\n\nEnsure Python and pip are installed:\n\npython3 --version # Python 3.12.5\npip3 --version  # PROBLEM! # pip 21.2.4 (python 3.9)\n# pip 21.2.4 from\n# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)\n\nGotcha (part 1/2)!!!\nProblem: mismatch tra pip (3.9) e python 3.12)\nThe error externally-managed-environment typically occurs when trying to install or upgrade packages in a Python environment that is managed by the system or another package manager (like Homebrew on macOS). To resolve this, you can use a virtual environment to isolate your Python installation and manage packages independently.\nHere are the steps to create a virtual environment and install radian within it:\nCreate a virtual environment:\n\n# Create a virtual environment\npython3.12 -m venv myenv\n# Activate the virtual environment\nsource myenv/bin/activate\n# Upgrade pip within the virtual environment\npip install --upgrade pip\n# Install radian within the virtual environment\npip install radian\n\nWhere is this new Python 3.12?\n/usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\nlooks like Homebrew puts Python in /usr/local/Cellar/\n\nWhere is this new pip/ (pip3 install radian)\n/usr/local/lib/python3.12/site-packages/pip",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#now-install-radian",
-    "href": "rstats/02_r_vscode.html#now-install-radian",
-    "title": "Using R from VS Code",
-    "section": "… now install radian\n",
-    "text": "… now install radian\n\n\n#  Now, try installing radian again:\npip3 install radian\n\nWhere is this radian (Gotcha (part 2/2)!!!)\nOKKIO: Move it from virtual environemnt a real environment\n\nwhich radian # /Users/luisamimmi/myenv/bin/radian  OLD!!!\nsource myenv/bin/activate\ncp /Users/luisamimmi/myenv/bin/radian /usr/local/bin/\nchmod +x /usr/local/bin/radian\n\n# check \nwhich radian # /usr/local/bin/radian   NEW !!!!",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#in-sum",
-    "href": "rstats/02_r_vscode.html#in-sum",
-    "title": "Using R from VS Code",
-    "section": "In sum:",
-    "text": "In sum:\n\n\nPython 3.12.5 is in: /usr/local/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/bin/python3.12\n\n\nPip ?? is in: /usr/local/lib/python3.12/site-packages/pip\n\n\nradian is in: /usr/local/bin/radian",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#ways-to-work-with-python",
-    "href": "rstats/02_r_vscode.html#ways-to-work-with-python",
-    "title": "Using R from VS Code",
-    "section": "3 ways to work with python",
-    "text": "3 ways to work with python\n— 1) Launch Idle shell + execute\n(it comes installed with the new python3)\n— 2) Execute program in shell\n\npython3 Python3_9_test.py  \n# it prompts for name etc... \n\n— 3) Execute program in VS code\nJust look for the arrow from the top of the .py file",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#modify-r-extension-settings",
-    "href": "rstats/02_r_vscode.html#modify-r-extension-settings",
-    "title": "Using R from VS Code",
-    "section": "modify R Extension settings",
-    "text": "modify R Extension settings\nI need to specify the path to R R &gt; Rpath: mac\n\n# here are the commands to figure it out \nR \nR.home(\"bin\")\n# [1] \"/Library/Frameworks/R.framework/Resources/bin\"\n\nTo color the console I need to have radian path in R settings –&gt; R&gt; Rterm:MACR &gt; Rterm: Mac\n\"r.rterm.mac\": \"/usr/local/bin/radian\"",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#sending-r-code-to-terminal",
-    "href": "rstats/02_r_vscode.html#sending-r-code-to-terminal",
-    "title": "Using R from VS Code",
-    "section": "Sending R code to terminal",
-    "text": "Sending R code to terminal\n\n\nCtrl + Shift + P and choose “R: Create R terminal” command\noppure lancio R interactive dalla tendina in Terminal",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#path-to-keybindings.json",
-    "href": "rstats/02_r_vscode.html#path-to-keybindings.json",
-    "title": "Using R from VS Code",
-    "section": "Path to keybindings.json",
-    "text": "Path to keybindings.json\n~/Library/Application Support/Code/User/keybindings.json",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#info-on-keybinding",
-    "href": "rstats/02_r_vscode.html#info-on-keybinding",
-    "title": "Using R from VS Code",
-    "section": "Info on Keybinding",
-    "text": "Info on Keybinding\nhttps://code.visualstudio.com/docs/getstarted/keybindings",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/02_r_vscode.html#fing-lintr-in-vscode",
-    "href": "rstats/02_r_vscode.html#fing-lintr-in-vscode",
-    "title": "Using R from VS Code",
-    "section": "F&$%ing lintr in VSCode",
-    "text": "F&$%ing lintr in VSCode\nhttps://github.com/r-lib/lintr#continuous-integration\nYou can tone it down by creating your own `~/.lintr/ file like so\nlinters: with_defaults(\n  line_length_linter = NULL,\n  open_curly_linter = NULL, \n  commented_code_linter = NULL,\n  trailing_whitespace_linter = NULL)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Using R from VS Code"
-    ]
-  },
-  {
-    "objectID": "rstats/04_text_analytics.html",
-    "href": "rstats/04_text_analytics.html",
-    "title": "Text Analytics in R",
-    "section": "",
-    "text": "To install quanteda\n\nquanteda is an R package for managing and analyzing text, https://github.com/quanteda/quanteda\n\nFirst, you will need to install XCode command line tools.\n\n\nxcode-select --install\n\n\nThen install the TBB libraries and the pkg-config utility: (after installing Homebrew):\n\n\nbrew install tbb pkg-config\n\n\ngfortran https://github.com/fxcoudert/gfortran-for-macOS/releases\nNow you can install quanteda\n\n\ninstall.packages(\"quanteda\")",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Text Analytics in R"
-    ]
-  },
-  {
     "objectID": "shell/foto.html",
     "href": "shell/foto.html",
     "title": "Shell script to change pics",
     "section": "",
-    "text": "change format for individual .HEIC pic\n\n# Specify input directory, file name, and output directory\ninput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo\"\noutput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg\"\n# single foto\nfile_name=\"IMG_5398.heic\"\n\n# Construct full input and output file paths\ninput_file=\"${input_dir}/${file_name}\"\noutput_file=\"${output_dir}/${file_name%.heic}.jpg\"\n\n# Convert to .jpg\nsips -s format jpeg \"$input_file\" --out \"$output_file\"\n\nNeeded to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .HEIC in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .HEIC files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.HEIC)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .HEIC files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .HEIC file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .HEIC)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img\"\n\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img/smaller\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd $input_dir\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_any_image_size() {\n    mkdir -p \"./output\"\n    max_size=5000000\n\n    find . -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.png\" \\) | while read -r file; do\n        base_name=$(basename \"$file\")\n        cp \"$file\" \"./output/$base_name\"\n        quality=85\n\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_any_image_size",
+    "text": "change format for individual .HEIC pic\n\n# Specify input directory, file name, and output directory\ninput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo\"\noutput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg\"\n# single foto\nfile_name=\"IMG_5398.heic\"\n\n# Construct full input and output file paths\ninput_file=\"${input_dir}/${file_name}\"\noutput_file=\"${output_dir}/${file_name%.heic}.jpg\"\n\n# Convert to .jpg\nsips -s format jpeg \"$input_file\" --out \"$output_file\"\n\nNeeded to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .heic in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .heic files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.heic)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .heic files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .heic file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .heic)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img\"\n\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img/smaller\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd $input_dir\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_any_image_size() {\n    mkdir -p \"./output\"\n    max_size=1000000\n\n    find . -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" \\) | while read -r file; do\n        base_name=$(basename \"$file\")\n        cp \"$file\" \"./output/$base_name\"\n        quality=85\n\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_any_image_size",
     "crumbs": [
       "Shell",
       "Shell script to change pics"

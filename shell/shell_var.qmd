@@ -26,7 +26,7 @@ format:
     toc_float: true
     toc-location: left
     toc-title: Outline
-    embed-resources: true # external dependencies embedded (Not in ..._files/)
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
   # pdf:
   #   toc-depth: 2
   #   toc-title: Indice
@@ -35,6 +35,7 @@ format:
   #   embed-resources: true # external dependencies embedded (Not in ..._files/)
 format-links: false
 ---
+
 # What are shell variables and how do u use them?
 
 ```{bash}

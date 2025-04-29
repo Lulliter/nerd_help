@@ -26,7 +26,7 @@ format:
     toc_float: true
     toc-location: left
     toc-title: Outline
-    embed-resources: true # external dependencies embedded (Not in ..._files/)
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
   # pdf:
   #   toc-depth: 2
   #   toc-title: Indice
@@ -319,7 +319,7 @@ git commit -m "Work on git_branches.qmd"
 3. When done, **merge `wkg_branch` into `master`**.
 ```{bash}
 git checkout master
-git merge wkg_branch
+git merge wkg_branch # this is *merged* INTO the branch you are on (master)
 
 quarto render
 git add docs/
@@ -327,6 +327,14 @@ git commit -m "Update docs"
 git push origin master
 ```
 
+4. check
+
+```{bash}
+git branch --merged
+git branch --no merged
+
+git log --oneline -4
+```
 
 --- 
 

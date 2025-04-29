@@ -8,6 +8,10 @@ project:
     - "dev/*.qmd"
     - "git/*.qmd"
     - "rstats/*.qmd"
+    - "!rstats/01_tidyeval.qmd"
+    - "!rstats/02_r_vscode.qmd"
+    - "!rstats/03_r_gpt.qmd"
+    - "!rstats/04_text_analytics.qmd"
     - "shell/*.qmd"
     - "!secret/"
 
@@ -86,10 +90,10 @@ website:
       contents:
         - rstats.qmd
         - rstats/00_useful.qmd
-        - rstats/01_tidyeval.qmd
-        - rstats/02_r_vscode.qmd
-        - rstats/03_r_gpt.qmd
-        - rstats/04_text_analytics.qmd
+        # - rstats/01_tidyeval.qmd
+        # - rstats/02_r_vscode.qmd
+        # - rstats/03_r_gpt.qmd
+        # - rstats/04_text_analytics.qmd
 
     - title: "Shell"
       style: "docked"
@@ -101,6 +105,10 @@ website:
 
 format:
   html:
+    self-contained: false
+    embed-resources: false
+    code-fold: false
+    code-tools: false
     toc: true
     toc-location: "left"
     code-link: true

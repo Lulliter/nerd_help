@@ -27,7 +27,7 @@ format:
     toc_float: true
     toc-location: left
     toc-title: Outline
-    embed-resources: true # external dependencies embedded (Not in ..._files/)
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
   # pdf:
   #   toc-depth: 2
   #   toc-title: Indice
