@@ -1,1 +1,1 @@
-Sitemap: {{< var website.site-url >}}/sitemap.xml
+Sitemap: https://lulliter.github.io/nerd-help/sitemap.xml

@@ -5,6 +5,10 @@ project:
 #  will be rendered (NO .file, _dir/)
   render:
     - "*.qmd"
+    - "dev/*.qmd"
+    - "git/*.qmd"
+    - "rstats/*.qmd"
+    - "shell/*.qmd"
     - "!secret/"
 
 execute:
@@ -13,7 +17,7 @@ execute:
 website:
   title: "Nerd help"
   description: "Instructions for R + git + AWS etc..."
-  site-url: "{{< var website.site-url >}}" # "https://lulliter.github.io/nerd-help"
+  site-url: "https://lulliter.github.io/nerd-help"
   favicon: images/icons8-git-96.png
   search: false # no magnifier on navbar
   page-navigation: true

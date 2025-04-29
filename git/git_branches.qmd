@@ -61,38 +61,6 @@ git checkout -b page_col
 
 <!-- Now I see   
 ![Git chekout branch](./img_tools/ck_branch.png){#fig-git_ck_b} -->
-
-## See which branches there are 
-```{bash}
-# (check which branches)
-git branch   # to list local branches.
-git branch -r # to list remote branches.
-git branch -a # to list all branches (local + remote).
-git branch --merged # to list branches that have been merged into the current branch.
-```
-
-### Delete a branch (`up`)
-
-This is only local, no remote
-```{bash}
-# delete local 
-git branch -d up
-# delete remote
-git push origin --delete up # error: unable to delete 'up': remote ref does not exist
-```
-
-
-## Switch to other branch 
-
-> It is better to commit or stash your changes before switching branches!!!
-
-You can *also* use `git switch other_branch` which is more specific 
-
-```{bash}
-git switch page_col
-cat .git/HEAD # (confirms me I moved)
-```
-
 ## Rename a (local) branch
 It's the `-m` parameter !
 
@@ -108,47 +76,85 @@ git branch -a  # it's there
 git branch -m test_branch test_branch2
 ```
 
+## See which branches there are 
+```{bash}
+# (check which branches)
+git branch   # to list local branches.
+git branch -r # to list remote branches.
+git branch -a # to list all branches (local + remote).
+git branch --merged # to list branches that have been merged into the current branch.
+```
+
+### Delete a branch (`up`)
+
+This is only local, no remote.
+```{bash}
+# delete local 
+git branch -d up
+
+# (delete remote)
+git push origin --delete up # error: unable to delete 'up': remote ref does not exist
+```
+
+
+## Switch to other branch 
+
+> It is better to commit or stash your changes before switching branches!!!
+
+You can *also* use `git switch other_branch` which is more specific 
+
+```{bash}
+git switch page_col
+cat .git/HEAD # (confirms me I moved)
+```
+
+However I might have **ALSO** new/uncommitted stuff in the `wkg_branch` 
+
 
 # Merging a branch misaligned with master 
 
-E.g. I got to Github and examine branches and it tells me that `wkg_branch` is like this 
+GOAL = `git merge master`:  **MY GOAL HERE is to UPDATE `wkg_branch` with all the new stuff I have on `master`** (this eon't affect master)
+
+However, if I go Github and examine branches and it tells me that `wkg_branch` is like this 
 
 > This branch (`wkg_branch`) is 2 commits ahead of, 2 commits behind `master`.
+
+```{bash}
+# By the way
+git log --graph --oneline --all
+```
 
 ## 1. Evaluate changes 
 Review these changes to ensure you understand what will be merged.
 ```{bash}
 # check commits in wkg_branchh 
-git log master..wkg_branch
-  #  4 commits...  
+git log -2 --graph master..wkg_branch
+  #  2 commits...  
     # qlc su wkg_branch
     # pasticci su wkg_branch
-    # boh
-    # testing the branch workflow 
+ 
 
 # check commits in master
-git log wkg_branch..master
+git log -2 --graph wkg_branch..master
   # 2 commits 
     # split git_branch + git_collab ⑂
     # removed branch new_sh
 ```
 
-## 2. Bring the changes from master into your branch 
+## 2. Commit changes left on `wkg_branch` 
 
-```{bash}
-git checkout wkg_branch
-git merge master # error 
- # here I have problems 
-```
+### 2.1. Resolve conflicts for duplicated EXISTING FILES
 
-### 2.1. Resolve conflicts
-different ways to resolve conflicts 
+
+Different ways to resolve conflicts:  
 
 a. **Commit local changes** 
 ```{bash}
 # (in wkg_branch)
 git add .
 git commit -m "Save local changes"
+
+# then  merge master into wkg_branch
 git merge master
 ```
 
@@ -156,7 +162,10 @@ b. ~~**Stash the changes**~~
 ```{bash}
 # (in wkg_branch)
 git stash
+
+# then merge master into wkg_branch
 git merge master
+# Bring your changes back
 git stash pop
 ```
 
@@ -165,20 +174,59 @@ c. **Discard the local changes**
 # (in wkg_branch)
 git checkout -- .
 git checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml
+
+# then merge master into wkg_branch
 git merge master
 ```
 
-d. **Use a merge tool** 
+d. **Use a merge tool**  like in VS CODE
 
 You can use a merge tool to resolve the conflicts, such as `git mergetool` or `git difftool`. 
+
++ The best way for *SOURCE CODE FILES* is to go on VS CODE and use the guided merge prompt to manually choose the version to keep. 
+
++ The best way for *RENDERED FILES* (i.e. `docs/*` files) is to delete the file and re-render it.
+
+```{bash}
+# --theirs means "restore files as in the branch you are merging in," (master) 
+git checkout --theirs -- docs/index.html
+
+# then 
+git add docs/index.html
+git commit
+```
+
+
+### 2.2. Deal with UNTRACKED FILES in `wkg_branch`
+these too could get overwritten by the merge, so I have to stash or move/delete them
+
+```{bash}
+#(this includes new files you haven't added yet)
+git stash push --include-untracked
+# then merge master into wkg_branch
+git merge master
+# Bring your changes back
+git stash pop
+```
+
+### 2.3. Then commit to confirm the merge
+
+```{bash}
+# upon detecting and resolving conflicts...
+
+git add . # stages all resolved files at once
+git commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch
+```
+
 
 ## 3. Push the Updated Branch
 
 ```{bash}
-git push
+# check status
+git log --graph --oneline --all
 ```
 
-## 4. (optional) merge the branhc into master 
+## 4. (optional) merge the branch into master 
 
 ```{bash}
 git checkout master
