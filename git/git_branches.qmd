@@ -44,6 +44,12 @@ Web page construction in progress...
  
 # Branches
 
+> Branches are just pointers to commits.
+
+`git branch <name> <source>` creates a new branch referencing the same commit as `<source>`.
+`git branch feature master`
+`git branch feature origin/feature` 
+
 ## Create & checkout a branch
 
 > "checkout" means to change the branch you are currently working on (or switch to)
