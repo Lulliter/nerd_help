@@ -7,15 +7,16 @@ git status # (if there are uncommitted changes, you can either commit them or st
 git log --oneline
      # bd03dde (HEAD -> master, origin/master, origin/HEAD) rebuilt on Wed Apr 30 21:30:02 CEST 2025
 
+# ---- FETCH & MERGE CHANGES FROM THE REMOTE ----
 # Step 1) Switch to master and update it from origin
 git checkout master
 # Fetch the latest changes from the remote repository
-git pull origin master # (or git fetch origin master)
+git fetch origin master # (or git pull origin master )
 
+# --- CREATE/SWITCH TO A NEW WORKING BRANCH ---
+# git checkout -b wkg_br
 # Step 2) Switch to your working branch
-    # (the first time)
-    # git branch wkg_br
-git checkout wkg_br
+git switch wkg_br
 
 # Step 3a) Rebase your working branch onto the updated master (LINEAR but UNSAFE)
 # git rebase master
@@ -50,6 +51,13 @@ git push -u origin wkg_br
 # --- verify branches ---
 git branch -vv # * wkg_br abc1234 [origin/wkg_br] your commit message here
 git log --graph --all --oneline --decorate
+
+
+
+
+
+
+
 
 # --- Ensure that your local branches are always tracking their remote counterparts ---
 git config --global push.autoSetupRemote true
