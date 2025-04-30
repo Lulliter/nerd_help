@@ -3,11 +3,14 @@
 # Step 0) Clean the worktree of master branch,
 # i.e. ensure there are no uncommitted changes (local) and no unpushed commits (remote)
 git status # (if there are uncommitted changes, you can either commit them or stash them)
+     # nothing to commit, working tree clean
+git log --oneline
+     # bd03dde (HEAD -> master, origin/master, origin/HEAD) rebuilt on Wed Apr 30 21:30:02 CEST 2025
 
 # Step 1) Switch to master and update it from origin
 git checkout master
 # Fetch the latest changes from the remote repository
-git pull origin master
+git pull origin master # (or git fetch origin master)
 
 # Step 2) Switch to your working branch
     # (the first time)
@@ -24,7 +27,11 @@ git status # to see what I changed
 git add .
 git commit -m "WIP: update working branch with new changes" || true
 
+# check differences (now the branch has deviated from origin/master)
+git diff --color-words origin/master..wkg_br # (or git diff master..wkg_br)
+
 # Step 5) Push your changes to the remote branch (set upstream if needed)
+# git push <remote> <source>:<destination>
 git push -u origin wkg_br
 
 # Step 6) Create a pull request on GitHub
