@@ -44,6 +44,12 @@ Web page construction in progress...
  
 # Branches
 
+> Branches are just pointers to commits.
+
+`git branch <name> <source>` creates a new branch referencing the same commit as `<source>`.
+`git branch feature master`
+`git branch feature origin/feature` 
+
 ## Create & checkout a branch
 
 > "checkout" means to change the branch you are currently working on (or switch to)
@@ -144,7 +150,7 @@ However I might have **ALSO** new/uncommitted stuff in the `wkg_branch`
 ## 1. Evaluate changes 
 Review these changes to ensure you understand what will be merged.
 ```{bash}
-# check commits in wkg_branchh 
+# check commits in wkg_branch
 git log -2 --graph master..wkg_branch
   #  2 commits...  
     # qlc su wkg_branch
