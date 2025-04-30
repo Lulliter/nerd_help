@@ -148,30 +148,41 @@ Review these changes to ensure you understand what will be merged.
 # check commits in wkg_branchh 
 git log -2 --graph master..wkg_branch
   #  2 commits...  
-git log -2 --graph master..wkg_branch
-  #  2 commits...  
     # qlc su wkg_branch
     # pasticci su wkg_branch
- 
- 
 
 # check commits in master
-git log -2 --graph wkg_branch..master
 git log -2 --graph wkg_branch..master
   # 2 commits 
     # split git_branch + git_collab ⑂
     # removed branch new_sh
 ```
 
+
 ## 2. Commit changes left on `wkg_branch` 
 
-### 2.1. Resolve conflicts for duplicated EXISTING FILES
-## 2. Commit changes left on `wkg_branch` 
+`git` indicates the two versions of the file with `<<<<<` and `>>>>>` markers.
 
-### 2.1. Resolve conflicts for duplicated EXISTING FILES
+![Git merge conflict](../images/conflicted.jpg){#fig-git_merge_conflict}
+
+Here there are 3 options:
+
+1. **Abort merge**
+2. **Resolve conflicts manually**
+3. **Use a merge tool**
+
+### 2.1. Abort the merge
+
+```{bash}
+git merge --abort
+```
+This will revert the working directory to the state before the merge attempt.
 
 
-Different ways to resolve conflicts:  
+### 2.2. Resolve conflicts manually 
+
+#### Deal with CONFLICTING FILES
+
 Different ways to resolve conflicts:  
 
 a. **Commit local changes** 
@@ -212,8 +223,20 @@ git checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml
 git merge master
 ```
 
-d. **Use a merge tool**  like in VS CODE
-d. **Use a merge tool**  like in VS CODE
+#### Deal with UNTRACKED FILES in `wkg_branch`
+these too could get overwritten by the merge, so I have to stash or move/delete them
+
+```{bash}
+#(this includes new files you haven't added yet)
+git stash push --include-untracked
+# then merge master into wkg_branch
+git merge master
+# Bring your changes back
+git stash pop
+```
+
+### 2.3. Resolve conflicts with a merge tool
+(like the one in VS CODE)
 
 You can use a merge tool to resolve the conflicts, such as `git mergetool` or `git difftool`. 
 
@@ -230,20 +253,9 @@ git add docs/index.html
 git commit
 ```
 
+## 3. Then `add` +  `commit` to confirm the merge
 
-### 2.2. Deal with UNTRACKED FILES in `wkg_branch`
-these too could get overwritten by the merge, so I have to stash or move/delete them
-
-```{bash}
-#(this includes new files you haven't added yet)
-git stash push --include-untracked
-# then merge master into wkg_branch
-git merge master
-# Bring your changes back
-git stash pop
-```
-
-### 2.3. Then commit to confirm the merge
+`git add` marks the conflicts as resolved, and `git commit` concludes the merge process.
 
 ```{bash}
 # upon detecting and resolving conflicts...
@@ -252,57 +264,23 @@ git add . # stages all resolved files at once
 git commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch
 ```
 
-
-+ The best way for *SOURCE CODE FILES* is to go on VS CODE and use the guided merge prompt to manually choose the version to keep. 
-
-+ The best way for *RENDERED FILES* (i.e. `docs/*` files) is to delete the file and re-render it.
-
-```{bash}
-# --theirs means "restore files as in the branch you are merging in," (master) 
-git checkout --theirs -- docs/index.html
-
-# then 
-git add docs/index.html
-git commit
-```
-
-
-### 2.2. Deal with UNTRACKED FILES in `wkg_branch`
-these too could get overwritten by the merge, so I have to stash or move/delete them
-
-```{bash}
-#(this includes new files you haven't added yet)
-git stash push --include-untracked
-# then merge master into wkg_branch
-git merge master
-# Bring your changes back
-git stash pop
-```
-
-### 2.3. Then commit to confirm the merge
-
-```{bash}
-# upon detecting and resolving conflicts...
-
-git add . # stages all resolved files at once
-git commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch
-```
-
-
-## 3. Push the Updated Branch
+## 4. Push the Updated Branch
 
 ```{bash}
 # check status
-git log --graph --oneline --all
-# check status
-git log --graph --oneline --all
+git log --graph --all --oneline --decorate
+git log --graph -5 --oneline --decorate
 ```
+
+--- 
 
 # Daily workflow with `wkg_branch` 
 
 A possible workflow could be to add features to `wkg_branch` and then merge them into `master` when they are ready.
 
 + How to avoid pointless conflicts of rendered files (e.g. `docs/*`) which complicate merges unnecessarily?
+
+### On the working branch `wkg_branch`
 
 0. Do the above and merge master into `wkg_branch` first 
 
@@ -316,11 +294,17 @@ git add git/git_branches.qmd
 git commit -m "Work on git_branches.qmd"
 ```
 
+### Then on the master branch `master`
+
 3. When done, **merge `wkg_branch` into `master`**.
 ```{bash}
+# Switch to receiving branch
 git checkout master
+# Merge new stuff into master
 git merge wkg_branch # this is *merged* INTO the branch you are on (master)
-
+# or 
+git merge -m "some message" wkg_branch 
+# Proceed as usual also to get rendered files
 quarto render
 git add docs/
 git commit -m "Update docs"
@@ -328,22 +312,75 @@ git push origin master
 ```
 
 4. check
+```{bash}
+git diff master...wkg_branch '***.qmd'Q
+```
 
+General view on branches
 ```{bash}
 git branch --merged
 git branch --no merged
 
 git log --oneline -4
+
+# which Git branches are tracking which Upstream brances
+git branch -vv
+#* master       28bb22c [origin/master] quick fix
+#  page_col     c86edff [origin/page_col] added color.qmd to branch
+#  test_branch2 c86edff added color.qmd to branch
+#  wkg_branch   6fb1535 Work on git_branches.qmd
 ```
 
---- 
++ The main branch (`master`) has a tracking branch of [origin/master]
++ `page_col` has a tracking branch of [origin/master]
 
-# !!!!! ⛔️ in progress ⛔️!!!! 
+### Good strategy to minimize conflicts
+
+1. If I have a long standing working branch (e.g. `wkg_branch`) I should merge it into master frequently so that it doesn't diverge too much from master.
+	+ if that is not possible I can do the **opposite** and merge master into `wkg_branch` frequently (i.e. *"tracking the main branch"*)
+2. Do not commit rendered files (e.g. `docs/*`) in the working branch (but only source code)
+3. Beware of spaces/tabs in the source code files, as they can cause conflicts when merging branches.
+
 ---
 
-## Push upstream a local branch 
+# REMOTE TRACKING 
+https://www.linkedin.com/learning/complete-guide-to-git/remote-tracking-branches?autoSkip=true&resume=false
 
-Check out explanation here [https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/](https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/)
+i.e. USING A REMOTE AS PRIMARY HUB FOR COLLABORATION
+
+> An *upstream branch* in Git refers to a branch that serves as a *reference point* for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.
+
+<!-- Check out explanation here [https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/](https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/) -->
+
+Collaborator A) `push` a certain commit (*4ee789*) to the remote then Collaborator B) `fetch` from the remote the same (*4ee789*).
+
+
+```{bash}
+git remote
+# origin
+# upstream
+
+git remote -v
+#origin  git@github.com:Lulliter/nerd_help.git (fetch)
+#origin  git@github.com:Lulliter/nerd_help.git (push)
+#upstream        git@github.com:Lulliter/nerd_help.git (fetch)
+#upstream        git@github.com:Lulliter/nerd_help.git (push)
+```
+
+
+```{bash}
+git log -2 --oneline
+```
+
+
+Each collaborator must **clone the remote repository to their local machine**. This creates a local copy of the repository that is linked to the remote repository.
+
+
+---
+
+## 🟠 Push upstream a local branch 
+*(kind of too complicated for me)*
+
 
 > It is important to Setup an **Upstream Branch** in Git to make the workflow smooth and manage branches efficiently. 
 
@@ -354,85 +391,7 @@ Check out explanation here [https://www.geeksforgeeks.org/how-to-set-upstream-br
 3.  [When the current branch i.e (‘new_branch’) has no Upstream branch set] `git push –-set-upstream origin <new_branch>` command (the 1st time you push)
 4.  Thereafter `git push -u origin <new_branch>` (all subsequent git push commands automatically move local branch changes up to the remote branch.)
 
-```{bash}
-# 1 Create local branch 
 
-# 2 switch to local branch 
-git checkout -b <new_branch> # or
-git switch <new_branch> 
-
-# 3.a git push –set-upstream command (1st time)
-git push  --set-upstream origin <new_branch>
-  # check 
-  git branch -a # YAY!
-
-# 3.b git push origin (nest times )
-git push -u origin <new_branch>
-```
-
-## Check which Git branches are tracking which Upstream brances 
-
-```{bash}
-git branch -vv
-
-# * master       789640d [origin/master] split git_branch + git_collab ⑂
-#   page_col     c86edff [origin/page_col] added color.qmd to branch
-#   test_branch2 c86edff added color.qmd to branch
-#   up           bb0035b [upstream/master] git stuff
-#   wkg_branch   12e1e52 qlc su wkg_branch
-```
-
-+ The main branch (master) has a tracking branch of [origin/master]
-+ up has a tracking branch of [upstream/master]
-
-## Rename a (remote) branch
-You need to 
-
-1. Publish an existing local branch on remote
-`git push -u origin local_branch`
-2. So you delete old one and push up a new one from local repository  
-
-## Merge a git branch into master 
-
-1. List All Git Branches
-2. Switch to Master
-3. Merge Branch into Master
-4. Push Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)
-
-
-::: {.callout-tip collapse="true"}
-Since merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:
-:::
-
-```{bash}
-# 1. List
-git branch
-# 2. Switch
-git checkout master
-# 3. The merge creates a merge commit, bringing together
-    # lines of development while preserving the history of the source branch.
-git merge -m "Prova di merge" page_col
-# 4. Push the local changes to the remote repository
-git push origin
-```
-
-
-## See differences b/w branches 
-
-```{bash}
-git diff master..page_col '***.qmd'Q
-```
-
-
-# Git Rebase 
-
-1. take commits from a separat branch and replay (shift the change down to the tip of master) them at the end of another brabch
-2. integrate recent commits without merging
-
-* you never rebase a public branch, only a private one!
- 
-
-+ YT video on [diff merge - rebase](https://www.youtube.com/watch?v=zOnwgxiC0OA)
 
 
 

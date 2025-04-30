@@ -330,7 +330,7 @@
     "href": "git/git_branches.html#evaluate-changes",
     "title": "Git branches",
     "section": "1. Evaluate changes",
-    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n \n \n\n# check commits in master\ngit log -2 --graph wkg_branch..master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
+    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branchh \ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n\n# check commits in master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
     "crumbs": [
       "git",
       "Git branches"
@@ -341,7 +341,7 @@
     "href": "git/git_branches.html#commit-changes-left-on-wkg_branch",
     "title": "Git branches",
     "section": "2. Commit changes left on wkg_branch\n",
-    "text": "2. Commit changes left on wkg_branch\n\n2.1. Resolve conflicts for duplicated EXISTING FILES",
+    "text": "2. Commit changes left on wkg_branch\n\ngit indicates the two versions of the file with &lt;&lt;&lt;&lt;&lt; and &gt;&gt;&gt;&gt;&gt; markers.\n\n\nFigure 1: Git merge conflict\n\n\n\n\n\nHere there are 3 options:\n\nAbort merge\nResolve conflicts manually\nUse a merge tool\n\n2.1. Abort the merge\n\ngit merge --abort\n\nThis will revert the working directory to the state before the merge attempt.\n2.2. Resolve conflicts manually\nDeal with CONFLICTING FILES\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n\nDeal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Resolve conflicts with a merge tool\n(like the one in VS CODE)\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit",
     "crumbs": [
       "git",
       "Git branches"
@@ -362,8 +362,8 @@
     "objectID": "git/git_branches.html#push-the-updated-branch",
     "href": "git/git_branches.html#push-the-updated-branch",
     "title": "Git branches",
-    "section": "3. Push the Updated Branch",
-    "text": "3. Push the Updated Branch\n\n# check status\ngit log --graph --oneline --all\n# check status\ngit log --graph --oneline --all",
+    "section": "4. Push the Updated Branch",
+    "text": "4. Push the Updated Branch\n\n# check status\ngit log --graph --all --oneline --decorate\ngit log --graph -5 --oneline --decorate",
     "crumbs": [
       "git",
       "Git branches"
@@ -373,8 +373,8 @@
     "objectID": "git/git_branches.html#push-upstream-a-local-branch",
     "href": "git/git_branches.html#push-upstream-a-local-branch",
     "title": "Git branches",
-    "section": "Push upstream a local branch",
-    "text": "Push upstream a local branch\nCheck out explanation here https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/\n\nIt is important to Setup an Upstream Branch in Git to make the workflow smooth and manage branches efficiently.\n\n\nAn upstream branch in Git refers to a branch that serves as a reference point for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.\n\n\nCreate local branch\nSwitch to local branch git checkout -b &lt;new_branch&gt;\n\n[When the current branch i.e (‘new_branch’) has no Upstream branch set] git push –-set-upstream origin &lt;new_branch&gt; command (the 1st time you push)\nThereafter git push -u origin &lt;new_branch&gt; (all subsequent git push commands automatically move local branch changes up to the remote branch.)\n\n\n# 1 Create local branch \n\n# 2 switch to local branch \ngit checkout -b &lt;new_branch&gt; # or\ngit switch &lt;new_branch&gt; \n\n# 3.a git push –set-upstream command (1st time)\ngit push  --set-upstream origin &lt;new_branch&gt;\n  # check \n  git branch -a # YAY!\n\n# 3.b git push origin (nest times )\ngit push -u origin &lt;new_branch&gt;",
+    "section": "🟠 Push upstream a local branch",
+    "text": "🟠 Push upstream a local branch\n(kind of too complicated for me)\n\nIt is important to Setup an Upstream Branch in Git to make the workflow smooth and manage branches efficiently.\n\n\nAn upstream branch in Git refers to a branch that serves as a reference point for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.\n\n\nCreate local branch\nSwitch to local branch git checkout -b &lt;new_branch&gt;\n\n[When the current branch i.e (‘new_branch’) has no Upstream branch set] git push –-set-upstream origin &lt;new_branch&gt; command (the 1st time you push)\nThereafter git push -u origin &lt;new_branch&gt; (all subsequent git push commands automatically move local branch changes up to the remote branch.)",
     "crumbs": [
       "git",
       "Git branches"
@@ -924,6 +924,17 @@
     "crumbs": [
       "Shell",
       "Shell script to change pics"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
+    "href": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
+    "title": "Git branches",
+    "section": "3. Then add + commit to confirm the merge",
+    "text": "3. Then add + commit to confirm the merge\ngit add marks the conflicts as resolved, and git commit concludes the merge process.\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
+    "crumbs": [
+      "git",
+      "Git branches"
     ]
   }
 ]

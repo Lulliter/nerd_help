@@ -195,34 +195,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#commit-changes-left-on-wkg_branch" id="toc-commit-changes-left-on-wkg_branch" class="nav-link" data-scroll-target="#commit-changes-left-on-wkg_branch">2. Commit changes left on <code>wkg_branch</code></a>
   <ul class="collapse">
-<li><a href="#resolve-conflicts-for-duplicated-existing-files" id="toc-resolve-conflicts-for-duplicated-existing-files" class="nav-link" data-scroll-target="#resolve-conflicts-for-duplicated-existing-files">2.1. Resolve conflicts for duplicated EXISTING FILES</a></li>
+<li><a href="#abort-the-merge" id="toc-abort-the-merge" class="nav-link" data-scroll-target="#abort-the-merge">2.1. Abort the merge</a></li>
+  <li><a href="#resolve-conflicts-manually" id="toc-resolve-conflicts-manually" class="nav-link" data-scroll-target="#resolve-conflicts-manually">2.2. Resolve conflicts manually</a></li>
+  <li><a href="#resolve-conflicts-with-a-merge-tool" id="toc-resolve-conflicts-with-a-merge-tool" class="nav-link" data-scroll-target="#resolve-conflicts-with-a-merge-tool">2.3. Resolve conflicts with a merge tool</a></li>
+  </ul>
+</li>
+  <li><a href="#then-add-commit-to-confirm-the-merge" id="toc-then-add-commit-to-confirm-the-merge" class="nav-link" data-scroll-target="#then-add-commit-to-confirm-the-merge">3. Then <code>add</code> + <code>commit</code> to confirm the merge</a></li>
+  <li><a href="#push-the-updated-branch" id="toc-push-the-updated-branch" class="nav-link" data-scroll-target="#push-the-updated-branch">4. Push the Updated Branch</a></li>
   </ul>
 </li>
   <li>
-<a href="#commit-changes-left-on-wkg_branch-1" id="toc-commit-changes-left-on-wkg_branch-1" class="nav-link" data-scroll-target="#commit-changes-left-on-wkg_branch-1">2. Commit changes left on <code>wkg_branch</code></a>
+<a href="#daily-workflow-with-wkg_branch" id="toc-daily-workflow-with-wkg_branch" class="nav-link" data-scroll-target="#daily-workflow-with-wkg_branch">Daily workflow with <code>wkg_branch</code></a>
   <ul class="collapse">
-<li><a href="#resolve-conflicts-for-duplicated-existing-files-1" id="toc-resolve-conflicts-for-duplicated-existing-files-1" class="nav-link" data-scroll-target="#resolve-conflicts-for-duplicated-existing-files-1">2.1. Resolve conflicts for duplicated EXISTING FILES</a></li>
-  <li><a href="#deal-with-untracked-files-in-wkg_branch" id="toc-deal-with-untracked-files-in-wkg_branch" class="nav-link" data-scroll-target="#deal-with-untracked-files-in-wkg_branch">2.2. Deal with UNTRACKED FILES in <code>wkg_branch</code></a></li>
-  <li><a href="#then-commit-to-confirm-the-merge" id="toc-then-commit-to-confirm-the-merge" class="nav-link" data-scroll-target="#then-commit-to-confirm-the-merge">2.3. Then commit to confirm the merge</a></li>
-  <li><a href="#deal-with-untracked-files-in-wkg_branch-1" id="toc-deal-with-untracked-files-in-wkg_branch-1" class="nav-link" data-scroll-target="#deal-with-untracked-files-in-wkg_branch-1">2.2. Deal with UNTRACKED FILES in <code>wkg_branch</code></a></li>
-  <li><a href="#then-commit-to-confirm-the-merge-1" id="toc-then-commit-to-confirm-the-merge-1" class="nav-link" data-scroll-target="#then-commit-to-confirm-the-merge-1">2.3. Then commit to confirm the merge</a></li>
+<li><a href="#on-the-working-branch-wkg_branch" id="toc-on-the-working-branch-wkg_branch" class="nav-link" data-scroll-target="#on-the-working-branch-wkg_branch">On the working branch <code>wkg_branch</code></a></li>
+  <li><a href="#then-on-the-master-branch-master" id="toc-then-on-the-master-branch-master" class="nav-link" data-scroll-target="#then-on-the-master-branch-master">Then on the master branch <code>master</code></a></li>
+  <li><a href="#good-strategy-to-minimize-conflicts" id="toc-good-strategy-to-minimize-conflicts" class="nav-link" data-scroll-target="#good-strategy-to-minimize-conflicts">Good strategy to minimize conflicts</a></li>
   </ul>
 </li>
-  <li><a href="#push-the-updated-branch" id="toc-push-the-updated-branch" class="nav-link" data-scroll-target="#push-the-updated-branch">3. Push the Updated Branch</a></li>
-  </ul>
-</li>
-  <li><a href="#daily-workflow-with-wkg_branch" id="toc-daily-workflow-with-wkg_branch" class="nav-link" data-scroll-target="#daily-workflow-with-wkg_branch">Daily workflow with <code>wkg_branch</code></a></li>
   <li>
-<a href="#in-progress" id="toc-in-progress" class="nav-link" data-scroll-target="#in-progress">!!!!! ⛔️ in progress ⛔️!!!!</a>
+<a href="#remote-tracking" id="toc-remote-tracking" class="nav-link" data-scroll-target="#remote-tracking">REMOTE TRACKING</a>
   <ul class="collapse">
-<li><a href="#push-upstream-a-local-branch" id="toc-push-upstream-a-local-branch" class="nav-link" data-scroll-target="#push-upstream-a-local-branch">Push upstream a local branch</a></li>
-  <li><a href="#check-which-git-branches-are-tracking-which-upstream-brances" id="toc-check-which-git-branches-are-tracking-which-upstream-brances" class="nav-link" data-scroll-target="#check-which-git-branches-are-tracking-which-upstream-brances">Check which Git branches are tracking which Upstream brances</a></li>
-  <li><a href="#rename-a-remote-branch" id="toc-rename-a-remote-branch" class="nav-link" data-scroll-target="#rename-a-remote-branch">Rename a (remote) branch</a></li>
-  <li><a href="#merge-a-git-branch-into-master" id="toc-merge-a-git-branch-into-master" class="nav-link" data-scroll-target="#merge-a-git-branch-into-master">Merge a git branch into master</a></li>
-  <li><a href="#see-differences-bw-branches" id="toc-see-differences-bw-branches" class="nav-link" data-scroll-target="#see-differences-bw-branches">See differences b/w branches</a></li>
+<li><a href="#push-upstream-a-local-branch" id="toc-push-upstream-a-local-branch" class="nav-link" data-scroll-target="#push-upstream-a-local-branch">🟠 Push upstream a local branch</a></li>
   </ul>
 </li>
-  <li><a href="#git-rebase" id="toc-git-rebase" class="nav-link" data-scroll-target="#git-rebase">Git Rebase</a></li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -364,90 +359,83 @@ Caution
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check commits in wkg_branchh </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> master..wkg_branch</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  2 commits...  </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> master..wkg_branch</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  2 commits...  </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># qlc su wkg_branch</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pasticci su wkg_branch</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># check commits in master</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> wkg_branch..master</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> wkg_branch..master</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2 commits </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># split git_branch + git_collab ⑂</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># removed branch new_sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># qlc su wkg_branch</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pasticci su wkg_branch</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># check commits in master</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> wkg_branch..master</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2 commits </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># split git_branch + git_collab ⑂</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># removed branch new_sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="commit-changes-left-on-wkg_branch" class="level2"><h2 class="anchored" data-anchor-id="commit-changes-left-on-wkg_branch">2. Commit changes left on <code>wkg_branch</code>
 </h2>
-<section id="resolve-conflicts-for-duplicated-existing-files" class="level3"><h3 class="anchored" data-anchor-id="resolve-conflicts-for-duplicated-existing-files">2.1. Resolve conflicts for duplicated EXISTING FILES</h3>
-</section></section><section id="commit-changes-left-on-wkg_branch-1" class="level2"><h2 class="anchored" data-anchor-id="commit-changes-left-on-wkg_branch-1">2. Commit changes left on <code>wkg_branch</code>
-</h2>
-<section id="resolve-conflicts-for-duplicated-existing-files-1" class="level3"><h3 class="anchored" data-anchor-id="resolve-conflicts-for-duplicated-existing-files-1">2.1. Resolve conflicts for duplicated EXISTING FILES</h3>
-<p>Different ways to resolve conflicts:<br>
-Different ways to resolve conflicts:</p>
+<p><code>git</code> indicates the two versions of the file with <code>&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;</code> markers.</p>
+<div id="fig-git_merge_conflict" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-git_merge_conflict-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Git merge conflict
+</figcaption><div aria-describedby="fig-git_merge_conflict-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/conflicted.jpg" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
+<p>Here there are 3 options:</p>
+<ol type="1">
+<li><strong>Abort merge</strong></li>
+<li><strong>Resolve conflicts manually</strong></li>
+<li><strong>Use a merge tool</strong></li>
+</ol>
+<section id="abort-the-merge" class="level3"><h3 class="anchored" data-anchor-id="abort-the-merge">2.1. Abort the merge</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will revert the working directory to the state before the merge attempt.</p>
+</section><section id="resolve-conflicts-manually" class="level3"><h3 class="anchored" data-anchor-id="resolve-conflicts-manually">2.2. Resolve conflicts manually</h3>
+<section id="deal-with-conflicting-files" class="level4"><h4 class="anchored" data-anchor-id="deal-with-conflicting-files">Deal with CONFLICTING FILES</h4>
+<p>Different ways to resolve conflicts:</p>
 <ol type="a">
 <li><strong>Commit local changes</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Save local changes"</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># then  merge master into wkg_branch</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># then  merge master into wkg_branch</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Save local changes"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># then  merge master into wkg_branch</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># then  merge master into wkg_branch</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="a">
 <li><del><strong>Stash the changes</strong></del></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="a">
 <li><strong>Discard the local changes</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--</span> .</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--</span> docs/git/git_branches.html docs/search.json docs/sitemap.xml</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (in wkg_branch)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--</span> .</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--</span> docs/git/git_branches.html docs/search.json docs/sitemap.xml</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="4" type="a">
-<li>
-<strong>Use a merge tool</strong> like in VS CODE</li>
-<li>
-<strong>Use a merge tool</strong> like in VS CODE</li>
-</ol>
-<p>You can use a merge tool to resolve the conflicts, such as <code>git mergetool</code> or <code>git difftool</code>.</p>
-<ul>
-<li><p>The best way for <em>SOURCE CODE FILES</em> is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.</p></li>
-<li><p>The best way for <em>RENDERED FILES</em> (i.e.&nbsp;<code>docs/*</code> files) is to delete the file and re-render it.</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --theirs means "restore files as in the branch you are merging in," (master) </span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--theirs</span> <span class="at">--</span> docs/index.html</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># then </span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/index.html</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="deal-with-untracked-files-in-wkg_branch" class="level3"><h3 class="anchored" data-anchor-id="deal-with-untracked-files-in-wkg_branch">2.2. Deal with UNTRACKED FILES in <code>wkg_branch</code>
-</h3>
+</section><section id="deal-with-untracked-files-in-wkg_branch" class="level4"><h4 class="anchored" data-anchor-id="deal-with-untracked-files-in-wkg_branch">Deal with UNTRACKED FILES in <code>wkg_branch</code>
+</h4>
 <p>these too could get overwritten by the merge, so I have to stash or move/delete them</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(this includes new files you haven't added yet)</span></span>
@@ -457,93 +445,133 @@ Different ways to resolve conflicts:</p>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="then-commit-to-confirm-the-merge" class="level3"><h3 class="anchored" data-anchor-id="then-commit-to-confirm-the-merge">2.3. Then commit to confirm the merge</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># upon detecting and resolving conflicts...</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add . <span class="co"># stages all resolved files at once</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="co"># Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section></section><section id="resolve-conflicts-with-a-merge-tool" class="level3"><h3 class="anchored" data-anchor-id="resolve-conflicts-with-a-merge-tool">2.3. Resolve conflicts with a merge tool</h3>
+<p>(like the one in VS CODE)</p>
+<p>You can use a merge tool to resolve the conflicts, such as <code>git mergetool</code> or <code>git difftool</code>.</p>
 <ul>
 <li><p>The best way for <em>SOURCE CODE FILES</em> is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.</p></li>
 <li><p>The best way for <em>RENDERED FILES</em> (i.e.&nbsp;<code>docs/*</code> files) is to delete the file and re-render it.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --theirs means "restore files as in the branch you are merging in," (master) </span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--theirs</span> <span class="at">--</span> docs/index.html</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># then </span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/index.html</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --theirs means "restore files as in the branch you are merging in," (master) </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--theirs</span> <span class="at">--</span> docs/index.html</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># then </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/index.html</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="deal-with-untracked-files-in-wkg_branch-1" class="level3"><h3 class="anchored" data-anchor-id="deal-with-untracked-files-in-wkg_branch-1">2.2. Deal with UNTRACKED FILES in <code>wkg_branch</code>
-</h3>
-<p>these too could get overwritten by the merge, so I have to stash or move/delete them</p>
+</section></section><section id="then-add-commit-to-confirm-the-merge" class="level2"><h2 class="anchored" data-anchor-id="then-add-commit-to-confirm-the-merge">3. Then <code>add</code> + <code>commit</code> to confirm the merge</h2>
+<p><code>git add</code> marks the conflicts as resolved, and <code>git commit</code> concludes the merge process.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(this includes new files you haven't added yet)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash push <span class="at">--include-untracked</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># then merge master into wkg_branch</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge master</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bring your changes back</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># upon detecting and resolving conflicts...</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add . <span class="co"># stages all resolved files at once</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="co"># Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="then-commit-to-confirm-the-merge-1" class="level3"><h3 class="anchored" data-anchor-id="then-commit-to-confirm-the-merge-1">2.3. Then commit to confirm the merge</h3>
+</section><section id="push-the-updated-branch" class="level2"><h2 class="anchored" data-anchor-id="push-the-updated-branch">4. Push the Updated Branch</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># upon detecting and resolving conflicts...</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add . <span class="co"># stages all resolved files at once</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="co"># Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check status</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--graph</span> <span class="at">--all</span> <span class="at">--oneline</span> <span class="at">--decorate</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--graph</span> <span class="at">-5</span> <span class="at">--oneline</span> <span class="at">--decorate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="push-the-updated-branch" class="level2"><h2 class="anchored" data-anchor-id="push-the-updated-branch">3. Push the Updated Branch</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check status</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--graph</span> <span class="at">--oneline</span> <span class="at">--all</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check status</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--graph</span> <span class="at">--oneline</span> <span class="at">--all</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="daily-workflow-with-wkg_branch" class="level1"><h1>Daily workflow with <code>wkg_branch</code>
+<hr></section></section><section id="daily-workflow-with-wkg_branch" class="level1"><h1>Daily workflow with <code>wkg_branch</code>
 </h1>
 <p>A possible workflow could be to add features to <code>wkg_branch</code> and then merge them into <code>master</code> when they are ready.</p>
 <ul>
 <li>How to avoid pointless conflicts of rendered files (e.g.&nbsp;<code>docs/*</code>) which complicate merges unnecessarily?</li>
 </ul>
+<section id="on-the-working-branch-wkg_branch" class="level3"><h3 class="anchored" data-anchor-id="on-the-working-branch-wkg_branch">On the working branch <code>wkg_branch</code>
+</h3>
 <ol start="0" type="1">
 <li><p>Do the above and merge master into <code>wkg_branch</code> first</p></li>
 <li><p><strong>Work on new branch</strong> <code>wkg</code> from <code>master</code> (or <code>main</code>) for each new feature or bug fix.</p></li>
 <li><p><strong>Commit changes</strong> to <code>wkg_branch</code> as you go along.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout wkg_branch</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # work on .qmd files</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># render locally if needed (but don't commit docs/)</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add git/git_branches.qmd</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Work on git_branches.qmd"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout wkg_branch</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # work on .qmd files</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># render locally if needed (but don't commit docs/)</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add git/git_branches.qmd</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Work on git_branches.qmd"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section><section id="then-on-the-master-branch-master" class="level3"><h3 class="anchored" data-anchor-id="then-on-the-master-branch-master">Then on the master branch <code>master</code>
+</h3>
 <ol start="3" type="1">
 <li>When done, <strong>merge <code>wkg_branch</code> into <code>master</code></strong>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge wkg_branch <span class="co"># this is *merged* INTO the branch you are on (master)</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Update docs"</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to receiving branch</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge new stuff into master</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge wkg_branch <span class="co"># this is *merged* INTO the branch you are on (master)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">-m</span> <span class="st">"some message"</span> wkg_branch </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Proceed as usual also to get rendered files</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Update docs"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>check</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">--merged</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">--no</span> merged</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">-4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff master...wkg_branch <span class="st">'***.qmd'</span>Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr></section><section id="in-progress" class="level1"><h1>!!!!! ⛔️ in progress ⛔️!!!!</h1>
+<p>General view on branches</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">--merged</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">--no</span> merged</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">-4</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># which Git branches are tracking which Upstream brances</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-vv</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#* master       28bb22c [origin/master] quick fix</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  page_col     c86edff [origin/page_col] added color.qmd to branch</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  test_branch2 c86edff added color.qmd to branch</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  wkg_branch   6fb1535 Work on git_branches.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The main branch (<code>master</code>) has a tracking branch of [origin/master]</li>
+<li>
+<code>page_col</code> has a tracking branch of [origin/master]</li>
+</ul></section><section id="good-strategy-to-minimize-conflicts" class="level3"><h3 class="anchored" data-anchor-id="good-strategy-to-minimize-conflicts">Good strategy to minimize conflicts</h3>
+<ol type="1">
+<li>If I have a long standing working branch (e.g.&nbsp;<code>wkg_branch</code>) I should merge it into master frequently so that it doesn’t diverge too much from master.
+<ul>
+<li>if that is not possible I can do the <strong>opposite</strong> and merge master into <code>wkg_branch</code> frequently (i.e.&nbsp;<em>“tracking the main branch”</em>)</li>
+</ul>
+</li>
+<li>Do not commit rendered files (e.g.&nbsp;<code>docs/*</code>) in the working branch (but only source code)</li>
+<li>Beware of spaces/tabs in the source code files, as they can cause conflicts when merging branches.</li>
+</ol>
+<hr></section></section><section id="remote-tracking" class="level1"><h1>REMOTE TRACKING</h1>
+<p>https://www.linkedin.com/learning/complete-guide-to-git/remote-tracking-branches?autoSkip=true&amp;resume=false</p>
+<p>i.e.&nbsp;USING A REMOTE AS PRIMARY HUB FOR COLLABORATION</p>
+<blockquote class="blockquote">
+<p>An <em>upstream branch</em> in Git refers to a branch that serves as a <em>reference point</em> for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.</p>
+</blockquote>
+<!-- Check out explanation here [https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/](https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/) -->
+<p>Collaborator A) <code>push</code> a certain commit (<em>4ee789</em>) to the remote then Collaborator B) <code>fetch</code> from the remote the same (<em>4ee789</em>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># origin</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># upstream</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#origin  git@github.com:Lulliter/nerd_help.git (fetch)</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#origin  git@github.com:Lulliter/nerd_help.git (push)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#upstream        git@github.com:Lulliter/nerd_help.git (fetch)</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#upstream        git@github.com:Lulliter/nerd_help.git (push)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each collaborator must <strong>clone the remote repository to their local machine</strong>. This creates a local copy of the repository that is linked to the remote repository.</p>
 <hr>
-<section id="push-upstream-a-local-branch" class="level2"><h2 class="anchored" data-anchor-id="push-upstream-a-local-branch">Push upstream a local branch</h2>
-<p>Check out explanation here <a href="https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/">https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/</a></p>
+<section id="push-upstream-a-local-branch" class="level2"><h2 class="anchored" data-anchor-id="push-upstream-a-local-branch">🟠 Push upstream a local branch</h2>
+<p><em>(kind of too complicated for me)</em></p>
 <blockquote class="blockquote">
 <p>It is important to Setup an <strong>Upstream Branch</strong> in Git to make the workflow smooth and manage branches efficiently.</p>
 </blockquote>
@@ -557,90 +585,9 @@ Different ways to resolve conflicts:</p>
 <li>[When the current branch i.e (‘new_branch’) has no Upstream branch set] <code>git push –-set-upstream origin &lt;new_branch&gt;</code> command (the 1st time you push)</li>
 <li>Thereafter <code>git push -u origin &lt;new_branch&gt;</code> (all subsequent git push commands automatically move local branch changes up to the remote branch.)</li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Create local branch </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 switch to local branch </span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> <span class="op">&lt;</span>new_branch<span class="op">&gt;</span> <span class="co"># or</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="op">&lt;</span>new_branch<span class="op">&gt;</span> </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.a git push –set-upstream command (1st time)</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push  <span class="at">--set-upstream</span> origin <span class="op">&lt;</span>new_branch<span class="op">&gt;</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># check </span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> branch <span class="at">-a</span> <span class="co"># YAY!</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.b git push origin (nest times )</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="op">&lt;</span>new_branch<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="check-which-git-branches-are-tracking-which-upstream-brances" class="level2"><h2 class="anchored" data-anchor-id="check-which-git-branches-are-tracking-which-upstream-brances">Check which Git branches are tracking which Upstream brances</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-vv</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># * master       789640d [origin/master] split git_branch + git_collab ⑂</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   page_col     c86edff [origin/page_col] added color.qmd to branch</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   test_branch2 c86edff added color.qmd to branch</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   up           bb0035b [upstream/master] git stuff</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   wkg_branch   12e1e52 qlc su wkg_branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>The main branch (master) has a tracking branch of [origin/master]</li>
-<li>up has a tracking branch of [upstream/master]</li>
-</ul></section><section id="rename-a-remote-branch" class="level2"><h2 class="anchored" data-anchor-id="rename-a-remote-branch">Rename a (remote) branch</h2>
-<p>You need to</p>
-<ol type="1">
-<li>Publish an existing local branch on remote <code>git push -u origin local_branch</code>
-</li>
-<li>So you delete old one and push up a new one from local repository</li>
-</ol></section><section id="merge-a-git-branch-into-master" class="level2"><h2 class="anchored" data-anchor-id="merge-a-git-branch-into-master">Merge a git branch into master</h2>
-<ol type="1">
-<li>List All Git Branches</li>
-<li>Switch to Master</li>
-<li>Merge Branch into Master</li>
-<li>Push Changes (push the local changes to the remote repository so everyone working on the project can fetch the latest version.)</li>
-</ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Since merging is a type of commit, it also requires a commit message. There are two ways to specify the commit message:</p>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. List</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Switch</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. The merge creates a merge commit, bringing together</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># lines of development while preserving the history of the source branch.</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">-m</span> <span class="st">"Prova di merge"</span> page_col</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Push the local changes to the remote repository</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="see-differences-bw-branches" class="level2"><h2 class="anchored" data-anchor-id="see-differences-bw-branches">See differences b/w branches</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff master..page_col <span class="st">'***.qmd'</span>Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="git-rebase" class="level1"><h1>Git Rebase</h1>
-<ol type="1">
-<li>take commits from a separat branch and replay (shift the change down to the tip of master) them at the end of another brabch</li>
-<li>integrate recent commits without merging</li>
-</ol>
-<ul>
-<li><p>you never rebase a public branch, only a private one!</p></li>
-<li><p>YT video on <a href="https://www.youtube.com/watch?v=zOnwgxiC0OA">diff merge - rebase</a></p></li>
-</ul>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
