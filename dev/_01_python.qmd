@@ -1,0 +1,245 @@
+---
+title: "Python"
+editor: source
+## ------  general Output Options
+execute:     
+  eval: false
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+ 
+RStudio has `reticulate` package embedded
+
+Python is standalone in your machine
+```{bash}
+python3 --version
+#Python 3.13.0
+```
+
+```{r}
+print("Hello World")
+```
+
+
+```{python}
+print("Hello World")
+```
+
+```{python}
+print("Hello World" *3)
+```
+
+```{python}
+x = 5
+x
+list = [1, 2, 3, "Hello"]
+list
+# utile per creare liste di cose
+my_dict = {"name": "John", "age": 30, "city": "New York"}
+print(my_dict)
+```
+
+
+```{r}
+add_1 <- function(x) {
+  x + 1
+}
+```
+
+```{python}
+def add_1(x):
+    return x + 1 # must be 4 spaces 
+   
+```
+
+```{r}
+reticulate::py_module_available("numpy")       # Returns TRUE if available
+reticulate::py_module_available("pandas")      # Check another package
+```
+
+# To install a package 
+
+### --- (Install ARM-native brew if needed)
+This is because Apple Silicon Macs should use the ARM-native Homebrew, located at: /opt/homebrew/bin/brew
+
+```{bash}
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# echo >> ~/.zprofile
+# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+Then check
+```{bash}
+which brew
+# should return      /opt/homebrew/bin/brew OK!
+```
+
+But I still have Python and other things that Brew installed in usr/local/bin (WRONG in this MAC)
+```{bash}
+ls -l /usr/local/bin/python3*
+
+# if any
+sudo rm -f /usr/local/bin/python3.13 \
+             /usr/local/bin/python3.13-config \
+             /usr/local/bin/python3-config \
+             /usr/local/bin/python3.bak
+# then 
+#no matches found 
+```
+
+
+### --- (Install Python 3.11 via ARM Homebrew  if needed)
+
+> This should now install an ARM-native Python to /opt/homebrew/bin/python3.
+(Instead for some reason it tells me that it is installing to /usr/local/bin/python3.11, which is wrong for my machine.)
+
+```{bash}
+/opt/homebrew/bin/brew reinstall python@3.11
+#==> Summary
+#🍺  /opt/homebrew/Cellar/python@3.11/3.11.12: 3,306 files, 62.1MB
+
+which python3 # STILL returns /usr/bin/python3
+# this is because the symlink python3 → python3.11 was not created by Homebrew (by design), and your shell doesn’t know to default to the version you installed via ARM Homebrew.
+
+# BUT here it gives both 
+file $(which python3) # it must say arm64 not x86_64
+# (MINE both )            
+# /usr/bin/python3 (for architecture x86_64):     Mach-O 64-bit executable x86_64
+# /usr/bin/python3 (for architecture arm64e):     Mach-O 64-bit executable arm64e
+
+# (IT SHOULD BE)   /opt/homebrew/bin/python3: Mach-O 64-bit executable arm64
+```
+
+
+### --- Link python3.11 into /opt/homwbrew/bin
+You've got Python 3.11 installed via ARM Homebrew, but it's not symlinked into your main PATH at /opt/homebrew/bin. That's why /opt/homebrew/bin/python3 doesn't exist, even though the files live at: `/opt/homebrew/Cellar/python@3.11/3.11.12/...` 
+
+...to fix with an alias for python3
+```{bash}
+# add an alias to your ~/.zprofile
+file.edit("~/.zshrc")
+# add this line at the bottom
+# alias python3=/opt/homebrew/bin/python3.11
+
+# then
+source ~/.zshrc
+
+# and check again 
+which python3 
+# python3: aliased to /opt/homebrew/bin/python3.11
+file /opt/homebrew/bin/python3.11
+# /opt/homebrew/bin/python3.11: Mach-O 64-bit executable arm64   OK 
+```
+
+### --- 1. [Create] Use a virtual environment for reticulate
+
+> OKKIO:
++ On Intel Macs, Homebrew installs to: /usr/local/
++ On Apple Silicon Macs (like yours), Homebrew installs to: /opt/homebrew/
+(This avoids mixing Intel and ARM binaries.)
+
+ 
+### --- 2. Activate the environment (optional for shell)
+
+Shows that it is using `arm64`, which is the correct architecture for your machine.
+
+```{r}
+reticulate::conda_list()
+#          name                                                                   python
+#1         base                   /Users/luisamimmi/Library/r-miniconda-arm64/bin/python
+#2 r-reticulate /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/bin/python
+
+```
+ 
+### --- 3. RESTART RStudio
+
+### --- 4.a ⛔️ Make THE VIRTUAL ENVIRONMENT permanent (just once):
+After restarting RStudio, you need to tell RStudio to use the virtual environment you just created. You can do this in several ways:
+
+```{r}
+#reticulate::use_virtualenv("~/.venvs/r-reticulate", required = TRUE)
+```
+
+### --- 4.b ✅ Make THE VIRTUAL ENVIRONMENT permanent (just once):
+You're using Miniconda installed via reticulate, and there's already a conda environment called r-reticulate.
+```{r}
+
+reticulate::use_condaenv("r-reticulate", required = TRUE)
+
+# Check if it works  !!! YES 
+reticulate::py_config()
+# python:         /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/bin/python
+# libpython:      /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/lib/libpython3.10.dylib
+# pythonhome:     /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate:/Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticula# te
+# version:        3.10.17 | packaged by conda-forge | (main, Apr 10 2025, 22:23:34) [Clang 18.1.8 ]
+# numpy:          /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/lib/python3.10/site-packages/numpy
+# numpy_version:  2.2.4
+# 
+# NOTE: Python version was forced by use_python() function
+```
+
+### --- 6. Add this to either your project-level .Rprofile or your global ~/.Rprofile:
+```{r}
+# 1 OPEN 
+# Global Rprofile
+file.edit("~/.Rprofile")
+
+# 2 ADD this at the bottom 
+# if (requireNamespace("reticulate", quietly = TRUE)) {
+#   reticulate::use_condaenv("r-reticulate", required = TRUE)
+# }
+```
+
+### --- 7. Check if it works
+```{r}
+reticulate::py_config()
+
+# python:         /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/bin/python
+# libpython:      /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/lib/libpython3.10.dylib
+# pythonhome:     /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate:/Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticula# te
+# version:        3.10.17 | packaged by conda-forge | (main, Apr 10 2025, 22:23:34) [Clang 18.1.8 ]
+# numpy:          /Users/luisamimmi/Library/r-miniconda-arm64/envs/r-reticulate/lib/python3.10/site-packages/numpy
+# numpy_version:  2.2.4
+# 
+# NOTE: Python version was forced by use_python() function
+
+```
+
+
+### --- 8. Check if it works
+
+```{python}
+import numpy as np
+np.arange(5)
+```
+
+### --- [JUST IN CASE ]
+
+If for any reason the conda environment doesn't load automatically, you can do so with:'
+```{r}
+reticulate::use_condaenv("r-reticulate", required = TRUE)
+```
+

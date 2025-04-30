@@ -236,14 +236,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Tue, 29 of April, 2025</p>
+      <p class="date">Wed, 30 of April, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tue, 29 of April, 2025</p>
+      <p class="date-modified">Wed, 30 of April, 2025</p>
     </div>
   </div>
     
@@ -356,7 +356,7 @@ Caution
 </section><section id="evaluate-changes" class="level2"><h2 class="anchored" data-anchor-id="evaluate-changes">1. Evaluate changes</h2>
 <p>Review these changes to ensure you understand what will be merged.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check commits in wkg_branchh </span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check commits in wkg_branch</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-2</span> <span class="at">--graph</span> master..wkg_branch</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  2 commits...  </span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># qlc su wkg_branch</span></span>
@@ -476,6 +476,7 @@ Figure&nbsp;1: Git merge conflict
 </div>
 <hr></section></section><section id="daily-workflow-with-wkg_branch" class="level1"><h1>Daily workflow with <code>wkg_branch</code>
 </h1>
+<p>[see file <code>/Users/luisamimmi/Documents/__nerd/00_shell_git _make/tracking_branch2.sh</code>]</p>
 <p>A possible workflow could be to add features to <code>wkg_branch</code> and then merge them into <code>master</code> when they are ready.</p>
 <ul>
 <li>How to avoid pointless conflicts of rendered files (e.g.&nbsp;<code>docs/*</code>) which complicate merges unnecessarily?</li>

@@ -144,7 +144,7 @@ However I might have **ALSO** new/uncommitted stuff in the `wkg_branch`
 ## 1. Evaluate changes 
 Review these changes to ensure you understand what will be merged.
 ```{bash}
-# check commits in wkg_branchh 
+# check commits in wkg_branch
 git log -2 --graph master..wkg_branch
   #  2 commits...  
     # qlc su wkg_branch
