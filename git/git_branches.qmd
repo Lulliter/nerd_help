@@ -114,7 +114,6 @@ git push origin --delete up # error: unable to delete 'up': remote ref does not 
 ```
 
 
-
 # Merging master into a misaligned different branch
 
 GOAL = `git merge master`:  **MY GOAL HERE is to UPDATE `wkg_branch` with all the new stuff I have on `master`** (this won't affect master)
@@ -275,6 +274,9 @@ git log --graph -5 --oneline --decorate
 --- 
 
 # Daily workflow with `wkg_branch` 
+
+[see file `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/tracking_branch2.sh`]
+
 
 A possible workflow could be to add features to `wkg_branch` and then merge them into `master` when they are ready.
 
