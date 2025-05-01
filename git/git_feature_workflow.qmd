@@ -1,0 +1,236 @@
+---
+title: "Git Feature Branch Workflow"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+## Intro
+
+This workflow supports small-team collaboration using feature branches and GitHub pull requests. Based on:
+
+-   [A simple Git workflow for small team projects](https://www.youtube.com/watch?v=-6lx_vh6vuI)
+-   [GIT when working with a team?](https://www.youtube.com/watch?v=jhtbhSpV5YA)
+-   [Git Feature Branch Workflow](https://www.youtube.com/watch?v=ZBexzpgj1GE)
+
+# -----------------  MASTER
+
+
+
+## Step 0: Clean your `master` worktree
+
+Make sure there are no uncommitted or unpushed changes in `master`.
+
+``` bash
+git status
+# should output: nothing to commit, working tree clean
+```
+
+
+
+## Step 1: Switch to `master` and update it from origin
+
+``` bash
+git checkout master
+git pull origin master
+```
+
+
+
+# -----------------  FEATURE BRANCH
+
+## Step 2: Create a new feature branch
+
+Create a new branch based on the latest `master`.
+
+``` bash
+git checkout -b feature/name
+```
+
+(OR IF EXISTING) Switch to an existing feature branch:
+
+``` bash
+git switch feature/name
+```
+
+
+
+## (Make your changes)...
+
+## Step 3: Edit and commit changes
+
+Stage and commit your changes regularly.
+
+``` bash
+git add .
+git commit -m "feat: update on x"
+```
+
+
+
+## Step 4 (optional): Check differences from `master`
+
+Useful for reviewing what the branch introduces.
+
+``` bash
+git diff --color-words master..feature/name
+```
+
+
+
+## Step 5: Push your branch to the remote
+
+Push your branch and set the upstream tracking reference.
+
+``` bash
+git push -u origin feature/name
+```
+
+
+
+# -----------------  MASTER (optional
+
+## Step 6 (optional): Update local `master`
+
+Switch back to `master` to check if there have been any updates.
+
+``` bash
+git checkout master
+# (optional) update local repo with latest changes from remote
+git pull origin master
+```
+
+
+
+# -----------------  FEATURE BRANCH (optional
+
+## Step 7 (optional): Merge latest `master` into your feature branch
+
+Switch back to your feature branch
+
+``` bash
+git checkout feature/name
+```
+
+MERGE OR REBASE to avoid conflicts when the PR is reviewed or merged.
+
+ + a) `merge` keeps the commit history of the branch ✅
+ + b) `rebase` rewrites commits, but keep the history of the branch clean ⚠️
+
+Merge the latest changes from `master` into your feature branch locally
+
+``` bash
+git merge master
+git push origin feature/name
+```
+
+
+
+## Step 8 (optional): Review branch differences before PR
+
++ 1/2 On GitHub:   [https://github.com/your-username/<your-repo/compare>/<master...feature/name>](https://github.com/your-username/<your-repo/compare>/<master...feature/name>)
+
++ 2/2 In terminal:
+
+``` bash
+git diff --color-words master..feature/name
+```
+
+
+
+## Step 9: Create a pull request
+
+You can do this either:
+
++ 1/2 On GitHub: click 🔳 **"Compare & pull request"** or go to Pull Requests tab
+
++ 2/2 In terminal:
+
+``` bash
+gh pr create --base master --head feature/name --title "feat: upd..."
+```
+
+
+
+## Step 10: Respond to code review (if needed)
+...
+
+If reviewers request changes:
+
+``` bash
+git add .
+git commit -m "fix: addressed review comments"
+# update the pull request
+git push origin feature/name
+```
+
+
+## Step 11: Merge the pull request
+
+On GitHub, choose your preferred merge method:
+
+-   **Squash and merge**: one commit for the whole branch added to `master`
+-   **Rebase and merge**: replays commits on top of base branch, (linear history)
+-   **Merge commit**: adds a merge commit preserving all commits as-is (full history)
+
+Then confirm the merge.
+
+
+# -----------------  MASTER
+
+## Step 12: Pull the updated `master` locally
+
+After merging the PR:
+
+``` bash
+git checkout master
+git pull origin master
+```
+
+Verify branches 
+
+``` bash
+git branch -vv # * wkg_br abc1234 [origin/wkg_br] your commit message here
+git log --graph --all --oneline --decorate
+```
+
+## Step 13 (optional): Delete the feature branch
+
+Delete your feature branch locally and remotely if it's no longer needed.
+
+``` bash
+git branch -d feature/name                 # local deletion
+git push origin --delete feature/name     # remote deletion
+```
+

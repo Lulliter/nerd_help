@@ -81,7 +81,7 @@ website:
         - git.qmd
         - git/git_intro.qmd
         - git/git_branches.qmd
-        - git/git_collab.qmd
+        - git/git_feature_workflow.qmd
 
     - title: "{{< fa brands r-project >}} programming"
       style: "docked"

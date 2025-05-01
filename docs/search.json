@@ -689,14 +689,190 @@
     ]
   },
   {
-    "objectID": "git/git_collab.html",
-    "href": "git/git_collab.html",
-    "title": "Git collaboration",
+    "objectID": "git/git_feature_workflow.html",
+    "href": "git/git_feature_workflow.html",
+    "title": "Git Feature Branch Workflow",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\n\n\n\nCollaboration\n\nI create a test GH account lula-test (associated to l__a__a@icloud.com)\nI clone in /Users/testuser/GH_test/nerd_help this repository “nerd-help” I own as Lulliter and (from there (I indicated that lula-test is a collaborator)\n\n\n# positioned in parent folder /Users/testuser/GH_test/\ngit clone https://github.com/Lulliter/nerd_help.git\ncd nerd_help\n\nRules\n\nTHE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE\n\nyou create new branches for new features and merge them into Master when they’re completed.\nIt’s also important when collaborating that your team picks features that don’t have overlapping code.\n\n\n\n\nHere I create a new branch colors_page and I go there\n\n\n#  I create a new branch to add a color.qmd page and switch there \ngit checkout -b colors_page \n\n# verify this with the command:\ngit branch\n\n\n“checkout” is used to switch between branches. Adding the “-b” and a name at the end creates a new branch and then moves into that new branch for us.\n\nIn the branch, the collabrorator\n\nmakes some changes …\nadd + commit + push\n\n3.b Wait\nEven if I am in the collaborator GH, lookg like the remote is considered the owner GH\n\ngit remote -v         \n# origin  https://github.com/Lulliter/nerd_help.git (fetch)\n# origin  https://github.com/Lulliter/nerd_help.git (push)\n\nso I must change te origin in the collaborator GH\n\ngit remote set-url origin  https://github.com/lula-test/nerd_help.git\n\nReference\n\nBlog on collab\n\nThe Pragmatic Git blogsite\nTutorials",
+    "text": "This workflow supports small-team collaboration using feature branches and GitHub pull requests. Based on:\n\nA simple Git workflow for small team projects\nGIT when working with a team?\nGit Feature Branch Workflow",
     "crumbs": [
       "git",
-      "Git collaboration"
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#intro",
+    "href": "git/git_feature_workflow.html#intro",
+    "title": "Git Feature Branch Workflow",
+    "section": "",
+    "text": "This workflow supports small-team collaboration using feature branches and GitHub pull requests. Based on:\n\nA simple Git workflow for small team projects\nGIT when working with a team?\nGit Feature Branch Workflow",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-0-clean-your-master-worktree",
+    "href": "git/git_feature_workflow.html#step-0-clean-your-master-worktree",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 0: Clean your master worktree",
+    "text": "Step 0: Clean your master worktree\nMake sure there are no uncommitted or unpushed changes in master.\ngit status\n# should output: nothing to commit, working tree clean",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-1-switch-to-master-and-update-it-from-origin",
+    "href": "git/git_feature_workflow.html#step-1-switch-to-master-and-update-it-from-origin",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 1: Switch to master and update it from origin",
+    "text": "Step 1: Switch to master and update it from origin\ngit checkout master\ngit pull origin master",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-2-create-a-new-feature-branch",
+    "href": "git/git_feature_workflow.html#step-2-create-a-new-feature-branch",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 2: Create a new feature branch",
+    "text": "Step 2: Create a new feature branch\nCreate a new branch based on the latest master.\ngit checkout -b feature/name\n(OR IF EXISTING) Switch to an existing feature branch:\ngit switch feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#make-your-changes",
+    "href": "git/git_feature_workflow.html#make-your-changes",
+    "title": "Git Feature Branch Workflow",
+    "section": "(Make your changes)…",
+    "text": "(Make your changes)…",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-3-edit-and-commit-changes",
+    "href": "git/git_feature_workflow.html#step-3-edit-and-commit-changes",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 3: Edit and commit changes",
+    "text": "Step 3: Edit and commit changes\nStage and commit your changes regularly.\ngit add .\ngit commit -m \"feat: update on x\"",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-4-optional-check-differences-from-master",
+    "href": "git/git_feature_workflow.html#step-4-optional-check-differences-from-master",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 4 (optional): Check differences from master\n",
+    "text": "Step 4 (optional): Check differences from master\n\nUseful for reviewing what the branch introduces.\ngit diff --color-words master..feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-5-push-your-branch-to-the-remote",
+    "href": "git/git_feature_workflow.html#step-5-push-your-branch-to-the-remote",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 5: Push your branch to the remote",
+    "text": "Step 5: Push your branch to the remote\nPush your branch and set the upstream tracking reference.\ngit push -u origin feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-6-optional-update-local-master",
+    "href": "git/git_feature_workflow.html#step-6-optional-update-local-master",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 6 (optional): Update local master\n",
+    "text": "Step 6 (optional): Update local master\n\nSwitch back to master to check if there have been any updates.\ngit checkout master\n# (optional) update local repo with latest changes from remote\ngit pull origin master",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-7-optional-merge-latest-master-into-your-feature-branch",
+    "href": "git/git_feature_workflow.html#step-7-optional-merge-latest-master-into-your-feature-branch",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 7 (optional): Merge latest master into your feature branch",
+    "text": "Step 7 (optional): Merge latest master into your feature branch\nSwitch back to your feature branch\ngit checkout feature/name\nMERGE OR REBASE to avoid conflicts when the PR is reviewed or merged.\n\n\n\nmerge keeps the commit history of the branch ✅\n\n\n\nrebase rewrites commits, but keep the history of the branch clean ⚠️\n\n\nMerge the latest changes from master into your feature branch locally\ngit merge master\ngit push origin feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-8-optional-review-branch-differences-before-pr",
+    "href": "git/git_feature_workflow.html#step-8-optional-review-branch-differences-before-pr",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 8 (optional): Review branch differences before PR",
+    "text": "Step 8 (optional): Review branch differences before PR\n\n1/2 On GitHub: https://github.com/your-username//&lt;master…feature/name&gt;\n2/2 In terminal:\n\ngit diff --color-words master..feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-9-create-a-pull-request",
+    "href": "git/git_feature_workflow.html#step-9-create-a-pull-request",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 9: Create a pull request",
+    "text": "Step 9: Create a pull request\nYou can do this either:\n\n1/2 On GitHub: click 🔳 “Compare & pull request” or go to Pull Requests tab\n2/2 In terminal:\n\ngh pr create --base master --head feature/name --title \"feat: upd...\"",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-10-respond-to-code-review-if-needed",
+    "href": "git/git_feature_workflow.html#step-10-respond-to-code-review-if-needed",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 10: Respond to code review (if needed)",
+    "text": "Step 10: Respond to code review (if needed)\n…\nIf reviewers request changes:\ngit add .\ngit commit -m \"fix: addressed review comments\"\n# update the pull request\ngit push origin feature/name",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-11-merge-the-pull-request",
+    "href": "git/git_feature_workflow.html#step-11-merge-the-pull-request",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 11: Merge the pull request",
+    "text": "Step 11: Merge the pull request\nOn GitHub, choose your preferred merge method:\n\n\nSquash and merge: one commit for the whole branch added to master\n\n\nRebase and merge: replays commits on top of base branch, (linear history)\n\nMerge commit: adds a merge commit preserving all commits as-is (full history)\n\nThen confirm the merge.",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-12-pull-the-updated-master-locally",
+    "href": "git/git_feature_workflow.html#step-12-pull-the-updated-master-locally",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 12: Pull the updated master locally",
+    "text": "Step 12: Pull the updated master locally\nAfter merging the PR:\ngit checkout master\ngit pull origin master\nVerify branches\ngit branch -vv # * wkg_br abc1234 [origin/wkg_br] your commit message here\ngit log --graph --all --oneline --decorate",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
+    ]
+  },
+  {
+    "objectID": "git/git_feature_workflow.html#step-13-optional-delete-the-feature-branch",
+    "href": "git/git_feature_workflow.html#step-13-optional-delete-the-feature-branch",
+    "title": "Git Feature Branch Workflow",
+    "section": "Step 13 (optional): Delete the feature branch",
+    "text": "Step 13 (optional): Delete the feature branch\nDelete your feature branch locally and remotely if it’s no longer needed.\ngit branch -d feature/name                 # local deletion\ngit push origin --delete feature/name     # remote deletion",
+    "crumbs": [
+      "git",
+      "Git Feature Branch Workflow"
     ]
   },
   {
