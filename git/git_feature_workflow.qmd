@@ -113,7 +113,10 @@ git diff --color-words master..feature/name
 
 Push your branch and set the upstream tracking reference.
 
++ (extra) before pushing, I may do `git pull` just to make sure that what added does not conflict with the "master" content
+
 ``` bash
+# git pull origin master
 git push -u origin feature/name
 ```
 
@@ -135,6 +138,8 @@ git pull origin master
 
 # -----------------  FEATURE BRANCH (optional
 
+At this point if I look at GitHub, I will see that the *"`feature/name` had recent push/es"*
+
 ## Step 7 (optional): Merge latest `master` into your feature branch
 
 Switch back to your feature branch
@@ -155,8 +160,6 @@ git merge master
 git push origin feature/name
 ```
 
-
-
 ## Step 8 (optional): Review branch differences before PR
 
 + 1/2 On GitHub:   [https://github.com/your-username/<your-repo/compare>/<master...feature/name>](https://github.com/your-username/<your-repo/compare>/<master...feature/name>)
@@ -166,8 +169,7 @@ git push origin feature/name
 ``` bash
 git diff --color-words master..feature/name
 ```
-
-
+    + [If the reviewer is someone else, he could `git pull origin feature/name` to copy the branch and check it out]
 
 ## Step 9: Create a pull request
 
@@ -191,10 +193,10 @@ If reviewers request changes:
 ``` bash
 git add .
 git commit -m "fix: addressed review comments"
+git pull origin master # once again to ensure nothing breaks
 # update the pull request
 git push origin feature/name
 ```
-
 
 ## Step 11: Merge the pull request
 
