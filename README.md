@@ -1,64 +1,43 @@
 # Nerd (self) Help
 
 This is a set of instructions for "nerdy things" that I will never remember...
-
-# TO DO list ✍︎
-
-+ remote: Resolving deltas: 100% (29/29), completed with 16 local objects.
-+ remote: warning: See https://gh.io/lfs for more information.
-+ remote: warning: File docs/rstats/04_text_analytics.html is 78.20 MB; this is larger than GitHub's recommended + maximum file size of 50.00 MB
-+ remote: warning: File docs/rstats/03_r_gpt.html is 60.14 MB; this is larger than GitHub's recommended maximum + file size of 50.00 MB
-+ remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - + https://git-lfs.github.com.
-
-
-
-+ ❒ 1) **git & Github** (`~/Documents/__nerd/00_shell_git _make/*`) 2 `*.qmd` file 
-+ ❒ 4) **Bonus stuff** ... 
-
-+ new mac setup
-
-+ ❒ shell commands
-  + looking for files CLI `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh`
-+ ❒ understanding collaboration on git /GH
-
-+ ❒ Example of things 
-  + `_variables.yml` for quarto projects variables
-  + Example of gitignore
-
-+ ❒ Authentication for Github
-    + Using the SSH protocol (credentials)
-    + Cloning GitHub repositories using SSH
-    + Cloning GitHub repositories using HTTPS
-
-+ ❒ make 
-+ ❒ VS Code 
-+ ❒
-+ ❒
-+ ❒
-+ ❒
+I collect them in a Quarto website [https://github.com/Lulliter/nerd_help](https://github.com/Lulliter/nerd_help) 
 
 # Content
 
-1. **git & Github**
-2. **Quarto website**
-3. **AWS deployment from GH Pages domain**
-4. **Bonus stuff**
-    + new mac setup
-    + shell commands
-      + looking for files CLI `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh`
-    + understanding collaboration on git /GH
-    + Example of things 
-      + `_variables.yml` for quarto projects variables
-      + Example of gitignore
-    + Authentication for Github
-        + Using the SSH protocol (credentials)
-        + Cloning GitHub repositories using SSH
-        + Cloning GitHub repositories using HTTPS
-    + make 
-    + VS Code 
-    + ...     
+1. **Dev otols**
+    + **Quarto website**
+    + **Custom domain on AWS**
+    + **Custom domain on Google domain**
+    + **Custom domain on Aruba**
+    + **GitHub CLI**
+2. **git**
+3. **R programming**
+4. **shell**
+5. [secret] SSH authentication 
 
-5. [ secret] SSH authentication 
+# TO DO list ✍︎
+
++ ❒ **git & Github** (`~/Documents/__nerd/00_shell_git _make/*`) 2 `*.qmd` file 
+  + ✅ Feature branch workflow  added
+  + ❒ Example of `.gitignore` file
+  + ❒ Example of `_variables.yml` file
+  + ❒ ...
++ ❒ **shell commands**
+    + looking for files CLI `/Users/luisamimmi/Documents/__nerd/00_shell_git _make/Looking4Files.sh`
++ ❒ **New Mac**  setup
++ ❒ **VS code** setup... or at this point wait for Positron
++ ❒ **Bonus stuff** ... 
++ ❒ **Authentication for Github**
+      + Using the SSH protocol (credentials)
+      + Cloning GitHub repositories using SSH
+      + Cloning GitHub repositories using HTTPS
++ ❒ **make**
++ ❒
++ ❒
++ ❒
++ ❒
+
 
 # Reference
 
