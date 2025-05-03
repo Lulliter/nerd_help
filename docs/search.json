@@ -1063,7 +1063,18 @@
     "href": "shell/shell_intro.html",
     "title": "Intro to Unix and shell",
     "section": "",
-    "text": "Reference\nGreat (paid) LinkedIn course by Kevin Skoglund “Unix essential training”\nWhat is Unix?\n\nan OS developed by AT&T employes at Bell Labs in the 1960s/70s\nin 1972 it is rewritten in C programming, which made it portable. It then spread outside AT&T\nit still powers devises all around\nyou can use it from the Command line or from GUI interfaces\nWhat are the kernell and shell?\n\n\nkernel is the core of the OS. it allocates time and memory to processes\n\nshells is the outer layer of the OS. it sends reuqests to the kernel\n\nyou can choose from different shells (sh, bash, zsh, etc.)\n\n\nFiles and directories\n\npwd\n\nls\n# formatted differently\nls -l\nls -lh # size (5 col) is human readable\nls -a # include hidden\nls -a -lh\n\n\npwd\n# User home directory \ncd ~ # /Users/luisamimmi\n# go back to the \"last\" dir you were in !\ncd -\n\nCreating Files\n\ncd shell\n# open text editor\nnano\n# then write inside \n'ctrl+X' # to exit\n'Y' # yes to save \n# write name\n'enter' # to save\n\nnano test2.text\n\nReading files\n\ncd ..\nls\ncat README.md\n\n# pagination \nmore \n\n# opens a viewer for scrolling \nless README.md\n# then press `f` for forward\n# or press `b` for backward\n# or press `q` for done",
+    "text": "Great (paid) LinkedIn course by Kevin Skoglund “Unix essential training”\n\n\nan OS developed by AT&T employes at Bell Labs in the 1960s/70s\nin 1972 it is rewritten in C programming, which made it portable. It then spread outside AT&T\nit still powers devises all around\nyou can use it from the Command line or from GUI interfaces\n\n\n\nkernel is the core of the OS. it allocates time and memory to processes\n\nshells is the outer layer of the OS. it sends reuqests to the kernel\n\nyou can choose from different shells (sh, bash, zsh, etc.)",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
+    "href": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
+    "title": "Intro to Unix and shell",
+    "section": "Do it to bring shared stuff in Others’ google Drive into My Drive",
+    "text": "Do it to bring shared stuff in Others’ google Drive into My Drive\n\nGo to google drive under Shared with me/Condivisi con me\n\nRight click and scroll to [Manage/Organizza]/Add shortcut to Drive/Aggiungi scorciatoia\n\nChoose the location My Drive",
     "crumbs": [
       "Shell",
       "Intro to Unix and shell"

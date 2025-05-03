@@ -110,3 +110,123 @@ less README.md
 # or press `b` for backward
 # or press `q` for done
 ```
+
+# Creating directories
++ `-p` = add NEW parent dir
+
+```{bash}
+pwd
+mkdir  dir 
+ls -l
+
+mkdir shell/dir
+ls -l
+
+# to create a dir in a NEW Parent dir 
+mkdir -p shell/newdir/dir
+```
+
+# Move and rename 
+
++ `-f` = force overwriting (default!)
++ `-n` = no overwriting 
++ `-i` = interactive overwrigitn (ask!)
+
+```{bash}
+cd shell 
+
+# Move <target> <destination file>
+mv test.txt newdir/dir/test.txt
+
+# Move <target> <directory>(no file) # OK as well
+mv newdir/dir/test.txt newdir
+
+# Rename (automatic)
+touch second_test.txt 
+# Move <target> <RENAMED destination file>
+mv second_test.txt newdir/dir/2_test.txt
+ls -l newdir
+ls newdir/dir/
+```
+
+# Copy 
+```{bash}
+pwd
+cd newdir
+ls -l
+cp test.txt dir/
+
+cd dir
+ls -l
+
+
+```
+
++ `-R` = recursive (if a dir also its content )
+```{bash}
+pwd
+cd ..
+cp -R dir dir2
+```
+
+# Deleting files and directories 
+
+In Unix when you delete something, it is gone **immediately** and **forever**! 
+```{bash}
+pwd
+ls -l
+# file 
+rm test.txt
+# dir 
+rm -R dir2
+```
+
+
+# Searching for files and directories 
+`find <path> <expression>`
+
++ `*` = zero or more characters (glob) 
++ `?` = any one character 
++ `[]`= any character in the brackets 
+
+```{bash}
+cd ~/Github/_nerd_help/
+find shell -name "test.txt"
+find . -name "test.txt"
+
+find shell -name "*test*"
+find shell -name "??test.txt"
+find shell -name "*[.txt.qmd]"
+```
+
+# Creating symbolic links
+
+`sym link`s are similar to shortcuts or alias in a GUI systme 
+
++ `-s` = needed otherwise it is a hard link not a simbolic one 
++ It creates a reference to a **file path**, NOT a file!
+  + which means it breaks if the file is moved!!!
+```{bash}
+cd ../..
+cd _nerd*/shell
+pwd
+ls -l
+
+# ln -s <file_name> <symlink_name>(PATH)
+# symlink the shell_intro.qmd file 
+ln -s ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd
+
+# check 
+cd ~/Desktop
+ls -l
+  # lrwxr-xr-x@  .... shell_intro.qmd -> shell_intro.qmd
+ ls -l shell_intro_sl.qmd 
+cat shell_intro_sl.qmd  
+```
+
+
+## Do it to bring shared stuff in Others' google Drive into My Drive 
+1. Go to google drive under `Shared with me`/`Condivisi con me`
+2. Right click and scroll to [`Manage`/`Organizza`]/`Add shortcut to Drive`/`Aggiungi scorciatoia` 
+3. Choose the location `My Drive`
+

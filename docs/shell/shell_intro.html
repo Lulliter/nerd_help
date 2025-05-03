@@ -183,6 +183,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#files-and-directories" id="toc-files-and-directories" class="nav-link" data-scroll-target="#files-and-directories">Files and directories</a></li>
   <li><a href="#creating-files" id="toc-creating-files" class="nav-link" data-scroll-target="#creating-files">Creating Files</a></li>
   <li><a href="#reading-files" id="toc-reading-files" class="nav-link" data-scroll-target="#reading-files">Reading files</a></li>
+  <li><a href="#creating-directories" id="toc-creating-directories" class="nav-link" data-scroll-target="#creating-directories">Creating directories</a></li>
+  <li><a href="#move-and-rename" id="toc-move-and-rename" class="nav-link" data-scroll-target="#move-and-rename">Move and rename</a></li>
+  <li><a href="#copy" id="toc-copy" class="nav-link" data-scroll-target="#copy">Copy</a></li>
+  <li><a href="#deleting-files-and-directories" id="toc-deleting-files-and-directories" class="nav-link" data-scroll-target="#deleting-files-and-directories">Deleting files and directories</a></li>
+  <li><a href="#searching-for-files-and-directories" id="toc-searching-for-files-and-directories" class="nav-link" data-scroll-target="#searching-for-files-and-directories">Searching for files and directories</a></li>
+  <li>
+<a href="#creating-symbolic-links" id="toc-creating-symbolic-links" class="nav-link" data-scroll-target="#creating-symbolic-links">Creating symbolic links</a>
+  <ul class="collapse">
+<li><a href="#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive" id="toc-do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive" class="nav-link" data-scroll-target="#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive">Do it to bring shared stuff in Others’ google Drive into My Drive</a></li>
+  </ul>
+</li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -201,14 +212,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Fri, 2 of May, 2025</p>
+      <p class="date">Sat, 3 of May, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Fri, 2 of May, 2025</p>
+      <p class="date-modified">Sat, 3 of May, 2025</p>
     </div>
   </div>
     
@@ -280,9 +291,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># or press `b` for backward</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># or press `q` for done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section><section id="creating-directories" class="level1"><h1>Creating directories</h1>
+<ul>
+<li>
+<code>-p</code> = add NEW parent dir</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span>  dir </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> shell/dir</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># to create a dir in a NEW Parent dir </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> shell/newdir/dir</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="move-and-rename" class="level1"><h1>Move and rename</h1>
+<ul>
+<li>
+<code>-f</code> = force overwriting (default!)</li>
+<li>
+<code>-n</code> = no overwriting</li>
+<li>
+<code>-i</code> = interactive overwrigitn (ask!)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> shell </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Move &lt;target&gt; &lt;destination file&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> test.txt newdir/dir/test.txt</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Move &lt;target&gt; &lt;directory&gt;(no file) # OK as well</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> newdir/dir/test.txt newdir</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename (automatic)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> second_test.txt </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Move &lt;target&gt; &lt;RENAMED destination file&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> second_test.txt newdir/dir/2_test.txt</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> newdir</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> newdir/dir/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="copy" class="level1"><h1>Copy</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> newdir</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> test.txt dir/</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> dir</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>
+<code>-R</code> = recursive (if a dir also its content )</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-R</span> dir dir2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="deleting-files-and-directories" class="level1"><h1>Deleting files and directories</h1>
+<p>In Unix when you delete something, it is gone <strong>immediately</strong> and <strong>forever</strong>!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># file </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> test.txt</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dir </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-R</span> dir2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="searching-for-files-and-directories" class="level1"><h1>Searching for files and directories</h1>
+<p><code>find &lt;path&gt; &lt;expression&gt;</code></p>
+<ul>
+<li>
+<code>*</code> = zero or more characters (glob)</li>
+<li>
+<code>?</code> = any one character</li>
+<li>
+<code>[]</code>= any character in the brackets</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Github/_nerd_help/</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"test.txt"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"*test*"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="creating-symbolic-links" class="level1"><h1>Creating symbolic links</h1>
+<p><code>sym link</code>s are similar to shortcuts or alias in a GUI systme</p>
+<ul>
+<li>
+<code>-s</code> = needed otherwise it is a hard link not a simbolic one</li>
+<li>It creates a reference to a <strong>file path</strong>, NOT a file!
+<ul>
+<li>which means it breaks if the file is moved!!!</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> _nerd<span class="pp">*</span>/shell</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ln -s &lt;file_name&gt; &lt;symlink_name&gt;(PATH)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># symlink the shell_intro.qmd file </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># check </span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Desktop</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lrwxr-xr-x@  .... shell_intro.qmd -&gt; shell_intro.qmd</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> shell_intro_sl.qmd </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> shell_intro_sl.qmd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive" class="level2"><h2 class="anchored" data-anchor-id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive">Do it to bring shared stuff in Others’ google Drive into My Drive</h2>
+<ol type="1">
+<li>Go to google drive under <code>Shared with me</code>/<code>Condivisi con me</code>
+</li>
+<li>Right click and scroll to [<code>Manage</code>/<code>Organizza</code>]/<code>Add shortcut to Drive</code>/<code>Aggiungi scorciatoia</code>
+</li>
+<li>Choose the location <code>My Drive</code>
+</li>
+</ol>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
