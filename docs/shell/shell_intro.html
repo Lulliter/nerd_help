@@ -180,6 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-are-the-kernell-and-shell" id="toc-what-are-the-kernell-and-shell" class="nav-link" data-scroll-target="#what-are-the-kernell-and-shell">What are the kernell and shell?</a></li>
   </ul>
 </li>
+  <li><a href="#fundamental" id="toc-fundamental" class="nav-link" data-scroll-target="#fundamental">Fundamental</a></li>
   <li><a href="#files-and-directories" id="toc-files-and-directories" class="nav-link" data-scroll-target="#files-and-directories">Files and directories</a></li>
   <li><a href="#creating-files" id="toc-creating-files" class="nav-link" data-scroll-target="#creating-files">Creating Files</a></li>
   <li><a href="#reading-files" id="toc-reading-files" class="nav-link" data-scroll-target="#reading-files">Reading files</a></li>
@@ -187,7 +188,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#move-and-rename" id="toc-move-and-rename" class="nav-link" data-scroll-target="#move-and-rename">Move and rename</a></li>
   <li><a href="#copy" id="toc-copy" class="nav-link" data-scroll-target="#copy">Copy</a></li>
   <li><a href="#deleting-files-and-directories" id="toc-deleting-files-and-directories" class="nav-link" data-scroll-target="#deleting-files-and-directories">Deleting files and directories</a></li>
-  <li><a href="#searching-for-files-and-directories" id="toc-searching-for-files-and-directories" class="nav-link" data-scroll-target="#searching-for-files-and-directories">Searching for files and directories</a></li>
+  <li>
+<a href="#filedir-by-name" id="toc-filedir-by-name" class="nav-link" data-scroll-target="#filedir-by-name">File/dir by name</a>
+  <ul class="collapse">
+<li><a href="#filedir-by-name-content-word-only-text-files" id="toc-filedir-by-name-content-word-only-text-files" class="nav-link" data-scroll-target="#filedir-by-name-content-word-only-text-files">File/dir by name + content word (only text files)</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exe-in-google-drive" id="toc-exe-in-google-drive" class="nav-link" data-scroll-target="#exe-in-google-drive">Exe in Google Drive</a>
+  <ul class="collapse">
+<li><a href="#based-on-name-filedir" id="toc-based-on-name-filedir" class="nav-link" data-scroll-target="#based-on-name-filedir">… based on name (file|dir)</a></li>
+  <li><a href="#based-on-name-filedir-word-in-text-file" id="toc-based-on-name-filedir-word-in-text-file" class="nav-link" data-scroll-target="#based-on-name-filedir-word-in-text-file">… based on name (file|dir) + word (in <em>text</em> file)</a></li>
+  <li><a href="#based-on-name-filedir-word-in-pdf-file" id="toc-based-on-name-filedir-word-in-pdf-file" class="nav-link" data-scroll-target="#based-on-name-filedir-word-in-pdf-file">… based on name (file|dir) + word (in <em>PDF</em> file)</a></li>
+  <li>
+<a href="#based-on-name-filedir-word-in-word-file" id="toc-based-on-name-filedir-word-in-word-file" class="nav-link" data-scroll-target="#based-on-name-filedir-word-in-word-file">… based on name (file|dir) + word (in <em>WORD</em> file)</a>
+  <ul class="collapse">
+<li><a href="#check-only-1-files-content" id="toc-check-only-1-files-content" class="nav-link" data-scroll-target="#check-only-1-files-content">Check only 1 file’s content</a></li>
+  </ul>
+</li>
+  <li><a href="#based-on-name-filedir-word-in-doc-file" id="toc-based-on-name-filedir-word-in-doc-file" class="nav-link" data-scroll-target="#based-on-name-filedir-word-in-doc-file">… based on name (file|dir) + word (in <em>doc</em> file)</a></li>
+  </ul>
+</li>
+  <li><a href="#look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" id="toc-look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" class="nav-link" data-scroll-target="#look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal"><code>look4files.sh</code> creates a reusable function that can be called in terminal</a></li>
   <li>
 <a href="#creating-symbolic-links" id="toc-creating-symbolic-links" class="nav-link" data-scroll-target="#creating-symbolic-links">Creating symbolic links</a>
   <ul class="collapse">
@@ -212,14 +234,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Sat, 3 of May, 2025</p>
+      <p class="date">Mon, 5 of May, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Sat, 3 of May, 2025</p>
+      <p class="date-modified">Mon, 5 of May, 2025</p>
     </div>
   </div>
     
@@ -245,7 +267,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>you can choose from different shells (<code>sh</code>, <code>bash</code>, <code>zsh</code>, etc.)</li>
 </ul>
 </li>
-</ul></section></section><section id="files-and-directories" class="level1"><h1>Files and directories</h1>
+</ul></section></section><section id="fundamental" class="level1"><h1>Fundamental</h1>
+<ul>
+<li>
+<code>Ctrl + C</code> = Cancel/stop the current command (SIGINT)</li>
+<li>
+<code>Ctrl + Z</code> = Pause current command (suspend, SIGTSTP)
+<ul>
+<li>
+<code>fg</code> Resume the last paused command</li>
+</ul>
+</li>
+<li>
+<code>Ctrl + a</code> = start of the command</li>
+<li>
+<code>Ctrl + e</code> = end of the command</li>
+<li>
+<code>q</code> = close dialogue</li>
+<li>
+<code>Ctrl + L</code> → clears the terminal screen (but not history)</li>
+</ul></section><section id="files-and-directories" class="level1"><h1>Files and directories</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -361,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dir </span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-R</span> dir2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="searching-for-files-and-directories" class="level1"><h1>Searching for files and directories</h1>
+</section><section id="filedir-by-name" class="level1"><h1>File/dir by name</h1>
 <p><code>find &lt;path&gt; &lt;expression&gt;</code></p>
 <ul>
 <li>
@@ -374,9 +415,211 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Github/_nerd_help/</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"test.txt"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"*test*"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-name</span> <span class="st">"test.txt"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"*test*"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"??test.txt"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> shell <span class="at">-name</span> <span class="st">"*[.txt.qmd]"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="creating-symbolic-links" class="level1"><h1>Creating symbolic links</h1>
+<p><code>grep &lt;expression&gt; &lt;path&gt;</code></p>
+<ul>
+<li>
+<code>r</code> = recursive<br>
+</li>
+<li>
+<code>l</code> = follow symbolic links</li>
+<li>
+<code>i</code>= case-insensitive matching</li>
+<li>
+<code>E</code> = use extended regular expressions (like <code>|</code>)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tutti i file .R in tutte le cartelle e sottocartelle, e mostrerà solo quelli che contengono la parola "library".</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rl</span> <span class="st">"Google Drive"</span> .</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-insensitive search</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rli</span> <span class="st">"Google Drive"</span> .</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Search for multiple words (logical OR)</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rEl</span> <span class="st">"Google Drive|Github"</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="filedir-by-name-content-word-only-text-files" class="level3"><h3 class="anchored" data-anchor-id="filedir-by-name-content-word-only-text-files">File/dir by name + content word (only text files)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Github/_nerd_help</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-exec</span> grep <span class="at">-l</span> <span class="st">"color"</span> {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="exe-in-google-drive" class="level1"><h1>Exe in Google Drive</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Library/CloudS<span class="pp">*</span>/GoogleDrive-lmm76@georgetown.edu/<span class="st">'Il mio Drive'</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="based-on-name-filedir" class="level2"><h2 class="anchored" data-anchor-id="based-on-name-filedir">… based on name (file|dir)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> d <span class="at">-name</span> <span class="st">"*MUSIC*"</span>      <span class="co"># directory</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*MUSIC*"</span>              <span class="co"># file + directory </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="based-on-name-filedir-word-in-text-file" class="level2"><h2 class="anchored" data-anchor-id="based-on-name-filedir-word-in-text-file">… based on name (file|dir) + word (in <em>text</em> file)</h2>
+<p><code>find</code> + <code>grep</code> will only work with text files (<code>R</code> or <code>txt</code>)</p>
+<ul>
+<li>
+<code>find .</code> → Start searching in the current directory
+<ul>
+<li>
+<code>-type f</code> → Only look for regular files</li>
+<li>
+<code>-name "*.R"</code> → Restrict the search to files ending in <code>.R</code><br>
+</li>
+<li>
+<code>/(</code> and <code>\)</code> → bc parenthesis must be escaped</li>
+<li>
+<code>-o</code> → logical OR between conditions</li>
+</ul>
+</li>
+<li>
+<code>-exec</code> → For each matching file, execute the following command…
+<ul>
+<li>
+<code>grep -l "library" {} +</code> → search for the word “library” in the file (<code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> filename placeholder)
+<ul>
+<li>
+<code>-l</code> tells grep to only print the filename if a match is found</li>
+</ul>
+</li>
+<li>
+<code>+</code> → because <code>-exec</code> clause must be escaped (<code>+</code> or <code>;</code>)</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Search for files containing specific content and return the list of files</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-exec</span> grep <span class="at">-l</span> <span class="st">"library"</span> {} + <span class="co"># or </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-exec</span> grep <span class="at">-l</span> <span class="st">"library"</span> {} <span class="dt">\;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="dt">\)</span> <span class="at">-type</span> f <span class="at">-exec</span> grep <span class="at">-El</span> <span class="st">"feature|color"</span> {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="based-on-name-filedir-word-in-pdf-file" class="level2"><h2 class="anchored" data-anchor-id="based-on-name-filedir-word-in-pdf-file">… based on name (file|dir) + word (in <em>PDF</em> file)</h2>
+<ul>
+<li>
+<code>sh -c '...'</code> → Run the given string as a shell script</li>
+<li>
+<code>for file do ... done</code> loops over those filenames</li>
+<li>
+<code>grep</code>
+<ul>
+<li>
+<code>-q</code> → be quiet (don’t print the match)</li>
+<li>
+<code>-i</code> → ignore case</li>
+<li>
+<code>-E</code> → use extended regex (feature|color)</li>
+</ul>
+</li>
+<li>
+<code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> are the filenames from find, passed as $1, $2, …, to the shell script</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Library/CloudS<span class="pp">*</span>/GoogleDrive-lmm76@georgetown.edu/<span class="st">'Il mio Drive'</span>/SCP_mio</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.pdf"</span> <span class="at">-exec</span> sh <span class="at">-c</span> <span class="st">'</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">  for file do</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">    if pdftotext "$file" - | grep -qiE "sussidiarietà"; then</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">      echo "$file"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">    fi</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">  done</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">'</span> sh {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="based-on-name-filedir-word-in-word-file" class="level2"><h2 class="anchored" data-anchor-id="based-on-name-filedir-word-in-word-file">… based on name (file|dir) + word (in <em>WORD</em> file)</h2>
+<section id="nerdy-set-up-step" class="level4"><h4 class="anchored" data-anchor-id="nerdy-set-up-step">NERDY set up step</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First time I got </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> brew</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#/usr/local/bin/brew</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/opt/homebrew/bin/brew</span> <span class="at">--version</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Homebrew 4.5.0 OK</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># configure zsh to use the correct brew</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"/opt/homebrew/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># then </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.zshrc</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> brew</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#/opt/homebrew/bin/brew # OK!</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install docx2txt</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#docx2txt --help # doesnot work!?!?!</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#... but I have it</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> docx2txt</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /opt/homebrew/Cellar/docx2txt/1.4/bin</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add symlink</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /opt/homebrew/Cellar/docx2txt/1.4/bin/docx2txt.sh /opt/homebrew/bin/docx2txt</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> docx2txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or to use PANDOC for word files</p>
+<ul>
+<li>Quarto and R should use their own pandoc version (so this shouldn’t mess that up!)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> upgrade pandoc</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">--version</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> link <span class="at">--overwrite</span> pandoc <span class="co"># from pandoc 1. 2 pandoc 3.6.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="check-only-1-files-content" class="level3"><h3 class="anchored" data-anchor-id="check-only-1-files-content">Check only 1 file’s content</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Library/CloudS<span class="pp">*</span>/GoogleDrive-lmm76@georgetown.edu/<span class="st">'Il mio Drive'</span>/SCP_mio</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># `docx2txt` often misses text in text boxes, shapes, footers, or other styled containers</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docx2txt</span> <span class="op">&lt;</span> ./<span class="st">'Appunti 2o tavolo.docx'</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"sviluppo sostenibile"</span> <span class="co"># NOPE!</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># `pandoc` uses the full internal structure of the .docx file and:</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="st">'Appunti 2o tavolo.docx'</span> <span class="at">-t</span> plain <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"sviluppo sostenibile"</span> <span class="co"># YEP!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="get-files-list" class="level4"><h4 class="anchored" data-anchor-id="get-files-list">Get files list</h4>
+<ul>
+<li>Need to transform into text first</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Library/CloudS<span class="pp">*</span>/GoogleDrive-lmm76@georgetown.edu/<span class="st">'Il mio Drive'</span>/SCP_mio</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using docx2txt (NOPE!)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pandoc (YEP!)</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.docx"</span> <span class="at">-exec</span> sh <span class="at">-c</span> <span class="st">'</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">  for file do</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">    if pandoc "$file" -t plain | grep -qiE "sviluppo sostenibile"; then</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">      echo "$file"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">    fi</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">  done</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">'</span> sh {} +</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress errors (corrupt or *.doc files - NOT handled by pandoc)</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.docx"</span> <span class="at">-exec</span> sh <span class="at">-c</span> <span class="st">'</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="st">  for file do</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="st">    if pandoc "$file" -t plain 2&gt;/dev/null | grep -qiE "sviluppo sostenibile"; then</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="st">      echo "$file"</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="st">    fi</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="st">  done</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="st">'</span> sh {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section></section><section id="based-on-name-filedir-word-in-doc-file" class="level2"><h2 class="anchored" data-anchor-id="based-on-name-filedir-word-in-doc-file">… based on name (file|dir) + word (in <em>doc</em> file)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> ./<span class="st">"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc"</span> <span class="at">-t</span> plain <span class="co"># NOPE</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Unknown input format doc</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">antiword</span> ./<span class="st">"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"pavia"</span> <span class="co"># YEP</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.doc"</span> <span class="at">-exec</span> sh <span class="at">-c</span> <span class="st">'</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">  for file do</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="st">    if antiword "$file" 2&gt;/dev/null | grep -qiE "PAVIA "; then</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">      echo "$file"</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">    fi</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="st">  done</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="st">'</span> sh {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" class="level1"><h1>
+<code>look4files.sh</code> creates a reusable function that can be called in terminal</h1>
+<p>This will look for a specific <string> in files with extensions &lt;(PDF, docx, doc, md, R, qmd)&gt; in <given path=""></given></string></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">look4files.sh</span> <span class="st">"search_string"</span> /path/to/directory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr></section><section id="creating-symbolic-links" class="level1"><h1>Creating symbolic links</h1>
 <p><code>sym link</code>s are similar to shortcuts or alias in a GUI systme</p>
 <ul>
 <li>
@@ -388,31 +631,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> _nerd<span class="pp">*</span>/shell</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ln -s &lt;file_name&gt; &lt;symlink_name&gt;(PATH)</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># symlink the shell_intro.qmd file </span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># check </span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Desktop</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lrwxr-xr-x@  .... shell_intro.qmd -&gt; shell_intro.qmd</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> shell_intro_sl.qmd </span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> shell_intro_sl.qmd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> _nerd<span class="pp">*</span>/shell</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ln -s &lt;file_name&gt; &lt;symlink_name&gt;(PATH)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># symlink the shell_intro.qmd file </span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># check </span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Desktop</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lrwxr-xr-x@  .... shell_intro.qmd -&gt; shell_intro.qmd</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> shell_intro_sl.qmd </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> shell_intro_sl.qmd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive" class="level2"><h2 class="anchored" data-anchor-id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive">Do it to bring shared stuff in Others’ google Drive into My Drive</h2>
 <ol type="1">
-<li>Go to google drive under <code>Shared with me</code>/<code>Condivisi con me</code>
+<li>Go to Google drive under <code>Shared with me</code>/<code>Condivisi con me</code>
 </li>
 <li>Right click and scroll to [<code>Manage</code>/<code>Organizza</code>]/<code>Add shortcut to Drive</code>/<code>Aggiungi scorciatoia</code>
 </li>
 <li>Choose the location <code>My Drive</code>
 </li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">'/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Will show also linked folders (like shared with me for which I created a shortcut in my drive)</p>
+<pre><code>total 41528
+    0 drwx------@  9 luisamimmi  staff       288 Jan 16 16:37 50_mo_quiz_foto
+    8 -rw-------@  1 luisamimmi  staff       193 Mar 17 20:55 Appunti Lezioni INGLESE Fortu 2023.gdoc
+    0 lrw-------@  1 luisamimmi  staff       159 Mar  2  2024 Biostatistics course by Cocca -&gt; /Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/.shortcut-targets-by-id/1G8RzLFV_yz_1QH1LhfMU3Rxex1oATzLq/Biostatistics course by Cocca
+    0 drwxr-xr-x@ 19 luisamimmi  staff       608 Apr  4 10:14 CANTI_SAN_MICHELE</code></pre>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

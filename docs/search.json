@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "shell/shell_intro.html",
+    "href": "shell/shell_intro.html",
+    "title": "Intro to Unix and shell",
+    "section": "",
+    "text": "Great (paid) LinkedIn course by Kevin Skoglund “Unix essential training”\n\n\nan OS developed by AT&T employes at Bell Labs in the 1960s/70s\nin 1972 it is rewritten in C programming, which made it portable. It then spread outside AT&T\nit still powers devises all around\nyou can use it from the Command line or from GUI interfaces\n\n\n\nkernel is the core of the OS. it allocates time and memory to processes\n\nshells is the outer layer of the OS. it sends reuqests to the kernel\n\nyou can choose from different shells (sh, bash, zsh, etc.)",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#based-on-name-filedir",
+    "href": "shell/shell_intro.html#based-on-name-filedir",
+    "title": "Intro to Unix and shell",
+    "section": "… based on name (file|dir)",
+    "text": "… based on name (file|dir)\n\nfind . -type d -name \"*MUSIC*\"      # directory\nfind . -iname \"*MUSIC*\"              # file + directory",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#based-on-name-filedir-word-in-text-file",
+    "href": "shell/shell_intro.html#based-on-name-filedir-word-in-text-file",
+    "title": "Intro to Unix and shell",
+    "section": "… based on name (file|dir) + word (in text file)",
+    "text": "… based on name (file|dir) + word (in text file)\nfind + grep will only work with text files (R or txt)\n\n\nfind . → Start searching in the current directory\n\n\n-type f → Only look for regular files\n\n-name \"*.R\" → Restrict the search to files ending in .R\n\n\n/( and \\) → bc parenthesis must be escaped\n\n-o → logical OR between conditions\n\n\n\n-exec → For each matching file, execute the following command…\n\n\ngrep -l \"library\" {} + → search for the word “library” in the file ({} filename placeholder)\n\n\n-l tells grep to only print the filename if a match is found\n\n\n\n+ → because -exec clause must be escaped (+ or ;)\n\n\n\n\n# Search for files containing specific content and return the list of files\nfind . -type f -name \"*.R\" -exec grep -l \"library\" {} + # or \nfind . -type f -name \"*.R\" -exec grep -l \"library\" {} \\; \n\nfind . \\( -name \"*.R\" -o -name \"*.qmd\" -o -name \"*.md\" \\) -type f -exec grep -El \"feature|color\" {} +",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#based-on-name-filedir-word-in-pdf-file",
+    "href": "shell/shell_intro.html#based-on-name-filedir-word-in-pdf-file",
+    "title": "Intro to Unix and shell",
+    "section": "… based on name (file|dir) + word (in PDF file)",
+    "text": "… based on name (file|dir) + word (in PDF file)\n\n\nsh -c '...' → Run the given string as a shell script\n\nfor file do ... done loops over those filenames\n\ngrep\n\n\n-q → be quiet (don’t print the match)\n\n-i → ignore case\n\n-E → use extended regex (feature|color)\n\n\n\n{} are the filenames from find, passed as $1, $2, …, to the shell script\n\n\ncd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio\nls -ls\n\nfind . -type f -name \"*.pdf\" -exec sh -c '\n  for file do\n    if pdftotext \"$file\" - | grep -qiE \"sussidiarietà\"; then\n      echo \"$file\"\n    fi\n  done\n' sh {} +",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#based-on-name-filedir-word-in-word-file",
+    "href": "shell/shell_intro.html#based-on-name-filedir-word-in-word-file",
+    "title": "Intro to Unix and shell",
+    "section": "… based on name (file|dir) + word (in WORD file)",
+    "text": "… based on name (file|dir) + word (in WORD file)\nNERDY set up step\n\n# First time I got \nwhich brew\n#/usr/local/bin/brew\n/opt/homebrew/bin/brew --version\n# Homebrew 4.5.0 OK\n\n# configure zsh to use the correct brew\nexport PATH=\"/opt/homebrew/bin:$PATH\"\n# then \nsource ~/.zshrc\nwhich brew\n#/opt/homebrew/bin/brew # OK!\nbrew install docx2txt\n#docx2txt --help # doesnot work!?!?!\n#... but I have it\nwhich docx2txt\nls /opt/homebrew/Cellar/docx2txt/1.4/bin\n# add symlink\nln -s /opt/homebrew/Cellar/docx2txt/1.4/bin/docx2txt.sh /opt/homebrew/bin/docx2txt\nwhich docx2txt\n\nOr to use PANDOC for word files\n\nQuarto and R should use their own pandoc version (so this shouldn’t mess that up!)\n\n\nbrew upgrade pandoc\npandoc --version\nbrew link --overwrite pandoc # from pandoc 1. 2 pandoc 3.6.4\n\nCheck only 1 file’s content\n\ncd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio\nls -ls\n\n# `docx2txt` often misses text in text boxes, shapes, footers, or other styled containers\ndocx2txt &lt; ./'Appunti 2o tavolo.docx' - | grep -i \"sviluppo sostenibile\" # NOPE!\n# `pandoc` uses the full internal structure of the .docx file and:\npandoc 'Appunti 2o tavolo.docx' -t plain | grep -i \"sviluppo sostenibile\" # YEP!\n\nGet files list\n\nNeed to transform into text first\n\n\ncd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio\nls -ls\n# Using docx2txt (NOPE!)\n# Using pandoc (YEP!)\nfind . -type f -name \"*.docx\" -exec sh -c '\n  for file do\n    if pandoc \"$file\" -t plain | grep -qiE \"sviluppo sostenibile\"; then\n      echo \"$file\"\n    fi\n  done\n' sh {} +\n\n\n# suppress errors (corrupt or *.doc files - NOT handled by pandoc)\nfind . -type f -name \"*.docx\" -exec sh -c '\n  for file do\n    if pandoc \"$file\" -t plain 2&gt;/dev/null | grep -qiE \"sviluppo sostenibile\"; then\n      echo \"$file\"\n    fi\n  done\n' sh {} +",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#based-on-name-filedir-word-in-doc-file",
+    "href": "shell/shell_intro.html#based-on-name-filedir-word-in-doc-file",
+    "title": "Intro to Unix and shell",
+    "section": "… based on name (file|dir) + word (in doc file)",
+    "text": "… based on name (file|dir) + word (in doc file)\n\npandoc ./\"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc\" -t plain # NOPE\n# Unknown input format doc\nantiword ./\"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc\" | grep -i \"pavia\" # YEP\n\nfind . -type f -name \"*.doc\" -exec sh -c '\n  for file do\n    if antiword \"$file\" 2&gt;/dev/null | grep -qiE \"PAVIA \"; then\n      echo \"$file\"\n    fi\n  done\n' sh {} +",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
+    "objectID": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
+    "href": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
+    "title": "Intro to Unix and shell",
+    "section": "Do it to bring shared stuff in Others’ google Drive into My Drive",
+    "text": "Do it to bring shared stuff in Others’ google Drive into My Drive\n\nGo to Google drive under Shared with me/Condivisi con me\n\nRight click and scroll to [Manage/Organizza]/Add shortcut to Drive/Aggiungi scorciatoia\n\nChoose the location My Drive\n\n\n\n# Path\ncd '/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'\nls -ls\n\nWill show also linked folders (like shared with me for which I created a shortcut in my drive)\ntotal 41528\n    0 drwx------@  9 luisamimmi  staff       288 Jan 16 16:37 50_mo_quiz_foto\n    8 -rw-------@  1 luisamimmi  staff       193 Mar 17 20:55 Appunti Lezioni INGLESE Fortu 2023.gdoc\n    0 lrw-------@  1 luisamimmi  staff       159 Mar  2  2024 Biostatistics course by Cocca -&gt; /Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/.shortcut-targets-by-id/1G8RzLFV_yz_1QH1LhfMU3Rxex1oATzLq/Biostatistics course by Cocca\n    0 drwxr-xr-x@ 19 luisamimmi  staff       608 Apr  4 10:14 CANTI_SAN_MICHELE",
+    "crumbs": [
+      "Shell",
+      "Intro to Unix and shell"
+    ]
+  },
+  {
     "objectID": "shell/shell_var.html",
     "href": "shell/shell_var.html",
     "title": "Shell script to learn variables",
@@ -11,187 +88,33 @@
     ]
   },
   {
-    "objectID": "shell/foto.html",
-    "href": "shell/foto.html",
-    "title": "Shell script to change pics",
+    "objectID": "shell.html",
+    "href": "shell.html",
+    "title": "Shell & CLI scripts",
     "section": "",
-    "text": "change format for individual .HEIC pic\n\n# Specify input directory, file name, and output directory\ninput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo\"\noutput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg\"\n# single foto\nfile_name=\"IMG_5398.heic\"\n\n# Construct full input and output file paths\ninput_file=\"${input_dir}/${file_name}\"\noutput_file=\"${output_dir}/${file_name%.heic}.jpg\"\n\n# Convert to .jpg\nsips -s format jpeg \"$input_file\" --out \"$output_file\"\n\nNeeded to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .heic in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .heic files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.heic)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .heic files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .heic file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .heic)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img\"\n\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img/smaller\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd $input_dir\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_any_image_size() {\n    mkdir -p \"./output\"\n    max_size=1000000\n\n    find . -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" \\) | while read -r file; do\n        base_name=$(basename \"$file\")\n        cp \"$file\" \"./output/$base_name\"\n        quality=85\n\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_any_image_size",
+    "text": "}(Source: www.freepik.com/)",
     "crumbs": [
       "Shell",
-      "Shell script to change pics"
+      "Shell & CLI scripts"
     ]
   },
   {
-    "objectID": "rstats/01_tidyeval.html",
-    "href": "rstats/01_tidyeval.html",
-    "title": "Tidyeval and functional programming",
+    "objectID": "rstats/00_useful.html",
+    "href": "rstats/00_useful.html",
+    "title": "Useful things R",
     "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)",
+    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0",
     "crumbs": [
       "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
+      "Useful things R"
     ]
   },
   {
-    "objectID": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "href": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
-    "title": "Tidyeval and functional programming",
-    "section": "Non-Standard evaluation in tidyverse\n",
-    "text": "Non-Standard evaluation in tidyverse\n\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions.",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "href": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
-    "title": "Tidyeval and functional programming",
-    "section": "Two (complementary) forms of NSE used in tidyverse\n",
-    "text": "Two (complementary) forms of NSE used in tidyverse\n\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing for data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{` embracing operator (`rlang`) OR\n        + [`enquo` followed by] `!!` operator (`base`) \n        + `...` + `...`\n    + varname_name `:=` function(`{{var}`)\n    + `.data` pronouns. \n    + `.env` pronouns.",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "href": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
-    "title": "Tidyeval and functional programming",
-    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
-    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "href": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
-    "title": "Tidyeval and functional programming",
-    "section": "2 Defuse enquo + Inject !! (inside custom f)",
-    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#defuse-...-inject-...",
-    "href": "rstats/01_tidyeval.html#defuse-...-inject-...",
-    "title": "Tidyeval and functional programming",
-    "section": "3 Defuse ... + Inject ...\n",
-    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-nothing-left-side",
-    "href": "rstats/01_tidyeval.html#b-nothing-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "1b (nothing!) + {{ & left side := !!!!",
-    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-enquo-left-side",
-    "href": "rstats/01_tidyeval.html#b-enquo-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "2b enquo + !! & left side :=\n",
-    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#b-...-...-left-side",
-    "href": "rstats/01_tidyeval.html#b-...-...-left-side",
-    "title": "Tidyeval and functional programming",
-    "section": "3b ... + ... & left side :=\n",
-    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#c-inject-specify-.data",
-    "href": "rstats/01_tidyeval.html#c-inject-specify-.data",
-    "title": "Tidyeval and functional programming",
-    "section": "1.c Inject {{ + specify .data\n",
-    "text": "1.c Inject {{ + specify .data\n\nAdding a new generic function argument data (up until now I was hardcoding it when executing the function)\nSimple data\n\n\nstarwars &lt;- starwars\n\n## -- write function\nmy_sum &lt;- function(data, num_var) {\n    data %&gt;%\n        dplyr::group_by(data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n    }\n\n## --  call function\nmy_sum (starwars, mass) \n\nWith .data pronoun\nThe .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{\n\n## -- write function\nmy_sum2 &lt;- function(data, num_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\n## --  call function\nmy_sum2 (starwars, mass) \n\nWith .data[[var]] pronoun\n\nIf you have a variable name in a string, use the .data pronoun to subset that variable with [[.\n\n\n## -- write function\nmy_sum3 &lt;- function(data, num_var, group_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[group_var]]) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\ngroup_var &lt;- \"homeworld\"\n## --  call function\nmy_sum3 (starwars, mass, group_var)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "href": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
-    "title": "Tidyeval and functional programming",
-    "section": "Option 1) purrr + existing function .f…",
-    "text": "Option 1) purrr + existing function .f…\n\nmy big “gotcha” here is I must not specify .x in the arguments after .f as I kept doing… 🤯\n\n\n## -- using function `my_mean` with:\ngroup_var_vec &lt;- c(\"homeworld\", \"species\", \"sex\") \n\n# map returns a list \ngroupmeans_l  &lt;-  map(.x = group_var_vec, #  x \n                             .f = my_mean,   # function  NO ()\n                             data = starwars, # ADDITIONAL arguments \n                             num_var = height)\n#, group_var = .x)  \n\n\ngroupmeans_l[[3]]",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "href": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
-    "title": "Tidyeval and functional programming",
-    "section": "Option 2) purrr + anonymous function as formula ~ fun()\n",
-    "text": "Option 2) purrr + anonymous function as formula ~ fun()\n\n\n🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless\n\n\n## -- using function `my_mean` with:\ngroupmeans_l_tilde &lt;- map(.x = group_var_vec, \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_l_tilde[[3]] \npluck(groupmeans_l_tilde, 3)\n\nBTW map can output a row-binded df here\n\n# map returns dataframes binded by row \ngroupmeans_dfr &lt;- map_dfr(.x = group_var_vec, # x \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_dfr",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "href": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
-    "title": "Tidyeval and functional programming",
-    "section": "Tidyeval in purrr + custom function",
-    "text": "Tidyeval in purrr + custom function\n1/2 single (group, num) function\n\nmy_mean_2  &lt;- function(data, group_var, num_var) {\n    quo_group_var &lt;- enquo(group_var)\n    quo_num_var &lt;- enquo(num_var)\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[!! quo_group_var]]) %&gt;%\n        dplyr::summarise(\n            \"mean_of_{{quo_num_var}}\" := mean( !!quo_num_var, na.rm = TRUE ))\n}\n\n# test YEAH\ntest1 &lt;- my_mean_2(data = starwars, group_var = sex, num_var =height) \n\n2/2 map function\n\ngroup_var &lt;- c(\"gender\", \"species\")\nnum_var &lt;- c(\"height\", \"birth_year\")\n\ntidy_map_df3 &lt;- map2(.x = group_var, \n                            .y = num_var ,\n                            ~my_mean_2,\n                            data = starwars\n) \ntidy_map_df3\n\nhttps://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr\n\nvars &lt;- train %&gt;% select(ends_with(\"bin\")) %&gt;% colnames()\n\nvars %&gt;%\n# create a symbol (defused expressions that represent objects in environments)\n  syms() %&gt;%\n  map(function(var) get_charts(!!var))\n\n# test YEAH\ntest2 &lt;- my_mean(data = starwars, group_var = sex, num_var =height)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats/01_tidyeval.html#digression-pluck",
-    "href": "rstats/01_tidyeval.html#digression-pluck",
-    "title": "Tidyeval and functional programming",
-    "section": "[digression] pluck\n",
-    "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "Tidyeval and functional programming"
-    ]
-  },
-  {
-    "objectID": "rstats.html",
-    "href": "rstats.html",
-    "title": "I ❤️ #rstats",
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "Luisa M. Mimmi",
     "section": "",
-    "text": "(Source: www.freepik.com/)",
-    "crumbs": [
-      "{{< fa brands r-project >}} programming",
-      "I ❤️ #rstats"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome!",
-    "section": "",
-    "text": "This is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)"
+    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
   },
   {
     "objectID": "git/git_feature_workflow.html",
@@ -565,17 +488,6 @@
     "crumbs": [
       "Dev tools",
       "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev.html",
-    "href": "dev.html",
-    "title": "Misc. Development tools",
-    "section": "",
-    "text": "(Source: www.freepik.com/)",
-    "crumbs": [
-      "Dev tools",
-      "Misc. Development tools"
     ]
   },
   {
@@ -1030,54 +942,179 @@
     ]
   },
   {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "Luisa M. Mimmi",
+    "objectID": "rstats.html",
+    "href": "rstats.html",
+    "title": "I ❤️ #rstats",
     "section": "",
-    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
-  },
-  {
-    "objectID": "rstats/00_useful.html",
-    "href": "rstats/00_useful.html",
-    "title": "Useful things R",
-    "section": "",
-    "text": "Filter rows in and out with dplyr\n\nMultiple values (same column) in and out\n\n\n%in% c(\"x\", \"y\") for values\n\n!colname for negation\n\n\nlibrary(dplyr)\n\nstarwars &lt;- starwars\n\nf_1 &lt;- starwars %&gt;% \n    filter(homeworld %in% c(\"Naboo\",\"Tatooine\"))  \n\nf_2 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nMultiple columns (some values) in and out\n\nf_3 &lt;- starwars %&gt;% \n    filter(species == \"Ewok\" & homeworld %in% c(\"Endor\",\"Tatooine\"))  \n\nf_4 &lt;- starwars %&gt;% \n    # ! in front! \n    filter(!species %in% c(\"Droid\",\"Human\") &  !homeworld %in% c(\"Naboo\",\"Tatooine\"))\n\nKeep/Drop rows that have ALL NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_allNA &lt;- starwars %&gt;%\n  filter(if_all(everything(), is.na))  # 0 \n\n# or drop them \n# Drop rows that have NA values in all columns\ncols_noneNA &lt;- starwars %&gt;%\n  filter(!if_all(everything(), is.na))  # 87 \n\nDrop rows that have ANY NA values in all columns\n\n# Filter rows that have only NA values in all columns  \ncols_anyNA &lt;- starwars %&gt;%\n  filter(!if_any(everything(), is.na))  # 58 \n\nKeep/drop rows that have ALL NA values in some columns\n\n# Filter rows that have only NA values in all columns whose name ....\nspec_col_allNA &lt;- starwars %&gt;%\n filter(if_all(starts_with(\"h\"), is.na))  # 0 \n # filter(!if_all(starts_with(\"h\"), is.na))  # 0",
+    "text": "(Source: www.freepik.com/)",
     "crumbs": [
       "{{< fa brands r-project >}} programming",
-      "Useful things R"
+      "I ❤️ #rstats"
     ]
   },
   {
-    "objectID": "shell.html",
-    "href": "shell.html",
-    "title": "Shell & CLI scripts",
+    "objectID": "rstats/01_tidyeval.html",
+    "href": "rstats/01_tidyeval.html",
+    "title": "Tidyeval and functional programming",
     "section": "",
-    "text": "}(Source: www.freepik.com/)",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…\nlibrary(tidyverse)\nlibrary(rlang)",
     "crumbs": [
-      "Shell",
-      "Shell & CLI scripts"
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
     ]
   },
   {
-    "objectID": "shell/shell_intro.html",
-    "href": "shell/shell_intro.html",
-    "title": "Intro to Unix and shell",
+    "objectID": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "href": "rstats/01_tidyeval.html#non-standard-evaluation-in-tidyverse",
+    "title": "Tidyeval and functional programming",
+    "section": "Non-Standard evaluation in tidyverse\n",
+    "text": "Non-Standard evaluation in tidyverse\n\n\n\nDEFUSING (DELAYING) function arguments: I can create a “quosure” with rlang::enquo() / rlang::enquos() so an expression can be examined, modified, and injected into other expressions.",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
+    "href": "rstats/01_tidyeval.html#two-complementary-forms-of-nse-used-in-tidyverse",
+    "title": "Tidyeval and functional programming",
+    "section": "Two (complementary) forms of NSE used in tidyverse\n",
+    "text": "Two (complementary) forms of NSE used in tidyverse\n\n1) TIDY SELECTION is used in SELECTION VERBS\ne.g. in dplyr::select() across(), relocate(), rename() and pull() use tidy selection where expressions are either interpreted in the context of the data frame (e.g. c(cyl, am) or evaluated in the user environment (e.g. all_of(), starts_with())\n\n# EXE `across()`\nsummarise_mean &lt;- function(data, vars) {\n    # all variables selected by user... \n    data %&gt;% summarise(n = n(), across({{ vars }}, mean))\n}\n# call \nstarwars %&gt;% \n    group_by(homeworld) %&gt;% \n    # with where\n    summarise_mean(where(is.numeric))\n\n2) DATA MASKING used in ACTION VERBS\nACTION VERBS = dplyr::mutate(), ggplot2::aes(), arrange(), count(), filter(), group_by(), and summarise().\nNormal interactive programming (tidyverse) use data-masking, which allow you to use variables in the “current” data frame without any extra syntax. This:\n\n(+) makes it nicer to interactively work (no extra typing for data$column, just column), but\n(-) makes it harder to create your own functions (it could be ambiguous what is a data-variable and what is an env-variable).\n\n\n## ---  tidyverse non std eval \nstarwars %&gt;% \n filter (homeworld == \"Tatooine\")  \n\nSOOOOO We need some way to add $ back into the picture. Passing data-masked arguments to functions requires INJECTION (= quasiquotation), i.e. TO INJECT A FUNCTION ARGUMENT IN A DATA-MASKED CONTEST, YOU EMBRACE IT WITH {{\nInside data-masking function (actions), we can use injection operators:\n    + `{` embracing operator (`rlang`) OR\n        + [`enquo` followed by] `!!` operator (`base`) \n        + `...` + `...`\n    + varname_name `:=` function(`{{var}`)\n    + `.data` pronouns. \n    + `.env` pronouns.",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "href": "rstats/01_tidyeval.html#defuse-nothing-inject-inside-custom-f",
+    "title": "Tidyeval and functional programming",
+    "section": "1 Defuse (nothing!) + Inject {{ (inside custom f)",
+    "text": "1 Defuse (nothing!) + Inject {{ (inside custom f)\n\n# -------- OR \ngrouped_mean_1 &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n# Defuse and inject in a single step with the embracing operator\n    group_by({{group_var}} ) %&gt;% \n    summarize(mean = mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# call\ngrouped_mean_1(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWithout {group_var} I would get the error“! Must group by variables found in .data. ✖ Column group_var is not found.”",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "href": "rstats/01_tidyeval.html#defuse-enquo-inject-inside-custom-f",
+    "title": "Tidyeval and functional programming",
+    "section": "2 Defuse enquo + Inject !! (inside custom f)",
+    "text": "2 Defuse enquo + Inject !! (inside custom f)\n\n# We can tell group_by() not to quote by using !! (pronounced “bang bang”). !! says something like “evaluate me!” or “unquote!”test \n\ngrouped_mean_2 &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = enquo(summarize_var)\n\n  df %&gt;% \n    ## -- Inject the expression contained in `*_var` \n    group_by(!!group_var) %&gt;% \n    summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# call\ngrouped_mean_2(\n  df = starwars, \n  group_var = sex, \n  summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#defuse-...-inject-...",
+    "href": "rstats/01_tidyeval.html#defuse-...-inject-...",
+    "title": "Tidyeval and functional programming",
+    "section": "3 Defuse ... + Inject ...\n",
+    "text": "3 Defuse ... + Inject ...\n\nIn this case, summarize_var goes in front and ... last\n\n\n... can stand for multiple variables\n\n\n# ---- func \ngrouped_mean_3 &lt;- function(df,  summarize_var, ...) {\n  \n    ## -- Defuse the summarize_var = enquo(summarize_var) \n    ## ... group_var &gt;&gt;&gt;&gt; NO NEED FOR ENQUO with ... !\n    summarize_var = enquo(summarize_var)\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n        summarize(mean = mean(!!summarize_var, na.rm = TRUE))\n}\n\n# ---- call\ngrouped_mean_3(\n    df = starwars, \n    sex, homeworld, # (...)\n    summarize_var =  height \n)\n\n\n\n\n\n\n\nTip\n\n\n\n{...} Basically we are saying “everything I throw at the function will be carried along until I want to evaluate it”",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-nothing-left-side",
+    "href": "rstats/01_tidyeval.html#b-nothing-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "1b (nothing!) + {{ & left side := !!!!",
+    "text": "1b (nothing!) + {{ & left side := !!!!\n\nSuper compact left side syntax with \"sometext_{{group_var}}\" :=\n\n\n\n# --- func\ngrouped_mean_1b &lt;- function(df, group_var, summarize_var) {\n    df %&gt;% \n        # Defuse and inject in a single step with the embracing operator\n        group_by({{group_var}} ) %&gt;% \n        summarize( \"BY_{{group_var}}\" := mean({{summarize_var}} , na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_1b (\n    df = starwars, \n    group_var = sex, \n    summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-enquo-left-side",
+    "href": "rstats/01_tidyeval.html#b-enquo-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "2b enquo + !! & left side :=\n",
+    "text": "2b enquo + !! & left side :=\n\n2 things needed here :\n+  `as_label(enquo(____var))`\n+  left side syntax with `!!str_c(\"Mean_\", ____var) :=`\n\n# --- func\ngrouped_mean_2b &lt;- function(df, group_var, summarize_var) {\n    ## -- Defuse the user expression in `*_var`\n    group_var = enquo(group_var)\n    summarize_var = as_label(enquo(summarize_var)) # as_label(enquo !!!!!\n    \n    df %&gt;% \n        ## -- Inject the expression contained in `*_var` \n        group_by(!!group_var) %&gt;% \n        summarize(!!str_c(\"Mean_\", summarize_var) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n# --- call\ngrouped_mean_2b(df = starwars, \n                     group_var = sex, \n                     summarize_var =  height \n)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#b-...-...-left-side",
+    "href": "rstats/01_tidyeval.html#b-...-...-left-side",
+    "title": "Tidyeval and functional programming",
+    "section": "3b ... + ... & left side :=\n",
+    "text": "3b ... + ... & left side :=\n\n\n## --  define function \ngrouped_mean_3b &lt;- function(df,  summarize_var, ...) {\n#   group_var = ...  NO NEED FOR ENQUO!\n    summarize_var = enquo(summarize_var)\n    summarize_var_name &lt;- as_label(enquo(summarize_var))\n    \n    df %&gt;% \n        group_by(...) %&gt;% \n    #   summarize(!!summarize_var_name := mean(!!summarize_var, na.rm = TRUE))\n    # or  \n    summarize(!!str_c(\"My_mean_\", summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n    # ERRORE ?!?!?!?\n    # summarize(str_c(\"Mean_\", !!summarize_var_name) := mean(!!summarize_var, na.rm = TRUE))\n}\n\n## --  call function\ngrouped_mean_3b(df = starwars, \n                     sex, homeworld, #  group_var\n                     summarize_var =  height \n)\n\n\n\n\n\n\n\nWarning\n\n\n\nOKKIO!!! Strange enough… seems like the unquoting must be of the WHOLE left-side of the equation not just of the quoted variable as I thought + !!summarize_var_name :=  ... OK + !!str_c(\"Mean_\", summarize_var_name) :=  ... OK: xchè?????? + str_c(\"Mean_\", !!summarize_var_name) :=  ... WRONG: xchè??????",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#c-inject-specify-.data",
+    "href": "rstats/01_tidyeval.html#c-inject-specify-.data",
+    "title": "Tidyeval and functional programming",
+    "section": "1.c Inject {{ + specify .data\n",
+    "text": "1.c Inject {{ + specify .data\n\nAdding a new generic function argument data (up until now I was hardcoding it when executing the function)\nSimple data\n\n\nstarwars &lt;- starwars\n\n## -- write function\nmy_sum &lt;- function(data, num_var) {\n    data %&gt;%\n        dplyr::group_by(data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n    }\n\n## --  call function\nmy_sum (starwars, mass) \n\nWith .data pronoun\nThe .data pronoun is a tidy eval feature that is enabled in all data-masked arguments, just like {{\n\n## -- write function\nmy_sum2 &lt;- function(data, num_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data$homeworld) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\n## --  call function\nmy_sum2 (starwars, mass) \n\nWith .data[[var]] pronoun\n\nIf you have a variable name in a string, use the .data pronoun to subset that variable with [[.\n\n\n## -- write function\nmy_sum3 &lt;- function(data, num_var, group_var) {\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[group_var]]) %&gt;%\n        # num_var or sum will not work!\n        dplyr::summarise(\n            \"weighted_count_{{num_var}}\" := sum( {{ num_var }}, na.rm = TRUE ))\n}\n\ngroup_var &lt;- \"homeworld\"\n## --  call function\nmy_sum3 (starwars, mass, group_var)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
+    "href": "rstats/01_tidyeval.html#option-1-purrr-existing-function-.f",
+    "title": "Tidyeval and functional programming",
+    "section": "Option 1) purrr + existing function .f…",
+    "text": "Option 1) purrr + existing function .f…\n\nmy big “gotcha” here is I must not specify .x in the arguments after .f as I kept doing… 🤯\n\n\n## -- using function `my_mean` with:\ngroup_var_vec &lt;- c(\"homeworld\", \"species\", \"sex\") \n\n# map returns a list \ngroupmeans_l  &lt;-  map(.x = group_var_vec, #  x \n                             .f = my_mean,   # function  NO ()\n                             data = starwars, # ADDITIONAL arguments \n                             num_var = height)\n#, group_var = .x)  \n\n\ngroupmeans_l[[3]]",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
+    "href": "rstats/01_tidyeval.html#option-2-purrr-anonymous-function-as-formula-fun",
+    "title": "Tidyeval and functional programming",
+    "section": "Option 2) purrr + anonymous function as formula ~ fun()\n",
+    "text": "Option 2) purrr + anonymous function as formula ~ fun()\n\n\n🤔🤷🏻‍♀️not quite sure why it should be “anonymous” given that I gave it a name… but it works nonetheless\n\n\n## -- using function `my_mean` with:\ngroupmeans_l_tilde &lt;- map(.x = group_var_vec, \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_l_tilde[[3]] \npluck(groupmeans_l_tilde, 3)\n\nBTW map can output a row-binded df here\n\n# map returns dataframes binded by row \ngroupmeans_dfr &lt;- map_dfr(.x = group_var_vec, # x \n                                  ~my_mean(        # function  YESS!! ()\n                                    data = starwars, num_var = height, group_var = .x) # ALL arguments \n)\n\ngroupmeans_dfr",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
+    "href": "rstats/01_tidyeval.html#tidyeval-in-purrr-custom-function",
+    "title": "Tidyeval and functional programming",
+    "section": "Tidyeval in purrr + custom function",
+    "text": "Tidyeval in purrr + custom function\n1/2 single (group, num) function\n\nmy_mean_2  &lt;- function(data, group_var, num_var) {\n    quo_group_var &lt;- enquo(group_var)\n    quo_num_var &lt;- enquo(num_var)\n    # no`.` here!!!\n    data %&gt;%\n        dplyr::group_by(.data[[!! quo_group_var]]) %&gt;%\n        dplyr::summarise(\n            \"mean_of_{{quo_num_var}}\" := mean( !!quo_num_var, na.rm = TRUE ))\n}\n\n# test YEAH\ntest1 &lt;- my_mean_2(data = starwars, group_var = sex, num_var =height) \n\n2/2 map function\n\ngroup_var &lt;- c(\"gender\", \"species\")\nnum_var &lt;- c(\"height\", \"birth_year\")\n\ntidy_map_df3 &lt;- map2(.x = group_var, \n                            .y = num_var ,\n                            ~my_mean_2,\n                            data = starwars\n) \ntidy_map_df3\n\nhttps://stackoverflow.com/questions/47870838/how-to-loop-over-a-tidy-eval-function-using-purrr\n\nvars &lt;- train %&gt;% select(ends_with(\"bin\")) %&gt;% colnames()\n\nvars %&gt;%\n# create a symbol (defused expressions that represent objects in environments)\n  syms() %&gt;%\n  map(function(var) get_charts(!!var))\n\n# test YEAH\ntest2 &lt;- my_mean(data = starwars, group_var = sex, num_var =height)",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "rstats/01_tidyeval.html#digression-pluck",
+    "href": "rstats/01_tidyeval.html#digression-pluck",
+    "title": "Tidyeval and functional programming",
+    "section": "[digression] pluck\n",
+    "text": "[digression] pluck\n\n\n# build list \nmovies &lt;- c(\"A New Hope\",\n            \"The Empire Strikes Back\",\n            \"Return of the Jedi\",\n            \"Phantom Menace\",\n            \"Attack of the Clones\",\n            \"Revenge of the Sith\",\n            \"The Force Awakens\",\n            \"The Last Jedi\",\n            \"Rise of Skywalker\")\n\nyears &lt;- c(1977, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)\n\nfilm_l &lt;- list(movies, years,\n                preference = c(2, 1, 3, 7, 8, 9, 4, 6, 5))\n\nHere is an esasier way to extract elements from lists\n\n# 1st df and 1st column of it \nfilm_l[[1]][1]\n\npluck(film_l,1,1)\n\n… which can go insude a pipe\n\n#pipe in our list \nfilm_l %&gt;% \n    #and grab the first list element, the movie title;\n    pluck(1) %&gt;% \n    # take each movie title and extract the last word from it using the word function.\n    map_chr(~ word(., -1))",
+    "crumbs": [
+      "{{< fa brands r-project >}} programming",
+      "Tidyeval and functional programming"
+    ]
+  },
+  {
+    "objectID": "shell/foto.html",
+    "href": "shell/foto.html",
+    "title": "Shell script to change pics",
     "section": "",
-    "text": "Great (paid) LinkedIn course by Kevin Skoglund “Unix essential training”\n\n\nan OS developed by AT&T employes at Bell Labs in the 1960s/70s\nin 1972 it is rewritten in C programming, which made it portable. It then spread outside AT&T\nit still powers devises all around\nyou can use it from the Command line or from GUI interfaces\n\n\n\nkernel is the core of the OS. it allocates time and memory to processes\n\nshells is the outer layer of the OS. it sends reuqests to the kernel\n\nyou can choose from different shells (sh, bash, zsh, etc.)",
+    "text": "change format for individual .HEIC pic\n\n# Specify input directory, file name, and output directory\ninput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo\"\noutput_dir=\"/Users/luisamimmi/Documents/14_FOTO/2025_50esimo_jpg\"\n# single foto\nfile_name=\"IMG_5398.heic\"\n\n# Construct full input and output file paths\ninput_file=\"${input_dir}/${file_name}\"\noutput_file=\"${output_dir}/${file_name%.heic}.jpg\"\n\n# Convert to .jpg\nsips -s format jpeg \"$input_file\" --out \"$output_file\"\n\nNeeded to change size and format\n\n#!/bin/zsh\n\n# Funzione per convertire le immagini .heic in .jpg\nconvert_heic_to_jpg() {\n    # Check if input directory exists\n    if [ ! -d \"$input_dir\" ]; then\n        echo \"Input directory $input_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if output directory exists, if not, create it\n    if [ ! -d \"$output_dir\" ]; then\n        mkdir -p \"$output_dir\"\n        if [ $? -ne 0 ]; then\n            echo \"Failed to create output directory $output_dir.\"\n            return 1\n        fi\n    fi\n\n    # Check if there are any .heic files in the input directory\n    shopt -s nullglob\n    heic_files=(\"$input_dir\"/*.heic)\n    shopt -u nullglob\n\n    if [ ${#heic_files[@]} -eq 0 ]; then\n        echo \"No .heic files found in $input_dir.\"\n        return 1\n    fi\n\n    # Convert each .heic file to .jpg\n    for file in \"${heic_files[@]}\"; do\n        base_name=$(basename \"$file\" .heic)\n        convert \"$file\" -quality 85 \"$output_dir/$base_name.jpg\"\n        if [ $? -eq 0 ]; then\n            echo \"Converted $file to $output_dir/$base_name.jpg\"\n        else\n            echo \"Failed to convert $file.\"\n        fi\n    done\n}\n\n\n# Funzione per ridurre la dimensione dei file a meno di 2 megabyte\nreduce_image_size() {\n    # Check if output directory exists\n    if [ ! -d \"$output_dir\" ]; then\n        echo \"Output directory $output_dir does not exist.\"\n        return 1\n    fi\n\n    # Check if there are any .jpg files in the output directory\n    shopt -s nullglob\n    jpg_files=(\"$output_dir\"/*.jpg)\n    shopt -u nullglob\n\n    if [ ${#jpg_files[@]} -eq 0 ]; then\n        echo \"No .jpg files found in $output_dir.\"\n        return 1\n    fi\n\n    # Reduce each .jpg file to less than 2 megabytes\n    for file in \"${jpg_files[@]}\"; do\n        while [ $(stat -f%z \"$file\") -ge 1000000 ]; do\n            mogrify -resize 90% \"$file\"\n        done\n        echo \"Reduced size of $file\"\n    done\n}\n\n\n# ----4 esempio \n# Directory contenente le immagini .HEIC\ninput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img\"\n\n# Directory dove salvare le immagini convertite\noutput_dir=\"/Users/luisamimmi/Github/cv_typst/assets/img/smaller\"\n\n# Call the 1 function\nconvert_heic_to_jpg\n# Call the 2 function\nreduce_image_size\n\n\n#!/bin/zsh\n\n# move to desired dir \ncd $input_dir\n\n# Funzione per ridurre la dimensione delle immagini sotto 1MB in meno passaggi\nreduce_any_image_size() {\n    mkdir -p \"./output\"\n    max_size=1000000\n\n    find . -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" \\) | while read -r file; do\n        base_name=$(basename \"$file\")\n        cp \"$file\" \"./output/$base_name\"\n        quality=85\n\n        while [[ $(stat -f%z \"./output/$base_name\") -ge $max_size ]]; do\n            if [[ $quality -gt 10 ]]; then\n                magick \"./output/$base_name\" -quality $quality \"./output/$base_name\"\n                quality=$((quality - 5))\n            else\n                magick \"./output/$base_name\" -resize 90% \"./output/$base_name\"\n            fi\n        done\n\n        echo \"Reduced $base_name to $(stat -f%z \"./output/$base_name\") bytes\"\n    done\n}\n\n\n# Esecuzione della funzione\nreduce_any_image_size",
     "crumbs": [
       "Shell",
-      "Intro to Unix and shell"
-    ]
-  },
-  {
-    "objectID": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
-    "href": "shell/shell_intro.html#do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive",
-    "title": "Intro to Unix and shell",
-    "section": "Do it to bring shared stuff in Others’ google Drive into My Drive",
-    "text": "Do it to bring shared stuff in Others’ google Drive into My Drive\n\nGo to google drive under Shared with me/Condivisi con me\n\nRight click and scroll to [Manage/Organizza]/Add shortcut to Drive/Aggiungi scorciatoia\n\nChoose the location My Drive",
-    "crumbs": [
-      "Shell",
-      "Intro to Unix and shell"
+      "Shell script to change pics"
     ]
   }
 ]

@@ -42,3 +42,7 @@ images/huge_res/*
 .Rdata
 .DS_Store
 .quarto
+
+# Useless
+shell/dir/*
+shell/newdir/*

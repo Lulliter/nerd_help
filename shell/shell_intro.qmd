@@ -53,6 +53,15 @@ Great (paid) LinkedIn course by Kevin Skoglund ["Unix essential training"](https
 + `shells` is the outer layer of the OS. it sends reuqests to the kernel
   + you can choose from different shells (`sh`, `bash`, `zsh`, etc.)
 
+# Fundamental 
+
++ `Ctrl + C` = Cancel/stop the current command (SIGINT)
++ `Ctrl + Z` = Pause current command (suspend, SIGTSTP)
+  + `fg`	Resume the last paused command
++ `Ctrl + a` = start of the command
++ `Ctrl + e` = end of the command
++ `q` = close dialogue
++ `Ctrl + L` → clears the terminal screen (but not history)
 
 # Files and directories 
 
@@ -158,8 +167,6 @@ cp test.txt dir/
 
 cd dir
 ls -l
-
-
 ```
 
 + `-R` = recursive (if a dir also its content )
@@ -182,7 +189,7 @@ rm -R dir2
 ```
 
 
-# Searching for files and directories 
+# File/dir by name 
 `find <path> <expression>`
 
 + `*` = zero or more characters (glob) 
@@ -199,6 +206,193 @@ find shell -name "??test.txt"
 find shell -name "*[.txt.qmd]"
 ```
 
+`grep <expression> <path> `
+
++ `r` = recursive  
++ `l` = follow symbolic links 
++ `i`= case-insensitive matching
++ `E` = use extended regular expressions (like `|`)
+
+
+```{bash}
+# tutti i file .R in tutte le cartelle e sottocartelle, e mostrerà solo quelli che contengono la parola "library".
+grep -rl "Google Drive" .
+
+# Case-insensitive search
+grep -rli "Google Drive" .
+
+# Search for multiple words (logical OR)
+grep -rEl "Google Drive|Github" .
+```
+
+### File/dir by name + content word (only text files)
+
+```{bash}
+cd ~/Github/_nerd_help
+find . -type f -name "*.R" -exec grep -l "color" {} +
+```
+
+# Exe in Google Drive 
+```{bash}
+cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'
+ls -ls
+
+```
+
+## ... based on name (file|dir)
+```{bash}
+find . -type d -name "*MUSIC*"		# directory
+find . -iname "*MUSIC*"              # file + directory	
+```
+
+## ... based on name (file|dir) + word (in *text* file)
+
+`find` + `grep` will only work with text files (`R` or `txt`)
+
++ `find .`         → Start searching in the current directory
+  + `-type f`      → Only look for regular files
+  + `-name "*.R"`  → Restrict the search to files ending in `.R`  
+  + `/(` and `\)`  → bc parenthesis must be escaped 
+  + `-o`           →  logical OR between conditions
++ `-exec`          →  For each matching file, execute the following command...
+  + `grep -l "library" {} +` → search for the word "library" in the file (`{}` filename placeholder)
+    +  `-l` tells grep to only print the filename if a match is found 
+  + ` +`           → because `-exec` clause must be escaped (`+` or `;`)
+  
+```{bash}
+# Search for files containing specific content and return the list of files
+find . -type f -name "*.R" -exec grep -l "library" {} + # or 
+find . -type f -name "*.R" -exec grep -l "library" {} \; 
+
+find . \( -name "*.R" -o -name "*.qmd" -o -name "*.md" \) -type f -exec grep -El "feature|color" {} +
+```
+
+## ... based on name (file|dir) + word (in *PDF* file)
+
++ `sh -c '...'` → Run the given string as a shell script
++ `for file do ... done` loops over those filenames
++ `grep`   
+  + `-q` → be quiet (don’t print the match)
+  + `-i` → ignore case
+  + `-E` → use extended regex (feature|color)
++ `{}` are the filenames from find, passed as $1, $2, ..., to the shell script
+
+```{bash}
+cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
+ls -ls
+
+find . -type f -name "*.pdf" -exec sh -c '
+  for file do
+    if pdftotext "$file" - | grep -qiE "sussidiarietà"; then
+      echo "$file"
+    fi
+  done
+' sh {} +
+
+```
+
+
+## ... based on name (file|dir) + word (in *WORD* file)
+
+#### NERDY set up step 
+
+```{bash}
+# First time I got 
+which brew
+#/usr/local/bin/brew
+/opt/homebrew/bin/brew --version
+# Homebrew 4.5.0 OK
+
+# configure zsh to use the correct brew
+export PATH="/opt/homebrew/bin:$PATH"
+# then 
+source ~/.zshrc
+which brew
+#/opt/homebrew/bin/brew # OK!
+brew install docx2txt
+#docx2txt --help # doesnot work!?!?!
+#... but I have it
+which docx2txt
+ls /opt/homebrew/Cellar/docx2txt/1.4/bin
+# add symlink
+ln -s /opt/homebrew/Cellar/docx2txt/1.4/bin/docx2txt.sh /opt/homebrew/bin/docx2txt
+which docx2txt
+```
+
+Or to use PANDOC for word files 
+
++ Quarto and R should use their own pandoc version (so this shouldn't mess that up!)
+```{bash}
+brew upgrade pandoc
+pandoc --version
+brew link --overwrite pandoc # from pandoc 1. 2 pandoc 3.6.4
+```
+
+### Check only 1 file's content 
+
+```{bash}
+cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
+ls -ls
+
+# `docx2txt` often misses text in text boxes, shapes, footers, or other styled containers
+docx2txt < ./'Appunti 2o tavolo.docx' - | grep -i "sviluppo sostenibile" # NOPE!
+# `pandoc` uses the full internal structure of the .docx file and:
+pandoc 'Appunti 2o tavolo.docx' -t plain | grep -i "sviluppo sostenibile" # YEP!
+```
+
+#### Get files list 
+
++ Need to transform into text first
+
+```{bash}
+cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
+ls -ls
+# Using docx2txt (NOPE!)
+# Using pandoc (YEP!)
+find . -type f -name "*.docx" -exec sh -c '
+  for file do
+    if pandoc "$file" -t plain | grep -qiE "sviluppo sostenibile"; then
+      echo "$file"
+    fi
+  done
+' sh {} +
+
+
+# suppress errors (corrupt or *.doc files - NOT handled by pandoc)
+find . -type f -name "*.docx" -exec sh -c '
+  for file do
+    if pandoc "$file" -t plain 2>/dev/null | grep -qiE "sviluppo sostenibile"; then
+      echo "$file"
+    fi
+  done
+' sh {} +
+```
+
+## ... based on name (file|dir) + word (in *doc* file)
+
+```{bash}
+pandoc ./"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc" -t plain # NOPE
+# Unknown input format doc
+antiword ./"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc" | grep -i "pavia" # YEP
+
+find . -type f -name "*.doc" -exec sh -c '
+  for file do
+    if antiword "$file" 2>/dev/null | grep -qiE "PAVIA "; then
+      echo "$file"
+    fi
+  done
+' sh {} +
+```
+
+# `look4files.sh` creates a reusable function that can be called in terminal 
+
+This will look for a specific <string> in files with extensions <(PDF, docx, doc, md, R, qmd)> in <given path>
+
+```{bash}
+look4files.sh "search_string" /path/to/directory
+```
+
+---
 # Creating symbolic links
 
 `sym link`s are similar to shortcuts or alias in a GUI systme 
@@ -206,6 +400,7 @@ find shell -name "*[.txt.qmd]"
 + `-s` = needed otherwise it is a hard link not a simbolic one 
 + It creates a reference to a **file path**, NOT a file!
   + which means it breaks if the file is moved!!!
+  
 ```{bash}
 cd ../..
 cd _nerd*/shell
@@ -226,7 +421,23 @@ cat shell_intro_sl.qmd
 
 
 ## Do it to bring shared stuff in Others' google Drive into My Drive 
-1. Go to google drive under `Shared with me`/`Condivisi con me`
+
+1. Go to Google drive under `Shared with me`/`Condivisi con me`
 2. Right click and scroll to [`Manage`/`Organizza`]/`Add shortcut to Drive`/`Aggiungi scorciatoia` 
 3. Choose the location `My Drive`
 
+```{bash}
+# Path
+cd '/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'
+ls -ls
+```
+
+Will show also linked folders (like shared with me for which I created a shortcut in my drive)
+
+```
+total 41528
+    0 drwx------@  9 luisamimmi  staff       288 Jan 16 16:37 50_mo_quiz_foto
+    8 -rw-------@  1 luisamimmi  staff       193 Mar 17 20:55 Appunti Lezioni INGLESE Fortu 2023.gdoc
+    0 lrw-------@  1 luisamimmi  staff       159 Mar  2  2024 Biostatistics course by Cocca -> /Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/.shortcut-targets-by-id/1G8RzLFV_yz_1QH1LhfMU3Rxex1oATzLq/Biostatistics course by Cocca
+    0 drwxr-xr-x@ 19 luisamimmi  staff       608 Apr  4 10:14 CANTI_SAN_MICHELE
+```
