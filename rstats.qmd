@@ -36,4 +36,4 @@ title: "I ❤️ #rstats"
 # format-links: false
 ---
 
-![](images/cat1_vert.jpg){width=40%}<br>(Source: [www.freepik.com/](https://www.freepik.com/free-photo))
+![](images/cat1_vert.jpg){width=40%}<br>(Source: [www.freepik.com/](https://www.freepik.com))

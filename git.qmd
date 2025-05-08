@@ -36,4 +36,4 @@ title: "Git"
 # format-links: false
 ---
 
-![](images/cat4_horiz.jpeg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com/free-photo))
+![](images/cat4_horiz.jpeg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com))

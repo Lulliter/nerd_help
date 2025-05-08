@@ -2,4 +2,4 @@
 title: "Misc. Development tools"
 ---
 
-![](images/cat3_horiz.jpg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com/free-photo))
+![](images/cat3_horiz.jpg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com))
