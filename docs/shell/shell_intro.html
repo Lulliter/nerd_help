@@ -54,7 +54,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<link href="../shell/foto.html" rel="next">
+<link href="../shell/shell_func.html" rel="next">
 <link href="../shell.html" rel="prev">
 <link href="../images/icons8-git-96.png" rel="icon" type="image/png">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -158,14 +158,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../shell/foto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Shell script to change pics</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../shell/shell_var.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Shell script to learn variables</span></a>
+  <a href="../shell/shell_func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My own functions in shell</span></a>
   </div>
 </li>
     </ul>
@@ -209,7 +203,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#based-on-name-filedir-word-in-doc-file" id="toc-based-on-name-filedir-word-in-doc-file" class="nav-link" data-scroll-target="#based-on-name-filedir-word-in-doc-file">… based on name (file|dir) + word (in <em>doc</em> file)</a></li>
   </ul>
 </li>
-  <li><a href="#look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" id="toc-look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" class="nav-link" data-scroll-target="#look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal"><code>look4files.sh</code> creates a reusable function that can be called in terminal</a></li>
   <li>
 <a href="#creating-symbolic-links" id="toc-creating-symbolic-links" class="nav-link" data-scroll-target="#creating-symbolic-links">Creating symbolic links</a>
   <ul class="collapse">
@@ -234,14 +227,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mon, 5 of May, 2025</p>
+      <p class="date">Wed, 7 of May, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Mon, 5 of May, 2025</p>
+      <p class="date-modified">Wed, 7 of May, 2025</p>
     </div>
   </div>
     
@@ -613,13 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="st">  done</span></span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="st">'</span> sh {} +</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="look4files.sh-creates-a-reusable-function-that-can-be-called-in-terminal" class="level1"><h1>
-<code>look4files.sh</code> creates a reusable function that can be called in terminal</h1>
-<p>This will look for a specific <string> in files with extensions &lt;(PDF, docx, doc, md, R, qmd)&gt; in <given path=""></given></string></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">look4files.sh</span> <span class="st">"search_string"</span> /path/to/directory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr></section><section id="creating-symbolic-links" class="level1"><h1>Creating symbolic links</h1>
+<hr></section></section><section id="creating-symbolic-links" class="level1"><h1>Creating symbolic links</h1>
 <p><code>sym link</code>s are similar to shortcuts or alias in a GUI systme</p>
 <ul>
 <li>
@@ -631,21 +618,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> _nerd<span class="pp">*</span>/shell</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ln -s &lt;file_name&gt; &lt;symlink_name&gt;(PATH)</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># symlink the shell_intro.qmd file </span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># check </span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Desktop</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lrwxr-xr-x@  .... shell_intro.qmd -&gt; shell_intro.qmd</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> shell_intro_sl.qmd </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> shell_intro_sl.qmd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> _nerd<span class="pp">*</span>/shell</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ln -s &lt;file_name&gt; &lt;symlink_name&gt;(PATH)</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># symlink the shell_intro.qmd file </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># check </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Desktop</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lrwxr-xr-x@  .... shell_intro.qmd -&gt; shell_intro.qmd</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> shell_intro_sl.qmd </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> shell_intro_sl.qmd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive" class="level2"><h2 class="anchored" data-anchor-id="do-it-to-bring-shared-stuff-in-others-google-drive-into-my-drive">Do it to bring shared stuff in Others’ google Drive into My Drive</h2>
 <ol type="1">
@@ -657,9 +644,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">'/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">'/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Will show also linked folders (like shared with me for which I created a shortcut in my drive)</p>
 <pre><code>total 41528
@@ -1091,8 +1078,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../shell/foto.html" class="pagination-link" aria-label="Shell script to change pics">
-        <span class="nav-page-text">Shell script to change pics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../shell/shell_func.html" class="pagination-link" aria-label="My own functions in shell">
+        <span class="nav-page-text">My own functions in shell</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

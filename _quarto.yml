@@ -100,8 +100,9 @@ website:
       contents:
         - shell.qmd
         - shell/shell_intro.qmd
-        - shell/foto.qmd
-        - shell/shell_var.qmd
+        - shell/shell_func.qmd
+        # - shell/foto.qmd
+        # - shell/shell_var.qmd
 
 format:
   html:

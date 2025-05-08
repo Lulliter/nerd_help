@@ -384,13 +384,6 @@ find . -type f -name "*.doc" -exec sh -c '
 ' sh {} +
 ```
 
-# `look4files.sh` creates a reusable function that can be called in terminal 
-
-This will look for a specific <string> in files with extensions <(PDF, docx, doc, md, R, qmd)> in <given path>
-
-```{bash}
-look4files.sh "search_string" /path/to/directory
-```
 
 ---
 # Creating symbolic links
