@@ -1,0 +1,176 @@
+---
+title: "My own functions in shell"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+---
+
+# Reference
+
+Great (paid) LinkedIn course by Kevin Skoglund ["Unix essential training"](https://www.linkedin.com/learning/unix-essential-training/unix-text-editors)
+
+# Fundamentals 
+
+## CLI commands
+
++ `Ctrl + C` = Cancel/stop the current command (SIGINT)
++ `Ctrl + Z` = Pause current command (suspend, SIGTSTP)
+  + `fg`	Resume the last paused command
++ `Ctrl + a` = start of the command
++ `Ctrl + e` = end of the command
++ `q` = close dialogue
++ `Ctrl + L` → clears the terminal screen (but not history)
+
+
+## Shell functions' syntax
+
++ `$` = In shell scripting is used to reference or access a variable's value
++ `:-` = sets default value if empty
++ `#` = Anchors the pattern to the beginning of the string (like ^ in regex).
++ `%.*` = Removes the shortest match of the pattern from the end (gz) of the string (archive.tar.gz --> archive.tar)
++ `%%.*` = Removes the longest match of the pattern from the end (tar.gz) of the string (archive.tar.gz --> archive)
++ `chmod -x ...` = Make the script executable (it is only needed once, unless you change the script)
+
+
+---
+
+# My shell preferences
+
+I use **Z shell** (zsh) as my default shell (check it by running the command `echo $SHELL` in the terminal --> `/bin/zsh`. 
+
+I also use the **Oh My Zsh** framework to manage my zsh configuration (plugin and theme setup). Basically, this "enhances" the zsh shell with a lot of features and plugins.
+
+When you install Oh My Zsh, it creates a configuration file called `~/.zshrc` in your home directory. This file is where you can customize your zsh shell environment.
+
++ In my `~/.zshrc` file (which is similar to to how `~/.bashrc` works for Bash). Here, I have set up:
+	+ my environment variables, 
+	+ aliases, 
+	+ functions, and 
+	+ other configurations.
+
+
+# My own functions 
+
+I can also create my own functions in shell. Then I save them in a shell file in `~/scripts`, and then can source them adding an `alias` in my `~/.zshrc` file (i.e. make reusable functions that can be called in terminal).
+
+## Opening & modifying `~/.zshrc` file
+
+```{bash}
+# Open/change  the file in nano editor
+nano ~/.zshrc
+# change | Ctrl + X | Y | Enter
+
+# open 
+open ~/.zshrc #then save 
+
+# Reload your configuration file
+source ~/.zshrc
+```
+
+## Looking into `~/scripts` dir
+
+```{bash}
+# List all files in the directory
+ls ~/scripts
+# List all files in the directory with details
+ls -l ~/scripts
+# List all files in the directory with details and hidden files
+ls -la ~/scripts
+# List all files in the directory with details and hidden files and human readable sizes
+ls -lah ~/scripts
+```
+
+For example 
+```{bash}
+# List all files in the directory | with .sh extension | with details and human readable sizes 
+ls -lh ~/scripts/*.sh  
+		#-rwxr-xr-x@ 1 luisamimmi  staff   1.5K May  8 00:12 /Users/luisamimmi/scripts/compress_pdf.sh
+		#-rwxr-xr-x@ 1 luisamimmi  staff   1.6K May  8 00:36 /Users/luisamimmi/scripts/compress_pdf_interactive.sh
+		#-rwxr-xr-x@ 1 luisamimmi  staff   3.7K May  8 11:52 /Users/luisamimmi/scripts/compress_pdf_interactive_choice.sh
+		#-rwxr-xr-x@ 1 luisamimmi  staff   1.7K May  5 16:21 /Users/luisamimmi/scripts/look4files.sh
+		#-rwxr-xr-x@ 1 luisamimmi  staff   1.8K May  8 00:02 /Users/luisamimmi/scripts/look4files_interactive.sh
+```
+
+
+```{bash}
+# How is the file look4files.sh?
+cat ~/scripts/look4files.sh
+type ~/scripts/look4files.sh
+```
+
+## 1) `look4files.sh` 
+
++ This function will look for a specific `<string>` in files with extensions `<(PDF, docx, doc, md, R, qmd)>` in `<given path>`
+	+ If a `<given path>` is not provided, it will look in the current working directory.
+	
+```{bash}
+# Run by executing the script
+look4files.sh "search_string" /path/to/directory
+
+# ... or just 
+look4files.sh "search_string" # in ./ 
+```
+
+The script can be seen here: [look4files.sh](scripts/look4files.sh)  
+ 
+## 2) `look4files_interactive.sh`
+
+Better yet, this one will prompt from the CLI for the search string and the path to search in.
+
+```{bash}
+# It is enough to write this in the terminal!
+~/scripts/look4files_interactive.sh
+# ... or (since I created an ALIAS for it in my .zshrc file)
+look4
+```
+
+The script can be seen here: [look4](scripts/look4files_interactive.sh)  
+
+ 
+## 3) `compress_pdf_interactive_choice.sh`
+
+Similar to the previous one, but this one will compress PDF files in a given directory.
+
++ it provides 2 options for the level of compression:
+	+ standard
+	+ aggressive
+ 
+```{bash}
+# It is enough to write this in the terminal!
+~/scripts/compress_pdf_interactive_choice.sh
+# ... or (since I created an ALIAS for it in my .zshrc file)
+shrinkPDF
+``` 
+
+The script can be seen here: [shrinkPDF](scripts/compress_pdf_interactive_choice.sh)  
