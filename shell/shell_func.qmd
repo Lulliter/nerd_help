@@ -142,7 +142,8 @@ look4files.sh "search_string" /path/to/directory
 look4files.sh "search_string" # in ./ 
 ```
 
-The script can be seen here: [look4files.sh](scripts/look4files.sh)  
+The script can be downloaded here: [⬇️  look4files.sh](scripts/look4files.sh)  
+
  
 ## 2) `look4files_interactive.sh`
 
@@ -155,7 +156,7 @@ Better yet, this one will prompt from the CLI for the search string and the path
 look4
 ```
 
-The script can be seen here: [look4](scripts/look4files_interactive.sh)  
+The script can be downloaded here: [⬇️ look4](scripts/look4files_interactive.sh)  
 
  
 ## 3) `compress_pdf_interactive_choice.sh`
@@ -173,4 +174,4 @@ Similar to the previous one, but this one will compress PDF files in a given dir
 shrinkPDF
 ``` 
 
-The script can be seen here: [shrinkPDF](scripts/compress_pdf_interactive_choice.sh)  
+The script can be downloaded here: [⬇️ shrinkPDF](scripts/compress_pdf_interactive_choice.sh)  

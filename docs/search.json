@@ -1173,7 +1173,7 @@
     "href": "shell/shell_func.html#look4files.sh",
     "title": "My own functions in shell",
     "section": "1) look4files.sh\n",
-    "text": "1) look4files.sh\n\n\nThis function will look for a specific &lt;string&gt; in files with extensions &lt;(PDF, docx, doc, md, R, qmd)&gt; in &lt;given path&gt;\n\nIf a &lt;given path&gt; is not provided, it will look in the current working directory.\n\n\n\n\n# Run by executing the script\nlook4files.sh \"search_string\" /path/to/directory\n\n# ... or just \nlook4files.sh \"search_string\" # in ./ \n\nThe script can be seen here: look4files.sh",
+    "text": "1) look4files.sh\n\n\nThis function will look for a specific &lt;string&gt; in files with extensions &lt;(PDF, docx, doc, md, R, qmd)&gt; in &lt;given path&gt;\n\nIf a &lt;given path&gt; is not provided, it will look in the current working directory.\n\n\n\n\n# Run by executing the script\nlook4files.sh \"search_string\" /path/to/directory\n\n# ... or just \nlook4files.sh \"search_string\" # in ./ \n\nThe script can be downloaded here: ⬇️ look4files.sh",
     "crumbs": [
       "Shell",
       "My own functions in shell"
@@ -1184,7 +1184,7 @@
     "href": "shell/shell_func.html#look4files_interactive.sh",
     "title": "My own functions in shell",
     "section": "2) look4files_interactive.sh\n",
-    "text": "2) look4files_interactive.sh\n\nBetter yet, this one will prompt from the CLI for the search string and the path to search in.\n\n# It is enough to write this in the terminal!\n~/scripts/look4files_interactive.sh\n# ... or (since I created an ALIAS for it in my .zshrc file)\nlook4\n\nThe script can be seen here: look4",
+    "text": "2) look4files_interactive.sh\n\nBetter yet, this one will prompt from the CLI for the search string and the path to search in.\n\n# It is enough to write this in the terminal!\n~/scripts/look4files_interactive.sh\n# ... or (since I created an ALIAS for it in my .zshrc file)\nlook4\n\nThe script can be downloaded here: ⬇️ look4",
     "crumbs": [
       "Shell",
       "My own functions in shell"
@@ -1195,7 +1195,7 @@
     "href": "shell/shell_func.html#compress_pdf_interactive_choice.sh",
     "title": "My own functions in shell",
     "section": "3) compress_pdf_interactive_choice.sh\n",
-    "text": "3) compress_pdf_interactive_choice.sh\n\nSimilar to the previous one, but this one will compress PDF files in a given directory.\n\nit provides 2 options for the level of compression:\n\nstandard\naggressive\n\n\n\n\n# It is enough to write this in the terminal!\n~/scripts/compress_pdf_interactive_choice.sh\n# ... or (since I created an ALIAS for it in my .zshrc file)\nshrinkPDF\n\nThe script can be seen here: shrinkPDF",
+    "text": "3) compress_pdf_interactive_choice.sh\n\nSimilar to the previous one, but this one will compress PDF files in a given directory.\n\nit provides 2 options for the level of compression:\n\nstandard\naggressive\n\n\n\n\n# It is enough to write this in the terminal!\n~/scripts/compress_pdf_interactive_choice.sh\n# ... or (since I created an ALIAS for it in my .zshrc file)\nshrinkPDF\n\nThe script can be downloaded here: ⬇️ shrinkPDF",
     "crumbs": [
       "Shell",
       "My own functions in shell"
