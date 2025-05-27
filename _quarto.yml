@@ -46,6 +46,9 @@ website:
       - text: "Home"
         icon: house-fill # https://icons.getbootstrap.com/?q=home
         href: index.qmd
+      - text: "Tools & principles"
+        icon: gear-fill #  archive-fill # https://icons.getbootstrap.com/?q=home
+        href: princ.qmd
       - text: "Dev tools"
         icon: tools #  archive-fill # https://icons.getbootstrap.com/?q=home
         href: dev.qmd
@@ -63,6 +66,14 @@ website:
         href: me.qmd
 
   sidebar:
+    - title: "Tools & principles"
+      style: "docked"
+      background: light
+      contents:
+        - princ.qmd
+        - princ/01_principles.qmd
+        - princ/02_data_pipelines.qmd
+
     - title: "Dev tools"
       style: "docked"
       background: light

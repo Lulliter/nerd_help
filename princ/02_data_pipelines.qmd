@@ -1,0 +1,104 @@
+---
+title: "Intro to building data pipelines in organizations"
+date: "`r Sys.time()`"
+date-format: "ddd, D of MMMM, YYYY"
+date-modified: last-modified
+lang: en
+editor: source
+engine: knitr
+## ------  general Output Options
+execute:     
+  eval: false    # actually run? 
+  echo: true     #  include source code in output
+  warning: false  #  include warning code in output
+  error: false    #  include error code in output
+  output: false   # include output code in output (CHG in BLOCKS)
+  # include: false   # R still runs but code and results DON"T appear in output  
+  cache: false # normalmnte false
+toc: true
+fig-cap-location: top
+tbl-cap-location: top
+format:
+  html:
+    # theme: flatly #spacelab
+    code-fold: false # redundant bc echo false 
+    toc-depth: 3
+    toc_float: true
+    toc-location: left
+    toc-title: Outline
+    #embed-resources: true # external dependencies embedded (Not in ..._files/)
+  # pdf:
+  #   toc-depth: 2
+  #   toc-title: Indice
+  #   highlight-style: github
+  #   #lang: it
+  #   embed-resources: true # external dependencies embedded (Not in ..._files/)
+format-links: false
+bibliography: Data_pipeline.bib
+---
+
+# Reference
+
++ OSF support page [https://help.osf.io/](https://help.osf.io/)
++ OSF [Tips and tricks](https://help.osf.io/article/576-tips-and-tricks) page 
++ Prof. Pat Schloss' Lab organization protocols: 
+	+ [Shloss lab's data folder](https://www.schlosslab.org/lab_business/schloss-data_shared_directory.html)
+	+ [New Proj template in Github](https://github.com/SchlossLab/new_projects)
++ Daan Marchiori's book on [R in production](https://datasciworkflows.netlify.app/)
+
+# Entities
+
++ OSF
++ Atlan
++ [Development Data Partnership](https://datapartnership.org/)
+
+## American companies
+
++ [Jumping Rivers](https://www.jumpingrivers.com/)
++ [Lander Analytics](https://www.landeranalytics.com/)
+
+## Italian companies
++ [Miriade](https://www.miriade.it/it/consulenza-informatica)
+
+# Topics / questions
+
++ privacy and regulations (by sector) 
+	+ deidentification
+	+ anonymization
++ data collection and storage
+	+ processes for ingesting, storing, and pre-processing data
+	+ metadata curation
++ transforming data into insights	
++ data governance 
+	+ sharing and access
+	+ ethical use 
+	+ licensing of derived analyses
+
++ Theory of Change: a description of how and why a development intervention is expected to deliver desired results; details the causal flow of how and why changes will occur, as well as who must be involved, who has interests at stake, and what steps must be followed for intended results to be reached (Gertler et al. 2016). 
+
+## Economics' conceps to consider
+
+Economists are always conscious of several fundamentals that must be understood in order to avoid making a mess of the world:
+
+- incentives,
+- unintended consequences,
+- opportunity costs,
+- shadow prices,
+- relative prices,
+- relative supply and demand and
+- sunk costs (these last two can be broadly classified as understanding the word “marginal”).
+
+# General principles on data pipelines
+
++ Make sure your sensitive data is well protected. 
++ Data Generating Methods Should Be As Open and Standard As Possible
++ Data Aggregation Standards Should Be As Clear As Possible
++ Ask the right questions before purchasing software.
++ Permanent solutions, visualizations and answers flows v. "Ad-hoc Report"
+	+ _each AhR request delays the creation of more permanent solutions. The absence of those solutions, in turn, lead to more requests._ [@decision-first_ai_five_2017]
++ Business Intelligence is not just interactive reporting, although that is a component. A great BI solution is a model of your business. It allows you to gain insights, track change, and forecast future outcomes. BI should include segmentation and benchmarks. It includes forecasting, scoring, and visualization. A good BI developer/designer needs broad knowledge and experience.  [@decision-first_ai_ad-hoc_2016]
+
+
+# Data Use by Foundations
+Foundations **rely on data from NGOs** to explain how donated money was spent, and to decide where to invest in the future. Foundations **collect this data** by asking questions and designing *grant parameters*, both of which keep NGOs accountable for their spending. To get better data from NGOs, foundations must ask better questions and build grant parameters that are achievable, work towards transparent results, and avoid tedious burdens on under-resourced NGOs. Though it can be difficult, improving data quality and the questions being asked is a win-win for all involved. 
+

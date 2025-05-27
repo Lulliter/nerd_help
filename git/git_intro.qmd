@@ -77,7 +77,7 @@ git --version
 
 ## Setting up your Git configs
 
-### --- In terminal 
+## --- In terminal 
 ```{bash}
 # - Terminal
 
@@ -86,10 +86,12 @@ git config --global user.email "jane@example.com"
 git config --global --list
 ```
 
-### --- In R 
+## --- In R 
 The usethis package offers an alternative approach. You can set your Git user name and email from within R:
 
 ```{r}
+# - IN R 
+
 ## install if needed (do this exactly once):
 ## install.packages("usethis")
 
@@ -108,6 +110,8 @@ library(usethis)
 
 ```{r}
 #| eval: false
+
+# - IN R 
 
 credentials::credential_helper_get()
       # [1] "osxkeychain"
@@ -138,21 +142,22 @@ gh::gh_whoami()
 # } 
 ```
 
-### What are SSH keys?
+## What are SSH keys?
 Secure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.
 
-## Create an SSH
+### Create an SSH
 
 You only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [adding a new SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) to learn how to do this.
 
-## Check which ssh I already have 
+### Check which ssh I already have 
 > I have a github SSH  
 
-SSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:
+SSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘`id_rsa.pub`’, ‘`id_ecdsa.pub`’, ‘`id_ed25519.pub`’. You can check your SSH keys as follows:
 
 
 ```{bash}
 # - Terminal
+
 ls -al ~/.ssh
 ```
 
@@ -382,8 +387,10 @@ git push origin master
 ```
 
 
-
 # Git architecture
+
+
+## Key concepts
 
 + **`origin`**	= stands for the *remote repository*. When we use `git push -u origin local_branch`, it tells the system that we want to push our local branch to the remote repository. 
 + Usually there is one *default remote repository* and `origin` represents this default repository.
@@ -405,24 +412,19 @@ git remote rename origin new_name
 
 #  to check which branches I have  
 git branch -a
-    # * master
-    #   page_col
-    #   test_branch2
-    #   up
-    #   wkg_branch
-    #   remotes/origin/HEAD -> origin/master
-    #   remotes/origin/master
-    #   remotes/origin/page_col
-    #   remotes/origin/wkg_branch
-    #   remotes/upstream/master
-    #   remotes/upstream/page_col
-    #   remotes/upstream/wkg_branch
+	# * master
+	#   wkg_br
+	#   remotes/origin/HEAD -> origin/master
+	#   remotes/origin/fix/README.md
+	#   remotes/origin/master
+	#   remotes/origin/wkg_br
 ```
 
 + **`master`**	(or `main`) is a branch, the default branch, the main branch, and it’s always there.
 
-+ **`HEAD`**	= the currently active branch (the checked out one). Each repository only has one current branch, hence one HEAD as well.
-  + **`Detached HEAD`** happens when a checkout command is applied to a specific historical commit, tag or remote branch.
++ **`HEAD`** = HEAD is the symbolic name for the *currently checked out commit* -- it's essentially what commit you're working on top of.
+	+ Normally **`HEAD`** points to a branch name (e.g. `master`). When you commit, the status of `master` is altered and this change is visible through HEAD.
+	+ **`Detached HEAD`** happens when a `git checkout` command is applied to a specific historical commit, tag or remote branch. So HEAD is attached to a commit instead of a branch
 
 ```{bash}
 # - Terminal

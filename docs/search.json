@@ -99,660 +99,66 @@
     ]
   },
   {
-    "objectID": "me.html",
-    "href": "me.html",
-    "title": "Luisa M. Mimmi",
+    "objectID": "princ/02_data_pipelines.html",
+    "href": "princ/02_data_pipelines.html",
+    "title": "Intro to building data pipelines in organizations",
     "section": "",
-    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
-  },
-  {
-    "objectID": "git/git_intro.html",
-    "href": "git/git_intro.html",
-    "title": "Git introduction",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "text": "OSF support page https://help.osf.io/\n\nOSF Tips and tricks page\nProf. Pat Schloss’ Lab organization protocols:\n\nShloss lab’s data folder\nNew Proj template in Github\n\n\nDaan Marchiori’s book on R in production",
     "crumbs": [
-      "git",
-      "Git introduction"
+      "Tools & principles",
+      "Intro to building data pipelines in organizations"
     ]
   },
   {
-    "objectID": "git/git_intro.html#setting-up-your-git-configs",
-    "href": "git/git_intro.html#setting-up-your-git-configs",
-    "title": "Git introduction",
-    "section": "Setting up your Git configs",
-    "text": "Setting up your Git configs\n— In terminal\n\n# - Terminal\n\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@example.com\"\ngit config --global --list\n\n— In R\nThe usethis package offers an alternative approach. You can set your Git user name and email from within R:\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\n#usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nManaging/Verifying git credential stored\n\nWhere do I see it on Github? ? fa(name = \"github\") –&gt; settings –&gt; Developer settings –&gt; Personal Access Tokens\n\n\nWARNING: credentials::git_credential_ask(\"https://github.com\") actually exposes the PAT password\n\n\ncredentials::credential_helper_get()\n      # [1] \"osxkeychain\"\n\n# to see all of them \ncredentials::git_credential_ask(\"https://github.com\")\n      # $protocol\n      # [1] \"https\"\n      # $host\n      # [1] \"github.com\"\n      # $username\n      # [1] \"PersonalAccessToken\"\n      # $password\n      # [1] \"ghp_...52eR\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n      # attr(,\"class\")\n      # [1] \"git_credential\"\n\n# --- other useful things to check \n#usethis::gh_token_help()\nusethis::git_sitrep()\ngh::gh_whoami()\n# {\n#   \"name\": \"Luisa Mimmi\",\n#   \"login\": \"Lulliter\",\n#   \"html_url\": \"https://github.com/Lulliter\",\n#   \"scopes\": \"gist, repo, user, workflow\",\n#   \"token\": \"ghp_...52eR\"\n# } \n\nWhat are SSH keys?\nSecure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.",
+    "objectID": "princ/02_data_pipelines.html#american-companies",
+    "href": "princ/02_data_pipelines.html#american-companies",
+    "title": "Intro to building data pipelines in organizations",
+    "section": "American companies",
+    "text": "American companies\n\nJumping Rivers\nLander Analytics",
     "crumbs": [
-      "git",
-      "Git introduction"
+      "Tools & principles",
+      "Intro to building data pipelines in organizations"
     ]
   },
   {
-    "objectID": "git/git_intro.html#create-an-ssh",
-    "href": "git/git_intro.html#create-an-ssh",
-    "title": "Git introduction",
-    "section": "Create an SSH",
-    "text": "Create an SSH\nYou only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on generating a new SSH key and adding a new SSH key to your GitHub account to learn how to do this.",
+    "objectID": "princ/02_data_pipelines.html#italian-companies",
+    "href": "princ/02_data_pipelines.html#italian-companies",
+    "title": "Intro to building data pipelines in organizations",
+    "section": "Italian companies",
+    "text": "Italian companies\n\nMiriade",
     "crumbs": [
-      "git",
-      "Git introduction"
+      "Tools & principles",
+      "Intro to building data pipelines in organizations"
     ]
   },
   {
-    "objectID": "git/git_intro.html#check-which-ssh-i-already-have",
-    "href": "git/git_intro.html#check-which-ssh-i-already-have",
-    "title": "Git introduction",
-    "section": "Check which ssh I already have",
-    "text": "Check which ssh I already have\n\nI have a github SSH\n\nSSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:\n\n# - Terminal\nls -al ~/.ssh\n\n\n# - IN R \n\n# ------ where to see my SSH \nlibrary(credentials)  \n# Found git version 2.41.0\n# Supported HTTPS credential helpers: cache, store\n# Found OpenSSH_9.0p1, LibreSSL 3.3.6\n# Default SSH key: /Users/luisamimmi/.ssh/id_ed25519  #(location of my SSH key)\n\n# ------ KEY \n# credentials::ssh_key_info()",
+    "objectID": "princ/02_data_pipelines.html#economics-conceps-to-consider",
+    "href": "princ/02_data_pipelines.html#economics-conceps-to-consider",
+    "title": "Intro to building data pipelines in organizations",
+    "section": "Economics’ conceps to consider",
+    "text": "Economics’ conceps to consider\nEconomists are always conscious of several fundamentals that must be understood in order to avoid making a mess of the world:\n\nincentives,\nunintended consequences,\nopportunity costs,\nshadow prices,\nrelative prices,\nrelative supply and demand and\nsunk costs (these last two can be broadly classified as understanding the word “marginal”).",
     "crumbs": [
-      "git",
-      "Git introduction"
+      "Tools & principles",
+      "Intro to building data pipelines in organizations"
     ]
   },
   {
-    "objectID": "git/git_intro.html#on-github-i-create-a-new-repo",
-    "href": "git/git_intro.html#on-github-i-create-a-new-repo",
-    "title": "Git introduction",
-    "section": "1) On Github I create a NEW repo",
-    "text": "1) On Github I create a NEW repo\n[…]",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "href": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
-    "title": "Git introduction",
-    "section": "2.a) In Terminal clone remote repo locally",
-    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n# - Terminal\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# - Terminal\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "href": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
-    "title": "Git introduction",
-    "section": "2.b) With {usethis} clone remote repo locally",
-    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "href": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
-    "title": "Git introduction",
-    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
-    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# - Terminal\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#i-make-changes-in-the-local-repo",
-    "href": "git/git_intro.html#i-make-changes-in-the-local-repo",
-    "title": "Git introduction",
-    "section": "4) I make changes in the local repo",
-    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\n# - Terminal\n\nquarto create project website mysite",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#check-what-happened",
-    "href": "git/git_intro.html#check-what-happened",
-    "title": "Git introduction",
-    "section": "5) Check what happened…",
-    "text": "5) Check what happened…\n\n# - Terminal\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#add-local-changes-to-staging-area",
-    "href": "git/git_intro.html#add-local-changes-to-staging-area",
-    "title": "Git introduction",
-    "section": "6) Add local changes to staging area",
-    "text": "6) Add local changes to staging area\n\n# - Terminal\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#commit-desired-changes",
-    "href": "git/git_intro.html#commit-desired-changes",
-    "title": "Git introduction",
-    "section": "7) Commit desired changes",
-    "text": "7) Commit desired changes\n\n# - Terminal\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#push-source-and-build-repos.",
-    "href": "git/git_intro.html#push-source-and-build-repos.",
-    "title": "Git introduction",
-    "section": "8) Push source and build repos.",
-    "text": "8) Push source and build repos.\n\n# - Terminal\n\ngit push origin master",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#ask-about-latest-commit",
-    "href": "git/git_intro.html#ask-about-latest-commit",
-    "title": "Git introduction",
-    "section": "Ask about latest commit",
-    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# - Terminal\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#see-differences-bw-commits",
-    "href": "git/git_intro.html#see-differences-bw-commits",
-    "title": "Git introduction",
-    "section": "See differences b/w commits",
-    "text": "See differences b/w commits\n\n# - Terminal\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#when-you-accidentally-let-git-track-files",
-    "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
-    "title": "Git introduction",
-    "section": "When you accidentally let git track files",
-    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "title": "Git introduction",
-    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
-    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#which-branches-have-been-merged",
-    "href": "git/git_intro.html#which-branches-have-been-merged",
-    "title": "Git introduction",
-    "section": "Which branches have been merged?",
-    "text": "Which branches have been merged?\n\n# To see which branches have been merged into your current branch\ngit branch --merged\n# To check if a branch has been merged into the remote default branch (e.g., origin/master): \ngit branch -r --merged origin/master \n\n# To check a specific branch was merged \ngit log master --oneline --decorate --graph --all | grep new_sh",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#visual-confirmation-of-branches",
-    "href": "git/git_intro.html#visual-confirmation-of-branches",
-    "title": "Git introduction",
-    "section": "Visual confirmation of branches",
-    "text": "Visual confirmation of branches\nThis shows a visual representation of branch merges.\n\ngit log --graph --oneline --all\n# for a specific branches\ngit merge-base --is-ancestor new_sh master \n  # success == no output, exit code 0\ngit merge-base --is-ancestor wkg_branch master   \n  # failure\ngit merge-base --is-ancestor page_col master   \n  # success == no output, exit code 0",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
-    "href": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
-    "title": "Git introduction",
-    "section": "Delete local and remote branch (e.g. new_sh)",
-    "text": "Delete local and remote branch (e.g. new_sh)\n(now not visible anumore)\n\n# check merged \ngit merge-base --is-ancestor new_sh master \n# delete local \ngit branch -D new_sh\n# delete remote \ngit push origin --delete new_sh\n# re-check \ngit branch -a\n\n## WTF remotes/upstream/new_sh ?\ngit remote -v\n# remote also from remote upstream \ngit push upstream --delete new_sh # ---&gt;&gt;&gt;&gt; NOPE (but it was stale in local ref!\ngit remote prune upstream           # ---&gt;&gt;&gt;&gt; YEP !!\n\n# verify deletion \ngit branch -r",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html",
-    "href": "git/git_branches.html",
-    "title": "Git branches",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#create-checkout-a-branch",
-    "href": "git/git_branches.html#create-checkout-a-branch",
-    "title": "Git branches",
-    "section": "Create & checkout a branch",
-    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#rename-a-local-branch",
-    "href": "git/git_branches.html#rename-a-local-branch",
-    "title": "Git branches",
-    "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#rename-a-local-branch-1",
-    "href": "git/git_branches.html#rename-a-local-branch-1",
-    "title": "Git branches",
-    "section": "Rename a (local) branch",
-    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#see-which-branches-there-are",
-    "href": "git/git_branches.html#see-which-branches-there-are",
-    "title": "Git branches",
-    "section": "See which branches there are",
-    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote. This is only local, no remote.\n\n# delete local \ngit branch -d up\n\n# (delete remote)\n\n# (delete remote)\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#switch-to-other-branch",
-    "href": "git/git_branches.html#switch-to-other-branch",
-    "title": "Git branches",
-    "section": "0. Switch to other branch",
-    "text": "0. Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch wkg_branch\ncat .git/HEAD # (confirms me I moved)\n\nHowever I might have ALSO new/uncommitted stuff in the wkg_branch",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#evaluate-changes",
-    "href": "git/git_branches.html#evaluate-changes",
-    "title": "Git branches",
-    "section": "1. Evaluate changes",
-    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branch\ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n\n# check commits in master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#commit-changes-left-on-wkg_branch",
-    "href": "git/git_branches.html#commit-changes-left-on-wkg_branch",
-    "title": "Git branches",
-    "section": "2. Commit changes left on wkg_branch\n",
-    "text": "2. Commit changes left on wkg_branch\n\ngit indicates the two versions of the file with &lt;&lt;&lt;&lt;&lt; and &gt;&gt;&gt;&gt;&gt; markers.\n\n\nFigure 1: Git merge conflict\n\n\n\n\n\nHere there are 3 options:\n\nAbort merge\nResolve conflicts manually\nUse a merge tool\n\n2.1. Abort the merge\n\ngit merge --abort\n\nThis will revert the working directory to the state before the merge attempt.\n2.2. Resolve conflicts manually\nDeal with CONFLICTING FILES\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n\nDeal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Resolve conflicts with a merge tool\n(like the one in VS CODE)\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
-    "href": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
-    "title": "Git branches",
-    "section": "3. Then add + commit to confirm the merge",
-    "text": "3. Then add + commit to confirm the merge\ngit add marks the conflicts as resolved, and git commit concludes the merge process.\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#push-the-updated-branch",
-    "href": "git/git_branches.html#push-the-updated-branch",
-    "title": "Git branches",
-    "section": "4. Push the Updated Branch",
-    "text": "4. Push the Updated Branch\n\n# check status\ngit log --graph --all --oneline --decorate\ngit log --graph -5 --oneline --decorate",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "git/git_branches.html#push-upstream-a-local-branch",
-    "href": "git/git_branches.html#push-upstream-a-local-branch",
-    "title": "Git branches",
-    "section": "🟠 Push upstream a local branch",
-    "text": "🟠 Push upstream a local branch\n(kind of too complicated for me)\n\nIt is important to Setup an Upstream Branch in Git to make the workflow smooth and manage branches efficiently.\n\n\nAn upstream branch in Git refers to a branch that serves as a reference point for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.\n\n\nCreate local branch\nSwitch to local branch git checkout -b &lt;new_branch&gt;\n\n[When the current branch i.e (‘new_branch’) has no Upstream branch set] git push –-set-upstream origin &lt;new_branch&gt; command (the 1st time you push)\nThereafter git push -u origin &lt;new_branch&gt; (all subsequent git push commands automatically move local branch changes up to the remote branch.)",
-    "crumbs": [
-      "git",
-      "Git branches"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html",
-    "href": "dev/05_colors.html",
-    "title": "Colors",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html#colors",
-    "href": "dev/05_colors.html#colors",
-    "title": "Colors",
-    "section": "Colors",
-    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/05_colors.html#color-palettes",
-    "href": "dev/05_colors.html#color-palettes",
-    "title": "Colors",
-    "section": "Color palettes",
-    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system",
-    "crumbs": [
-      "Dev tools",
-      "Colors"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html",
-    "href": "dev/03b_Google_domain.html",
-    "title": "Custom domain on Google domain",
-    "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "Custom domain on Google domain",
-    "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "href": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] Buy a domain",
-    "text": "[on Google Domain] Buy a domain",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "href": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
-    "title": "Custom domain on Google domain",
-    "section": "[on Google Domain] set up a “HOSTED ZONE”",
-    "text": "[on Google Domain] set up a “HOSTED ZONE”",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on Google domain"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html",
-    "href": "dev/02_quarto.html",
-    "title": "Quarto projects and websites",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html#markdown-divs",
-    "href": "dev/02_quarto.html#markdown-divs",
-    "title": "Quarto projects and websites",
-    "section": "Markdown divs\n",
-    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev/02_quarto.html#quarto-and-bibliography",
-    "href": "dev/02_quarto.html#quarto-and-bibliography",
-    "title": "Quarto projects and websites",
-    "section": "Quarto and bibliography",
-    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown",
-    "crumbs": [
-      "Dev tools",
-      "Quarto projects and websites"
-    ]
-  },
-  {
-    "objectID": "dev.html",
-    "href": "dev.html",
-    "title": "Misc. Development tools",
+    "objectID": "princ.html",
+    "href": "princ.html",
+    "title": "Tools & principles for data operations & beyond…",
     "section": "",
     "text": "(Source: www.freepik.com/)",
     "crumbs": [
-      "Dev tools",
-      "Misc. Development tools"
+      "Tools & principles",
+      "Tools & principles for data operations & beyond..."
     ]
   },
   {
-    "objectID": "dev/03a_AWS.html",
-    "href": "dev/03a_AWS.html",
-    "title": "Custom domain on AWS",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
     "section": "",
-    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "href": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
-    "title": "Custom domain on AWS",
-    "section": "[on GitHub]: initiate a repo in the usual way",
-    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt;\n\n\nmake sure to have a ./docs folder and indicate to GH that you will deploy from it\nand to create a .nojekyll file for GitHub pages to work with a quarto website!\n\n\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-aws-buy-a-domain",
-    "href": "dev/03a_AWS.html#on-aws-buy-a-domain",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS] Buy a domain",
-    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
-    "href": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS] set up a “HOSTED ZONE”",
-    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone.",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "href": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS]: Redirect the domain to my website on Github pages",
-    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” .",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "href": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
-    "title": "Custom domain on AWS",
-    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
-    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "href": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
-    "title": "Custom domain on AWS",
-    "section": "[on local]: Adjust the .yml file of your website",
-    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
-    "href": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
-    "title": "Custom domain on AWS",
-    "section": "[on GH Pages]: fix GHPages error",
-    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)",
-    "crumbs": [
-      "Dev tools",
-      "Custom domain on AWS"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html",
-    "href": "dev/04_AWS_mail.html",
-    "title": "Aruba <-> GH Pages",
-    "section": "",
-    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
-    "href": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 1: Deploy your website via GitHub Pages",
-    "text": "✅ Step 1: Deploy your website via GitHub Pages\nMake sure your site is published via GitHub Pages.\n\n\nUser site: https://yourusername.github.io/\n\n\nProject site: https://yourusername.github.io/project-name/\n\n\nSet your custom domain in the repo settings or by adding a CNAME file to the root of your repository with the content:\nyourdomain.com",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
-    "href": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 2: Get your domain from Aruba",
-    "text": "✅ Step 2: Get your domain from Aruba\nIf you haven’t already, purchase or manage your domain on https://admin.aruba.it.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
-    "href": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 3: Update DNS Settings on Aruba",
-    "text": "✅ Step 3: Update DNS Settings on Aruba\n\nLog in to Aruba’s admin panel.\nGo to:\n\nDomini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS\n\nAdd the following A records to point to GitHub Pages:\n\n\n\nType\nName\nValue\n\n\n\nA\n@\n185.199.108.153\n\n\nA\n@\n185.199.109.153\n\n\nA\n@\n185.199.110.153\n\n\nA\n@\n185.199.111.153\n\n\n\n\nAdd a CNAME record so www.yourdomain.com redirects correctly:\n\n\n\nType\nName\nValue\n\n\nCNAME\nwww\nyourusername.github.io.\n\n\n\n⚠️ Don’t forget the trailing . after your GitHub username.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
-    "href": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
-    "title": "Aruba <-> GH Pages",
-    "section": "✅ Step 4: Configure your GitHub Repository",
-    "text": "✅ Step 4: Configure your GitHub Repository\n\nGo to your repository → Settings → Pages.\nIn the Custom domain field, enter:\n\nyourdomain.com\n\nGitHub will create a CNAME file automatically.\n\nEnable “Enforce HTTPS” after DNS has propagated.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#wait-for-dns-propagation",
-    "href": "dev/04_AWS_mail.html#wait-for-dns-propagation",
-    "title": "Aruba <-> GH Pages",
-    "section": "⏱️ Wait for DNS Propagation",
-    "text": "⏱️ Wait for DNS Propagation\n\nThis can take a few hours (up to 48h).\nUse tools like https://dnschecker.org to check your domain.\nFrom your terminal:\n\n\nping yourdomain.com",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#test",
-    "href": "dev/04_AWS_mail.html#test",
-    "title": "Aruba <-> GH Pages",
-    "section": "🧪 Test",
-    "text": "🧪 Test\nOnce propagated:\n\nVisit https://yourdomain.com\n\nAlso test https://www.yourdomain.com to ensure CNAME redirection works.",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
-    "href": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
-    "title": "Aruba <-> GH Pages",
-    "section": "🔁 Optional: Redirect www to apex domain",
-    "text": "🔁 Optional: Redirect www to apex domain\nYou can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like www.yourdomain.com that forwards to yourdomain.com.\nLet me know if you’d like a template for that too!",
-    "crumbs": [
-      "Dev tools",
-      "Aruba <-> GH Pages"
-    ]
-  },
-  {
-    "objectID": "git.html",
-    "href": "git.html",
-    "title": "Git",
-    "section": "",
-    "text": "(Source: www.freepik.com/)",
-    "crumbs": [
-      "git",
-      "Git"
-    ]
+    "text": "This is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)"
   },
   {
     "objectID": "git/git_feature_workflow.html",
@@ -942,11 +348,737 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome!",
+    "objectID": "git.html",
+    "href": "git.html",
+    "title": "Git",
     "section": "",
-    "text": "This is a Quarto website where I collect instructions for “nerdy” things.\n(Source: www.freepik.com/)"
+    "text": "(Source: www.freepik.com/)",
+    "crumbs": [
+      "git",
+      "Git"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html",
+    "href": "dev/04_AWS_mail.html",
+    "title": "Aruba <-> GH Pages",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "href": "dev/04_AWS_mail.html#step-1-deploy-your-website-via-github-pages",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 1: Deploy your website via GitHub Pages",
+    "text": "✅ Step 1: Deploy your website via GitHub Pages\nMake sure your site is published via GitHub Pages.\n\n\nUser site: https://yourusername.github.io/\n\n\nProject site: https://yourusername.github.io/project-name/\n\n\nSet your custom domain in the repo settings or by adding a CNAME file to the root of your repository with the content:\nyourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "href": "dev/04_AWS_mail.html#step-2-get-your-domain-from-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 2: Get your domain from Aruba",
+    "text": "✅ Step 2: Get your domain from Aruba\nIf you haven’t already, purchase or manage your domain on https://admin.aruba.it.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "href": "dev/04_AWS_mail.html#step-3-update-dns-settings-on-aruba",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 3: Update DNS Settings on Aruba",
+    "text": "✅ Step 3: Update DNS Settings on Aruba\n\nLog in to Aruba’s admin panel.\nGo to:\n\nDomini → [yourdomain.com] → Gestione DNS e Name Server → Modifica zona DNS\n\nAdd the following A records to point to GitHub Pages:\n\n\n\nType\nName\nValue\n\n\n\nA\n@\n185.199.108.153\n\n\nA\n@\n185.199.109.153\n\n\nA\n@\n185.199.110.153\n\n\nA\n@\n185.199.111.153\n\n\n\n\nAdd a CNAME record so www.yourdomain.com redirects correctly:\n\n\n\nType\nName\nValue\n\n\nCNAME\nwww\nyourusername.github.io.\n\n\n\n⚠️ Don’t forget the trailing . after your GitHub username.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "href": "dev/04_AWS_mail.html#step-4-configure-your-github-repository",
+    "title": "Aruba <-> GH Pages",
+    "section": "✅ Step 4: Configure your GitHub Repository",
+    "text": "✅ Step 4: Configure your GitHub Repository\n\nGo to your repository → Settings → Pages.\nIn the Custom domain field, enter:\n\nyourdomain.com\n\nGitHub will create a CNAME file automatically.\n\nEnable “Enforce HTTPS” after DNS has propagated.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "href": "dev/04_AWS_mail.html#wait-for-dns-propagation",
+    "title": "Aruba <-> GH Pages",
+    "section": "⏱️ Wait for DNS Propagation",
+    "text": "⏱️ Wait for DNS Propagation\n\nThis can take a few hours (up to 48h).\nUse tools like https://dnschecker.org to check your domain.\nFrom your terminal:\n\n\nping yourdomain.com",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#test",
+    "href": "dev/04_AWS_mail.html#test",
+    "title": "Aruba <-> GH Pages",
+    "section": "🧪 Test",
+    "text": "🧪 Test\nOnce propagated:\n\nVisit https://yourdomain.com\n\nAlso test https://www.yourdomain.com to ensure CNAME redirection works.",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "href": "dev/04_AWS_mail.html#optional-redirect-www-to-apex-domain",
+    "title": "Aruba <-> GH Pages",
+    "section": "🔁 Optional: Redirect www to apex domain",
+    "text": "🔁 Optional: Redirect www to apex domain\nYou can set up a redirect in GitHub Pages or via a simple HTML file in a separate repo like www.yourdomain.com that forwards to yourdomain.com.\nLet me know if you’d like a template for that too!",
+    "crumbs": [
+      "Dev tools",
+      "Aruba <-> GH Pages"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html",
+    "href": "dev/03a_AWS.html",
+    "title": "Custom domain on AWS",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on AWS.\nAssuming you have:",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "dev/03a_AWS.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on AWS",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt;\n\n\nmake sure to have a ./docs folder and indicate to GH that you will deploy from it\nand to create a .nojekyll file for GitHub pages to work with a quarto website!\n\n\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-buy-a-domain",
+    "href": "dev/03a_AWS.html#on-aws-buy-a-domain",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] Buy a domain",
+    "text": "[on AWS] Buy a domain\n\non AWS: Go to Route53, under ‘register domain’ then follow instructions to buy a domain (usually 10$/12$ per year). e.g. example.com\n\non AWS Route53: domain registration should be done automatically\n\nfirst, it will appear under DOMAINS –&gt; Pending Requests [a verification email will be sent by AWS]\nafter it will be under DOMAINS –&gt; Registered Domains\n\n\n\nI had already bought some DOMAIN from Amazon… + lulliter.com + R4biostats.com",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "href": "dev/03a_AWS.html#on-aws-set-up-a-hosted-zone",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS] set up a “HOSTED ZONE”",
+    "text": "[on AWS] set up a “HOSTED ZONE”\nI see “HostedZone created by Route53 Registrar”\nNOTE: If AWS did not automatically create a hosted zone upon buying the domain name, create one.\n\n\n\n\n\n\nTip\n\n\n\n\n\nSo for example if you bought the domain name username.com, you create the hosted zone name username.com. Once created open it up. Once you have created the hosted zone, open it up, click the Type NS, and copy the values on the right (4x url’s to awsdns addresses). Then go to the registered domains from the left menu, and in the Name Servers section on the right, click Add or edit name servers, delete any contents in there, and add the 4x lines you just copied one by one. This gives your domain name the address to the hosted zone.",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "href": "dev/03a_AWS.html#on-aws-redirect-the-domain-to-my-website-on-github-pages",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Redirect the domain to my website on Github pages",
+    "text": "[on AWS]: Redirect the domain to my website on Github pages\n\n\n\n\n\n\nNote\n\n\n\n\n\nFollowing\n\n\nBEn Wiz’s tutorial and + GITHUB ’s tutorial\n\n\n\n\n\n\nLog into AWS Console –&gt; Route53\nIn your Route53 dashboard, click hosted zones \n\nClick on the hyperlinked name of the domain you would like to use so it can open its specific page. Without doing nothing I already see:\n\n\nexample.com — Type NS — …\n\nexample.com — Type SOA — …\n\n\n\n\n\n\nClick Create Record A (This will be your example.com rule)\n\nDo not enter anything into the Name field\nUnder the Type dropdown, select A — IPv4 addresses\nThe Alias toggle should be UNSELECTED\nEnter the following four IP addresses into the value text area.\n\n\n\n    185.199.108.153\n   185.199.109.153\n   185.199.110.153\n   185.199.111.153\n\nThen click Save Record Set “Create Record” .",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "href": "dev/03a_AWS.html#on-aws-configuring-a-subdomain-www.example.com",
+    "title": "Custom domain on AWS",
+    "section": "[on AWS]: Configuring a subdomain www.example.com\n",
+    "text": "[on AWS]: Configuring a subdomain www.example.com\n\n\n\nCreate another A type of record set (your www.example.com rule, aka an alias for example.com)\n\nInto the Name field, enter ‘www’\n\nUnder the Type dropdown, select A — IPv4 addresses, again\nSELECT Alias on the dashboard, from dropdown menu, choose “Alias to another record in this hosted zone” and then www.example.com. (it has the full stop!!)\nThen click Save Record Set Create Record .\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nIn GH Pages, when you write under \"Custom domain\" the new name of your vanity example.com domain something will happen. If you are publishing your site from a branch (e.g. master branch / ./docs), this will create a commit that adds a CNAME file directly to the root of your source branch.\n💡 SO next time you push from local it will tell that your branch is ahead or something an you must do some form of git pull\n\n# praticamente pull da remoto + insieme merge ai cambiamenti locali \ngit config pull.rebase false\n\n\n\n\n\n\nLast, go back to GitHub repository’s settings tab\n\nScroll down to the GitHub Pages section\nIn the Custom domain field enter your custom domain: example.com\n\nClick Save\nCheck Enforce HTTPS",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "href": "dev/03a_AWS.html#on-local-adjust-the-.yml-file-of-your-website",
+    "title": "Custom domain on AWS",
+    "section": "[on local]: Adjust the .yml file of your website",
+    "text": "[on local]: Adjust the .yml file of your website\nLastest 😥, go to “_site.yml” and replace base_url\n\n##  e.g.  in quarto.yml \n\nwebsite:\n  title: \"The example KOOL stuff\"\n  site-url: https://example.com",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "href": "dev/03a_AWS.html#on-gh-pages-fix-ghpages-error",
+    "title": "Custom domain on AWS",
+    "section": "[on GH Pages]: fix GHPages error",
+    "text": "[on GH Pages]: fix GHPages error\nGH Pages is asking me to point www.domain.com to a CNAME record (instead of an A record)",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on AWS"
+    ]
+  },
+  {
+    "objectID": "dev.html",
+    "href": "dev.html",
+    "title": "Misc. Development tools",
+    "section": "",
+    "text": "(Source: www.freepik.com/)",
+    "crumbs": [
+      "Dev tools",
+      "Misc. Development tools"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html",
+    "href": "dev/02_quarto.html",
+    "title": "Quarto projects and websites",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWebsite construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#markdown-divs",
+    "href": "dev/02_quarto.html#markdown-divs",
+    "title": "Quarto projects and websites",
+    "section": "Markdown divs\n",
+    "text": "Markdown divs\n\nRather than write out the HTML, you can use “fenced Div blocks”, which somewhat resemble code chunks. These Div blocks use the following syntax, where # denotes the ID, and . denotes a class.\nExample:\n\nthis (markdown) is =\n\n::: {#hello .greeting .message style=\"color: red;\"}\nHello **world**!\n:::\n\nHello world!\n\n\nto this (HTLM)\n\n&lt;div id=\"hello\" class=\"greeting\"&gt;\n  Hello world!\n&lt;/div&gt;\n\nand this (markdown) is =\n\n::: {style=\"color: red; border: solid black;\"}\nGoodbye, world.\n:::\n\nGoodbye, world.\n\n\nand to this (HTLM)\n\n&lt;div style=\"color: red; border: solid black;\"&gt;\n  Goodbye, world.\n&lt;/div&gt;",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/02_quarto.html#quarto-and-bibliography",
+    "href": "dev/02_quarto.html#quarto-and-bibliography",
+    "title": "Quarto projects and websites",
+    "section": "Quarto and bibliography",
+    "text": "Quarto and bibliography\nCheck out these resources:\n\nAnnotated Bibliographies with Quarto\nEnough Markdown to Write a Thesis\nCitations in R Markdown",
+    "crumbs": [
+      "Dev tools",
+      "Quarto projects and websites"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html",
+    "href": "dev/03b_Google_domain.html",
+    "title": "Custom domain on Google domain",
+    "section": "",
+    "text": "The following steps help when setting up a new website that is hosted on GitHub Pages. Then, since GitHub Pages supports using custom domains, there are the instructions to re-direct tje site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain. Since GitHub Pages supports using custom domains, there are the instructions to re-direct the site’s URL from the default &lt;user&gt;.github.io/domain to a custom domain name registered on Google Domain.\nAssuming you have:",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "href": "dev/03b_Google_domain.html#on-github-initiate-a-repo-in-the-usual-way",
+    "title": "Custom domain on Google domain",
+    "section": "[on GitHub]: initiate a repo in the usual way",
+    "text": "[on GitHub]: initiate a repo in the usual way\n\nCreate a new repo on GitHub\nGo on local PARENT directory of the intended repo\nExecute\n\n\ngit clone https://github.com/Lulliter/example.git\n\n\n\non Local/GitHub: deploy website via Github Pages\n\nadd content\ngit add/commit/push (or see my ./_render-deploy.sh)\n\n\nConfigure the Repo to publish on https://lulliter.github.io/example/ by going to Settings –&gt; Pages –&gt; (make sure to have a ./docs folder and indicate to GH that you will deploy from it)\non local: CNAME Looking forward, we will need to have a file named CNAME that contains a single row: your custom domain (in this case: thepadrinoz.com)\n\n\n\n\n\n\n\nWarning\n\n\n\n\n\n❗ Before adding/committing to repo CNAME, at every push, the custom domain gets decoupled from GH Pages settings ….",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "href": "dev/03b_Google_domain.html#on-google-domain-buy-a-domain",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] Buy a domain",
+    "text": "[on Google Domain] Buy a domain",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "href": "dev/03b_Google_domain.html#on-google-domain-set-up-a-hosted-zone",
+    "title": "Custom domain on Google domain",
+    "section": "[on Google Domain] set up a “HOSTED ZONE”",
+    "text": "[on Google Domain] set up a “HOSTED ZONE”",
+    "crumbs": [
+      "Dev tools",
+      "Custom domain on Google domain"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html",
+    "href": "dev/05_colors.html",
+    "title": "Colors",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#colors",
+    "href": "dev/05_colors.html#colors",
+    "title": "Colors",
+    "section": "Colors",
+    "text": "Colors\n\npacificharbour_shades &lt;- c( \"#d4e6f3\",\"#b8d6eb\", \"#9cc6e3\", \"#80b6db\",  \"#72aed8\", \"#5b8bac\", \"#39576c\",  \"#16222b\")\n\npacificharbour  &lt;- \"#72aed8\"\njapyew &lt;- \"#d89c72\"\ntriad_verde &lt;- \"#d8cf71\"\ntriad_rosso &lt;- \"#d8717b\"\n\nbluMEFprinc &lt;- \"#2D337C\" # \"#2D337CFF\" (alpha = 1) OR rgb(45/255, 51/255, 124/255, 1)\nbluMEFsec &lt;- \"#455A8B\" # \"#455A8BFF\" (alpha = 1) OR rgb(69/255, 90/255, 139/255, 1)\nbluMEFsec_light &lt;- \"#455A8B99\"\nbluMEFsec_extralight &lt;- \"#455A8B33\" #  (alpha = .2) OR rgb(69/255, 90/255, 139/255, .2)\n\ngialloMEF_dark &lt;- \"#715115\"\ngialloMEFprinc &lt;- \"#BD8723\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 1)\ngialloMEF_light &lt;- \"#d7b77b\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.4)\ngialloMEF_extralight &lt;- \"#f1e7d3\" # \"#BD8723FF\" (alpha = 1) OR rgb(189/255, 135/255, 35/255, 0.2)\n\nbordeaux_dark &lt;- \"#51242c\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux &lt;- \"#873c4a\" # \"#854442FF\" (alpha = 1) OR rgb(133/255, 68/255, 66/255, 1)\nbordeaux_light &lt;- \"#b78a92\" #\"#85444299\"\nbordeaux_extralight &lt;- \"#e7d8da\" #\" \"#e6cdcc\"\n\nviola &lt;- \"#2D337C\"\nviola_light &lt;- \"#8e94d6\" #\"#85444299\"\nviola_extralight &lt;- \"#d9dbf1\" #\" \"#e6cdcc\"\n\nverde_dark &lt;- \"#245048\"\nverde &lt;- \"#3c8678\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_light &lt;- \"#8ab6ae\" # \"#285E60FF\" (alpha = 1) OR rgb(40/255, 94/255, 96/255, 1)\nverde_extralight &lt;- \"#d8e6e4\"\nverdino &lt;- \"#a6bd23\"\n\nmarrone_dark  &lt;- \"#5d2b15\"\nmarrone &lt;- \"#9b4923\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\nmarrone_light &lt;- \"#c3917b\"\nmarrone_extralight &lt;- \"#ebdad3\"\n\ngrigio_scuro &lt;- \"#4c4c4c\" # \"#A6A6A6FF\" (alpha = 1) OR rgb(166/255, 166/255, 166/255, 1)\ngrigio &lt;- \"#A6A6A6\"\ngrigioSfondo &lt;- \"#F2F2F2\" # \"#F2F2F2FF\" (alpha = 1) OR rgb(242/255, 242/255, 242/255, 1)\n\n\narancio_dark  &lt;- \"#8e550a\"\narancio &lt;- \"#bd710e\" # \"#866445FF\" (alpha = 1) OR rgb(134/255, 100/255, 69/255, 1)\narancio_light &lt;- \"#f0a441\"\narancio_extralight &lt;- \"#fbe8cf\"\n\nrosso &lt;- \"#9b2339\"\n# col2rgb( \"#854442\")",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "dev/05_colors.html#color-palettes",
+    "href": "dev/05_colors.html#color-palettes",
+    "title": "Colors",
+    "section": "Color palettes",
+    "text": "Color palettes\n\n#palette_g20 &lt;- c(\"#455A8B\", \"#854442\", \"#285E60\", \"#BD8723\", \"#866445\", \"#A6A6A6\")\n#mycolors_gradient &lt;- c(\"#ccf6fa\", \"#80e8f3\", \"#33d9eb\", \"#00d0e6\", \"#0092a1\")\n\n#                   fat gold  |Romaine Green| Blue ColaD |directoire Blue| Bourgeois  | Aztec Turquoise | Fulvous\nmycolors_contrast &lt;- c(\"#9b2339\", \"#E7B800\",\"#239b85\", \"#85239b\", \"#9b8523\",\"#23399b\", \"#d8e600\", \"#0084e6\",\"#399B23\",  \"#e60066\" , \"#00d8e6\",  \"#005ca1\", \"#e68000\")\n#theme_col &lt;-  c(\"#00d7e6\", \"#0065e6\",  \"#10069f\")  \nthree_col &lt;- c(\"#d8e600\", \"#e68000\",  \"#e60c00\")     \ntwo_col &lt;- c( \"#009E73\",\"#E69F00\")\n\ntwo_col_contrast &lt;- c( \"#399B23\",  \"#e60066\" )\n\n\nblu_contrast &lt;- c(\n  \"#0f7184\",\n  \"#56adbf\",\n  \"#5bd6ef\",\n  \"#025b6d\",\n  \"#b5f2ff\",\n  \"#1b5884\",\n  \"#72aed8\",\n  \"#98c8ea\",\n  \"#5097c9\",\n  \"#3a7aa8\",\n  \"#0286e5\",\n  \"#c6e7ff\",\n  \"#013d68\"\n  )\n\n\n# # -- Add custom fonts & make custom theme for ggplot2 -----\n# # -- da google\nsysfonts::font_add_google(name = \"Roboto Condensed\", family =  \"Condensed\")\nsysfonts::font_add(family = \"Roboto Condensed\", regular =  \"~/Applications/Roboto_Condensed/RobotoCondensed#-Regular.ttf\")\n# # -- da web\nsysfonts::font_add(family = \"Inconsolata\", regular = \"~/Applications/Inconsolata/static/Inconsolata_Expanded#.ttf\")\nsysfonts::font_families()\n# \n# # install.packages(\"extrafont\")\nlibrary(extrafont)\n# # -- quali ho nel sistema\nfonts()\n# # -- Import all the .ttf files from your system",
+    "crumbs": [
+      "Dev tools",
+      "Colors"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html",
+    "href": "git/git_branches.html",
+    "title": "Git branches",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#create-checkout-a-branch",
+    "href": "git/git_branches.html#create-checkout-a-branch",
+    "title": "Git branches",
+    "section": "Create & checkout a branch",
+    "text": "Create & checkout a branch\n\n“checkout” means to change the branch you are currently working on (or switch to)\n\n\n# 1/2 create b\ngit branch page_col #create a new branch named \"page_col\"\n\n# 2/2 then switch to b\ngit checkout page_col\n\n# or 1+2/2 CREATE + SWITCH BRANCHES\ngit checkout -b page_col",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-local-branch",
+    "href": "git/git_branches.html#rename-a-local-branch",
+    "title": "Git branches",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#rename-a-local-branch-1",
+    "href": "git/git_branches.html#rename-a-local-branch-1",
+    "title": "Git branches",
+    "section": "Rename a (local) branch",
+    "text": "Rename a (local) branch\nIt’s the -m parameter !\n\nyou cannot rename a remote branch –&gt; you delete it and re-upload it\n\n\n# In currently checkedout \ngit branch -m better_name\n\n# In different branch (non HEAD)\ngit switch master\ngit branch test_branch # fake one \ngit branch -a  # it's there\ngit branch -m test_branch test_branch2",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#see-which-branches-there-are",
+    "href": "git/git_branches.html#see-which-branches-there-are",
+    "title": "Git branches",
+    "section": "See which branches there are",
+    "text": "See which branches there are\n\n# (check which branches)\ngit branch   # to list local branches.\ngit branch -r # to list remote branches.\ngit branch -a # to list all branches (local + remote).\ngit branch --merged # to list branches that have been merged into the current branch.\n\nDelete a branch (up)\nThis is only local, no remote. This is only local, no remote.\n\n# delete local \ngit branch -d up\n\n# (delete remote)\n\n# (delete remote)\ngit push origin --delete up # error: unable to delete 'up': remote ref does not exist",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#switch-to-other-branch",
+    "href": "git/git_branches.html#switch-to-other-branch",
+    "title": "Git branches",
+    "section": "0. Switch to other branch",
+    "text": "0. Switch to other branch\n\nIt is better to commit or stash your changes before switching branches!!!\n\nYou can also use git switch other_branch which is more specific\n\ngit switch wkg_branch\ncat .git/HEAD # (confirms me I moved)\n\nHowever I might have ALSO new/uncommitted stuff in the wkg_branch",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#evaluate-changes",
+    "href": "git/git_branches.html#evaluate-changes",
+    "title": "Git branches",
+    "section": "1. Evaluate changes",
+    "text": "1. Evaluate changes\nReview these changes to ensure you understand what will be merged.\n\n# check commits in wkg_branch\ngit log -2 --graph master..wkg_branch\n  #  2 commits...  \n    # qlc su wkg_branch\n    # pasticci su wkg_branch\n\n# check commits in master\ngit log -2 --graph wkg_branch..master\n  # 2 commits \n    # split git_branch + git_collab ⑂\n    # removed branch new_sh",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#commit-changes-left-on-wkg_branch",
+    "href": "git/git_branches.html#commit-changes-left-on-wkg_branch",
+    "title": "Git branches",
+    "section": "2. Commit changes left on wkg_branch\n",
+    "text": "2. Commit changes left on wkg_branch\n\ngit indicates the two versions of the file with &lt;&lt;&lt;&lt;&lt; and &gt;&gt;&gt;&gt;&gt; markers.\n\n\nFigure 1: Git merge conflict\n\n\n\n\n\nHere there are 3 options:\n\nAbort merge\nResolve conflicts manually\nUse a merge tool\n\n2.1. Abort the merge\n\ngit merge --abort\n\nThis will revert the working directory to the state before the merge attempt.\n2.2. Resolve conflicts manually\nDeal with CONFLICTING FILES\nDifferent ways to resolve conflicts:\n\nCommit local changes\n\n\n# (in wkg_branch)\ngit add .\ngit commit -m \"Save local changes\"\n\n# then  merge master into wkg_branch\n\n# then  merge master into wkg_branch\ngit merge master\n\n\nStash the changes\n\n\n# (in wkg_branch)\ngit stash\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\n# Bring your changes back\ngit stash pop\n\n\nDiscard the local changes\n\n\n# (in wkg_branch)\ngit checkout -- .\ngit checkout -- docs/git/git_branches.html docs/search.json docs/sitemap.xml\n\n# then merge master into wkg_branch\n\n# then merge master into wkg_branch\ngit merge master\n\nDeal with UNTRACKED FILES in wkg_branch\n\nthese too could get overwritten by the merge, so I have to stash or move/delete them\n\n#(this includes new files you haven't added yet)\ngit stash push --include-untracked\n# then merge master into wkg_branch\ngit merge master\n# Bring your changes back\ngit stash pop\n\n2.3. Resolve conflicts with a merge tool\n(like the one in VS CODE)\nYou can use a merge tool to resolve the conflicts, such as git mergetool or git difftool.\n\nThe best way for SOURCE CODE FILES is to go on VS CODE and use the guided merge prompt to manually choose the version to keep.\nThe best way for RENDERED FILES (i.e. docs/* files) is to delete the file and re-render it.\n\n\n# --theirs means \"restore files as in the branch you are merging in,\" (master) \ngit checkout --theirs -- docs/index.html\n\n# then \ngit add docs/index.html\ngit commit",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
+    "href": "git/git_branches.html#then-add-commit-to-confirm-the-merge",
+    "title": "Git branches",
+    "section": "3. Then add + commit to confirm the merge",
+    "text": "3. Then add + commit to confirm the merge\ngit add marks the conflicts as resolved, and git commit concludes the merge process.\n\n# upon detecting and resolving conflicts...\n\ngit add . # stages all resolved files at once\ngit commit # Git will automatically open a merge commit message like: Merge branch 'master' into wkg_branch",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#push-the-updated-branch",
+    "href": "git/git_branches.html#push-the-updated-branch",
+    "title": "Git branches",
+    "section": "4. Push the Updated Branch",
+    "text": "4. Push the Updated Branch\n\n# check status\ngit log --graph --all --oneline --decorate\ngit log --graph -5 --oneline --decorate",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_branches.html#push-upstream-a-local-branch",
+    "href": "git/git_branches.html#push-upstream-a-local-branch",
+    "title": "Git branches",
+    "section": "🟠 Push upstream a local branch",
+    "text": "🟠 Push upstream a local branch\n(kind of too complicated for me)\n\nIt is important to Setup an Upstream Branch in Git to make the workflow smooth and manage branches efficiently.\n\n\nAn upstream branch in Git refers to a branch that serves as a reference point for another branch. Typically, it’s used to track the remote branch, allowing developers to fetch updates, compare changes, and push their commits easily. Setting an upstream branch simplifies the process of keeping local and remote repositories in sync.\n\n\nCreate local branch\nSwitch to local branch git checkout -b &lt;new_branch&gt;\n\n[When the current branch i.e (‘new_branch’) has no Upstream branch set] git push –-set-upstream origin &lt;new_branch&gt; command (the 1st time you push)\nThereafter git push -u origin &lt;new_branch&gt; (all subsequent git push commands automatically move local branch changes up to the remote branch.)",
+    "crumbs": [
+      "git",
+      "Git branches"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html",
+    "href": "git/git_intro.html",
+    "title": "Git introduction",
+    "section": "",
+    "text": "Caution\n\n\n\n\n\nWeb page construction in progress…",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#setting-up-your-git-configs",
+    "href": "git/git_intro.html#setting-up-your-git-configs",
+    "title": "Git introduction",
+    "section": "Setting up your Git configs",
+    "text": "Setting up your Git configs",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#in-terminal",
+    "href": "git/git_intro.html#in-terminal",
+    "title": "Git introduction",
+    "section": "— In terminal",
+    "text": "— In terminal\n\n# - Terminal\n\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@example.com\"\ngit config --global --list",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#in-r",
+    "href": "git/git_intro.html#in-r",
+    "title": "Git introduction",
+    "section": "— In R",
+    "text": "— In R\nThe usethis package offers an alternative approach. You can set your Git user name and email from within R:\n\n# - IN R \n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\n#usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nManaging/Verifying git credential stored\n\nWhere do I see it on Github? ? fa(name = \"github\") –&gt; settings –&gt; Developer settings –&gt; Personal Access Tokens\n\n\nWARNING: credentials::git_credential_ask(\"https://github.com\") actually exposes the PAT password\n\n\n# - IN R \n\ncredentials::credential_helper_get()\n      # [1] \"osxkeychain\"\n\n# to see all of them \ncredentials::git_credential_ask(\"https://github.com\")\n      # $protocol\n      # [1] \"https\"\n      # $host\n      # [1] \"github.com\"\n      # $username\n      # [1] \"PersonalAccessToken\"\n      # $password\n      # [1] \"ghp_...52eR\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n      # attr(,\"class\")\n      # [1] \"git_credential\"\n\n# --- other useful things to check \n#usethis::gh_token_help()\nusethis::git_sitrep()\ngh::gh_whoami()\n# {\n#   \"name\": \"Luisa Mimmi\",\n#   \"login\": \"Lulliter\",\n#   \"html_url\": \"https://github.com/Lulliter\",\n#   \"scopes\": \"gist, repo, user, workflow\",\n#   \"token\": \"ghp_...52eR\"\n# }",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#what-are-ssh-keys",
+    "href": "git/git_intro.html#what-are-ssh-keys",
+    "title": "Git introduction",
+    "section": "What are SSH keys?",
+    "text": "What are SSH keys?\nSecure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.\nCreate an SSH\nYou only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on generating a new SSH key and adding a new SSH key to your GitHub account to learn how to do this.\nCheck which ssh I already have\n\nI have a github SSH\n\nSSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:\n\n# - Terminal\n\nls -al ~/.ssh\n\n\n# - IN R \n\n# ------ where to see my SSH \nlibrary(credentials)  \n# Found git version 2.41.0\n# Supported HTTPS credential helpers: cache, store\n# Found OpenSSH_9.0p1, LibreSSL 3.3.6\n# Default SSH key: /Users/luisamimmi/.ssh/id_ed25519  #(location of my SSH key)\n\n# ------ KEY \n# credentials::ssh_key_info()",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#on-github-i-create-a-new-repo",
+    "href": "git/git_intro.html#on-github-i-create-a-new-repo",
+    "title": "Git introduction",
+    "section": "1) On Github I create a NEW repo",
+    "text": "1) On Github I create a NEW repo\n[…]",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "href": "git/git_intro.html#a-in-terminal-clone-remote-repo-locally",
+    "title": "Git introduction",
+    "section": "2.a) In Terminal clone remote repo locally",
+    "text": "2.a) In Terminal clone remote repo locally\ni) position myself in the Folder ABOVE the desired git repo\n\n# - Terminal\n\n#  My `ParentFolder` for github repos...\ncd cd ~/Github/  \n\nii) clone remote repo locally locally\nYou can only push to two types of URL addresses:\n\nAn HTTPS URL like https://github.com/user/repo.git\nAn SSH URL, like git@github.com:user/repo.git\n\nGit associates a remote URL with a name, and your default remote is usually called origin\n\n# - Terminal\n\n# if https (Clone using the web URL.)\ngit clone https://github.com/Lulliter/nerd_help.git\n# if SSH (Use a password-protected SSH key.)\ngit clone git@github.com:Lulliter/nerd_help.git",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "href": "git/git_intro.html#b-with-usethis-clone-remote-repo-locally",
+    "title": "Git introduction",
+    "section": "2.b) With {usethis} clone remote repo locally",
+    "text": "2.b) With {usethis} clone remote repo locally\nIn the R console (in any R session)\n\nOKKIO: only need the parent folder name (~/Github/) because the actual folder name will be the repo name !\n\n\nlibrary(usethis)\nusethis::create_from_github(\n    # https or SSH both ok \n    repo_spec = \"git@github.com:Lulliter/ideeperpavia.git\",\n    # destdir specifies the parent directory where the new folder (and local Git repo) will live. \n    destdir = \"~/Github/\"\n)\n\nThis Creates a new local directory in destdir, which is all of these things:\n\na directory or folder on your computer\na Git repository, linked to a remote GitHub repository\nan RStudio Project\n\nOpens a new RStudio instance in the new Project",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "href": "git/git_intro.html#optional---i-copy-there-some-stuff-i-already-had-in-a-different-folder",
+    "title": "Git introduction",
+    "section": "3) - OPTIONAL - I copy there some stuff I already had in a different folder",
+    "text": "3) - OPTIONAL - I copy there some stuff I already had in a different folder\n\n# - Terminal\n\n# copy other LOCAL --&gt; git LOCAL\ncp -r ~/OtherLocalDrive/nerd_help/   ~/Github/_nerd_help",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#i-make-changes-in-the-local-repo",
+    "href": "git/git_intro.html#i-make-changes-in-the-local-repo",
+    "title": "Git introduction",
+    "section": "4) I make changes in the local repo",
+    "text": "4) I make changes in the local repo\nFor example, I actually wanted a quarto website, so I open TERMINAL and do\n\n# - Terminal\n\nquarto create project website mysite",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#check-what-happened",
+    "href": "git/git_intro.html#check-what-happened",
+    "title": "Git introduction",
+    "section": "5) Check what happened…",
+    "text": "5) Check what happened…\n\n# - Terminal\n\ncd ~/Github/_nerd_help \ngit remote show origin \ngit status",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#add-local-changes-to-staging-area",
+    "href": "git/git_intro.html#add-local-changes-to-staging-area",
+    "title": "Git introduction",
+    "section": "6) Add local changes to staging area",
+    "text": "6) Add local changes to staging area\n\n# - Terminal\n\ngit add -A # everything\ngit add -u # only already tracked stuff",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#commit-desired-changes",
+    "href": "git/git_intro.html#commit-desired-changes",
+    "title": "Git introduction",
+    "section": "7) Commit desired changes",
+    "text": "7) Commit desired changes\n\n# - Terminal\n\n# Create Std commit \"message\"....\nmsg=\"rebuilt on `date`\"\nif [ $# -eq 1 ]\n  then msg=\"$1\"\nfi\n# ... Commit Those changes.\ngit commit -m \"$msg\"\n\n# or  \ngit commit -m \"whatever message\"",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#push-source-and-build-repos.",
+    "href": "git/git_intro.html#push-source-and-build-repos.",
+    "title": "Git introduction",
+    "section": "8) Push source and build repos.",
+    "text": "8) Push source and build repos.\n\n# - Terminal\n\ngit push origin master",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#key-concepts",
+    "href": "git/git_intro.html#key-concepts",
+    "title": "Git introduction",
+    "section": "Key concepts",
+    "text": "Key concepts\n\n\norigin = stands for the remote repository. When we use git push -u origin local_branch, it tells the system that we want to push our local branch to the remote repository.\nUsually there is one default remote repository and origin represents this default repository.\n\n…or you can rename it\n\n\n\n\n# - Terminal\n\n#  see your remote branches listed:\ngit remote -v\n\n#  rename origin it by using \ngit remote rename origin new_name\n  # looks like I have 2 remote branches: origin (default) and upstream\n\n\n\nbranch branch is a like a fork in the history of a repository. One branch represents an independent line of development, like a fork teeth.\n\n\n# - Terminal\n\n#  to check which branches I have  \ngit branch -a\n    # * master\n    #   wkg_br\n    #   remotes/origin/HEAD -&gt; origin/master\n    #   remotes/origin/fix/README.md\n    #   remotes/origin/master\n    #   remotes/origin/wkg_br\n\n\nmaster (or main) is a branch, the default branch, the main branch, and it’s always there.\n\nHEAD = HEAD is the symbolic name for the currently checked out commit – it’s essentially what commit you’re working on top of.\n\nNormally HEAD points to a branch name (e.g. master). When you commit, the status of master is altered and this change is visible through HEAD.\n\nDetached HEAD happens when a git checkout command is applied to a specific historical commit, tag or remote branch. So HEAD is attached to a commit instead of a branch\n\n\n\n\n# - Terminal\n\n#  to check where the HEAD of a repository is pointing to\ncat .git/HEAD\n    # ref: refs/heads/master\n\n\n\nindex index is the proposed next commit, also called staging area.",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#ask-about-latest-commit",
+    "href": "git/git_intro.html#ask-about-latest-commit",
+    "title": "Git introduction",
+    "section": "Ask about latest commit",
+    "text": "Ask about latest commit\nWHere:\n\n\n--format=%cd %cd stands for “commit date.”\n\n--pretty=%B Customizes the output to show the full commit message body\n\n--format=%cd and the commit message subject %s of the most recent commit.\n\n--pretty is a shorthand for common formatting options\n\n\n# - Terminal\n\n# 1) To find out the date and time of your last Git commit \ngit log -1 --format=%cd # %cd stands for \"commit date.\"\n# 2) To find out the message of your last Git commit \ngit log -1 --pretty=%B # --pretty=%B: Customizes the output to show the full commit message body\n\n#1+2) You can get both the commit date and message in one line using the following command:\ngit log -1 --format=\"%cd %s\"\n# or \ngit log -1 --pretty=\"%cd %s\"",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#see-differences-bw-commits",
+    "href": "git/git_intro.html#see-differences-bw-commits",
+    "title": "Git introduction",
+    "section": "See differences b/w commits",
+    "text": "See differences b/w commits\n\n# - Terminal\n\n# diff between 2 latest commits (1 on branch) only in files I care \ngit diff dc87ae c86edffc16 \"*.qmd\"\n\n#(To view diff between next commit (HEAD) and parent commit (SHA 682bc))\ngit diff dc87ae..  \ngit diff dc87ae^..HEAD  '***.qmd' #ORQ\ngit diff dc87ae..HEAD   #OR\n\n# b/w old commit on branch and HEAD \ngit diff 693e61^..HEAD",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
+    "title": "Git introduction",
+    "section": "When you accidentally let git track files",
+    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
+    "title": "Git introduction",
+    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
+    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#which-branches-have-been-merged",
+    "href": "git/git_intro.html#which-branches-have-been-merged",
+    "title": "Git introduction",
+    "section": "Which branches have been merged?",
+    "text": "Which branches have been merged?\n\n# To see which branches have been merged into your current branch\ngit branch --merged\n# To check if a branch has been merged into the remote default branch (e.g., origin/master): \ngit branch -r --merged origin/master \n\n# To check a specific branch was merged \ngit log master --oneline --decorate --graph --all | grep new_sh",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#visual-confirmation-of-branches",
+    "href": "git/git_intro.html#visual-confirmation-of-branches",
+    "title": "Git introduction",
+    "section": "Visual confirmation of branches",
+    "text": "Visual confirmation of branches\nThis shows a visual representation of branch merges.\n\ngit log --graph --oneline --all\n# for a specific branches\ngit merge-base --is-ancestor new_sh master \n  # success == no output, exit code 0\ngit merge-base --is-ancestor wkg_branch master   \n  # failure\ngit merge-base --is-ancestor page_col master   \n  # success == no output, exit code 0",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
+    "href": "git/git_intro.html#delete-local-and-remote-branch-e.g.-new_sh",
+    "title": "Git introduction",
+    "section": "Delete local and remote branch (e.g. new_sh)",
+    "text": "Delete local and remote branch (e.g. new_sh)\n(now not visible anumore)\n\n# check merged \ngit merge-base --is-ancestor new_sh master \n# delete local \ngit branch -D new_sh\n# delete remote \ngit push origin --delete new_sh\n# re-check \ngit branch -a\n\n## WTF remotes/upstream/new_sh ?\ngit remote -v\n# remote also from remote upstream \ngit push upstream --delete new_sh # ---&gt;&gt;&gt;&gt; NOPE (but it was stale in local ref!\ngit remote prune upstream           # ---&gt;&gt;&gt;&gt; YEP !!\n\n# verify deletion \ngit branch -r",
+    "crumbs": [
+      "git",
+      "Git introduction"
+    ]
+  },
+  {
+    "objectID": "me.html",
+    "href": "me.html",
+    "title": "Luisa M. Mimmi",
+    "section": "",
+    "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
+  },
+  {
+    "objectID": "princ/01_principles.html#my-skills",
+    "href": "princ/01_principles.html#my-skills",
+    "title": "General guiding principles",
+    "section": "(my) skills",
+    "text": "(my) skills\n\nlogic\ntruth\npersistence\nproactivity\nrealism\naudacity\ncandor\nhumor\ningenuity\ninspiration / intuition\n\n\ndon’t mistake difficult (for you), e.g. macroeconomics, for universally valuable. Focus on what you are good at, and what you like: Harness your unfair advantage!",
+    "crumbs": [
+      "Tools & principles",
+      "General guiding principles"
+    ]
+  },
+  {
+    "objectID": "princ/01_principles.html#my-unfair-advantage",
+    "href": "princ/01_principles.html#my-unfair-advantage",
+    "title": "General guiding principles",
+    "section": "(my) unfair advantage",
+    "text": "(my) unfair advantage\n\nwriting effectively\nspeaking clearly\nteaching patiently\nlearning languages fast",
+    "crumbs": [
+      "Tools & principles",
+      "General guiding principles"
+    ]
+  },
+  {
+    "objectID": "princ/01_principles.html#a-framework-for-thinking-about-complex-change",
+    "href": "princ/01_principles.html#a-framework-for-thinking-about-complex-change",
+    "title": "General guiding principles",
+    "section": "A framework for thinking about complex change",
+    "text": "A framework for thinking about complex change",
+    "crumbs": [
+      "Tools & principles",
+      "General guiding principles"
+    ]
+  },
+  {
+    "objectID": "princ/01_principles.html#useful-tips-to-work-with-data-4-government",
+    "href": "princ/01_principles.html#useful-tips-to-work-with-data-4-government",
+    "title": "General guiding principles",
+    "section": "Useful tips to work with data 4 government",
+    "text": "Useful tips to work with data 4 government",
+    "crumbs": [
+      "Tools & principles",
+      "General guiding principles"
+    ]
+  },
+  {
+    "objectID": "princ/01_principles.html#team-building",
+    "href": "princ/01_principles.html#team-building",
+    "title": "General guiding principles",
+    "section": "Team building",
+    "text": "Team building\n10 Tips for TTLs Leading Teams:\n\n\nGather Your Core Team Early: Get a core team designated early. Create a core team Outlook email distribution list. This includes not only FM, procurement, safeguards, but also finance officer, disbursement, lawyer, DE, ACS. These people will have your back if you gain their trust and ownership early.\n\nAsk for Input on Design Modalities: Peer reviewers and DE are not the only ones who have the potential to improve project design. Your core team members (FM, procurement, safeguards, lawyer, etc.) support many projects at the same time, and their cross-fertilization can be revolutionary. One of the best design features came from a procurement specialist (thanks Lina!) – it had nothing to do with procurement, but rather design simplification.\n\nWhen in Doubt, CC the team: Again, inclusion is your friend. Err on the side of circulating contracts, RFPs, bidding documents, TORs, etc. to all members of your core team. Be clear who you are expecting feedback and/or clearance from, and FYI to others. All team members need a full picture of how the project is progressing. Team members can always shunt-to-file, and then the background is close at hand if it is needed later on.\n\nBe Clear on How to Communicate with the Client: Some TTLs prefer to be the only conduit between Bank team (including consultants) and client, and some TTLs are OK with having team members correspond directly with their country counterparts. Both modalities have strengths and weaknesses. Just be clear and consistent on what you expect as a TTL.\n\nSet, then Honor Expected Business Standards: Make sure there is clarity with respect to business standards for review of and response to critical technical documents. Business standards vary – for me it is five business days, but I try to deliver in less. One TTL I work with is very clear in writing “Please reply by COB Thursday” (as an example), which lets me know she is not expecting a 24-hour turnaround, and gives me time enough to juggle competing tasks. (As an aside, if everyone did this with emails we send on the weekend, then there wouldn’t be all this stress about whether our manager expects us to respond during the weekend.)\n\nDon’t Procrastinate, then Declare “Fire”: Many a time I have received an email marked “URGENT”, requesting immediate turnaround, only to scroll down and see that the TTL received the document a week ago and sat on it.\n\n\nDon’t Be the TTL Who Cries Wolf: When everything is urgent, then eventually nothing is treated urgently. For those TTLs for which everything is urgent, there are (some) team members who apply the “FILO” (first in, last out) rule. Many fiduciary team members I know employ a “KIFO” rule (kindest (TTL) in, first out).\n\nCommunicate Timelines (for Deliverables and Travel) and Share Them Early: Many team members are juggling multiple deliverables. Put together a clear timeline, not only of project processing steps (including internal deadlines), but also expected travel dates for operational travel. There is tremendous good will for meeting expectations when there is sufficient time to work out schedules for delivering and for traveling. Many of us are negotiating with other projects’ timelines, our partner’s work travel, our parents’ ability to fly in to care for children, anniversaries, birthdays, graduations, etc.\n\n\nLet your Team Members do Their Jobs: Your team members have their areas of expertise and years of experience. Be clear what you expect of them, and then give them the space to do their jobs. Micromanagement generally backfires.\n\nPraise in Public, Punish in Private: This is a rule for every role in the workplace. Give positive feedback to a team member in front of the full team, and, if there are shortcomings, take these and work them out on sidebar. This demonstrates kindness and respect rather than humiliation. In every project, there will be hiccups and mistakes made. However, a strong team can recover from almost anything, and focusing on the way forward, rather than assessing blame, is much more efficient when we have so much work on our plates.",
+    "crumbs": [
+      "Tools & principles",
+      "General guiding principles"
+    ]
   },
   {
     "objectID": "rstats.html",

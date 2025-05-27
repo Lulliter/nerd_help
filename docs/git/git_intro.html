@@ -104,6 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../princ.html"> <i class="bi bi-gear-fill" role="img">
+</i> 
+<span class="menu-text">Tools &amp; principles</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../dev.html"> <i class="bi bi-tools" role="img">
 </i> 
 <span class="menu-text">Dev tools</span></a>
@@ -178,17 +183,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#git-configuration" id="toc-git-configuration" class="nav-link" data-scroll-target="#git-configuration">Git configuration</a>
   <ul class="collapse">
-<li>
-<a href="#setting-up-your-git-configs" id="toc-setting-up-your-git-configs" class="nav-link" data-scroll-target="#setting-up-your-git-configs">Setting up your Git configs</a>
+<li><a href="#setting-up-your-git-configs" id="toc-setting-up-your-git-configs" class="nav-link" data-scroll-target="#setting-up-your-git-configs">Setting up your Git configs</a></li>
+  <li><a href="#in-terminal" id="toc-in-terminal" class="nav-link" data-scroll-target="#in-terminal">— In terminal</a></li>
+  <li>
+<a href="#in-r" id="toc-in-r" class="nav-link" data-scroll-target="#in-r">— In R</a>
   <ul class="collapse">
-<li><a href="#in-terminal" id="toc-in-terminal" class="nav-link" data-scroll-target="#in-terminal">— In terminal</a></li>
-  <li><a href="#in-r" id="toc-in-r" class="nav-link" data-scroll-target="#in-r">— In R</a></li>
-  <li><a href="#managingverifying-git-credential-stored" id="toc-managingverifying-git-credential-stored" class="nav-link" data-scroll-target="#managingverifying-git-credential-stored">Managing/Verifying git credential stored</a></li>
-  <li><a href="#what-are-ssh-keys" id="toc-what-are-ssh-keys" class="nav-link" data-scroll-target="#what-are-ssh-keys">What are SSH keys?</a></li>
+<li><a href="#managingverifying-git-credential-stored" id="toc-managingverifying-git-credential-stored" class="nav-link" data-scroll-target="#managingverifying-git-credential-stored">Managing/Verifying git credential stored</a></li>
   </ul>
 </li>
-  <li><a href="#create-an-ssh" id="toc-create-an-ssh" class="nav-link" data-scroll-target="#create-an-ssh">Create an SSH</a></li>
+  <li>
+<a href="#what-are-ssh-keys" id="toc-what-are-ssh-keys" class="nav-link" data-scroll-target="#what-are-ssh-keys">What are SSH keys?</a>
+  <ul class="collapse">
+<li><a href="#create-an-ssh" id="toc-create-an-ssh" class="nav-link" data-scroll-target="#create-an-ssh">Create an SSH</a></li>
   <li><a href="#check-which-ssh-i-already-have" id="toc-check-which-ssh-i-already-have" class="nav-link" data-scroll-target="#check-which-ssh-i-already-have">Check which ssh I already have</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   <li><a href="#git-commands" id="toc-git-commands" class="nav-link" data-scroll-target="#git-commands">Git commands</a></li>
@@ -216,7 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#git-architecture" id="toc-git-architecture" class="nav-link" data-scroll-target="#git-architecture">Git architecture</a>
   <ul class="collapse">
-<li><a href="#ask-about-latest-commit" id="toc-ask-about-latest-commit" class="nav-link" data-scroll-target="#ask-about-latest-commit">Ask about latest commit</a></li>
+<li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key concepts</a></li>
+  <li><a href="#ask-about-latest-commit" id="toc-ask-about-latest-commit" class="nav-link" data-scroll-target="#ask-about-latest-commit">Ask about latest commit</a></li>
   <li><a href="#see-differences-bw-commits" id="toc-see-differences-bw-commits" class="nav-link" data-scroll-target="#see-differences-bw-commits">See differences b/w commits</a></li>
   </ul>
 </li>
@@ -260,14 +270,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Tue, 29 of April, 2025</p>
+      <p class="date">Tue, 27 of May, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tue, 29 of April, 2025</p>
+      <p class="date-modified">Tue, 27 of May, 2025</p>
     </div>
   </div>
     
@@ -331,7 +341,7 @@ Caution
 </div>
 </section><section id="git-configuration" class="level1"><h1>Git configuration</h1>
 <section id="setting-up-your-git-configs" class="level2"><h2 class="anchored" data-anchor-id="setting-up-your-git-configs">Setting up your Git configs</h2>
-<section id="in-terminal" class="level3"><h3 class="anchored" data-anchor-id="in-terminal">— In terminal</h3>
+</section><section id="in-terminal" class="level2"><h2 class="anchored" data-anchor-id="in-terminal">— In terminal</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># - Terminal</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -339,16 +349,18 @@ Caution
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"jane@example.com"</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="in-r" class="level3"><h3 class="anchored" data-anchor-id="in-r">— In R</h3>
+</section><section id="in-r" class="level2"><h2 class="anchored" data-anchor-id="in-r">— In R</h2>
 <p>The usethis package offers an alternative approach. You can set your Git user name and email from within R:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## install if needed (do this exactly once):</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># - IN R </span></span>
+<span></span>
+<span><span class="co">## install if needed (do this exactly once):</span></span>
 <span><span class="co">## install.packages("usethis")</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org">usethis</a></span><span class="op">)</span></span>
 <span><span class="co">#usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="managingverifying-git-credential-stored" class="level3"><h3 class="anchored" data-anchor-id="managingverifying-git-credential-stored">Managing/Verifying git credential stored</h3>
+<section id="managingverifying-git-credential-stored" class="level3"><h3 class="anchored" data-anchor-id="managingverifying-git-credential-stored">Managing/Verifying git credential stored</h3>
 <blockquote class="blockquote">
 <p>Where do I see it on Github? <code>? fa(name = "github")</code> –&gt; <strong>settings</strong> –&gt; <strong>Developer settings</strong> –&gt; Personal Access Tokens</p>
 </blockquote>
@@ -356,7 +368,9 @@ Caution
 <p>WARNING: <code>credentials::git_credential_ask("https://github.com")</code> actually exposes the PAT password</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">credentials</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/credentials/reference/credential_helper.html">credential_helper_get</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># - IN R </span></span>
+<span></span>
+<span><span class="fu">credentials</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/credentials/reference/credential_helper.html">credential_helper_get</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="co"># [1] "osxkeychain"</span></span>
 <span></span>
 <span><span class="co"># to see all of them </span></span>
@@ -384,18 +398,19 @@ Caution
 <span><span class="co">#   "token": "ghp_...52eR"</span></span>
 <span><span class="co"># } </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="what-are-ssh-keys" class="level3"><h3 class="anchored" data-anchor-id="what-are-ssh-keys">What are SSH keys?</h3>
+</section></section><section id="what-are-ssh-keys" class="level2"><h2 class="anchored" data-anchor-id="what-are-ssh-keys">What are SSH keys?</h2>
 <p>Secure Shell Protocol (SSH) is a cryptographic network protocol that allows a single computer to connect with a server over the internet securely. SSH is best used for accessing remote servers.</p>
-</section></section><section id="create-an-ssh" class="level2"><h2 class="anchored" data-anchor-id="create-an-ssh">Create an SSH</h2>
+<section id="create-an-ssh" class="level3"><h3 class="anchored" data-anchor-id="create-an-ssh">Create an SSH</h3>
 <p>You only have to do it once. GitHub’s documentation around how to do this is great. Check out articles on <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generating a new SSH key</a> and <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">adding a new SSH key to your GitHub account</a> to learn how to do this.</p>
-</section><section id="check-which-ssh-i-already-have" class="level2"><h2 class="anchored" data-anchor-id="check-which-ssh-i-already-have">Check which ssh I already have</h2>
+</section><section id="check-which-ssh-i-already-have" class="level3"><h3 class="anchored" data-anchor-id="check-which-ssh-i-already-have">Check which ssh I already have</h3>
 <blockquote class="blockquote">
 <p>I have a github SSH</p>
 </blockquote>
-<p>SSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘id_rsa.pub’, ‘id_ecdsa.pub’, ‘id_ed25519.pub’. You can check your SSH keys as follows:</p>
+<p>SSH is more secure protocol and requires a SSH key. The supported SSH public keys for GitHub Enterprise Server are ‘<code>id_rsa.pub</code>’, ‘<code>id_ecdsa.pub</code>’, ‘<code>id_ed25519.pub</code>’. You can check your SSH keys as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># - Terminal</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># - IN R </span></span>
@@ -410,7 +425,7 @@ Caution
 <span><span class="co"># ------ KEY </span></span>
 <span><span class="co"># credentials::ssh_key_info()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="git-commands" class="level1"><h1>Git commands</h1>
+</section></section></section><section id="git-commands" class="level1"><h1>Git commands</h1>
 <p>See <a href="#fig-git_wfl" class="quarto-xref">Figure&nbsp;1</a></p>
 <ul>
 <li>
@@ -617,6 +632,7 @@ Figure&nbsp;1: Git Workflow
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="git-architecture" class="level1"><h1>Git architecture</h1>
+<section id="key-concepts" class="level2"><h2 class="anchored" data-anchor-id="key-concepts">Key concepts</h2>
 <ul>
 <li>
 <strong><code>origin</code></strong> = stands for the <em>remote repository</em>. When we use <code>git push -u origin local_branch</code>, it tells the system that we want to push our local branch to the remote repository.</li>
@@ -646,25 +662,20 @@ Figure&nbsp;1: Git Workflow
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  to check which branches I have  </span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-a</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># * master</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   page_col</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   test_branch2</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   up</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   wkg_branch</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/HEAD -&gt; origin/master</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/master</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/page_col</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/wkg_branch</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/upstream/master</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/upstream/page_col</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/upstream/wkg_branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   wkg_br</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/HEAD -&gt; origin/master</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/fix/README.md</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/master</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   remotes/origin/wkg_br</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><strong><code>master</code></strong> (or <code>main</code>) is a branch, the default branch, the main branch, and it’s always there.</p></li>
 <li>
-<p><strong><code>HEAD</code></strong> = the currently active branch (the checked out one). Each repository only has one current branch, hence one HEAD as well.</p>
+<p><strong><code>HEAD</code></strong> = HEAD is the symbolic name for the <em>currently checked out commit</em> – it’s essentially what commit you’re working on top of.</p>
 <ul>
+<li>Normally <strong><code>HEAD</code></strong> points to a branch name (e.g.&nbsp;<code>master</code>). When you commit, the status of <code>master</code> is altered and this change is visible through HEAD.</li>
 <li>
-<strong><code>Detached HEAD</code></strong> happens when a checkout command is applied to a specific historical commit, tag or remote branch.</li>
+<strong><code>Detached HEAD</code></strong> happens when a <code>git checkout</code> command is applied to a specific historical commit, tag or remote branch. So HEAD is attached to a commit instead of a branch</li>
 </ul>
 </li>
 </ul>
@@ -678,8 +689,7 @@ Figure&nbsp;1: Git Workflow
 <ul>
 <li>
 <strong><code>index</code></strong> index is the proposed next commit, also called staging area.</li>
-</ul>
-<section id="ask-about-latest-commit" class="level2"><h2 class="anchored" data-anchor-id="ask-about-latest-commit">Ask about latest commit</h2>
+</ul></section><section id="ask-about-latest-commit" class="level2"><h2 class="anchored" data-anchor-id="ask-about-latest-commit">Ask about latest commit</h2>
 <p>WHere:</p>
 <ul>
 <li>
