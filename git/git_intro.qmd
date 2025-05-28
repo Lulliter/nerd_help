@@ -651,4 +651,10 @@ git branch -r
 + [Tutorials](https://phoenixnap.com/kb/tag/git)
 
 
+# Maelle's talk on git to R-ladies Rome
++ https://rome-git.netlify.app/#/
++ https://github.blog/developer-skills/github/write-better-commits-build-better-projects/
++ https://wizardzines.com/comics/rules-for-rebasing/
++ https://drmowinckels.io/blog/2025/positron-debugging/
+
 -----

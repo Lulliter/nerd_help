@@ -103,7 +103,7 @@
     "href": "princ/02_data_pipelines.html",
     "title": "Intro to building data pipelines in organizations",
     "section": "",
-    "text": "OSF support page https://help.osf.io/\n\nOSF Tips and tricks page\nProf. Pat Schloss’ Lab organization protocols:\n\nShloss lab’s data folder\nNew Proj template in Github\n\n\nDaan Marchiori’s book on R in production",
+    "text": "OSF support page https://help.osf.io/\n\nOSF Tips and tricks page\nProf. Pat Schloss’ Lab organization protocols:\n\nShloss lab’s data folder\nNew Proj template in Github\n\n\nDaan Marchiori’s book on R in production\n\nBlog post on Role of Data Engineer",
     "crumbs": [
       "Tools & principles",
       "Intro to building data pipelines in organizations"
@@ -126,6 +126,17 @@
     "title": "Intro to building data pipelines in organizations",
     "section": "Italian companies",
     "text": "Italian companies\n\nMiriade",
+    "crumbs": [
+      "Tools & principles",
+      "Intro to building data pipelines in organizations"
+    ]
+  },
+  {
+    "objectID": "princ/02_data_pipelines.html#eu-companies",
+    "href": "princ/02_data_pipelines.html#eu-companies",
+    "title": "Intro to building data pipelines in organizations",
+    "section": "EU companies",
+    "text": "EU companies\n\nAppsilon, it has Statistical Computing Environemnt for clinical teams",
     "crumbs": [
       "Tools & principles",
       "Intro to building data pipelines in organizations"
@@ -1026,22 +1037,11 @@
     "text": "Hi there!\nI am Luisa, a Policy & Data Analyst,  coffee addict, and  enthusiast.\nSince I am a self-taught programmer, I made this website to collect a bunch of nerdy instructions I keep forgetting.\nWhile this stuff is collected for personal use, I am glad if it can help anyone else ☺️\nYou can learn about me and my work via the links below.\n \n  \n   \n  \n    \n     Github\n  \n  \n    \n     LinkedIn"
   },
   {
-    "objectID": "princ/01_principles.html#my-skills",
-    "href": "princ/01_principles.html#my-skills",
+    "objectID": "princ/01_principles.html",
+    "href": "princ/01_principles.html",
     "title": "General guiding principles",
-    "section": "(my) skills",
-    "text": "(my) skills\n\nlogic\ntruth\npersistence\nproactivity\nrealism\naudacity\ncandor\nhumor\ningenuity\ninspiration / intuition\n\n\ndon’t mistake difficult (for you), e.g. macroeconomics, for universally valuable. Focus on what you are good at, and what you like: Harness your unfair advantage!",
-    "crumbs": [
-      "Tools & principles",
-      "General guiding principles"
-    ]
-  },
-  {
-    "objectID": "princ/01_principles.html#my-unfair-advantage",
-    "href": "princ/01_principles.html#my-unfair-advantage",
-    "title": "General guiding principles",
-    "section": "(my) unfair advantage",
-    "text": "(my) unfair advantage\n\nwriting effectively\nspeaking clearly\nteaching patiently\nlearning languages fast",
+    "section": "",
+    "text": "blog with DS tips",
     "crumbs": [
       "Tools & principles",
       "General guiding principles"

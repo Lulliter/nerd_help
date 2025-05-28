@@ -39,6 +39,8 @@ bibliography: Data_pipeline.bib
 
 # Reference
 
++ [blog with DS tips](https://www.linkedin.com/pulse/20141109065233-2426729-22-tips-for-better-data-science/)
+
 # Guiding principles
 
 The first is kind of *meta*, but crucial:
@@ -74,28 +76,6 @@ and related...
 > "Human beings are not born on this planet to work for somebody else. We are problem-solvers, hunters, go-getters. {…} can you imagine a cave man sending a job application?" 
 
 
-# Self reflection 
-
-## (my) skills 
-+ logic
-+ truth
-+ persistence
-+ proactivity
-+ realism
-+ audacity
-+ candor
-+ humor
-+ ingenuity
-+ inspiration / intuition
-
-> don't mistake difficult (for you), e.g. macroeconomics, for universally valuable. Focus on what you are good at, and what you like: Harness your unfair advantage!
-
-## (my) unfair advantage
-+ writing effectively
-+ speaking clearly
-+ teaching patiently
-+ learning languages fast
- 
 
 # Other Topics
 
@@ -122,3 +102,27 @@ and related...
 8.  **Communicate Timelines (for Deliverables and Travel) and Share Them Early**:   Many team members are juggling multiple deliverables.   Put together a clear timeline, not only of project processing steps (including internal deadlines), but also expected travel dates for operational travel.   There is tremendous good will for meeting expectations when there is sufficient time to work out schedules for delivering and for traveling.   Many of us are negotiating with other projects' timelines, our partner's work travel, our parents' ability to fly in to care for children, anniversaries, birthdays, graduations, etc.   
 9.  **Let your Team Members do Their Jobs**:  Your team members have their areas of expertise and years of experience.  Be clear what you expect of them, and then give them the space to do their jobs.   Micromanagement generally backfires. 
 10.  **Praise in Public, Punish in Private**:  This is a rule for every role in the workplace.   Give positive feedback to a team member in front of the full team, and, if there are shortcomings, take these and work them out on sidebar.  This demonstrates kindness and respect rather than humiliation.   In every project, there will be hiccups and mistakes made.  However, a strong team can recover from almost anything, and focusing on the way forward, rather than assessing blame, is much more efficient when we have so much work on our plates. 
+
+
+<!-- # Self reflection  -->
+
+<!-- ## (my) skills  -->
+<!-- + logic -->
+<!-- + truth -->
+<!-- + persistence -->
+<!-- + proactivity -->
+<!-- + realism -->
+<!-- + audacity -->
+<!-- + candor -->
+<!-- + humor -->
+<!-- + ingenuity -->
+<!-- + inspiration / intuition -->
+
+<!-- > don't mistake difficult (for you), e.g. macroeconomics, for universally valuable. Focus on what you are good at, and what you like: Harness your unfair advantage! -->
+
+<!-- ## (my) unfair advantage -->
+<!-- + writing effectively -->
+<!-- + speaking clearly -->
+<!-- + teaching patiently -->
+<!-- + learning languages fast -->
+
