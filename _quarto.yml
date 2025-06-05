@@ -11,6 +11,7 @@ project:
     - "!rstats/02_r_vscode.qmd"
     - "!rstats/03_r_gpt.qmd"
     - "!rstats/04_text_analytics.qmd"
+    - "!princ/02_data_pipelines.qmd"
     - "shell/*.qmd"
     - "!secret/"
 
@@ -72,7 +73,7 @@ website:
       contents:
         - princ.qmd
         - princ/01_principles.qmd
-        - princ/02_data_pipelines.qmd
+        # - princ/02_data_pipelines.qmd
 
     - title: "Dev tools"
       style: "docked"

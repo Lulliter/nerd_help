@@ -2,4 +2,4 @@
 title: "Tools & principles for data operations & beyond..."
 ---
 
-![](images/cat3_horiz.jpg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com))
+![](images/cat5_horiz.jpg){width=70%}<br>(Source: [www.freepik.com/](https://www.freepik.com))

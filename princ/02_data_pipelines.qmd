@@ -66,6 +66,7 @@ bibliography: Data_pipeline.bib
 ## Italian companies
 + [Miriade](https://www.miriade.it/it/consulenza-informatica)
 
+
 ## EU companies
 + Appsilon, it has [Statistical Computing Environemnt](https://www.appsilon.com/services/sce) for clinical teams
 
@@ -107,22 +108,84 @@ Economists are always conscious of several fundamentals that must be understood 
 	+ _each AhR request delays the creation of more permanent solutions. The absence of those solutions, in turn, lead to more requests._ [@decision-first_ai_five_2017]
 + Business Intelligence is not just interactive reporting, although that is a component. A great BI solution is a model of your business. It allows you to gain insights, track change, and forecast future outcomes. BI should include segmentation and benchmarks. It includes forecasting, scoring, and visualization. A good BI developer/designer needs broad knowledge and experience.  [@decision-first_ai_ad-hoc_2016]
 
+# ---
 
-# Data Use by Foundations
+# Fondazioni Bancarie
+
+Le Fondazioni di origine bancaria sono organizzazioni **non profit, private e autonome**, nate all’inizio degli anni Novanta dalla riforma del sistema del credito. 
+Sono 85, differenti per dimensione e operatività territoriale, e intervengono in diversi campi dal welfare alla cultura, dall’innovazione all’ambiente, dall’educazione alla ricerca.
+
+## Italian companies (fondazioni)
+
++ Fondazione Cariplo
++ Fondazione Cassa di Risparmio di Padova e Rovigo
+
+## Data Use by Foundations
 Foundations **rely on data from NGOs** to explain how donated money was spent, and to decide where to invest in the future. Foundations **collect this data** by asking questions and designing *grant parameters*, both of which keep NGOs accountable for their spending. To get better data from NGOs, foundations must ask better questions and build grant parameters that are achievable, work towards transparent results, and avoid tedious burdens on under-resourced NGOs. Though it can be difficult, improving data quality and the questions being asked is a win-win for all involved. 
 
+## Bilancio di missione Cariparma su 2024 
 
-# Regulatory requirements
+- Erogazioni deliberate (36 mln x 394 progetti accolti) e effettuate
+	+ 51% a enti pubblici!?!?!
 
-+ Myth that open source software is not compliant with regulations (e.g., FDA, EMA, HIPAA, GDPR),
+## Questions & Goals for foundations 
+> Io provengo da realta pubbliche ( addirittura multilaterali) dove mi sono resa conto che l'agenda e' spesso dettata prima e altrove pero mi sembra che le fondazini siano di natura privata quindi...   
+
++ A chi risponde la Fondazione? Cioè, **quanta libertà ha la Fondazione di decidere a chi dare i fondi**? 	+ Cerca sinergie e/o complementarieta negli interventi con altri enti? (Comune, Universita, Camera di commercio enti del 3o settore?) 
+
+> ho notato che il 41% dei progetti finanziati sono in enti pubblici del territorio
+
++ **Su chi interessa misurare l'impatto**? 
+	+ Sui beneficiari finali? 
+	+ Sugli enti che li realizzano? 
+	+ Sulle politiche pubbliche?
 	
++ Is the issue **measuring the impact of your existing projects, or rather being sure to target the right projects** in the first place? 
+	 + How is proper targeting measured? Can predictive models be used to identify the most promising projects?
+	 + Can we use thematic mapping to overlap funding committed and the needs of the territory?
+
++ La strategia di sviluppo degli strumenti erogativi tiene conto degli altri strumenti di finanziamento e delle altre iniziative di sviluppo del territorio, in modo da evitare sovrapposizioni e conflitti, e per massimizzare l'impatto delle risorse investite?
+	+ azione diretta
+	+ azione di sistema
+
++ Act as the hub in a network of foundations, NGOs, and other stakeholders to share data and insights. 
+
++ Obiettivo non è necessariamente risolvere un problema (es Migranti) ma di sperimentare e consolidare alcune buone pratiche realizzate dal Privato sociale, che possano indicare al Pubblico possibili strade da percorrere, replicare ed estendere su scala più ampia.
+
+## Best practice in foundations
+
++ Fondazione Cariplo [Osservatorio e Valutazione](https://www.fondazionecariplo.it/it/la-fondazione/osservatorio-e-valutazione.html) - dal 2006
+
+
+
+
+# Salary range 
+
++ quando si chiedono almeno 5 anni, di solito si parla di Sr. Data Analyst, e non di Data Analyst
+
++ Datapizza: 
+	+ Sr. Data Analyst, Italia
+		+ > 6 anni esperienza -- mediana (BASE) = 46k €/anno
+	+ Sr. Data Scientist, Italia
+		+ > 6 anni esperienza -- mediana (BASE) = 53k €/anno
+
++ Glassdoor: 
+	+ Sr. Data Analyst, Italia
+		+ 4-6 anni esperienza 33.000 € - 45.000 €/anno -- media (BASE) = 40k €/anno
+		+ 7-9 anni esperienza 37.000 € - 50.000 €/anno -- media (BASE) = 43k €/anno
+		+ 10-14 anni esperienza 37.000 € - 51.000 €/anno -- media (BASE) = 46k €/anno
+		+ > 15 anni esperienza 35.000 € - 80.500 €/anno -- media (BASE) = 50k €/anno
 	
+	+ Sr. Data Scientist, Italia
+		+ 4-6 anni esperienza   - media (BASE) = 45k €/anno
+		+ 7-9 anni esperienza   - media (BASE) = 50k €/anno
+		+ 10-14 anni esperienza - media (BASE) = 540k €/anno
+		+ > 15 anni esperienza  - media (BASE) = 65k €/anno
 
-+ Open source solutions can have support too, e,g, in Pharma there are:
-	+ R Validation Hub, 
-	+ Pharmaverse, and
-	+ R Consortium
 
+
+
+# ---
 
 # Needed skills
 
@@ -131,20 +194,21 @@ Foundations **rely on data from NGOs** to explain how donated money was spent, a
 	+ the Basics of the Terminal will be extremely useful when working with remote machines
 	+ SSH and SCP - `SSH` is a command you can run from your terminal to connect to a remote machine. `SCP` is a command that will allow you to copy data from your local machine (such as your laptop) to your remote machine. Being data scientists, an easy way to move data between machines is very valuable.
 
+
+# Tools 
+
++ Airtable ~ a cloud-based platform for creating and sharing relational databases. see [old blog](https://medium.com/data-science/how-airtable-can-help-you-become-a-more-effective-data-scientist-2f0b1c7d8a3f)
 + Docker ~ a lightweight virtual machine that allows you to run code in a containerized environment. see [old blog](https://medium.com/data-science/how-docker-can-help-you-become-a-more-effective-data-scientist-7fc048ef91d5)
 
 
+# Regulatory requirements
 
-
-
-
-
-
-
-
-
-
-
++ Myth that open source software is not compliant with regulations (e.g., FDA, EMA, HIPAA, GDPR),
+	
++ Open source solutions can have support too, e,g, in Pharma there are:
+	+ R Validation Hub, 
+	+ Pharmaverse, and
+	+ R Consortium
 
 
 
