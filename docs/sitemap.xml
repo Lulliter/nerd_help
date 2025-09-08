@@ -2,66 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lulliter.github.io/nerd-help/shell/shell_intro.html</loc>
-    <lastmod>2025-05-07T13:47:31.597Z</lastmod>
+    <lastmod>2025-09-08T08:31:02.596Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/shell.html</loc>
-    <lastmod>2025-05-08T10:57:58.923Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/shell/shell_basic_commands.html</loc>
+    <lastmod>2025-09-08T07:56:03.156Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/rstats/00_useful.html</loc>
-    <lastmod>2025-05-01T23:01:37.881Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/rstats/01_tidyeval.html</loc>
+    <lastmod>2025-04-29T20:04:30.331Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/princ/01_principles.html</loc>
-    <lastmod>2025-05-28T15:16:47.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/me.html</loc>
-    <lastmod>2024-09-12T19:29:09.377Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/git/git_intro.html</loc>
-    <lastmod>2025-05-28T15:16:47.586Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/git/git_branches.html</loc>
-    <lastmod>2025-05-01T21:00:28.649Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev/05_colors.html</loc>
-    <lastmod>2025-04-29T20:04:29.904Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev/03b_Google_domain.html</loc>
-    <lastmod>2024-09-12T14:18:23.272Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev/02_quarto.html</loc>
-    <lastmod>2024-09-12T19:08:37.972Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev.html</loc>
-    <lastmod>2025-05-08T10:57:58.921Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev/03a_AWS.html</loc>
-    <lastmod>2024-04-20T16:25:34.873Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/dev/04_AWS_mail.html</loc>
-    <lastmod>2025-04-29T15:44:36.716Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/git.html</loc>
-    <lastmod>2025-05-08T10:57:58.921Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/git/git_feature_workflow.html</loc>
-    <lastmod>2025-05-01T19:52:56.575Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lulliter.github.io/nerd-help/index.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/rstats.html</loc>
     <lastmod>2025-05-08T10:57:58.922Z</lastmod>
   </url>
   <url>
@@ -69,12 +21,64 @@
     <lastmod>2025-06-05T10:09:15.438Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/rstats.html</loc>
+    <loc>https://lulliter.github.io/nerd-help/index.html</loc>
     <lastmod>2025-05-08T10:57:58.922Z</lastmod>
   </url>
   <url>
-    <loc>https://lulliter.github.io/nerd-help/rstats/01_tidyeval.html</loc>
-    <lastmod>2025-04-29T20:04:30.331Z</lastmod>
+    <loc>https://lulliter.github.io/nerd-help/git/git_feature_workflow.html</loc>
+    <lastmod>2025-05-01T19:52:56.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/git.html</loc>
+    <lastmod>2025-05-08T10:57:58.921Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev/04_AWS_mail.html</loc>
+    <lastmod>2025-04-29T15:44:36.716Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev/03a_AWS.html</loc>
+    <lastmod>2024-04-20T16:25:34.873Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev.html</loc>
+    <lastmod>2025-05-08T10:57:58.921Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev/02_quarto.html</loc>
+    <lastmod>2024-09-12T19:08:37.972Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev/03b_Google_domain.html</loc>
+    <lastmod>2024-09-12T14:18:23.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/dev/05_colors.html</loc>
+    <lastmod>2025-04-29T20:04:29.904Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/git/git_branches.html</loc>
+    <lastmod>2025-05-01T21:00:28.649Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/git/git_intro.html</loc>
+    <lastmod>2025-05-28T15:16:47.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/me.html</loc>
+    <lastmod>2024-09-12T19:29:09.377Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/princ/01_principles.html</loc>
+    <lastmod>2025-05-28T15:16:47.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/rstats/00_useful.html</loc>
+    <lastmod>2025-05-01T23:01:37.881Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lulliter.github.io/nerd-help/shell.html</loc>
+    <lastmod>2025-05-08T10:57:58.923Z</lastmod>
   </url>
   <url>
     <loc>https://lulliter.github.io/nerd-help/shell/shell_func.html</loc>

@@ -8,8 +8,8 @@ editor: source
 engine: knitr
 ## ------  general Output Options
 execute:     
-  eval: false    # actually run? 
-  echo: true     #  include source code in output
+  eval: true    # actually run? 
+  echo: false     #  include source code in output
   warning: false  #  include warning code in output
   error: false    #  include error code in output
   output: false   # include output code in output (CHG in BLOCKS)
@@ -44,13 +44,13 @@ Great (paid) LinkedIn course by Kevin Skoglund ["Unix essential training"](https
 
 + an OS developed by AT&T employes at Bell Labs in the 1960s/70s
 + in 1972 it is rewritten in C programming, which made it portable. It then spread outside AT&T 
-+ it still powers devises all around 
++ it still powers devices all around 
 + you can use it from the Command line or from GUI interfaces
 
 ### What are the kernell and shell?  
 
 + `kernel` is the core of the OS. it allocates time and memory to processes
-+ `shells` is the outer layer of the OS. it sends reuqests to the kernel
++ `shells` is the outer layer of the OS. it sends requests to the kernel
   + you can choose from different shells (`sh`, `bash`, `zsh`, etc.)
 
 # Fundamental 
@@ -63,374 +63,148 @@ Great (paid) LinkedIn course by Kevin Skoglund ["Unix essential training"](https
 + `q` = close dialogue
 + `Ctrl + L` → clears the terminal screen (but not history)
 
-# Files and directories 
+# Mac is a "Unix system"
+
+The macOS is a Unix-native system, i.e. it is built on a Unix core (Darwin). This enables you to use Unix commands in the terminal, as opposed to Windows, which is built on a different core. 
+
+## Why Mac is preferred for programming?
+
++ Mac has a better **terminal emulator** (Terminal, iTerm2) than Windows (`Command Prompt`, `PowerShell`)
++ MacOS is more **stable** and less prone to viruses than Windows
++ Mac with chip Apple Silicon (M1, M2, M3) has better **performance** and **energy efficiency** than Windows laptops with Intel or AMD processors
++ Mac is a Unix system, so you can **use Unix commands in the terminal** (e.g. `ls`, `cd`, `mv`, `cp`, `rm`, etc.)
+  + [On Windows, to run Unix commands, you need to install a Unix-like environment, e.g. 
+    + `WSL` (Windows Subsystem for Linux)
+    + `Cygwin` (a large collection of GNU and Open Source tools which provide functionality similar to a Linux distribution on Windows)
+    + `Git Bash`](an application for Microsoft Windows environments which provides a bash emulation used to run Git from the command line.)
+
+## MacOS and open source software
+
++ MacOS is more compatible with open-source software and tools used in data science (e.g. `R`, `Python`, etc.)
+  + [On Windows, you may face compatibility issues with some open-source software and tools.](https://docs.microsoft.com/en-us/windows/wsl/install)
++ Many `libraries` and `packages` used in data science are developed and tested first on Unix/Linux systems, so they may work better on MacOS than on Windows.
++ Some dependencies and tools may not be available or may require additional configuration on Windows (`Rcpp`, `devtools`, `spacy`, etc.)
++ `Homebrew`, which is a popular package manager for MacOS (& Linux), makes it easy to install and manage open-source software and tools (es. git, python, r, node, wget, ecc.). Plus, **it avoids having to download different installers, configure PATHS, manage version conflicts etc.**
+  + Windows alternatives would be `Chocolatey` or `winget`, but they are not as widely used or supported as Homebrew.
++ `Docker`, which is a popular containerization platform used in data science, also works better on MacOS than on Windows, as it uses a Linux kernel to run containers.
 
 
-```{bash}
-pwd
-
-ls
-# formatted differently
-ls -l
-ls -lh # size (5 col) is human readable
-ls -a # include hidden
-ls -a -lh
-
-```
+```{r}
+#| label: tbl-decision_matrix
+#| output: true
+#| tbl-cap: "Comparison of macOS/Unix vs Windows for Data Science Workflows"
 
 
-```{bash}
-pwd
-# User home directory 
-cd ~ # /Users/luisamimmi
-# go back to the "last" dir you were in !
-cd -
+library(tibble)
+library(flextable)
 
-```
-
-# Creating Files
-
-```{bash}
-cd shell
-# open text editor
-nano
-# then write inside 
-'ctrl+X' # to exit
-'Y' # yes to save 
-# write name
-'enter' # to save
-
-nano test2.text
-```
-
-# Reading files 
-
-```{bash}
-cd ..
-ls
-cat README.md
-
-# pagination 
-more 
-
-# opens a viewer for scrolling 
-less README.md
-# then press `f` for forward
-# or press `b` for backward
-# or press `q` for done
-```
-
-# Creating directories
-+ `-p` = add NEW parent dir
-
-```{bash}
-pwd
-mkdir  dir 
-ls -l
-
-mkdir shell/dir
-ls -l
-
-# to create a dir in a NEW Parent dir 
-mkdir -p shell/newdir/dir
-```
-
-# Move and rename 
-
-+ `-f` = force overwriting (default!)
-+ `-n` = no overwriting 
-+ `-i` = interactive overwrigitn (ask!)
-
-```{bash}
-cd shell 
-
-# Move <target> <destination file>
-mv test.txt newdir/dir/test.txt
-
-# Move <target> <directory>(no file) # OK as well
-mv newdir/dir/test.txt newdir
-
-# Rename (automatic)
-touch second_test.txt 
-# Move <target> <RENAMED destination file>
-mv second_test.txt newdir/dir/2_test.txt
-ls -l newdir
-ls newdir/dir/
-```
-
-# Copy 
-```{bash}
-pwd
-cd newdir
-ls -l
-cp test.txt dir/
-
-cd dir
-ls -l
-```
-
-+ `-R` = recursive (if a dir also its content )
-```{bash}
-pwd
-cd ..
-cp -R dir dir2
-```
-
-# Deleting files and directories 
-
-In Unix when you delete something, it is gone **immediately** and **forever**! 
-```{bash}
-pwd
-ls -l
-# file 
-rm test.txt
-# dir 
-rm -R dir2
-```
-
-
-# File/dir by name 
-`find <path> <expression>`
-
-+ `*` = zero or more characters (glob) 
-+ `?` = any one character 
-+ `[]`= any character in the brackets 
-
-```{bash}
-cd ~/Github/_nerd_help/
-find shell -name "test.txt"
-find . -name "test.txt"
-
-find shell -name "*test*"
-find shell -name "??test.txt"
-find shell -name "*[.txt.qmd]"
-```
-
-`grep <expression> <path> `
-
-+ `r` = recursive  
-+ `l` = follow symbolic links 
-+ `i`= case-insensitive matching
-+ `E` = use extended regular expressions (like `|`)
-
-
-```{bash}
-# tutti i file .R in tutte le cartelle e sottocartelle, e mostrerà solo quelli che contengono la parola "library".
-grep -rl "Google Drive" .
-
-# Case-insensitive search
-grep -rli "Google Drive" .
-
-# Search for multiple words (logical OR)
-grep -rEl "Google Drive|Github" .
-```
-
-### File/dir by name + content word (only text files)
-
-```{bash}
-cd ~/Github/_nerd_help
-find . -type f -name "*.R" -exec grep -l "color" {} +
-```
-
-# Exe in Google Drive 
-```{bash}
-cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'
-ls -ls
-
-```
-
-## ... based on name (file|dir)
-```{bash}
-find . -type d -name "*MUSIC*"		# directory
-find . -iname "*MUSIC*"              # file + directory	
-```
-
-## ... based on name (file|dir) + word (in *text* file)
-
-`find` + `grep` will only work with text files (`R` or `txt`)
-
-+ `find .`         → Start searching in the current directory
-  + `-type f`      → Only look for regular files
-  + `-name "*.R"`  → Restrict the search to files ending in `.R`  
-  + `/(` and `\)`  → bc parenthesis must be escaped 
-  + `-o`           →  logical OR between conditions
-+ `-exec`          →  For each matching file, execute the following command...
-  + `grep -l "library" {} +` → search for the word "library" in the file (`{}` filename placeholder)
-    +  `-l` tells grep to only print the filename if a match is found 
-  + ` +`           → because `-exec` clause must be escaped (`+` or `;`)
+decision_matrix <- tribble(
+  ~Area, ~macOS_Unix, ~Windows_Standard, ~Windows_Positron,
+  "Shell / PATH", 
+  "Single Unix shell (zsh/bash). PATH always coherent.", 
+  "Multiple shells (CMD, PowerShell, Git Bash, WSL). Frequent PATH conflicts.", 
+  "Positron manages interpreters better, but PATH issues remain.",
   
-```{bash}
-# Search for files containing specific content and return the list of files
-find . -type f -name "*.R" -exec grep -l "library" {} + # or 
-find . -type f -name "*.R" -exec grep -l "library" {} \; 
-
-find . \( -name "*.R" -o -name "*.qmd" -o -name "*.md" \) -type f -exec grep -El "feature|color" {} +
-```
-
-## ... based on name (file|dir) + word (in *PDF* file)
-
-+ `sh -c '...'` → Run the given string as a shell script
-+ `for file do ... done` loops over those filenames
-+ `grep`   
-  + `-q` → be quiet (don’t print the match)
-  + `-i` → ignore case
-  + `-E` → use extended regex (feature|color)
-+ `{}` are the filenames from find, passed as $1, $2, ..., to the shell script
-
-```{bash}
-cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
-ls -ls
-
-find . -type f -name "*.pdf" -exec sh -c '
-  for file do
-    if pdftotext "$file" - | grep -qiE "sussidiarietà"; then
-      echo "$file"
-    fi
-  done
-' sh {} +
-
-```
-
-
-## ... based on name (file|dir) + word (in *WORD* file)
-
-#### NERDY set up step 
-
-```{bash}
-# First time I got 
-which brew
-#/usr/local/bin/brew
-/opt/homebrew/bin/brew --version
-# Homebrew 4.5.0 OK
-
-# configure zsh to use the correct brew
-export PATH="/opt/homebrew/bin:$PATH"
-# then 
-source ~/.zshrc
-which brew
-#/opt/homebrew/bin/brew # OK!
-brew install docx2txt
-#docx2txt --help # doesnot work!?!?!
-#... but I have it
-which docx2txt
-ls /opt/homebrew/Cellar/docx2txt/1.4/bin
-# add symlink
-ln -s /opt/homebrew/Cellar/docx2txt/1.4/bin/docx2txt.sh /opt/homebrew/bin/docx2txt
-which docx2txt
-```
-
-Or to use PANDOC for word files 
-
-+ Quarto and R should use their own pandoc version (so this shouldn't mess that up!)
-```{bash}
-brew upgrade pandoc
-pandoc --version
-brew link --overwrite pandoc # from pandoc 1. 2 pandoc 3.6.4
-```
-
-### Check only 1 file's content 
-
-```{bash}
-cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
-ls -ls
-
-# `docx2txt` often misses text in text boxes, shapes, footers, or other styled containers
-docx2txt < ./'Appunti 2o tavolo.docx' - | grep -i "sviluppo sostenibile" # NOPE!
-# `pandoc` uses the full internal structure of the .docx file and:
-pandoc 'Appunti 2o tavolo.docx' -t plain | grep -i "sviluppo sostenibile" # YEP!
-```
-
-#### Get files list 
-
-+ Need to transform into text first
-
-```{bash}
-cd ~/Library/CloudS*/GoogleDrive-lmm76@georgetown.edu/'Il mio Drive'/SCP_mio
-ls -ls
-# Using docx2txt (NOPE!)
-# Using pandoc (YEP!)
-find . -type f -name "*.docx" -exec sh -c '
-  for file do
-    if pandoc "$file" -t plain | grep -qiE "sviluppo sostenibile"; then
-      echo "$file"
-    fi
-  done
-' sh {} +
-
-
-# suppress errors (corrupt or *.doc files - NOT handled by pandoc)
-find . -type f -name "*.docx" -exec sh -c '
-  for file do
-    if pandoc "$file" -t plain 2>/dev/null | grep -qiE "sviluppo sostenibile"; then
-      echo "$file"
-    fi
-  done
-' sh {} +
-```
-
-## ... based on name (file|dir) + word (in *doc* file)
-
-```{bash}
-pandoc ./"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc" -t plain # NOPE
-# Unknown input format doc
-antiword ./"Ioratti_proposta_DOCUMENTO PROGRAMMATICO - spunti per l'impostazione.doc" | grep -i "pavia" # YEP
-
-find . -type f -name "*.doc" -exec sh -c '
-  for file do
-    if antiword "$file" 2>/dev/null | grep -qiE "PAVIA "; then
-      echo "$file"
-    fi
-  done
-' sh {} +
-```
-
-
----
-# Creating symbolic links
-
-`sym link`s are similar to shortcuts or alias in a GUI systme 
-
-+ `-s` = needed otherwise it is a hard link not a simbolic one 
-+ It creates a reference to a **file path**, NOT a file!
-  + which means it breaks if the file is moved!!!
+  "R & Packages", 
+  "CRAN install + compilation works out of the box.", 
+  "Requires Rtools for many packages → extra step, errors likely.", 
+  "Still requires Rtools. Positron smooths management but OS issue remains.",
   
-```{bash}
-cd ../..
-cd _nerd*/shell
-pwd
-ls -l
+  "Python & Envs", 
+  "Native support. venv/conda integrate with terminal.", 
+  "Multiple installs common. PATH confusion across shells.", 
+  "Positron can choose envs in IDE, but conflicts outside remain.",
+  
+  "Git / GitHub", 
+  "Git native via Xcode CLI or Homebrew. One SSH dir (~/.ssh).", 
+  "Git for Windows + Git Bash + WSL = multiple key locations, SSH mismatches.", 
+  "Positron integrates Git/GitHub login, centralizing SSH inside IDE.",
+  
+  "Docker / Containers", 
+  "Native support. ARM64 stable on Apple Silicon.", 
+  "Needs WSL2/Hyper-V → overhead, resource heavy.", 
+  "Still needs WSL2/Hyper-V. Positron smooths workflow but not overhead.",
+  
+  "IDE", 
+  "RStudio, VS Code, PyCharm run natively with Unix shell.", 
+  "RStudio and VS Code work, but rely on Git Bash/WSL.", 
+  "Positron unifies R, Python, Quarto, Git → single IDE lowers friction.",
+  
+  "Maintenance", 
+  "Minimal IT support needed. Easy updates via Homebrew.", 
+  "Frequent issues with PATH, Rtools, Docker/WSL, SSH keys.", 
+  "Less IDE friction, but IT still needed for OS-level issues."
+)
 
-# ln -s <file_name> <symlink_name>(PATH)
-# symlink the shell_intro.qmd file 
-ln -s ~/Github/_nerd_help/shell/shell_intro.qmd ~/Desktop/shell_intro_sl.qmd
-
-# check 
-cd ~/Desktop
-ls -l
-  # lrwxr-xr-x@  .... shell_intro.qmd -> shell_intro.qmd
- ls -l shell_intro_sl.qmd 
-cat shell_intro_sl.qmd  
+decision_matrix |> flextable() |>
+  autofit() |>
+  theme_vanilla() |>
+  fontsize(size = 10) |>
+  bold(part = "header") |>
+  italic(j = 1, part = "body") |>
+  align(align = "center", part = "all") |>
+  align(j = 1, align = "left", part = "body") |>
+  set_caption("Comparison of macOS/Unix vs Windows for Data Science Workflows")
 ```
 
 
-## Do it to bring shared stuff in Others' google Drive into My Drive 
 
-1. Go to Google drive under `Shared with me`/`Condivisi con me`
-2. Right click and scroll to [`Manage`/`Organizza`]/`Add shortcut to Drive`/`Aggiungi scorciatoia` 
-3. Choose the location `My Drive`
+```{r}
+#| label: tbl-decision_matrix2
+#| output: true
+#| tbl-cap: "Comparison of macOS/Unix vs Windows for Data Science Workflows"
 
-```{bash}
-# Path
-cd '/Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/Il mio Drive'
-ls -ls
+
+library(tibble)
+library(flextable)
+
+decision_matrix_it <- tribble(
+  ~Area, ~macOS_Unix, ~Windows_Standard, ~Windows_Positron,
+  "Shell / PATH", 
+  "Unica shell Unix (zsh/bash). PATH sempre coerente.", 
+  "Più shell (CMD, PowerShell, Git Bash, WSL). Conflitti PATH frequenti.", 
+  "Positron gestisce meglio gli interpreti, ma i problemi di PATH restano.",
+  
+  "R & Pacchetti", 
+  "Installazione da CRAN + compilazione funziona subito.", 
+  "Richiede Rtools per molti pacchetti → passaggio extra, errori possibili.", 
+  "Rtools serve comunque. Positron semplifica la gestione, ma il problema rimane.",
+  
+  "Python & Ambienti", 
+  "Supporto nativo. venv/conda integrati col terminale.", 
+  "Spesso più installazioni (system, Anaconda, Store). Conflitti PATH tra shell.", 
+  "Positron può scegliere l’ambiente in IDE, ma i conflitti fuori restano.",
+  
+  "Git / GitHub", 
+  "Git nativo via Xcode CLI o Homebrew. Una sola directory SSH (~/.ssh).", 
+  "Git for Windows + Git Bash + WSL = directory multiple, conflitti SSH.", 
+  "Positron integra Git/GitHub con login centralizzato alle chiavi SSH.",
+  
+  "Docker / Container", 
+  "Supporto nativo. ARM64 stabile su Apple Silicon.", 
+  "Richiede WSL2/Hyper-V → overhead, consumo risorse elevato.", 
+  "WSL2/Hyper-V servono comunque. Positron semplifica i workflow ma non l’overhead.",
+  
+  "IDE", 
+  "RStudio, VS Code, PyCharm girano nativamente con shell Unix.", 
+  "RStudio e VS Code funzionano, ma dipendono da Git Bash/WSL.", 
+  "Positron unifica R, Python, Quarto, Git → un solo IDE riduce gli attriti.",
+  
+  "Manutenzione", 
+  "Minimo supporto IT. Aggiornamenti facili con Homebrew.", 
+  "Problemi frequenti con PATH, Rtools, Docker/WSL, chiavi SSH.", 
+  "Meno problemi lato IDE, ma l’IT serve ancora per i conflitti del sistema operativo."
+)
+
+
+decision_matrix_it |> flextable() |>
+  autofit() |>
+  theme_vanilla() |>
+  fontsize(size = 10) |>
+  bold(part = "header") |>
+  italic(j = 1, part = "body") |>
+  align(align = "center", part = "all") |>
+  align(j = 1, align = "left", part = "body") |>
+  set_caption("Comparison of macOS/Unix vs Windows for Data Science Workflows")
 ```
 
-Will show also linked folders (like shared with me for which I created a shortcut in my drive)
-
-```
-total 41528
-    0 drwx------@  9 luisamimmi  staff       288 Jan 16 16:37 50_mo_quiz_foto
-    8 -rw-------@  1 luisamimmi  staff       193 Mar 17 20:55 Appunti Lezioni INGLESE Fortu 2023.gdoc
-    0 lrw-------@  1 luisamimmi  staff       159 Mar  2  2024 Biostatistics course by Cocca -> /Users/luisamimmi/Library/CloudStorage/GoogleDrive-lmm76@georgetown.edu/.shortcut-targets-by-id/1G8RzLFV_yz_1QH1LhfMU3Rxex1oATzLq/Biostatistics course by Cocca
-    0 drwxr-xr-x@ 19 luisamimmi  staff       608 Apr  4 10:14 CANTI_SAN_MICHELE
-```

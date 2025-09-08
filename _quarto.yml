@@ -8,11 +8,11 @@ project:
     - "dev/*.qmd"
     - "git/*.qmd"
     - "rstats/*.qmd"
+    - "shell/*.qmd"
     - "!rstats/02_r_vscode.qmd"
     - "!rstats/03_r_gpt.qmd"
     - "!rstats/04_text_analytics.qmd"
     - "!princ/02_data_pipelines.qmd"
-    - "shell/*.qmd"
     - "!secret/"
 
 execute:
@@ -112,6 +112,7 @@ website:
       contents:
         - shell.qmd
         - shell/shell_intro.qmd
+        - shell/shell_basic_commands.qmd
         - shell/shell_func.qmd
         # - shell/foto.qmd
         # - shell/shell_var.qmd
