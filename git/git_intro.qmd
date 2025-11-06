@@ -515,11 +515,13 @@ git rm --cached accident.txt
 git rm --cached -r directory/
 ```
 
-## Your branch is ahead of 'origin/master' by "x" commits
+### CASE 3) Accidentally Tracked & pushed 
+
+> A.K.A. Your branch is ahead of 'origin/master' by "x" commits
 
 E.g. I had this occurring because I wanted to push a heavy PDF download button and `git push` couldn't go through.  
 
-1. make a BACKUP of local!
+1. make a **BACKUP of local**!
 
 2. Go back before the commit 
 
@@ -555,6 +557,30 @@ git reset --soft HEAD~1
   # ca9ae0a  Update a
 git reset --mixed HEAD^  
 ```
+
+#### Jump back to specific `commit`
+
+E.g. I know a safe commit 3 commits ago is `c86edffc16` so I do git reset to that commit
+
+```{bash}
+# - Terminal
+
+# a) Keep changes staged (undo commits only)
+git reset --soft c86edffc16
+# equivalent: git reset --soft HEAD~3
+
+# b) Keep changes unstaged (undo commits and unstage changes)
+git reset --mixed c86edffc16
+# equivalent: git reset --mixed HEAD~3
+
+# c) Discard all changes (undo commits and discard changes)
+git reset --hard c86edffc16
+# equivalent: git reset --hard HEAD~3
+```
+
+
+---
+
 
 # Dealing with existing branches
 To show details about a particular remote (e.g. `origin`, which is the default name when you clone a project). This command is for: 

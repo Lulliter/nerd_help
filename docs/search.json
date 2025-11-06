@@ -385,7 +385,7 @@
     "href": "git/git_feature_workflow.html#step-5-push-your-branch-to-the-remote",
     "title": "Git Feature Branch Workflow",
     "section": "Step 5: Push your branch to the remote",
-    "text": "Step 5: Push your branch to the remote\nPush your branch and set the upstream tracking reference.\ngit push -u origin feature/name",
+    "text": "Step 5: Push your branch to the remote\nPush your branch and set the upstream tracking reference.\n\n(extra) before pushing, I may do git pull just to make sure that what added does not conflict with the “master” content\n\n# git pull origin master\ngit push -u origin feature/name",
     "crumbs": [
       "git",
       "Git Feature Branch Workflow"
@@ -418,7 +418,7 @@
     "href": "git/git_feature_workflow.html#step-8-optional-review-branch-differences-before-pr",
     "title": "Git Feature Branch Workflow",
     "section": "Step 8 (optional): Review branch differences before PR",
-    "text": "Step 8 (optional): Review branch differences before PR\n\n1/2 On GitHub: https://github.com/your-username//&lt;master…feature/name&gt;\n2/2 In terminal:\n\ngit diff --color-words master..feature/name",
+    "text": "Step 8 (optional): Review branch differences before PR\n\n1/2 On GitHub: https://github.com/your-username//&lt;master…feature/name&gt;\n2/2 In terminal:\n\ngit diff --color-words master..feature/name\n+ [If the reviewer is someone else, he could `git pull origin feature/name` to copy the branch and check it out]",
     "crumbs": [
       "git",
       "Git Feature Branch Workflow"
@@ -440,7 +440,7 @@
     "href": "git/git_feature_workflow.html#step-10-respond-to-code-review-if-needed",
     "title": "Git Feature Branch Workflow",
     "section": "Step 10: Respond to code review (if needed)",
-    "text": "Step 10: Respond to code review (if needed)\n…\nIf reviewers request changes:\ngit add .\ngit commit -m \"fix: addressed review comments\"\n# update the pull request\ngit push origin feature/name",
+    "text": "Step 10: Respond to code review (if needed)\n…\nIf reviewers request changes:\ngit add .\ngit commit -m \"fix: addressed review comments\"\ngit pull origin master # once again to ensure nothing breaks\n# update the pull request\ngit push origin feature/name",
     "crumbs": [
       "git",
       "Git Feature Branch Workflow"
@@ -1100,18 +1100,7 @@
     "href": "git/git_intro.html#when-you-accidentally-let-git-track-files",
     "title": "Git introduction",
     "section": "When you accidentally let git track files",
-    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/",
-    "crumbs": [
-      "git",
-      "Git introduction"
-    ]
-  },
-  {
-    "objectID": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "href": "git/git_intro.html#your-branch-is-ahead-of-originmaster-by-x-commits",
-    "title": "Git introduction",
-    "section": "Your branch is ahead of ‘origin/master’ by “x” commits",
-    "text": "Your branch is ahead of ‘origin/master’ by “x” commits\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^",
+    "text": "When you accidentally let git track files\nCASE 1) File that is Untracked but it appears in git status\n\n🤟🏻 do this + add file to .gitignore file\n💣💥 don’t do this …..\n\n# - Terminal\n\n# Preview the files but `-n` means it is a dry run\ngit clean -n \n# Remove the file (-f flag stands for \"force\")\ngit clean -f \n\nCASE 2) File that is Tracked by git\nThis command removes files from the staging area (so they won’t be in the next commit), but keeps them in the working directory!!! Useful for configuration files, build artifacts, etc.\n\n# - Terminal\n\n# Remove the file from the staging area\n\n# add .env file to .gitignore\necho \"accident.txt\" &gt;&gt; .gitignore\n# tell Git NOT to track this file (it gets removed from the index, but stays local system)\ngit rm --cached accident.txt\n\n# or whole directory (-r recursive) \ngit rm --cached -r directory/\n\nCASE 3) Accidentally Tracked & pushed\n\nA.K.A. Your branch is ahead of ‘origin/master’ by “x” commits\n\nE.g. I had this occurring because I wanted to push a heavy PDF download button and git push couldn’t go through.\n\nmake a BACKUP of local!\nGo back before the commit\n\n\n\nBrutal: reset your local master to the state on your remote origin (a.k.a. last pushed updates)\n\n\n\n# - Terminal\n\ngit reset --hard origin/master\n\n\n\n\nConservative option: reset to before last commit saving local changes\n\n\n\n\n--soft = you will remove the last commit from the current branch, but the file changes will stay in your working tree & the changes will stay on your index (so it is enough to commit them)\n\n--mixed = you will still keep the changes in your working tree but not on the index (you have to add and commit again)\n\n--hard = you will lose all uncommited changes and all untracked files in addition to the changes introduced in the last commit\n\n\n\n\n# - Terminal\n\ngit reset --soft HEAD~1   \n\n\n\n\nAnother useful option: similar to soft\n\n\n\n\n--keep It only resets the files which are different between the current HEAD and the given commit. It aborts the reset if one or more of these files has uncommited changes. It basically acts as a safer version of hard.\n\n\n\n\n# - Terminal\n\n# Assuming HEAD points at 7e05a95 \n  # 7e05a95  (HEAD -&gt; main) Update a\n  # e62add5  Update b\n  # ca9ae0a  Update a\ngit reset --mixed HEAD^  \n\nJump back to specific commit\n\nE.g. I know a safe commit 3 commits ago is c86edffc16 so I do git reset to that commit\n\n# - Terminal\n\n# a) Keep changes staged (undo commits only)\ngit reset --soft c86edffc16\n# equivalent: git reset --soft HEAD~3\n\n# b) Keep changes unstaged (undo commits and unstage changes)\ngit reset --mixed c86edffc16\n# equivalent: git reset --mixed HEAD~3\n\n# c) Discard all changes (undo commits and discard changes)\ngit reset --hard c86edffc16\n# equivalent: git reset --hard HEAD~3",
     "crumbs": [
       "git",
       "Git introduction"
